@@ -44,38 +44,36 @@ if (contactForm) {
         emailjs
             .sendForm("service_ru3iykd", "template_m4msnqs", this)
             .then(() => {
-    const overlay = document.getElementById("contactSuccessOverlay");
-    const sound   = document.getElementById("contactSuccessSound");
+                const overlay = document.getElementById("contactSuccessOverlay");
+                const sound = document.getElementById("contactSuccessSound");
 
-    if (overlay) {
-        // forțăm reflow ca animația bifei să ruleze de fiecare dată
-        overlay.classList.remove("show");
-        void overlay.offsetWidth;
-        overlay.classList.add("show");
-    }
+                if (overlay) {
+                    // forțăm reflow ca animația bifei să ruleze de fiecare dată
+                    overlay.classList.remove("show");
+                    void overlay.offsetWidth;
+                    overlay.classList.add("show");
+                }
 
-    if (sound) {
-        try {
-            sound.currentTime = 0;
-            sound.play();
-        } catch (err) {
-            console.warn("Nu s-a putut reda sunetul de succes:", err);
-        }
-    }
-})
+                if (sound) {
+                    try {
+                        sound.currentTime = 0;
+                        sound.play();
+                    } catch (err) {
+                        console.warn("Nu s-a putut reda sunetul de succes:", err);
+                    }
+                }
+            })
             .catch(() => {
                 alert("A apărut o eroare. Reîncearcă.");
             });
     });
 }
 
-
-
 /// ====================================
 // CONTACT OVERLAY CLOSER
 // ====================================
 const closeOverlayBtn = document.getElementById("closeContactOverlay");
-const contactOverlay  = document.getElementById("contactSuccessOverlay");
+const contactOverlay = document.getElementById("contactSuccessOverlay");
 
 if (closeOverlayBtn && contactOverlay) {
     closeOverlayBtn.addEventListener("click", () => {
@@ -110,17 +108,18 @@ if (yearSpan) {
    LIGHTBOX – GALERIE + MEDIA ZOOM + ZOOM-ON-CLICK
 ============================================================ */
 
-const lightbox        = document.getElementById("lightbox");
-const lightboxInner   = lightbox ? lightbox.querySelector(".lightbox-inner") : null;
-const lightboxImg     = document.getElementById("lightboxImage");
-const lightboxPrev    = document.getElementById("lightboxPrev");
-const lightboxNext    = document.getElementById("lightboxNext");
-const lightboxClose   = document.getElementById("lightboxClose");
+const lightbox = document.getElementById("lightbox");
+const lightboxInner = lightbox ? lightbox.querySelector(".lightbox-inner") : null;
+const lightboxImg = document.getElementById("lightboxImage");
+const lightboxPrev = document.getElementById("lightboxPrev");
+const lightboxNext = document.getElementById("lightboxNext");
+const lightboxClose = document.getElementById("lightboxClose");
 const lightboxCounter = document.getElementById("lightboxCounter");
 
 let galleryImages = [];
 let currentIndex = 0;
 let isZoomed = false;
+let isLightboxOpen = false; // important pentru blocarea gesturilor pe mobil
 
 /* 1. SELECTĂM IMAGINILE DIN GALERIE + CELE CU .media-zoom */
 function loadZoomableImages() {
@@ -133,10 +132,6 @@ function loadZoomableImages() {
     });
 }
 
-if (lightbox && lightboxImg) {
-    loadZoomableImages();
-}
-
 /* 2. DESCHIDERE LIGHTBOX */
 function openLightbox(index) {
     if (!galleryImages.length || !lightbox || !lightboxImg) return;
@@ -147,24 +142,30 @@ function openLightbox(index) {
 
     lightbox.classList.add("open");
     document.body.classList.add("no-scroll"); // blocăm scroll-ul paginii
+    isLightboxOpen = true;
 }
 
-/* 3. ÎNCHIDERE LIGHTBOX */
+/* 3. ÎNCHIDERE LIGHTBOX (DOAR PE X) */
 function closeLightbox() {
     if (!lightbox) return;
+
     lightbox.classList.remove("open");
     document.body.classList.remove("no-scroll");
     resetZoom();
+    isLightboxOpen = false;
 }
 
 /* 4. RESET ZOOM LA DESCHIDERE / ÎNCHIDERE / SCHIMBARE IMAGINE */
 function resetZoom() {
     isZoomed = false;
-    lightboxInner.classList.remove("zoomed");
-    lightboxImg.style.transform = "";
-    lightboxImg.style.cursor = "zoom-in";
+    if (lightboxInner) {
+        lightboxInner.classList.remove("zoomed");
+    }
+    if (lightboxImg) {
+        lightboxImg.style.transform = "";
+        lightboxImg.style.cursor = "zoom-in";
+    }
 }
-
 
 /* 5. TOGGLE ZOOM PE CLICK PE IMAGINE */
 if (lightboxImg && lightboxInner) {
@@ -188,23 +189,25 @@ function toggleZoom() {
 
 /* 6. EVENIMENTE – BUTOANE, FUNDAL, TASTATURĂ */
 
+// Închidere doar pe X, conform cerinței
 if (lightboxClose) {
     lightboxClose.addEventListener("click", closeLightbox);
 }
 
-// click pe fundal închide lightbox-ul
-if (lightbox) {
-    lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) {
-            closeLightbox();
-        }
-    });
-}
+// NU mai închidem la click pe fundal – comentat intenționat
+// if (lightbox) {
+//     lightbox.addEventListener("click", (e) => {
+//         if (e.target === lightbox) {
+//             closeLightbox();
+//         }
+//     });
+// }
 
 if (lightboxPrev) {
     lightboxPrev.addEventListener("click", () => {
         if (!galleryImages.length) return;
-        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        const n = galleryImages.length;
+        currentIndex = (currentIndex - 1 + n) % n;
         resetZoom();
         updateLightbox();
     });
@@ -213,7 +216,8 @@ if (lightboxPrev) {
 if (lightboxNext) {
     lightboxNext.addEventListener("click", () => {
         if (!galleryImages.length) return;
-        currentIndex = (currentIndex + 1) % galleryImages.length;
+        const n = galleryImages.length;
+        currentIndex = (currentIndex + 1) % n;
         resetZoom();
         updateLightbox();
     });
@@ -224,7 +228,7 @@ document.addEventListener("keydown", (e) => {
     if (!lightbox || !lightbox.classList.contains("open")) return;
 
     if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft" && lightboxPrev)  lightboxPrev.click();
+    if (e.key === "ArrowLeft" && lightboxPrev) lightboxPrev.click();
     if (e.key === "ArrowRight" && lightboxNext) lightboxNext.click();
 });
 
@@ -238,11 +242,6 @@ function updateLightbox() {
 }
 
 /* ============================================================
-   DEBUG
-============================================================ */
-console.log("pgpr1.js loaded with lightbox zoom-on-click.");
-
-/* ============================================================
    CAROUSEL EVENIMENTE – loop infinit cu 3 carduri
 ============================================================ */
 
@@ -254,55 +253,9 @@ function initEventsCarousel() {
 
     if (!track || slides.length === 0 || !btnPrev || !btnNext) return;
 
-    let currentIndex = 0;
-
-    function updateSlides() {
-        const n = slides.length;
-        if (n === 0) return;
-
-        const prevIndex = (currentIndex - 1 + n) % n;
-        const nextIndex = (currentIndex + 1) % n;
-
-        slides.forEach((slide, i) => {
-            slide.classList.remove("is-center", "is-left", "is-right");
-
-            if (i === currentIndex) {
-                slide.classList.add("is-center");
-            } else if (i === prevIndex) {
-                slide.classList.add("is-left");
-            } else if (i === nextIndex) {
-                slide.classList.add("is-right");
-            }
-        });
-    }
-
-    btnPrev.addEventListener("click", () => {
-        const n = slides.length;
-        currentIndex = (currentIndex - 1 + n) % n;
-        updateSlides();
-    });
-
-    btnNext.addEventListener("click", () => {
-        const n = slides.length;
-        currentIndex = (currentIndex + 1) % n;
-        updateSlides();
-    });
-
-    // inițializare
-    updateSlides();
-}
-
-document.addEventListener("DOMContentLoaded", initEventsCarousel);
-
-/* ============================================================
-   CAROUSEL EVENIMENTE – loop infinit cu 3 carduri
-============================================================ */
-
-function initEventsCarousel() {
-    const track = document.getElementById("eventsTrack");
-    const slides = Array.from(track.querySelectorAll(".event-slide"));
-    const btnPrev = document.getElementById("eventsPrev");
-    const btnNext = document.getElementById("eventsNext");
+    // marcăm săgețile cu o clasă comună pentru tratamentul pe mobil
+    btnPrev.classList.add("events-arrow");
+    btnNext.classList.add("events-arrow");
 
     let current = 0; // indexul cardului din mijloc
 
@@ -334,57 +287,63 @@ function initEventsCarousel() {
     render();
 }
 
-document.addEventListener("DOMContentLoaded", initEventsCarousel);
-/* =========================================================
-   BLOCARE DOUBLE-TAP ZOOM PE MOBILE
-   ========================================================= */
-(function () {
-    let lastTouchEnd = 0;
+/* ============================================================
+   INIT DOMCONTENTLOADED
+============================================================ */
 
-    document.addEventListener(
-        "touchend",
-        function (event) {
-            const now = Date.now();
+document.addEventListener("DOMContentLoaded", () => {
+    if (lightbox && lightboxImg) {
+        loadZoomableImages();
+    }
+    initEventsCarousel();
+});
 
-            // dacă două touchend vin la < 300ms → considerăm double-tap
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
+/* ============================================================
+   BLOCARE DOUBLE-TAP ZOOM & SCROLL (CONDIȚIONAT)
+============================================================ */
+
+// Blochează:
+//  - double-tap zoom când lightbox-ul este deschis
+//  - double-tap zoom pe săgețile de la evenimente / lightbox
+let lastTouchEndGlobal = 0;
+
+document.addEventListener(
+    "touchend",
+    function (event) {
+        const now = Date.now();
+        const delta = now - lastTouchEndGlobal;
+
+        if (delta > 0 && delta < 300) {
+            const target = event.target;
+
+            const isOnArrow =
+                target.closest &&
+                target.closest(
+                    "#eventsPrev, #eventsNext, .events-arrow, .lightbox-arrow, #lightboxPrev, #lightboxNext"
+                );
+
+            if (isLightboxOpen || isOnArrow) {
+                event.preventDefault(); // blocăm zoom-ul la double-tap
             }
-            lastTouchEnd = now;
-        },
-        { passive: false }
-    );
+        }
 
-    // pentru unele versiuni de iOS – blochează gesture zoom
-    document.addEventListener(
-        "gesturestart",
-        function (event) {
+        lastTouchEndGlobal = now;
+    },
+    { passive: false }
+);
+
+// Blochează scroll-ul de pagină când lightbox-ul este deschis
+document.addEventListener(
+    "touchmove",
+    function (event) {
+        if (isLightboxOpen) {
             event.preventDefault();
-        },
-        { passive: false }
-    );
-})();
-/* =========================================================
-   BLOCHEAZĂ DOUBLE-TAP ZOOM PE TOATĂ PAGINA
-   (dar lasă pinch-zoom)
-   ========================================================= */
+        }
+    },
+    { passive: false }
+);
 
-(function () {
-    var lastTouchEnd = 0;
-
-    document.addEventListener(
-        "touchend",
-        function (event) {
-            var now = Date.now();
-            var delta = now - lastTouchEnd;
-
-            // dacă sunt două touchend-uri la < 300ms => considerăm double-tap
-            if (delta > 0 && delta < 300) {
-                event.preventDefault(); // blocăm comportamentul implicit (zoom)
-            }
-
-            lastTouchEnd = now;
-        },
-        { passive: false }
-    );
-})();
+/* ============================================================
+   DEBUG
+============================================================ */
+console.log("pgpr1.js loaded with lightbox + carousel + mobile protections.");
