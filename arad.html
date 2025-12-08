@@ -111,10 +111,10 @@
 
         <nav class="nav" id="mainNav">
             <a href="index.html#acasa" class="nav-link">Acasă</a>
-<a href="index.html#despre" class="nav-link">Despre</a>
-<a href="index.html#comitet" class="nav-link">Comitet</a>
-<a href="index.html#evenimente" class="nav-link">Evenimente</a>
-<a href="index.html#contact" class="nav-link nav-btn">Contact</a>
+            <a href="index.html#despre" class="nav-link">Despre</a>
+            <a href="index.html#comitet" class="nav-link">Comitet</a>
+            <a href="index.html#evenimente" class="nav-link">Evenimente</a>
+            <a href="index.html#contact" class="nav-link nav-btn">Contact</a>
         </nav>
 
     </div>
@@ -167,9 +167,6 @@
 
 <!-- Datele bisericilor (municipiul Arad) -->
 <script>
-    // Lista se bazează pe informații publice (site-uri de biserici, Waze, baze de date de firme).
-    // Poți adăuga foarte ușor biserici noi în același format.
-
     const churches = [
         {
             name: "Biserica Penticostală Betania",
@@ -206,10 +203,8 @@
             address: "Calea Timișorii 2, 310059 Arad",
             website: ""
         }
-        // aici poți continua cu alte biserici (Rosia Nouă, Sânnicolau Mic etc., dacă vrei să incluzi tot județul)
     ];
 
-    // Populare listă de carduri sub hartă
     function renderChurchList() {
         const grid = document.getElementById("aradChurchesGrid");
         if (!grid) return;
@@ -249,12 +244,10 @@
         });
     }
 
-    // Callback pentru Google Maps API
     function initAradMap() {
         const mapElement = document.getElementById("aradMap");
         if (!mapElement) return;
 
-        // Centru aproximativ pentru Arad
         const aradCenter = { lat: 46.1866, lng: 21.3123 };
 
         const map = new google.maps.Map(mapElement, {
@@ -299,19 +292,14 @@
                         infoWindow.open(map, marker);
                     });
                 } else {
-                    // Dacă geocodarea nu reușește, pur și simplu nu punem marker,
-                    // dar biserica rămâne în listă.
                     console.warn("Nu s-a putut geocoda adresa pentru:", church.name, status);
                 }
             });
         });
 
-        // Populăm și lista de mai jos
         renderChurchList();
     }
 
-    // Dacă dintr-un motiv Google Maps nu pornește (cheie greșită etc.),
-    // măcar lista să se încarce.
     document.addEventListener("DOMContentLoaded", renderChurchList);
 </script>
 

@@ -10,8 +10,10 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="pgpr1.css" />
-   
-    <!-- CONTACT SUCCESS OVERLAY -->
+</head>
+<body>
+
+<!-- CONTACT SUCCESS OVERLAY -->
 <div id="contactSuccessOverlay" class="contact-overlay">
     <div class="contact-overlay-box">
         <div class="contact-checkmark-wrapper">
@@ -33,253 +35,250 @@
 <!-- SUNET SUCCES -->
 <audio id="contactSuccessSound" preload="auto">
     <source src="sounds/success.mp3" type="audio/mpeg">
-    <!-- poți adăuga și .wav, dacă vrei -->
 </audio>
 
-<body>
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="header-container">
 
-    <!-- ================= HEADER ================= -->
-    <header class="header">
-        <div class="header-container">
-
-            <div class="logo-area">
-                <img src="images/logo1.png" alt="Logo CRP Arad" class="site-logo">
-                <div class="site-title">
-                    <h1>Comunitatea Regională</h1>
-                    <span>PENTICOSTALĂ ARAD</span>
-                </div>
-            </div>
-
-            <button class="nav-toggle" id="navToggle" aria-label="Deschide meniul">
-                <span></span><span></span>
-            </button>
-
-            <nav class="nav" id="mainNav">
-                <a href="#acasa" class="nav-link">Acasă</a>
-                <a href="#despre" class="nav-link">Despre</a>
-                <a href="#comitet" class="nav-link">Comitet</a>
-                <a href="#activitati" class="nav-link">Activități</a>
-                <a href="#evenimente" class="nav-link">Evenimente</a>
-                <a href="#contact" class="nav-link nav-btn">Contact</a>
-            </nav>
-
-        </div>
-    </header>
-
-    <!-- ================= HERO ================= -->
-    <section class="band-hero" id="acasa">
-        <div class="hero-background"></div>
-
-        <div class="hero">
-            <div class="hero-card">
-                <p class="hero-kicker">
-                    COMUNITATEA REGIONALĂ PENTICOSTALĂ ARAD
-                </p>
-
-                <h1>Unitate. Slujire. Misiune.</h1>
-
-                <p class="hero-subtitle">
-                    Susținem bisericile penticostale din județele Arad, Timiș, Hunedoara și Caraș-Severin
-                    în lucrarea de slujire, închinare și misiune.
-                </p>
-
-                <div class="hero-actions">
-                    <a href="#despre" class="btn primary">Află mai mult</a>
-                    <a href="#comitet" class="btn ghost">Vezi conducerea</a>
-                </div>
+        <div class="logo-area">
+            <img src="images/logo1.png" alt="Logo CRP Arad" class="site-logo">
+            <div class="site-title">
+                <h1>Comunitatea Regională</h1>
+                <span>PENTICOSTALĂ ARAD</span>
             </div>
         </div>
-    </section>
 
-    <!-- ================= DESPRE NOI ================= -->
-    <section class="band band-light" id="despre">
-        <div class="container">
-            <div class="about-card reveal">
-                <div class="about-content">
-                    <p class="section-kicker">Despre noi</p>
-                    <h2>O comunitate pentru bisericile din Arad, Timiș, Hunedoara, Caraș-Severin</h2>
-                    <p class="section-intro">
-                        Comunitatea Regională Penticostală Arad aparține Cultului Creștin Penticostal.
-                        Coordonăm în mod transparent activitatea bisericilor penticostale din județele
-                        Arad, Timiș, Hunedoara și Caraș-Severin, cultivând unitatea frățească și
-                        responsabilitatea față de Scriptură.
-                    </p>
+        <button class="nav-toggle" id="navToggle" aria-label="Deschide meniul">
+            <span></span><span></span>
+        </button>
 
-                    <div class="about-text">
-                        <ul class="checklist">
-                            <li>Sprijin pentru bisericile locale.</li>
-                            <li>Conferințe, seminarii și întâlniri de formare.</li>
-                            <li>Proiecte de misiune și evanghelizare.</li>
-                            <li>Implicare socială și ajutorarea celor în nevoie.</li>
-                        </ul>
-                    </div>
-                </div>
+        <nav class="nav" id="mainNav">
+            <a href="#acasa" class="nav-link">Acasă</a>
+            <a href="#despre" class="nav-link">Despre</a>
+            <a href="#comitet" class="nav-link">Comitet</a>
+            <a href="#activitati" class="nav-link">Activități</a>
+            <a href="#evenimente" class="nav-link">Evenimente</a>
+            <a href="#contact" class="nav-link nav-btn">Contact</a>
+        </nav>
 
-                <div class="about-photo">
-                    <img
-                        src="images/pozacladire.png"
-                        alt="Clădirea Comunității Regionale Penticostale Arad"
-                    />
-                </div>
+    </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="band-hero" id="acasa">
+    <div class="hero-background"></div>
+
+    <div class="hero">
+        <div class="hero-card">
+            <p class="hero-kicker">
+                COMUNITATEA REGIONALĂ PENTICOSTALĂ ARAD
+            </p>
+
+            <h1>Unitate. Slujire. Misiune.</h1>
+
+            <p class="hero-subtitle">
+                Susținem bisericile penticostale din județele Arad, Timiș, Hunedoara și Caraș-Severin
+                în lucrarea de slujire, închinare și misiune.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#despre" class="btn primary">Află mai mult</a>
+                <a href="#comitet" class="btn ghost">Vezi conducerea</a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ================= COMITET ================= -->
-    <section class="band band-muted" id="comitet">
-        <div class="container">
-            <div class="section-header reveal">
-                <p class="section-kicker">Comitet</p>
-                <h2>Conducerea Comunității</h2>
+<!-- ================= DESPRE NOI ================= -->
+<section class="band band-light" id="despre">
+    <div class="container">
+        <div class="about-card reveal">
+            <div class="about-content">
+                <p class="section-kicker">Despre noi</p>
+                <h2>O comunitate pentru bisericile din Arad, Timiș, Hunedoara, Caraș-Severin</h2>
                 <p class="section-intro">
-                    Pastori și slujitori care coordonează activitatea comunității regionale.
+                    Comunitatea Regională Penticostală Arad aparține Cultului Creștin Penticostal.
+                    Coordonăm în mod transparent activitatea bisericilor penticostale din județele
+                    Arad, Timiș, Hunedoara și Caraș-Severin, cultivând unitatea frățească și
+                    responsabilitatea față de Scriptură.
                 </p>
-            </div>
 
-            <!-- Lideri principali -->
-            <div class="team-main-grid reveal">
-                <div class="team-card-main">
-                    <div class="team-photo-main">
-                        <img src="images/TomutaSimion.png" alt="Tomuța Simion" />
-                    </div>
-                    <h3>Tomuța Simion</h3>
-                    <p class="team-role">Președinte</p>
-                </div>
-
-                <div class="team-card-main">
-                    <div class="team-photo-main">
-                        <img src="images/StanciuCornel.png" alt="Stanciu Cornel" />
-                    </div>
-                    <h3>Stanciu Cornel</h3>
-                    <p class="team-role">Vicepreședinte</p>
-                </div>
-
-                <div class="team-card-main">
-                    <div class="team-photo-main">
-                        <img src="images/AvramAurel.png" alt="Avram Aurel" />
-                    </div>
-                    <h3>Avram Aurel</h3>
-                    <p class="team-role">Secretar</p>
+                <div class="about-text">
+                    <ul class="checklist">
+                        <li>Sprijin pentru bisericile locale.</li>
+                        <li>Conferințe, seminarii și întâlniri de formare.</li>
+                        <li>Proiecte de misiune și evanghelizare.</li>
+                        <li>Implicare socială și ajutorarea celor în nevoie.</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Membrii comitetului -->
-            <div class="team-secondary-grid reveal">
-                <div class="team-card-secondary">
-                    <div class="team-photo-secondary">
-                        <img src="images/IoanFilip.png" alt="Filip Ioan" />
-                    </div>
-                    <h3>Filip Ioan</h3>
-                    <p class="team-role">Pastor</p>
-                </div>
-
-                <div class="team-card-secondary">
-                    <div class="team-photo-secondary">
-                        <img src="images/HadaDaniel.png" alt="Hada Daniel" />
-                    </div>
-                    <h3>Hada Daniel</h3>
-                    <p class="team-role">Pastor</p>
-                </div>
-
-                <div class="team-card-secondary">
-                    <div class="team-photo-secondary">
-                        <img src="images/PetroiescMihai.png" alt="Petroiesc Mihai" />
-                    </div>
-                    <h3>Petroiesc Mihai</h3>
-                    <p class="team-role">Pastor</p>
-                </div>
-
-                <div class="team-card-secondary">
-                    <div class="team-photo-secondary">
-                        <img src="images/CorobanTitus.png" alt="Coroban Titus" />
-                    </div>
-                    <h3>Coroban Titus</h3>
-                    <p class="team-role">Pastor</p>
-                </div>
-
-                <div class="team-card-secondary">
-                    <div class="team-photo-secondary">
-                        <img src="images/IlioniFlorin.png" alt="Ilioni Florin" />
-                    </div>
-                    <h3>Ilioni Florin</h3>
-                    <p class="team-role">Pastor</p>
-                </div>
-
-                <div class="team-card-secondary">
-                    <div class="team-photo-secondary">
-                        <img src="images/CrisanDanut.png" alt="Crișan Dănuț" />
-                    </div>
-                    <h3>Crișan Dănuț</h3>
-                    <p class="team-role">Pastor</p>
-                </div>
-
-                <div class="team-card-secondary">
-                    <div class="team-photo-secondary">
-                        <img src="images/MuresanMircea.png" alt="Mureșan Mircea" />
-                    </div>
-                    <h3>Mureșan Mircea</h3>
-                    <p class="team-role">Pastor</p>
-                </div>
-
-                <div class="team-card-secondary">
-                    <div class="team-photo-secondary">
-                        <img src="images/IosifAnca.png" alt="Anca Iosif" />
-                    </div>
-                    <h3>Anca Iosif</h3>
-                    <p class="team-role">Pastor</p>
-                </div>
+            <div class="about-photo">
+                <img
+                    src="images/pozacladire.png"
+                    alt="Clădirea Comunității Regionale Penticostale Arad"
+                />
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ================= ACTIVITĂȚI ================= -->
-    <section class="band band-light" id="activitati">
-        <div class="container activities-shell">
-            <div class="section-header reveal activities-header">
-                <h2>Activitățile noastre</h2>
-                <p class="section-intro">
-                    Ne implicăm în proiecte care sprijină lucrarea bisericilor și slujirea în comunitate.
-                </p>
+<!-- ================= COMITET ================= -->
+<section class="band band-muted" id="comitet">
+    <div class="container">
+        <div class="section-header reveal">
+            <p class="section-kicker">Comitet</p>
+            <h2>Conducerea Comunității</h2>
+            <p class="section-intro">
+                Pastori și slujitori care coordonează activitatea comunității regionale.
+            </p>
+        </div>
+
+        <!-- Lideri principali -->
+        <div class="team-main-grid reveal">
+            <div class="team-card-main">
+                <div class="team-photo-main">
+                    <img src="images/TomutaSimion.png" alt="Tomuța Simion" />
+                </div>
+                <h3>Tomuța Simion</h3>
+                <p class="team-role">Președinte</p>
             </div>
 
-            <div class="activities-panel">
-                <div class="activities-tagline">
-                    <div class="tagline-line"></div>
-                    <span>REGIUNILE NOASTRE</span>
-                    <div class="tagline-line"></div>
+            <div class="team-card-main">
+                <div class="team-photo-main">
+                    <img src="images/StanciuCornel.png" alt="Stanciu Cornel" />
                 </div>
+                <h3>Stanciu Cornel</h3>
+                <p class="team-role">Vicepreședinte</p>
+            </div>
 
-                <div class="regions-grid">
-    <a href="arad.html" class="region-card region-card-link">
-        <span class="region-name">ARAD</span>
-        <span class="region-sub">Coordonare regională</span>
-        <span class="region-arrow">→</span>
-    </a>
-
-    <div class="region-card">
-        <span class="region-name">TIMIȘ</span>
-        <span class="region-sub">Coordonare regională</span>
-        <span class="region-arrow">→</span>
-    </div>
-
-    <div class="region-card">
-        <span class="region-name">HUNEDOARA</span>
-        <span class="region-sub">Coordonare regională</span>
-        <span class="region-arrow">→</span>
-    </div>
-
-    <div class="region-card">
-        <span class="region-name">CARAȘ-SEVERIN</span>
-        <span class="region-sub">Coordonare regională</span>
-        <span class="region-arrow">→</span>
-    </div>
-</div>
-
+            <div class="team-card-main">
+                <div class="team-photo-main">
+                    <img src="images/AvramAurel.png" alt="Avram Aurel" />
+                </div>
+                <h3>Avram Aurel</h3>
+                <p class="team-role">Secretar</p>
             </div>
         </div>
-    </section>
 
-   <!-- ================= EVENIMENTE ================= -->
+        <!-- Membrii comitetului -->
+        <div class="team-secondary-grid reveal">
+            <div class="team-card-secondary">
+                <div class="team-photo-secondary">
+                    <img src="images/IoanFilip.png" alt="Filip Ioan" />
+                </div>
+                <h3>Filip Ioan</h3>
+                <p class="team-role">Pastor</p>
+            </div>
+
+            <div class="team-card-secondary">
+                <div class="team-photo-secondary">
+                    <img src="images/HadaDaniel.png" alt="Hada Daniel" />
+                </div>
+                <h3>Hada Daniel</h3>
+                <p class="team-role">Pastor</p>
+            </div>
+
+            <div class="team-card-secondary">
+                <div class="team-photo-secondary">
+                    <img src="images/PetroiescMihai.png" alt="Petroiesc Mihai" />
+                </div>
+                <h3>Petroiesc Mihai</h3>
+                <p class="team-role">Pastor</p>
+            </div>
+
+            <div class="team-card-secondary">
+                <div class="team-photo-secondary">
+                    <img src="images/CorobanTitus.png" alt="Coroban Titus" />
+                </div>
+                <h3>Coroban Titus</h3>
+                <p class="team-role">Pastor</p>
+            </div>
+
+            <div class="team-card-secondary">
+                <div class="team-photo-secondary">
+                    <img src="images/IlioniFlorin.png" alt="Ilioni Florin" />
+                </div>
+                <h3>Ilioni Florin</h3>
+                <p class="team-role">Pastor</p>
+            </div>
+
+            <div class="team-card-secondary">
+                <div class="team-photo-secondary">
+                    <img src="images/CrisanDanut.png" alt="Crișan Dănuț" />
+                </div>
+                <h3>Crișan Dănuț</h3>
+                <p class="team-role">Pastor</p>
+            </div>
+
+            <div class="team-card-secondary">
+                <div class="team-photo-secondary">
+                    <img src="images/MuresanMircea.png" alt="Mureșan Mircea" />
+                </div>
+                <h3>Mureșan Mircea</h3>
+                <p class="team-role">Pastor</p>
+            </div>
+
+            <div class="team-card-secondary">
+                <div class="team-photo-secondary">
+                    <img src="images/IosifAnca.png" alt="Anca Iosif" />
+                </div>
+                <h3>Anca Iosif</h3>
+                <p class="team-role">Pastor</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= ACTIVITĂȚI ================= -->
+<section class="band band-light" id="activitati">
+    <div class="container activities-shell">
+        <div class="section-header reveal activities-header">
+            <h2>Activitățile noastre</h2>
+            <p class="section-intro">
+                Ne implicăm în proiecte care sprijină lucrarea bisericilor și slujirea în comunitate.
+            </p>
+        </div>
+
+        <div class="activities-panel">
+            <div class="activities-tagline">
+                <div class="tagline-line"></div>
+                <span>REGIUNILE NOASTRE</span>
+                <div class="tagline-line"></div>
+            </div>
+
+            <div class="regions-grid">
+                <a href="arad.html" class="region-card region-card-link">
+                    <span class="region-name">ARAD</span>
+                    <span class="region-sub">Coordonare regională</span>
+                    <span class="region-arrow">→</span>
+                </a>
+
+                <div class="region-card">
+                    <span class="region-name">TIMIȘ</span>
+                    <span class="region-sub">Coordonare regională</span>
+                    <span class="region-arrow">→</span>
+                </div>
+
+                <div class="region-card">
+                    <span class="region-name">HUNEDOARA</span>
+                    <span class="region-sub">Coordonare regională</span>
+                    <span class="region-arrow">→</span>
+                </div>
+
+                <div class="region-card">
+                    <span class="region-name">CARAȘ-SEVERIN</span>
+                    <span class="region-sub">Coordonare regională</span>
+                    <span class="region-arrow">→</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= EVENIMENTE ================= -->
 <section class="band band-muted" id="evenimente">
     <div class="container">
         <div class="section-header reveal">
@@ -330,9 +329,9 @@
                     </a>
                 </article>
 
-                <!-- Întâlnire de suflet la CRP Arad (confiliala) -->
+                <!-- Întâlnire de suflet la CRP Arad -->
                 <article class="event-slide" data-index="2">
-                    <a href="confililala.html" class="event-card-link">
+                    <a href="confiliala.html" class="event-card-link">
                         <div class="event-card">
                             <div class="event-image">
                                 <img src="eveniment3/puza1.png" alt="Întâlnire de suflet la Comunitatea Penticostală Regională Arad">
@@ -355,7 +354,8 @@
         </div>
     </div>
 </section>
-   <!-- ================= CONTACT ================= -->
+
+<!-- ================= CONTACT ================= -->
 <section class="band band-light" id="contact">
     <div class="container">
         <div class="section-header reveal">
@@ -440,17 +440,17 @@
     </div>
 </section>
 
-    <!-- ================= FOOTER ================= -->
-    <footer class="footer">
-        <div class="footer-inner">
-            &copy; <span id="yearSpan"></span> Comunitatea Regională Penticostală Arad. Toate drepturile rezervate.
-        </div>
-    </footer>
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-inner">
+        &copy; <span id="yearSpan"></span> Comunitatea Regională Penticostală Arad. Toate drepturile rezervate.
+    </div>
+</footer>
 
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    <!-- JS site -->
-    <script src="pgpr1.js"></script>
+<!-- JS site -->
+<script src="pgpr1.js"></script>
 </body>
 </html>

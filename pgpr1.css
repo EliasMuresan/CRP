@@ -1774,8 +1774,9 @@ body.no-scroll {
     to { stroke-dashoffset: 0; }
 }
 /* =============================
-   OVERRIDE FINAL PENTRU SĂGEȚI
-   ============================= */
+// EVENTS – ARROWS & CARDS SIZE
+============================= */
+
 .events-arrow {
     position: absolute;
     top: 50%;
@@ -1807,8 +1808,8 @@ body.no-scroll {
 
 
 /* =============================
-   CARDURILE – ACEEAȘI ÎNĂLȚIME
-   ============================= */
+// CARDURILE – ACEEAȘI ÎNĂLȚIME
+============================= */
 
 .event-card {
     width: 100%;
@@ -1840,8 +1841,8 @@ body.no-scroll {
 }
 
 /* =============================
-   SĂGEȚI – VIZIBILE ȘI CENTRATE
-   ============================= */
+// SĂGEȚI – VIZIBILE ȘI CENTRATE
+============================= */
 
 .events-arrow {
     position: absolute;
@@ -1889,8 +1890,8 @@ body.no-scroll {
 }
 
 /* =============================
-   RESPONSIVE
-   ============================= */
+// RESPONSIVE
+============================= */
 
 @media (max-width: 900px) {
 
@@ -1924,8 +1925,8 @@ body.no-scroll {
     .events-arrow-right { right: 6px; }
 }
 /* =====================================
-   FIX EVENIMENTE – RESTAURARE COVERFLOW
-   ===================================== */
+// FIX EVENIMENTE – RESTAURARE COVERFLOW
+===================================== */
 
 .events-track {
     position: relative;
@@ -2007,8 +2008,8 @@ body.no-scroll {
     height: 560px;          /* redus de la 620 — acum cardurile nu taie jos, dar nu lasă spațiu mare */
 }
 /* ===============================
-   MOBILE COVERFLOW – CARD CENTRAL MARE
-   =============================== */
+// MOBILE COVERFLOW – CARD CENTRAL MARE
+=============================== */
 @media (max-width: 900px) {
 
     /* container */
@@ -2088,8 +2089,8 @@ body.no-scroll {
     touch-action: manipulation;
 }
 /* ============================================
-   BLOCARE SCROLL & FULLSCREEN LA LIGHTBOX
-   ============================================ */
+// BLOCARE SCROLL & FULLSCREEN LA LIGHTBOX
+============================================ */
 
 /* cand lightbox-ul e deschis, blocam scroll-ul pe body */
 body.no-scroll {
@@ -2133,7 +2134,7 @@ body.no-scroll {
     touch-action: manipulation; /* doar click/tap, fara gesturi de zoom */
 }
 /* ============================================================
-   LIGHTBOX – FULLSCREEN FĂRĂ SĂ STRICE DESKTOP
+// LIGHTBOX – FULLSCREEN FĂRĂ SĂ STRICE DESKTOP
 ============================================================ */
 
 /* overlay-ul acoperă tot ecranul, dar e invizibil implicit */
