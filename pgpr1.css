@@ -1920,4 +1920,50 @@ body.no-scroll {
     .events-arrow-left  { left: 8px; }
     .events-arrow-right { right: 8px; }
 }
+/* ==========================
+   FIX SCROLL ORIZONTAL MOBIL
+   ========================== */
+
+@media (max-width: 768px) {
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .container {
+        overflow-x: hidden;
+    }
+
+    /* sliderul să nu iasă în lateral */
+    .events-carousel {
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        overflow: hidden;
+    }
+
+    .events-track {
+        overflow: hidden;
+    }
+
+    .event-slide {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .event-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* săgețile rămân înăuntru, nu mai împing layout-ul */
+    .events-arrow-left {
+        left: 8px;
+    }
+
+    .events-arrow-right {
+        right: 8px;
+    }
+}
 
