@@ -2133,3 +2133,100 @@ body.no-scroll {
     touch-action: manipulation; /* doar click/tap, fara gesturi de zoom */
 }
 
+/* ============================================================
+   LIGHTBOX FULLSCREEN + FIX POZIȚIONARE + BLOCARE SCROLL
+============================================================ */
+
+/* blocare scroll când lightbox-ul e deschis */
+body.no-scroll {
+    overflow: hidden !important;
+    height: 100vh !important;
+    touch-action: none !important;
+}
+
+/* overlay care acoperă TOT ecranul */
+#lightbox {
+    position: fixed !important;
+    inset: 0 !important; /* top:0, right:0, bottom:0, left:0 */
+    width: 100vw !important;
+    height: 100vh !important;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+
+    background: rgba(15, 23, 42, 0.88) !important;
+    backdrop-filter: blur(4px);
+    z-index: 99999 !important;
+}
+
+/* clasa pusă de JS la deschidere */
+#lightbox.open {
+    display: flex !important;
+}
+
+/* containerul imaginii – ține poza centrată */
+.lightbox-inner {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+/* imaginea propriu-zisă */
+#lightboxImage {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+
+    touch-action: none !important;
+}
+
+/* săgeți */
+#lightboxPrev,
+#lightboxNext {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100000;
+    touch-action: manipulation;
+}
+
+#lightboxPrev {
+    left: 20px;
+}
+
+#lightboxNext {
+    right: 20px;
+}
+
+/* buton X */
+#lightboxClose {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100000;
+    touch-action: manipulation;
+}
+
+/* contorul (ex: 19 / 19) */
+#lightboxCounter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+    z-index: 100000;
+}
