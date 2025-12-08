@@ -2,93 +2,74 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8" />
-    <title>Biserici penticostale din Arad – Comunitatea Regională</title>
+    <title>Biserici penticostale din județul Arad</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
 
-    <!-- CSS principal al site-ului -->
+    <!-- CSS principal site -->
     <link rel="stylesheet" href="pgpr1.css" />
 
-    <!-- CSS specific pentru pagina Arad (hartă + grid) -->
+    <!-- CSS specific paginii Arad -->
     <style>
-        .arad-hero-title {
+        main {
+            padding-top: 90px;
+        }
+        .arad-wrapper {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 24px 16px 80px;
+        }
+        .arad-header {
+            margin-bottom: 24px;
+        }
+        .arad-header h2 {
             font-family: "Playfair Display", serif;
             font-size: clamp(28px, 3vw, 34px);
-            margin-bottom: 10px;
-        }
-
-        .arad-hero-intro {
-            max-width: 720px;
-            color: #4b5563;
-        }
-
-        .arad-map-wrapper {
-            margin-top: 28px;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-        }
-
-        #aradMap {
-            width: 100%;
-            height: 480px;
-        }
-
-        .arad-churches-section {
-            margin-top: 40px;
-        }
-
-        .arad-churches-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 22px;
-            margin-top: 18px;
-        }
-
-        .arad-church-card {
-            background: #ffffff;
-            border-radius: 18px;
-            padding: 18px 20px;
-            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-        }
-
-        .arad-church-name {
-            font-family: "Playfair Display", serif;
-            font-size: 18px;
-            margin-bottom: 4px;
-        }
-
-        .arad-church-address {
-            font-size: 14px;
-            color: #4b5563;
             margin-bottom: 6px;
         }
-
-        .arad-church-meta {
-            font-size: 13px;
-            color: #6b7280;
+        .arad-header p {
+            color: var(--text-muted);
         }
-
-        .arad-church-meta a {
-            color: var(--accent-dark, #8b5e34);
-            font-weight: 500;
+        .churches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+        .church-card {
+            background: var(--bg-light);
+            border-radius: var(--radius-lg, 18px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+            padding: 16px 14px;
+            font-size: 14px;
+        }
+        .church-card h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .church-card p {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        .church-card p strong {
+            font-weight: 600;
+        }
+        .church-card a {
+            color: var(--accent-dark);
             text-decoration: none;
         }
-
-        .arad-church-meta a:hover {
+        .church-card a:hover {
             text-decoration: underline;
         }
-
-        @media (max-width: 768px) {
-            #aradMap {
-                height: 360px;
+        @media (max-width: 640px) {
+            .church-card {
+                font-size: 13px;
             }
         }
     </style>
+
+    <script src="pgpr1.js" defer></script>
 </head>
 <body>
 
@@ -96,7 +77,7 @@
     <div class="header-container">
 
         <div class="logo-area">
-            <a href="index.html#acasa" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+            <a href="index.html#acasa" class="logo-link">
                 <img src="images/logo1.png" class="site-logo" alt="CRP Arad">
                 <div class="site-title">
                     <h1>Comunitatea Regională</h1>
@@ -105,206 +86,1787 @@
             </a>
         </div>
 
-        <button class="nav-toggle" id="navToggle" aria-label="Deschide meniul">
-            <span></span><span></span>
-        </button>
-
-        <nav class="nav" id="mainNav">
+        <nav class="nav">
             <a href="index.html#acasa" class="nav-link">Acasă</a>
             <a href="index.html#despre" class="nav-link">Despre</a>
-            <a href="index.html#comitet" class="nav-link">Comitet</a>
+            <a href="index.html#conducere" class="nav-link">Conducere</a>
             <a href="index.html#evenimente" class="nav-link">Evenimente</a>
+            <a href="arad.html" class="nav-link">Biserici Arad</a>
             <a href="index.html#contact" class="nav-link nav-btn">Contact</a>
         </nav>
+
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+        </button>
 
     </div>
 </header>
 
+
+
 <main>
+    <section class="arad-wrapper">
+        <header class="arad-header">
+            <h2>Bisericile penticostale din județul Arad</h2>
+            <p>Lista completă a bisericilor și punctelor de lucru raportate în județul Arad.</p>
+        </header>
 
-    <!-- HERO + HARTĂ -->
-    <section class="band band-light">
-        <div class="container reveal">
-            <div class="section-header">
-                <p class="section-kicker">Harta comunității</p>
-                <h2 class="arad-hero-title">Biserici penticostale din Arad</h2>
-                <p class="arad-hero-intro">
-                    Vizualizezi pe hartă o selecție de biserici penticostale din municipiul Arad, împreună cu
-                    adresele și site-urile lor. Lista poate fi actualizată ori de câte ori apar
-                    biserici noi în comunitate sau avem date suplimentare.
-                </p>
-            </div>
+        <div class="churches-grid">
 
-            <div class="arad-map-wrapper">
-                <div id="aradMap"></div>
-            </div>
+            <article class="church-card">
+  <h3>1. Biserica Penticostală Betania</h3>
+  <p>Locație: Arad, str. Vișinului, nr. 49-51, jud. Arad, cod 310191</p>
+  <p>Pastori: Tomuța Simion; pastor asistent Crișan Beniamin</p>
+  <p>Site biserica: www.bisericabetania.ro</p>
+</article>
 
-            <!-- LISTA BISERICILOR SUB HARTĂ -->
-            <section class="arad-churches-section">
-                <h3 class="section-subtitle">Biserici listate</h3>
-                <p class="section-intro">
-                    Selectarea unui pin pe hartă îți arată rapid numele bisericii și adresa ei.
-                    Mai jos găsești aceleași informații într-o listă structurată.
-                </p>
+<article class="church-card">
+  <h3>2. Biserica Penticostală Logos</h3>
+  <p>Locație: Zimandcuz, nr. 720, jud. Arad, cod 317427</p>
+  <p>Pastor: prezbiter Deznan Petru</p>
+  <p>Site biserica:</p>
+</article>
 
-                <div class="arad-churches-grid" id="aradChurchesGrid">
-                    <!-- Cardurile se populează din JavaScript pe baza aceluiași array folosit pentru hartă -->
-                </div>
-            </section>
+<article class="church-card">
+  <h3>3. Biserica Penticostală Eben Ezer</h3>
+  <p>Locație: Andrei Șaguna, nr. 434, jud. Arad, cod 317425</p>
+  <p>Pastor: prezbiter Deznan Petru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>4. Biserica Penticostală Betesda Livada</h3>
+  <p>Locație: Livada, nr. 58, jud. Arad, cod 317205</p>
+  <p>Pastor: Tomuța Simion</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>5. Biserica Penticostală Ekklesia</h3>
+  <p>Locație: Arad, B-dul Revoluției, nr. 49-53, jud. Arad, cod 310181</p>
+  <p>Pastori: Riviș Tipei Iosif; pastori asistenți Timiș Gabriel, Doboș Dumitru</p>
+  <p>Site biserica: www.ekklesia.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>6. Biserica Penticostală Gloria</h3>
+  <p>Locație: Arad, str. Gloriei, nr. 3-7, jud. Arad, cod 310466</p>
+  <p>Pastori: Ardelean Moise; pastor asistent Ilioni Florin</p>
+  <p>Site biserica: www.bisericagloria.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>7. Biserica Penticostală Micălaca</h3>
+  <p>Locație: Arad, str. Renașterii, nr. 2/B, jud. Arad, cod 310323</p>
+  <p>Pastor: Spătan Daniel; pastori asistenți:Mărgăian David</p>
+  <p>Site biserica: www.micalaca.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>8. Biserica Penticostală Șilindia</h3>
+  <p>Locație: Șilindia, nr. 80/A, jud. Arad, cod 317330</p>
+  <p>Pastor: Ciocan Liviu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>9. Biserica Penticostală Arăneag</h3>
+  <p>Locație: Arăneag, nr. 79, jud. Arad, cod 317361</p>
+  <p>Pastor: Spătan Daniel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>10. Biserica Penticostală Covăsînț</h3>
+  <p>Locație: Covăsînț, nr. 414-415, jud. Arad, cod 317090</p>
+  <p>Pastor: Spătan Daniel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>11. Biserica Penticostală Betania Bonțești</h3>
+  <p>Locație: Bonțești, nr. 275/A, jud. Arad, cod 317146</p>
+  <p>Pastor: Mărgăian David</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>12. Biserica Penticostală Dud</h3>
+  <p>Locație: Dud, nr. 345, jud. Arad, cod 317364</p>
+  <p>Pastor: Ciocan Liviu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>13. Biserica Penticostală Italiană „Sion”</h3>
+  <p>Locație: Arad, str. Orșovei, nr. 8/A, jud. Arad, cod 310232</p>
+  <p>Pastor: Mărgăian David</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>14. Biserica Penticostală „Speranța” Târnova</h3>
+  <p>Locație: Târnova, nr. 477, jud. Arad, cod 317360</p>
+  <p>Pastor: Mărgăian David</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>15. Biserica Penticostală Mândruloc</h3>
+  <p>Locație: Mândruloc, str. Victor Babeș, nr. 18, jud. Arad, cod 317408</p>
+  <p>Pastor: Mărgăian David</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>16. Biserica Penticostală Betesda Bârzava</h3>
+  <p>Locație: Bârzava, nr. 308, jud. Arad, cod 317030</p>
+  <p>Pastor: Mărgăian David</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>17. Biserica Penticostală Betleem Arad</h3>
+  <p>Locație: Arad, str. Faurilor, nr. 62, jud. Arad, cod 310356</p>
+  <p>Pastor: Botezatu Onisim</p>
+  <p>Site biserica: https://bisericabetleem.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>18. Biserica Penticostală „Muntele Sionului” Ghioroc</h3>
+  <p>Locație: Ghioroc, str. N. Bălcescu, nr. 554, jud. Arad, cod 317135</p>
+  <p>Pastor: Botezatu Onisim</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>19. Biserica Penticostală Betel Arad</h3>
+  <p>Locație: Arad, str. Calea Aurel Vlaicu, nr. 121-125, jud. Arad, cod 310392</p>
+  <p>Pastori: pastor coordonator Micurescu Emanuel; pastor Anca Iosif</p>
+  <p>Site biserica: www.betelarad.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>20. Biserica Penticostală Betel Bata</h3>
+  <p>Locație: Bata, nr. 206, jud. Arad, cod 317020</p>
+  <p>Pastor (prezbiter cu atribuții pastorale): Trifa Florin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>21. Biserica Penticostală Nădlac</h3>
+  <p>Locație: Nădlac, str. Independenței, nr. 58, jud. Arad, cod 315500</p>
+  <p>Pastor: Micurescu Emanuel</p>
+  <p>Site biserica: www.pentinadlac.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>22. Biserica Penticostală Sion Frumușeni</h3>
+  <p>Locație: Frumușeni, nr. 329, jud. Arad, cod 317122</p>
+  <p>Pastor: Micurescu Emanuel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>23. Biserica Penticostală Sânmartin</h3>
+  <p>Locație: Sânmartin, nr. 89, jud. Arad, cod 317211</p>
+  <p>Pastor: Micurescu Emanuel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>24. Biserica Penticostală Secusigiu</h3>
+  <p>Locație: Secusigiu, nr. 545/A, jud. Arad, cod 317285</p>
+  <p>Pastor: Iacob Daniel Iancu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>25. Biserica Penticostală Căprioara</h3>
+  <p>Locație: Căprioara, str. 3, nr. 28, jud. Arad, cod 317271</p>
+  <p>Pastor: Iacob Daniel Iancu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>26. Biserica Penticostală „Trezirea”</h3>
+  <p>Locație: Satu Mare, nr. 202, jud. Arad, cod 317287</p>
+  <p>Pastor: Iacob Daniel Iancu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>27. Biserica Penticostală Agrișu Mare</h3>
+  <p>Locație: Agrișu Mare, nr. 20/A, jud. Arad, cod 317365</p>
+  <p>Pastor: Varadin Dionisie; pastor asistent Ștefan Avram</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>28. Biserica Penticostală „Elim” Galșa</h3>
+  <p>Locație: Galșa, nr. 417/A, jud. Arad, cod 317341</p>
+  <p>Pastor: Ionașcu Paul</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>29. Biserica Penticostală „Eben Ezer” Ineu</h3>
+  <p>Locație: Ineu, str. Aurel Vlaicu, nr. 5/A, jud. Arad</p>
+  <p>Pastor: Ciocan Liviu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>30. Biserica Penticostală „Pe Stâncă”</h3>
+  <p>Locație: Lipova-Șoimoș, nr. 359-362, jud. Arad</p>
+  <p>Pastor: Lela Cornel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>31. Biserica Penticostală „Rehobot”</h3>
+  <p>Locație: Miniș, nr. 44, jud. Arad, cod 317137</p>
+  <p>Pastor: Lela Cornel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>32. Biserica Penticostală „Calea Mântuirii”</h3>
+  <p>Locație: Neudorf, nr. 266, jud. Arad, cod 317412</p>
+  <p>Pastor: Lela Cornel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>33. Biserica Penticostală „Elim” Curtici</h3>
+  <p>Locație: Curtici, str. Grănicierilor, nr. 13, jud. Arad</p>
+  <p>Pastor: Popelea Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>34. Biserica Penticostală „Betania” Păuliș</h3>
+  <p>Locație: Păuliș, nr. 1/D, jud. Arad, cod 317230</p>
+  <p>Pastor: Vasilciuc Vartică</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>35. Biserica Penticostală „Harul” Chesinț</h3>
+  <p>Locație: Chesinț, nr. 63/A, jud. Arad, cod 317411</p>
+  <p>Pastor: Vasilciuc Vartică</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>36. Biserica Penticostală „Emanuel” Sebiș</h3>
+  <p>Locație: Sebiș, str. Oltului, nr. 43, jud. Arad, cod 315700</p>
+  <p>Pastor: Guia Ștefan Marius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>37. Biserica Penticostală Sălăjeni</h3>
+  <p>Locație: Sălăjeni, nr. 98, jud. Arad, cod 315703</p>
+  <p>Pastor: Guia Ștefan Marius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>38. Biserica Penticostală Laz</h3>
+  <p>Locație: Laz, nr. 83/A, jud. Arad, cod 317112</p>
+  <p>Pastor: Guia Ștefan Marius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>39. Biserica Penticostală Revetiș</h3>
+  <p>Locație: Revetiș, nr. 117, jud. Arad, cod 317118</p>
+  <p>Pastor: Guia Ștefan Marius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>40. Biserica Penticostală „Betania” Sebiș</h3>
+  <p>Locație: Sebiș, str. B-dul Victoriei, nr. 13, jud. Arad, cod 315700</p>
+  <p>Pastor: Ardelean Alexandru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>41. Biserica Penticostală Șimand „Efrata”</h3>
+  <p>Locație: Șimand, str. Oituz, nr. 4, jud. Arad, cod 317335</p>
+  <p>Pastor: Pocioian Florin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>42. Biserica Penticostală Zăbrani</h3>
+  <p>Locație: Zăbrani, nr. 37, jud. Arad, cod 317410</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>43. Biserica Penticostală Păuliș</h3>
+  <p>Locație: Păuliș, nr. 37/A, jud. Arad, cod 317068</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>44. Biserica Penticostală Bonțești</h3>
+  <p>Locație: Bonțești, nr. 44, jud. Arad, cod 317146</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>45. Biserica Penticostală Buteni</h3>
+  <p>Locație: Buteni, nr. 15/A, jud. Arad, cod 317065</p>
+  <p>Pastor: Ardelean Alexandru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>46. Biserica Penticostală Chisindia</h3>
+  <p>Locație: Chisindia, nr. 396, jud. Arad, cod 317080</p>
+  <p>Pastor: Crișan Dănuț</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>47. Biserica Penticostală Dezna</h3>
+  <p>Locație: Dezna, str. Speranței, nr. 1, jud. Arad, cod 317110</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>48. Biserica Penticostală Bârsa</h3>
+  <p>Locație: Bârsa, nr. 46, jud. Arad, cod 317025</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>49. Biserica Penticostală Moneasa</h3>
+  <p>Locație: Moneasa, nr. 147, jud. Arad, cod 317220</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>50. Biserica Penticostală „Muntele Sionului” Prunișor</h3>
+  <p>Locație: Prunișor, nr. 149, jud. Arad, cod 315702</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>51. Biserica Penticostală „Filadelfia” Sebiș</h3>
+  <p>Locație: Sebiș, str. Oltului, nr. 87/A, jud. Arad, cod 315700</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>52. Biserica Penticostală „Măslinul” Arad</h3>
+  <p>Locație: Arad, str. Hunedoarei, nr. 57, jud. Arad, cod 310075</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>53. Biserica Penticostală „Măslinul” Secusigiu</h3>
+  <p>Locație: Secusigiu, nr. 654, jud. Arad, cod 317285</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>54. Biserica Penticostală Roșia</h3>
+  <p>Locație: Roșia, nr. 80, jud. Arad, cod 317119</p>
+  <p>Pastor: Fedur Șamoli</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>55. Biserica Penticostală Ieramata</h3>
+  <p>Locație: Ieramata, nr. 234, jud. Arad, cod 317291</p>
+  <p>Pastor: Fedur Șamoli</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>56. Biserica Penticostală Șicula</h3>
+  <p>Locație: Șicula, nr. 262, jud. Arad, cod 315500</p>
+  <p>Pastor: Fedur Șamoli</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>57. Biserica Penticostală „Flacăra Rusalilor” Cuvin</h3>
+  <p>Locație: Cuvin, nr. 381, jud. Arad, cod 317136</p>
+  <p>Pastor: Fedur Șamoli</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>58. Biserica Penticostală „Betel” Mășca</h3>
+  <p>Locație: Mășca, nr. 195, jud. Arad, cod 317342</p>
+  <p>Pastor: Fedur Șamoli</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>59. Biserica Penticostală „Golgota” Sânpaul</h3>
+  <p>Locație: Sânpaul, str. 3, nr. 1, jud. Arad, cod 317351</p>
+  <p>Pastor: Fedur Samoil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>60. Biserica Penticostală „Tabor” Sâmbăteni</h3>
+  <p>Locație: Sâmbăteni, nr. 422, jud. Arad, cod 317233</p>
+  <p>Pastor: Babuția Teofil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>61. Biserica Penticostală Lalașinț</h3>
+  <p>Locație: Lalașinț, nr. 277, jud. Arad, cod 317347</p>
+  <p>Pastor: Babuția Teofil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>62. Biserica Penticostală „Harul” Arad</h3>
+  <p>Locație: Arad, str. Bârsei, nr. 2, jud. Arad, cod 310094</p>
+  <p>Pastor: Babuția Teofil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>63. Biserica Penticostală Cladova</h3>
+  <p>Locație: Cladova, str. Salcâmilor, nr. 16, jud. Arad, cod 317232</p>
+  <p>Pastor: Crăciunescu Cosmin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>64. Biserica Penticostală „Harul” Pârnești</h3>
+  <p>Locație: Pârnești, str. 1, nr. 5, jud. Arad, cod 317274</p>
+  <p>Pastor: Babuția Teofil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>65. Biserica Penticostală „Izvorul Vieții” Arad</h3>
+  <p>Locație: Arad, str. Ady Endre, nr. 6, jud. Arad, cod 310228</p>
+  <p>Pastor: Bîrzan Adrian</p>
+  <p>Site biserica: www.izvorulvietiiarad.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>66. Biserica Penticostală „Peniel” Sântana</h3>
+  <p>Locație: Sântana, str. Rozelor, nr. 26, jud. Arad, cod 317280</p>
+  <p>Pastor: Popelea Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>67. Biserica Penticostală Semlac</h3>
+  <p>Locație: Semlac, nr. 572/A, jud. Arad, cod 317295</p>
+  <p>Pastor: Popelea Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>68. Biserica Penticostală Felnac</h3>
+  <p>Locație: Felnac, nr. 634, jud. Arad, cod 317125</p>
+  <p>Prezbit cu atribuții pastorale: Cerceraru Gabriel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>69. Biserica Penticostală „El-Shaddai” Arad</h3>
+  <p>Locație: Arad, str. Clopotului, nr. 151, jud. Arad, cod 310264</p>
+  <p>Pastor: Murgu Rudolf</p>
+  <p>Site biserica: www.bisericaelshaddai.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>70. Biserica Penticostală „Elim” Arad</h3>
+  <p>Locație: Arad, str. Iacob Cardoș, nr. 1, jud. Arad, cod 310093</p>
+  <p>Prezbit: Foț Simion</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>71. Biserica Penticostală Ususău</h3>
+  <p>Locație: Ususău, nr. 244, jud. Arad, cod 317375</p>
+  <p>Pastor: Buga Anton</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>72. Biserica Penticostală Dorgoș</h3>
+  <p>Locație: Dorgoș, nr. 72/B, jud. Arad, cod 317377</p>
+  <p>Prezbiter cu atribuții pastorale: Văcărescu Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>73. Biserica Penticostală Belotinț</h3>
+  <p>Locație: Belotinț, nr. 93, jud. Arad, cod 317086</p>
+  <p>Prezbiter cu atribuții pastorale: Văcărescu Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>74. Biserica Penticostală Mișca</h3>
+  <p>Locație: Mișca, nr. 162, jud. Arad, cod 317215</p>
+  <p>Prezbiter cu atribuții pastorale: Barbura Petru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>75. Biserica Penticostală Grăniceri</h3>
+  <p>Locație: Grăniceri, nr. 303, jud. Arad, cod 317140</p>
+  <p>Prezbiter cu atribuții pastorale: Barbura Petru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>1. Biserica Penticostală Betania</h3>
+  <p>Locație: Arad, str. Vișinului, nr. 49-51, jud. Arad, cod 310191</p>
+  <p>Pastori: Tomuța Simion; pastor asistent Crișan Beniamin</p>
+  <p>Site biserica: www.bisericabetania.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>2. Biserica Penticostală Logos</h3>
+  <p>Locație: Zimandcuz, nr. 720, jud. Arad, cod 317427</p>
+  <p>Pastor: prezbiter Deznan Petru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>3. Biserica Penticostală Eben Ezer</h3>
+  <p>Locație: Andrei Șaguna, nr. 434, jud. Arad, cod 317425</p>
+  <p>Pastor: prezbiter Deznan Petru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>4. Biserica Penticostală Betesda Livada</h3>
+  <p>Locație: Livada, nr. 58, jud. Arad, cod 317205</p>
+  <p>Pastor: Tomuța Simion</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>5. Biserica Penticostală Ekklesia</h3>
+  <p>Locație: Arad, B-dul Revoluției, nr. 49-53, jud. Arad, cod 310181</p>
+  <p>Pastori: Riviș Tipei Iosif; pastori asistenți Timiș Gabriel, Doboș Dumitru</p>
+  <p>Site biserica: www.ekklesia.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>6. Biserica Penticostală Gloria</h3>
+  <p>Locație: Arad, str. Gloriei, nr. 3-7, jud. Arad, cod 310466</p>
+  <p>Pastori: Ardelean Moise; pastor asistent Ilioni Florin</p>
+  <p>Site biserica: www.bisericagloria.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>7. Biserica Penticostală Micălaca</h3>
+  <p>Locație: Arad, str. Renașterii, nr. 2/B, jud. Arad, cod 310323</p>
+  <p>Pastor: Mărgăian David; pastori asistenți (inclusiv Spătan Daniel)</p>
+  <p>Site biserica: www.micalaca.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>8. Biserica Penticostală Șilindia</h3>
+  <p>Locație: Șilindia, nr. 80/A, jud. Arad, cod 317330</p>
+  <p>Pastor: Ciocan Liviu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>9. Biserica Penticostală Arăneag</h3>
+  <p>Locație: Arăneag, nr. 79, jud. Arad, cod 317361</p>
+  <p>Pastor: Spătan Daniel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>10. Biserica Penticostală Covăsînț</h3>
+  <p>Locație: Covăsînț, nr. 414-415, jud. Arad, cod 317090</p>
+  <p>Pastor: Spătan Daniel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>11. Biserica Penticostală Betania Bonțești</h3>
+  <p>Locație: Bonțești, nr. 275/A, jud. Arad, cod 317146</p>
+  <p>Pastor: Mărgăian David</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>12. Biserica Penticostală Dud</h3>
+  <p>Locație: Dud, nr. 345, jud. Arad, cod 317364</p>
+  <p>Pastor: Ciocan Liviu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>13. Biserica Penticostală Italiană „Sion”</h3>
+  <p>Locație: Arad, str. Orșovei, nr. 8/A, jud. Arad, cod 310232</p>
+  <p>Pastor: Mărgăian David</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>14. Biserica Penticostală „Speranța” Târnova</h3>
+  <p>Locație: Târnova, nr. 477, jud. Arad, cod 317360</p>
+  <p>Pastor: Mărgăian David</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>15. Biserica Penticostală Mândruloc</h3>
+  <p>Locație: Mândruloc, str. Victor Babeș, nr. 18, jud. Arad, cod 317408</p>
+  <p>Pastor: Mărgăian David</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>16. Biserica Penticostală Betesda Bârzava</h3>
+  <p>Locație: Bârzava, nr. 308, jud. Arad, cod 317030</p>
+  <p>Pastor: Mărgăian David</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>17. Biserica Penticostală Betleem Arad</h3>
+  <p>Locație: Arad, str. Faurilor, nr. 62, jud. Arad, cod 310356</p>
+  <p>Pastor: Botezatu Onisim</p>
+  <p>Site biserica: https://bisericabetleem.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>18. Biserica Penticostală „Muntele Sionului” Ghioroc</h3>
+  <p>Locație: Ghioroc, str. N. Bălcescu, nr. 554, jud. Arad, cod 317135</p>
+  <p>Pastor: Botezatu Onisim</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>19. Biserica Penticostală Betel Arad</h3>
+  <p>Locație: Arad, str. Calea Aurel Vlaicu, nr. 121-125, jud. Arad, cod 310392</p>
+  <p>Pastori: pastor coordonator Micurescu Emanuel; pastor Anca Iosif</p>
+  <p>Site biserica: www.betelarad.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>20. Biserica Penticostală Betel Bata</h3>
+  <p>Locație: Bata, nr. 206, jud. Arad, cod 317020</p>
+  <p>Pastor (prezbiter cu atribuții pastorale): Trifa Florin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>21. Biserica Penticostală Nădlac</h3>
+  <p>Locație: Nădlac, str. Independenței, nr. 58, jud. Arad, cod 315500</p>
+  <p>Pastor: Micurescu Emanuel</p>
+  <p>Site biserica: www.pentinadlac.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>22. Biserica Penticostală Sion Frumușeni</h3>
+  <p>Locație: Frumușeni, nr. 329, jud. Arad, cod 317122</p>
+  <p>Pastor: Micurescu Emanuel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>23. Biserica Penticostală Sânmartin</h3>
+  <p>Locație: Sânmartin, nr. 89, jud. Arad, cod 317211</p>
+  <p>Pastor: Micurescu Emanuel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>24. Biserica Penticostală Secusigiu</h3>
+  <p>Locație: Secusigiu, nr. 545/A, jud. Arad, cod 317285</p>
+  <p>Pastor: Iacob Daniel Iancu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>25. Biserica Penticostală Căprioara</h3>
+  <p>Locație: Căprioara, str. 3, nr. 28, jud. Arad, cod 317271</p>
+  <p>Pastor: Iacob Daniel Iancu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>26. Biserica Penticostală „Trezirea”</h3>
+  <p>Locație: Satu Mare, nr. 202, jud. Arad, cod 317287</p>
+  <p>Pastor: Iacob Daniel Iancu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>27. Biserica Penticostală Agrișu Mare</h3>
+  <p>Locație: Agrișu Mare, nr. 20/A, jud. Arad, cod 317365</p>
+  <p>Pastor: Varadin Dionisie; pastor asistent Ștefan Avram</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>28. Biserica Penticostală „Elim” Galșa</h3>
+  <p>Locație: Galșa, nr. 417/A, jud. Arad, cod 317341</p>
+  <p>Pastor: Ionașcu Paul</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>29. Biserica Penticostală „Eben Ezer” Ineu</h3>
+  <p>Locație: Ineu, str. Aurel Vlaicu, nr. 5/A, jud. Arad</p>
+  <p>Pastor: Ciocan Liviu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>30. Biserica Penticostală „Pe Stâncă”</h3>
+  <p>Locație: Lipova-Șoimoș, nr. 359-362, jud. Arad</p>
+  <p>Pastor: Lela Cornel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>31. Biserica Penticostală „Rehobot”</h3>
+  <p>Locație: Miniș, nr. 44, jud. Arad, cod 317137</p>
+  <p>Pastor: Lela Cornel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>32. Biserica Penticostală „Calea Mântuirii”</h3>
+  <p>Locație: Neudorf, nr. 266, jud. Arad, cod 317412</p>
+  <p>Pastor: Lela Cornel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>33. Biserica Penticostală „Elim” Curtici</h3>
+  <p>Locație: Curtici, str. Grănicierilor, nr. 13, jud. Arad</p>
+  <p>Pastor: Popelea Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>34. Biserica Penticostală „Betania” Păuliș</h3>
+  <p>Locație: Păuliș, nr. 1/D, jud. Arad, cod 317230</p>
+  <p>Pastor: Vasilciuc Vartică</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>35. Biserica Penticostală „Harul” Chesinț</h3>
+  <p>Locație: Chesinț, nr. 63/A, jud. Arad, cod 317411</p>
+  <p>Pastor: Vasilciuc Vartică</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>36. Biserica Penticostală „Emanuel” Sebiș</h3>
+  <p>Locație: Sebiș, str. Oltului, nr. 43, jud. Arad, cod 315700</p>
+  <p>Pastor: Guia Ștefan Marius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>37. Biserica Penticostală Sălăjeni</h3>
+  <p>Locație: Sălăjeni, nr. 98, jud. Arad, cod 315703</p>
+  <p>Pastor: Guia Ștefan Marius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>38. Biserica Penticostală Laz</h3>
+  <p>Locație: Laz, nr. 83/A, jud. Arad, cod 317112</p>
+  <p>Pastor: Guia Ștefan Marius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>39. Biserica Penticostală Revetiș</h3>
+  <p>Locație: Revetiș, nr. 117, jud. Arad, cod 317118</p>
+  <p>Pastor: Guia Ștefan Marius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>40. Biserica Penticostală „Betania” Sebiș</h3>
+  <p>Locație: Sebiș, str. B-dul Victoriei, nr. 13, jud. Arad, cod 315700</p>
+  <p>Pastor: Ardelean Alexandru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>41. Biserica Penticostală Șimand „Efrata”</h3>
+  <p>Locație: Șimand, str. Oituz, nr. 4, jud. Arad, cod 317335</p>
+  <p>Pastor: Pocioian Florin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>42. Biserica Penticostală Zăbrani</h3>
+  <p>Locație: Zăbrani, nr. 37, jud. Arad, cod 317410</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>43. Biserica Penticostală Păuliș</h3>
+  <p>Locație: Păuliș, nr. 37/A, jud. Arad, cod 317068</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>44. Biserica Penticostală Bonțești</h3>
+  <p>Locație: Bonțești, nr. 44, jud. Arad, cod 317146</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>45. Biserica Penticostală Buteni</h3>
+  <p>Locație: Buteni, nr. 15/A, jud. Arad, cod 317065</p>
+  <p>Pastor: Ardelean Alexandru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>46. Biserica Penticostală Chișindia</h3>
+  <p>Locație: Chișindia, nr. 396, jud. Arad, cod 317080</p>
+  <p>Pastor: Crișan Dănuț</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>47. Biserica Penticostală Dezna</h3>
+  <p>Locație: Dezna, str. Speranței, nr. 1, jud. Arad, cod 317110</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>48. Biserica Penticostală Bârsa</h3>
+  <p>Locație: Bârsa, nr. 46, jud. Arad, cod 317025</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>49. Biserica Penticostală Moneasa</h3>
+  <p>Locație: Moneasa, nr. 147, jud. Arad, cod 317220</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>50. Biserica Penticostală „Muntele Sionului” Prunișor</h3>
+  <p>Locație: Prunișor, nr. 149, jud. Arad, cod 315702</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>51. Biserica Penticostală „Filadelfia” Sebiș</h3>
+  <p>Locație: Sebiș, str. Oltului, nr. 87/A, jud. Arad, cod 315700</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>52. Biserica Penticostală „Măslinul” Arad</h3>
+  <p>Locație: Arad, str. Hunedoarei, nr. 57, jud. Arad, cod 310075</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>53. Biserica Penticostală „Măslinul” Secusigiu</h3>
+  <p>Locație: Secusigiu, nr. 654, jud. Arad, cod 317285</p>
+  <p>Pastor: Dronca Teodor</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>54. Biserica Penticostală Roșia</h3>
+  <p>Locație: Roșia, nr. 80, jud. Arad, cod 317119</p>
+  <p>Pastor: Fedur Șamoli</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>55. Biserica Penticostală Ieramata</h3>
+  <p>Locație: Ieramata, nr. 234, jud. Arad, cod 317291</p>
+  <p>Pastor: Fedur Șamoli</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>56. Biserica Penticostală Șicula</h3>
+  <p>Locație: Șicula, nr. 262, jud. Arad, cod 315500</p>
+  <p>Pastor: Fedur Șamoli</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>57. Biserica Penticostală „Flacăra Rusalilor” Cuvin</h3>
+  <p>Locație: Cuvin, nr. 381, jud. Arad, cod 317136</p>
+  <p>Pastor: Fedur Șamoli</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>58. Biserica Penticostală „Betel” Mășca</h3>
+  <p>Locație: Mășca, nr. 195, jud. Arad, cod 317342</p>
+  <p>Pastor: Fedur Șamoli</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>59. Biserica Penticostală „Golgota” Sânpaul</h3>
+  <p>Locație: Sânpaul, str. 3, nr. 1, jud. Arad, cod 317351</p>
+  <p>Pastor: Fedur Samoil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>60. Biserica Penticostală „Tabor” Sâmbăteni</h3>
+  <p>Locație: Sâmbăteni, nr. 422, jud. Arad, cod 317233</p>
+  <p>Pastor: Babuția Teofil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>61. Biserica Penticostală Lalașinț</h3>
+  <p>Locație: Lalașinț, nr. 277, jud. Arad, cod 317347</p>
+  <p>Pastor: Babuția Teofil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>62. Biserica Penticostală „Harul” Arad</h3>
+  <p>Locație: Arad, str. Bârsei, nr. 2, jud. Arad, cod 310094</p>
+  <p>Pastor: Babuția Teofil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>63. Biserica Penticostală Cladova</h3>
+  <p>Locație: Cladova, str. Salcâmilor, nr. 16, jud. Arad, cod 317232</p>
+  <p>Pastor: Crăciunescu Cosmin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>64. Biserica Penticostală „Harul” Pârnești</h3>
+  <p>Locație: Pârnești, str. 1, nr. 5, jud. Arad, cod 317274</p>
+  <p>Pastor: Babuția Teofil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>65. Biserica Penticostală „Izvorul Vieții” Arad</h3>
+  <p>Locație: Arad, str. Ady Endre, nr. 6, jud. Arad, cod 310228</p>
+  <p>Pastor: Bîrzan Adrian</p>
+  <p>Site biserica: www.izvorulvietiiarad.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>66. Biserica Penticostală „Peniel” Sântana</h3>
+  <p>Locație: Sântana, str. Rozelor, nr. 26, jud. Arad, cod 317280</p>
+  <p>Pastor: Popelea Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>67. Biserica Penticostală Semlac</h3>
+  <p>Locație: Semlac, nr. 572/A, jud. Arad, cod 317295</p>
+  <p>Pastor: Popelea Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>68. Biserica Penticostală Felnac</h3>
+  <p>Locație: Felnac, nr. 634, jud. Arad, cod 317125</p>
+  <p>Prezbiter cu atribuții pastorale: Cerceraru Gabriel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>69. Biserica Penticostală „El-Shaddai” Arad</h3>
+  <p>Locație: Arad, str. Clopotului, nr. 151, jud. Arad, cod 310264</p>
+  <p>Pastor: Murgu Rudolf</p>
+  <p>Site biserica: www.bisericaelshaddai.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>70. Biserica Penticostală „Elim” Arad</h3>
+  <p>Locație: Arad, str. Iacob Cardoș, nr. 1, jud. Arad, cod 310093</p>
+  <p>Prezbiter: Foț Simion</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>71. Biserica Penticostală Ususău</h3>
+  <p>Locație: Ususău, nr. 244, jud. Arad, cod 317375</p>
+  <p>Pastor: Buga Anton</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>72. Biserica Penticostală Dorgoș</h3>
+  <p>Locație: Dorgoș, nr. 72/B, jud. Arad, cod 317377</p>
+  <p>Prezbiter cu atribuții pastorale: Văcărescu Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>73. Biserica Penticostală Belotinț</h3>
+  <p>Locație: Belotinț, nr. 93, jud. Arad, cod 317086</p>
+  <p>Prezbiter cu atribuții pastorale: Văcărescu Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>74. Biserica Penticostală Mișca</h3>
+  <p>Locație: Mișca, nr. 162, jud. Arad, cod 317215</p>
+  <p>Prezbiter cu atribuții pastorale: Barbura Petru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>75. Biserica Penticostală Grăniceri</h3>
+  <p>Locație: Grăniceri, nr. 303, jud. Arad, cod 317140</p>
+  <p>Prezbiter cu atribuții pastorale: Barbura Petru</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>76. Biserica Penticostală „Filadelfia” Sântana</h3>
+  <p>Locație: Sântana, str. M. Eminescu, nr. 49, jud. Arad, cod 317280</p>
+  <p>Pastor: Ardeu Aurel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>77. Biserica Penticostală „Betel” Șiria</h3>
+  <p>Locație: Șiria, str. S. Bărnuțiu, nr. 585, jud. Arad</p>
+  <p>Pastor: Ardeu Aurel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>78. Biserica Penticostală „Filadelfia” Țipar</h3>
+  <p>Locație: Țipar, nr. 215, jud. Arad, cod 317302</p>
+  <p>Pastor: Ardeu Aurel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>79. Biserica Penticostală „Betania” Șiria</h3>
+  <p>Locație: Șiria, str. Andrei Mureșanu, nr. 67/A, jud. Arad, cod 317340</p>
+  <p>Pastor: Ardeu Aurel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>80. Biserica Penticostală „Emanuel” Odvoș</h3>
+  <p>Locație: Odvoș, nr. 215/A, jud. Arad, cod 317089</p>
+  <p>Pastor: Tună Cornel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>81. Biserica Penticostală „Casa de Rugăciune” Tăut</h3>
+  <p>Locație: Tăut, nr. 546, jud. Arad, cod 317355</p>
+  <p>Pastor: Tună Cornel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>82. Biserica Penticostală „Betleem” Măderat</h3>
+  <p>Locație: Măderat, nr. 342, jud. Arad, cod 315601</p>
+  <p>Pastor: Pogan Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>83. Biserica Penticostală „Betania” Caporal Alexa</h3>
+  <p>Locație: Caporal Alexa, nr. 293/A, jud. Arad, cod 317281</p>
+  <p>Pastor: Budișan Dorin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>84. Biserica Penticostală „Efrata” Sântana</h3>
+  <p>Locație: Sântana, str. Poetului, nr. 20, jud. Arad, cod 317280</p>
+  <p>Pastor: Budișan Dorin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>85. Biserica Penticostală „Piatra Vie” Șiria</h3>
+  <p>Locație: Șiria, str. Regiment 85 Infanterie, nr. 27, jud. Arad, cod 317340</p>
+  <p>Pastor: Budișan Dorin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>86. Biserica Penticostală „Golgota” Covăsînț</h3>
+  <p>Locație: Covăsînț, str. Podgoriei, nr. 81/A, jud. Arad, cod 317090</p>
+  <p>Pastor: Preda Emil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>87. Biserica Penticostală „Apa Vie” Lipova</h3>
+  <p>Locație: Lipova, str. Ion Vodă cel Cumplit, nr. 6, jud. Arad, cod 315400</p>
+  <p>Pastori: Jichița Ionel; Lazăr Vasile</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>88. Biserica Penticostală „Emanuel” Fântânele</h3>
+  <p>Locație: Fântânele, nr. 550, jud. Arad, cod 317120</p>
+  <p>Pastor: Jichița Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>89. Biserica Penticostală „Emanuel” Vărădia de Mureș</h3>
+  <p>Locație: Vărădia de Mureș, nr. 222/A, jud. Arad, cod 317380</p>
+  <p>Pastor: Jichița Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>90. Biserica Penticostală „Maranata” Conop</h3>
+  <p>Locație: Conop, nr. 3, jud. Arad, cod 317085</p>
+  <p>Pastor: Curescu Ovidiu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>91. Biserica Penticostală „Maranata” Țela</h3>
+  <p>Locație: Țela, nr. 61, jud. Arad, cod 317023</p>
+  <p>Pastor: Curescu Ovidiu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>92. Biserica Penticostală „Maranata” Dumbrăvița</h3>
+  <p>Locație: Dumbrăvița, nr. 239, jud. Arad, cod 317033</p>
+  <p>Pastor: Curescu Ovidiu</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>93. Biserica Penticostală „Emanuel” Vinga</h3>
+  <p>Locație: Vinga, nr. 423, jud. Arad, cod 317400</p>
+  <p>Pastor: Crișan Dănuț</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>94. Biserica Penticostală „Emanuel” Vladimirescu</h3>
+  <p>Locație: Vladimirescu, str. Progresului, nr. 110, jud. Arad, cod 317405</p>
+  <p>Pastor: Crișan Dănuț</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>95. Biserica Penticostală Nădaș</h3>
+  <p>Locație: Nădaș, nr. 99/B, jud. Arad, cod 317358</p>
+  <p>Pastor: Grijuc Mihai</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>96. Biserica Penticostală Drauț</h3>
+  <p>Locație: Drauț, nr. 44/A, jud. Arad, cod 317363</p>
+  <p>Pastor: Grijuc Mihai</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>97. Biserica Penticostală „Filadelfia” Pâncota</h3>
+  <p>Locație: Pâncota, str. V. Goldiș, nr. 68, jud. Arad, cod 315600</p>
+  <p>Pastor: Lascu Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>98. Biserica Penticostală „Betel” Seliștea</h3>
+  <p>Locație: Seliștea, nr. 35, jud. Arad, cod 317071</p>
+  <p>Pastor: Lascu Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>99. Biserica Penticostală „Filadelfia” Beliu</h3>
+  <p>Locație: Beliu, nr. 639, jud. Arad, cod 317040</p>
+  <p>Pastor: Trînc Marinel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>100. Biserica Penticostală Groșeni</h3>
+  <p>Locație: Groșeni, nr. 167/A, jud. Arad, cod 317017</p>
+  <p>Pastor: Trînc Marinel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>101. Biserica Penticostală Rogoz de Beliu</h3>
+  <p>Locație: Rogoz de Beliu, nr. 49, jud. Arad, cod 317101</p>
+  <p>Pastor: Trînc Marinel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>102. Biserica Penticostală Stoinești</h3>
+  <p>Locație: Stoinești, nr. 38/A, jud. Arad, cod 317102</p>
+  <p>Pastor: Trînc Marinel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>103. Biserica Penticostală Cermei</h3>
+  <p>Locație: Cermei, nr. 193, jud. Arad, cod 317075</p>
+  <p>Pastor: Trînc Marinel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>104. Biserica Penticostală „Betania” Chier</h3>
+  <p>Locație: Chier, nr. 534/A, jud. Arad, cod 317362</p>
+  <p>Pastor: Grijuc Mihai</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>105. Biserica Penticostală Gurahonț</h3>
+  <p>Locație: Gurahonț, str. V. Goldiș, nr. 10, jud. Arad, cod 317145</p>
+  <p>Pastor: Ion Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>106. Biserica Penticostală „Betel” Leasa</h3>
+  <p>Locație: Leasa, nr. 120, jud. Arad, cod 317167</p>
+  <p>Pastor: Ion Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>107. Biserica Penticostală „Emanuel” Hălmagiu</h3>
+  <p>Locație: Hălmagiu, str. Primăriei, nr. 1, jud. Arad, cod 317140</p>
+  <p>Pastor: Ion Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>108. Biserica Penticostală „Emanuel” Honțișor</h3>
+  <p>Locație: Honțișor, nr. 131, jud. Arad, cod 317149</p>
+  <p>Pastor: Ion Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>109. Biserica Penticostală Avram Iancu</h3>
+  <p>Locație: Avram Iancu, nr. 272, jud. Arad, cod 317093</p>
+  <p>Pastor: Ion Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>110. Biserica Penticostală „Betania” Tălagiu</h3>
+  <p>Locație: Tălagiu, nr. 125, jud. Arad, cod 317267</p>
+  <p>Pastor: Bîrcușel Beniamin Pavel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>111. Biserica Penticostală Aldești</h3>
+  <p>Locație: Aldești, nr. 108, jud. Arad, cod 317206</p>
+  <p>Pastor: Ion Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>112. Biserica Penticostală „Betel” Almaș</h3>
+  <p>Locație: Almaș, nr. 236-237, jud. Arad, cod 317005</p>
+  <p>Pastor: Ion Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>113. Biserica Penticostală „Sfânta Treime” Rădești</h3>
+  <p>Locație: Rădești, nr. 144, jud. Arad, cod 317408</p>
+  <p>Pastor: Popan Miron</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>114. Biserica Penticostală „Filadelfia” Horia</h3>
+  <p>Locație: Horia, nr. 214, jud. Arad, cod 317407</p>
+  <p>Pastor: Popan Miron</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>115. Biserica Penticostală „Maranata” Zădăreni</h3>
+  <p>Locație: Zădăreni, nr. 279/C, jud. Arad, cod 317103</p>
+  <p>Pastor: Gligor Marius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>116. Biserica Penticostală „Tabor” Tisa Nouă</h3>
+  <p>Locație: Tisa Nouă, nr. 108, jud. Arad, cod 317153</p>
+  <p>Pastor: Gligor Marius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>117. Biserica Penticostală „Golgota” Cruceni</h3>
+  <p>Locație: Cruceni, nr. 95, jud. Arad, cod 317131</p>
+  <p>Pastor: Ispas Daniel Jr.</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>118. Biserica Penticostală „Betania” Cărând</h3>
+  <p>Locație: Cărând, nr. 160/B, jud. Arad, cod 317070</p>
+  <p>Pastor: Ispas Daniel Jr.</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>119. Biserica Penticostală „Eben Ezer” Pecica</h3>
+  <p>Locație: Pecica, str. 2, nr. 58, jud. Arad, cod 317253</p>
+  <p>Pastor: Simion Ioan</p>
+  <p>Site biserica: www.bisericapenticoslaleeben ezerpecica.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>120. Biserica Penticostală Șeitin</h3>
+  <p>Locație: Șeitin, str. Izvor, nr. 20, jud. Arad, cod 317135</p>
+  <p>Pastor: Turle Augustin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>121. Biserica Penticostală Zăbalț</h3>
+  <p>Locație: Zăbalț, nr. 139, jud. Arad, cod 317139</p>
+  <p>Pastor: Florea Chirilă</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>122. Biserica Penticostală Brunișcu</h3>
+  <p>Locație: Brunișcu, nr. 139, jud. Arad, cod 317376</p>
+  <p>Pastor: Florea Chirilă</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>123. Biserica Penticostală „Osana” Chelmac</h3>
+  <p>Locație: Chelmac, nr. 15, jud. Arad, cod 317007</p>
+  <p>Pastor: Florea Chirilă</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>124. Biserica Penticostală „Betel” Birchiș</h3>
+  <p>Locație: Birchiș, nr. 235, jud. Arad, cod 317050</p>
+  <p>Pastor: Petrean Beniamin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>125. Biserica Penticostală „Maranata” Căpâlnaș</h3>
+  <p>Locație: Căpâlnaș, nr. 39, jud. Arad, cod 317051</p>
+  <p>Pastor: Petrean Beniamin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>126. Biserica Penticostală „Maranata” Lupești</h3>
+  <p>Locație: Lupești, nr. 13, jud. Arad, cod 317083</p>
+  <p>Pastor: Petrean Beniamin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>127. Biserica Penticostală „Poarta Cerului” Valea Mare</h3>
+  <p>Locație: Valea Mare, nr. 30, jud. Arad, cod 317297</p>
+  <p>Pastor: Petrean Beniamin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>128. Biserica Penticostală Corbești</h3>
+  <p>Locație: Corbești, nr. 123, jud. Arad, cod 317246</p>
+  <p>Pastor: Petrean Beniamin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>129. Biserica Penticostală „Betel” Roșia Nouă</h3>
+  <p>Locație: Roșia Nouă, nr. 193/A, jud. Arad, cod 317249</p>
+  <p>Pastor: Petrean Beniamin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>130. Biserica Penticostală Obârșia</h3>
+  <p>Locație: Obârșia, nr. 16, jud. Arad, cod 317248</p>
+  <p>Pastor: Petrean Beniamin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>131. Biserica Penticostală Troaș</h3>
+  <p>Locație: Troaș, nr. 24, jud. Arad, cod 317278</p>
+  <p>Pastor: Petrean Beniamin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>132. Biserica Penticostală Iltea</h3>
+  <p>Locație: Iltea, nr. 111/B, jud. Arad, cod 317247</p>
+  <p>Pastor: Petrean Beniamin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>133. Biserica Penticostală Ostrov</h3>
+  <p>Locație: Ostrov, nr. 190, jud. Arad, cod 317052</p>
+  <p>Pastor: Petrean Beniamin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>134. Biserica Penticostală „Eben Ezer” Săvârșin</h3>
+  <p>Locație: Săvârșin, str. Regele Mihai I, nr. 47, jud. Arad, cod 317270</p>
+  <p>Pastor: Măguran Flavius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>135. Biserica Penticostală Secaci</h3>
+  <p>Locație: Secaci, nr. 14, jud. Arad, cod 317064</p>
+  <p>Pastor: Măguran Flavius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>136. Biserica Penticostală „Emanuel” Cil</h3>
+  <p>Locație: Cil, nr. 183/B, jud. Arad, cod 317006</p>
+  <p>Pastor: Măguran Flavius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>137. Biserica Penticostală „Maranata” Crocna</h3>
+  <p>Locație: Crocna, nr. 4, jud. Arad, cod 317117</p>
+  <p>Pastor: Măguran Flavius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>138. Biserica Penticostală „Betel” Buceava Șoimuș</h3>
+  <p>Locație: Buceava Șoimuș, nr. 22, jud. Arad, cod 317061</p>
+  <p>Pastor: Căprar Eugen</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>139. Biserica Penticostală Mădrigești</h3>
+  <p>Locație: Mădrigești, nr. 87, jud. Arad, cod 317063</p>
+  <p>Pastor: Căprar Eugen</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>140. Biserica Penticostală Slatina de Mureș</h3>
+  <p>Locație: Slatina de Mureș, nr. 80/A, jud. Arad, cod 317083</p>
+  <p>Pastor: Căprar Eugen</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>141. Biserica Penticostală „Betania” Gură Văii</h3>
+  <p>Locație: Gură Văii, str. Românești, nr. 9, jud. Arad, cod 317264</p>
+  <p>Pastor: Filimon Darius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>142. Biserica Penticostală Pleșcuța</h3>
+  <p>Locație: Pleșcuța, nr. 31, jud. Arad, cod 317260</p>
+  <p>Pastor: Filimon Darius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>143. Biserica Penticostală Hășmaș</h3>
+  <p>Locație: Hășmaș, nr. 132, jud. Arad, cod 317185</p>
+  <p>Pastor: Filimon Darius</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>144. Biserica Penticostală Agrișu Mic</h3>
+  <p>Locație: Agrișu Mic, nr. 58/A, jud. Arad, cod 317186</p>
+  <p>Pastor: Mateiu Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>145. Biserica Penticostală „Maranata” Sânleani</h3>
+  <p>Locație: Sălănița, nr. 154/A, jud. Arad, cod 317260</p>
+  <p>Pastor: Pleș Constantin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>146. Biserica Penticostală „Maranata” Arad</h3>
+  <p>Locație: Str. Căpitan Ignat, nr. 68, jud. Arad, cod 310059</p>
+  <p>Pastor: Pleș Constantin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>147. Biserica Penticostală „Betania” Ineu</h3>
+  <p>Locație: Ineu, str. G. Coșbuc, nr. 37, jud. Arad, cod 315300</p>
+  <p>Pastor: Moț Ghiocel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>148. Biserica Penticostală „Elim” Gurba</h3>
+  <p>Locație: Gurba, nr. 99, jud. Arad, cod 317327</p>
+  <p>Pastor: Moț Ghiocel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>149. Biserica Penticostală „Noua Philadelphia” Arad</h3>
+  <p>Locație: Arad, str. Măgurii, nr. 10, cod 310452</p>
+  <p>Pastor: Moț Ghiocel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>150. Biserica Penticostală „Maranata” Șiria</h3>
+  <p>Locație: Șiria, str. Progresului, nr. 1803/A, jud. Arad, cod 317340</p>
+  <p>Pastor: Moț Ghiocel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>151. Biserica Penticostală Mocrea</h3>
+  <p>Locație: Mocrea, nr. 93, jud. Arad, cod 315301</p>
+  <p>Pastor: Moț Ghiocel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>152. Biserica Penticostală Mănăștur</h3>
+  <p>Locație: Mănăștur, nr. 157, jud. Arad, cod 317056</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>153. Biserica Penticostală „Maranata” Bârsa</h3>
+  <p>Locație: Bârsa, nr. 132, jud. Arad, cod 317255</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>154. Biserica Penticostală „Gloria” Chereluș</h3>
+  <p>Locație: Chereluș, nr. 208, jud. Arad, cod 317236</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>155. Biserica Penticostală „Gloria” Pilu</h3>
+  <p>Locație: Pilu, nr. 18, jud. Arad, cod 317255</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>156. Biserica Penticostală „Sfânta Treime” Vărșand</h3>
+  <p>Locație: Vărșand, nr. 103, jud. Arad, cod 317256</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>157. Biserica Penticostală „Samariteanul” Chișineu Criș</h3>
+  <p>Locație: Chișineu Criș, str. Brîndușei, nr. 24, jud. Arad, cod 315100</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>158. Biserica Penticostală „Filadelfia” Chișineu Criș</h3>
+  <p>Locație: Chișineu Criș, str. Gării, nr. 8, jud. Arad, cod 315100</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>159. Biserica Penticostală „Betesda” Socodor</h3>
+  <p>Locație: Socodor, nr. 679, jud. Arad, cod 317305</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>160. Biserica Penticostală Nădab</h3>
+  <p>Locație: Nădab, nr. 98, jud. Arad, cod 315101</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>161. Biserica Penticostală „Betel” Sintea Mare</h3>
+  <p>Locație: Sintea Mare, nr. 83, jud. Arad, cod 317300</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>162. Biserica Penticostală „Betel” Nădab</h3>
+  <p>Locație: Nădab, str. V. Goldiș, nr. 58, jud. Arad, cod 315101</p>
+  <p>Pastor: Nedelea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>163. Biserica Penticostală „Betel” Șepreuș</h3>
+  <p>Locație: Șepreuș, str. Nanci, nr. 102, jud. Arad, cod 317320</p>
+  <p>Pastor: Voinea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>164. Biserica Penticostală „Emanuel” Moroda</h3>
+  <p>Locație: Moroda, nr. 478, jud. Arad, cod 317292</p>
+  <p>Pastor: Voinea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>165. Biserica Penticostală „Betania” Seleuș</h3>
+  <p>Locație: Seleuș, nr. 273/B, jud. Arad, cod 317290</p>
+  <p>Pastor: Voinea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>166. Biserica Penticostală Bocsig</h3>
+  <p>Locație: Bocsig, nr. 307, jud. Arad, cod 317055</p>
+  <p>Pastor: Voinea Ionel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>167. Biserica Penticostală Șagu</h3>
+  <p>Locație: Șagu, nr. 225, jud. Arad, cod 317310</p>
+  <p>Pastor: Mihunță Nicolae Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>168. Biserica Penticostală Fîntîneaz</h3>
+  <p>Locație: Fîntîneaz, nr. 154/A, jud. Arad, cod 317312</p>
+  <p>Pastor: Mihunță Nicolae Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>169. Biserica Penticostală „Maranata” Fiscut</h3>
+  <p>Locație: Fiscut, nr. 167/A, jud. Arad, cod 317313</p>
+  <p>Pastor: Mihunță Nicolae Adrian</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>170. Biserica Penticostală „Elim” Cintei</h3>
+  <p>Locație: Cintei, str. Armoniei, nr. 4, jud. Arad, cod 317416</p>
+  <p>Pastor: Ilioni Florin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>171. Biserica Penticostală „Betel” Lipova</h3>
+  <p>Locație: Lipova, str. Hajdeu, nr. 58, jud. Arad, cod 315400</p>
+  <p>Pastor: Crăciunescu Cosmin</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>172. Biserica Penticostală Craiva</h3>
+  <p>Locație: Craiva, nr. 30, jud. Arad, cod 317095</p>
+  <p>Pastor: Trînc Marinel</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>173. Biserica Penticostală „Betesda” Nădlac</h3>
+  <p>Locație: Nădlac, str. M. Eminescu, nr. 112, jud. Arad, cod 315500</p>
+  <p>Pastor: Babuția Teofil</p>
+  <p>Site biserica:</p>
+</article>
+
+<article class="church-card">
+  <h3>174. Biserica Penticostală „Eben-Ezer” Arad</h3>
+  <p>Locație: Arad, str. Aprodul Purice, nr. 36, jud. Arad</p>
+  <p>Pastor: Farcaș Ioan</p>
+  <p>Site biserica:</p>
+</article>
+
+
         </div>
     </section>
-
 </main>
 
 <footer class="footer">
     <div class="footer-inner">
-        &copy; <span id="yearSpan"></span> Comunitatea Regională Penticostală Arad. Toate drepturile rezervate.
+        <p>&copy; <span id="footer-year"></span> Comunitatea Regională Penticostală Arad</p>
     </div>
 </footer>
-
-<!-- JS global al site-ului (nav, lightbox, contact, etc.) -->
-<script src="pgpr1.js"></script>
-
-<!-- Datele bisericilor (municipiul Arad) -->
-<script>
-    const churches = [
-        {
-            name: "Biserica Penticostală Betania",
-            address: "Strada Vișinului 49-51, 310158 Arad",
-            website: "https://bisericabetania.ro"
-        },
-        {
-            name: "Biserica Creștină Penticostală Gloria",
-            address: "Strada Gloriei 5, 310466 Arad",
-            website: "https://bisericagloria.ro"
-        },
-        {
-            name: "Biserica Creștină Penticostală Noua Philadelphia",
-            address: "Strada Măgurei 10, 310452 Arad",
-            website: "https://www.nouaphiladelphia.ro"
-        },
-        {
-            name: "Biserica Creștină Penticostală Micălaca",
-            address: "Strada Renașterii 2B, 310323 Arad",
-            website: ""
-        },
-        {
-            name: "Biserica Penticostală Izvorul Vieții",
-            address: "Strada Ady Endre 6, 310048 Arad",
-            website: ""
-        },
-        {
-            name: "Biserica Penticostală Măslinul",
-            address: "Strada Hunedoarei 57, 310190 Arad",
-            website: ""
-        },
-        {
-            name: "Biserica Creștină Penticostală Vox Domini",
-            address: "Calea Timișorii 2, 310059 Arad",
-            website: ""
-        }
-    ];
-
-    function renderChurchList() {
-        const grid = document.getElementById("aradChurchesGrid");
-        if (!grid) return;
-
-        grid.innerHTML = "";
-
-        churches.forEach((ch) => {
-            const card = document.createElement("article");
-            card.className = "arad-church-card";
-
-            const nameEl = document.createElement("h4");
-            nameEl.className = "arad-church-name";
-            nameEl.textContent = ch.name;
-
-            const addrEl = document.createElement("p");
-            addrEl.className = "arad-church-address";
-            addrEl.textContent = ch.address;
-
-            const metaEl = document.createElement("p");
-            metaEl.className = "arad-church-meta";
-
-            if (ch.website && ch.website.trim() !== "") {
-                const link = document.createElement("a");
-                link.href = ch.website;
-                link.target = "_blank";
-                link.rel = "noopener";
-                link.textContent = "Vizitează site-ul";
-                metaEl.appendChild(link);
-            } else {
-                metaEl.textContent = "Site oficial: în curs de actualizare";
-            }
-
-            card.appendChild(nameEl);
-            card.appendChild(addrEl);
-            card.appendChild(metaEl);
-            grid.appendChild(card);
-        });
-    }
-
-    function initAradMap() {
-        const mapElement = document.getElementById("aradMap");
-        if (!mapElement) return;
-
-        const aradCenter = { lat: 46.1866, lng: 21.3123 };
-
-        const map = new google.maps.Map(mapElement, {
-            zoom: 12,
-            center: aradCenter,
-            mapTypeControl: false,
-            streetViewControl: false
-        });
-
-        const geocoder = new google.maps.Geocoder();
-        const infoWindow = new google.maps.InfoWindow();
-
-        churches.forEach((church) => {
-            const query = church.address + ", România";
-
-            geocoder.geocode({ address: query }, (results, status) => {
-                if (status === "OK" && results && results[0]) {
-                    const position = results[0].geometry.location;
-
-                    const marker = new google.maps.Marker({
-                        map,
-                        position,
-                        title: church.name
-                    });
-
-                    const contentParts = [
-                        "<strong>" + church.name + "</strong>",
-                        "<br>",
-                        church.address
-                    ];
-
-                    if (church.website && church.website.trim() !== "") {
-                        contentParts.push(
-                            '<br><a href="' + church.website + '" target="_blank" rel="noopener">Deschide site-ul</a>'
-                        );
-                    }
-
-                    const contentString = contentParts.join("");
-
-                    marker.addListener("click", () => {
-                        infoWindow.setContent(contentString);
-                        infoWindow.open(map, marker);
-                    });
-                } else {
-                    console.warn("Nu s-a putut geocoda adresa pentru:", church.name, status);
-                }
-            });
-        });
-
-        renderChurchList();
-    }
-
-    document.addEventListener("DOMContentLoaded", renderChurchList);
-</script>
-
-<!-- Google Maps API (înlocuiește YOUR_API_KEY cu cheia ta) -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initAradMap" async defer></script>
 
 </body>
 </html>
