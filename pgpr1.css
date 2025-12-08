@@ -2139,9 +2139,9 @@ body.no-scroll {
 
 /* blocare scroll când lightbox-ul e deschis */
 body.no-scroll {
-    overflow: hidden !important;
-    height: 100vh !important;
-    touch-action: none !important;
+    overflow: hidden !important;   /* blochează scroll-ul pe pagină */
+    touch-action: none !important; /* blochează gesturile de page pan/zoom */
+    /* fără height:100vh aici – pe iOS strică centrare */
 }
 
 /* overlay care acoperă TOT ecranul */
@@ -2229,4 +2229,48 @@ body.no-scroll {
     font-size: 0.95rem;
     font-weight: 500;
     z-index: 100000;
+}
+/* ============================================================
+   LIGHTBOX FULLSCREEN + FIX POZIȚIONARE + BLOCARE SCROLL
+============================================================ */
+
+/* overlay care acoperă TOT ecranul */
+#lightbox {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 16px;
+    background: rgba(15, 23, 42, 0.88) !important;
+    backdrop-filter: blur(4px);
+    z-index: 99999 !important;
+
+    overflow-y: auto; /* scroll doar în overlay */
+}
+
+/* containerul imaginii – centrat */
+.lightbox-inner {
+    position: relative;
+    margin: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* imaginea */
+#lightboxImage {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    touch-action: none !important;
 }
