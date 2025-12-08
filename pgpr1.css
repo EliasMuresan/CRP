@@ -654,7 +654,7 @@ body {
 }
 
 /* =========================================================
-   EVENIMENTE – CARDURI
+   EVENIMENTE – CARDURI (layout grid clasic – folosit la nevoie)
    ========================================================= */
 
 .events-grid {
@@ -1181,7 +1181,7 @@ body {
 }
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE – GRIDURI
    ========================================================= */
 
 @media (max-width: 1100px) {
@@ -1297,20 +1297,18 @@ body {
 }
 
 /* ============================================================
-   L LAYOUT – FINAL, CURAT, OPTIMIZAT
+   L LAYOUT – PAGINA CONFERINȚĂ
 ============================================================ */
 
-/* CARDUL MARE AL SECTIUNII */
 .event-L-wrapper {
     background: #ffffff;
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.07);
-    overflow: hidden; /* necesar pentru float */
+    overflow: hidden;
     position: relative;
 }
 
-/* CARD UNIC ÎN DREAPTA – POZA SUS + TEXT JOS */
 .event-L-aside {
     float: right;
     width: 340px;
@@ -1326,17 +1324,15 @@ body {
     padding-bottom: 24px;
 }
 
-/* POZA DE SUS ÎN CARD */
 .event-L-photo-top {
     width: 100%;
-    height: 220px;
+    height: 230px;
     object-fit: cover;
     border-radius: 18px 18px 0 0;
     display: block;
     margin-bottom: 16px;
 }
 
-/* TEXT DIN CARD */
 .event-info-card-single h3 {
     font-size: 18px;
     margin: 0 0 10px 20px;
@@ -1353,38 +1349,38 @@ body {
     color: #777;
 }
 
-/* ============================================================
-   TEXTUL PRINCIPAL – CURGERE ÎN L
-============================================================ */
+/* text principal */
 
 .event-L-text {
     font-size: 17px;
-    line-height: 1.65;
+    line-height: 1.68;
     color: #222;
-    overflow: hidden;   /* împinge textul sub cardul din dreapta */
-    padding-top: 20px;  /* spațiere frumoasă sub card */
+    padding-top: 20px;
 }
 
-/* TITLURI */
 .event-L-text h2 {
     font-family: "Playfair Display", serif;
     font-size: 30px;
-    margin: 32px 0 12px;
+    margin-top: 32px;
+    margin-bottom: 12px;
 }
 
-/* LISTA — INDENTARE FRUMOASĂ */
 .event-L-text ul.event-detail-list {
-    padding-left: 28px;
+    padding-left: 30px;
     margin-left: 8px;
 }
 
 .event-L-text ul.event-detail-list li {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
-/* ============================================================
-   RESPONSIVE – CARDUL CADE SUB TEXT
-============================================================ */
+/* clearing float */
+
+.event-L-wrapper::after {
+    content: "";
+    display: block;
+    clear: both;
+}
 
 @media (max-width: 900px) {
     .event-L-aside {
@@ -1397,305 +1393,28 @@ body {
         height: 260px;
     }
 
-    .event-L-text {
-        padding-top: 0;
-    }
-}
-/* ============================================================
-   L LAYOUT — FINAL, OPTIMIZAT, COMPATIBIL CU TOT SITE-UL
-============================================================ */
-
-/* WRAPPERUL MARE AL SECTIUNII */
-.event-L-wrapper {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.07);
-    position: relative;
-    overflow: hidden; /* necesar pentru float */
-}
-
-/* ============================================================
-   CARD DREAPTA – POZA SUS + INFO JOS
-============================================================ */
-
-.event-L-aside {
-    float: right;
-    width: 340px;
-    margin-left: 32px;
-    margin-bottom: 20px;
-}
-
-.event-info-card-single {
-    background: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
-    overflow: hidden;
-    padding-bottom: 24px;
-}
-
-/* poză în partea superioară */
-.event-L-photo-top {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
-    display: block;
-    border-radius: 18px 18px 0 0;
-    margin-bottom: 16px;
-}
-
-/* text în card */
-.event-info-card-single h3 {
-    margin: 0 0 10px 20px;
-    font-size: 18px;
-}
-
-.event-info-card-single ul {
-    padding-left: 20px;
-    margin-bottom: 12px;
-}
-
-.event-info-card-single .event-source {
-    padding-left: 20px;
-    font-size: 14px;
-    color: #777;
-}
-
-/* ============================================================
-   TEXT PRINCIPAL — CURGE SUB CARD (FORMA L)
-============================================================ */
-
-.event-L-text {
-    font-size: 17px;
-    line-height: 1.68;
-    color: #222;
-    overflow: hidden; /* împinge textul sub card */
-    padding-top: 20px; /* distanță sub card */
-}
-
-/* titluri */
-.event-L-text h2 {
-    font-family: "Playfair Display", serif;
-    font-size: 30px;
-    margin-top: 32px;
-    margin-bottom: 12px;
-}
-
-/* indentare liste */
-.event-L-text ul.event-detail-list {
-    padding-left: 30px;
-    margin-left: 8px;
-}
-
-.event-L-text ul.event-detail-list li {
-    margin-bottom: 8px;
-}
-
-/* ============================================================
-   RESPONSIVE
-============================================================ */
-
-@media (max-width: 900px) {
-
-   .event-L-aside {
-    float: right;
-    shape-outside: margin-box;
-    shape-margin: 20px;
-}
-
-    .event-L-photo-top {
-        height: 260px;
+    .event-L-wrapper {
+        padding: 28px 22px;
     }
 
     .event-L-text {
         padding-top: 0;
     }
-}
-/* FORȚĂM L-LAYOUT SĂ FUNCȚIONEZE CA ÎN BROWSERUL CLASIC (float-based) */
-
-.event-L-wrapper {
-    display: block !important;    /* anulăm flex-ul moștenit */
-}
-
-.event-L-aside {
-    float: right;                 /* card în dreapta */
-    width: 340px;
-    margin-left: 32px;
-    margin-bottom: 20px;
-}
-
-.event-L-text {
-    overflow: hidden;             /* textul se înfășoară în jurul aside-ului */
-    padding-top: 0;               /* lăsăm browserul să decidă */
-}
-/* ================================
-   FIX L-LAYOUT – TEXT SUB CARD
-================================ */
-
-/* cardul din dreapta rămâne flotant */
-.event-L-aside {
-    float: right;
-    width: 340px;
-    margin-left: 32px;
-    margin-bottom: 20px;
-}
-
-/* textul NU mai are overflow hidden, ca să poată curge în jurul float-ului */
-.event-L-text {
-    overflow: visible !important;   /* anulăm overflow:hidden din stilurile de mai sus */
-    padding-top: 0;                 /* lăsăm browserul să așeze natural începutul textului */
-}
-
-/* curățăm float-ul ca să nu se „prăbușească” wrapperul */
-.event-L-wrapper::after {
-    content: "";
-    display: block;
-    clear: both;
-}
-/* SPATIERE MAI MARE ÎN CARDUL DE INFORMAȚII ESENȚIALE */
-
-.event-info-card-single ul.event-detail-list {
-    padding-left: 28px !important;   /* mărește distanța față de margine */
-}
-
-.event-info-card-single li {
-    margin-bottom: 6px;              /* spațiu mai aerisit între bullet-uri */
-}
-
-/* când lightbox-ul este deschis, blocăm scroll-ul paginii */
-body.no-scroll {
-    overflow: hidden;
-}
-
-/* când lightbox-ul e deschis, blocăm scroll-ul paginii */
-body.no-scroll {
-    overflow: hidden;
-}
-
-/* lightbox: container imagine */
-.lightbox-inner {
-    max-width: 90%;
-    max-height: 90vh;
-    overflow: hidden;       /* când nu e zoom */
-}
-
-/* animație zoom pe imagine */
-.lightbox-inner img {
-    transition: transform 0.25s ease;
-}
-
-/* stare zoom-ată: putem scrolla în interior, nu pe pagină */
-.lightbox-inner.zoomed {
-    overflow: auto;
-}
-
-/* mărim imaginea când e zoomed */
-.lightbox-inner.zoomed img {
-    transform: scale(1.8);
-}
-
-/* LIGHTBOX FIX – fără scrollbars + rotunjire păstrată */
-.lightbox-inner {
-    max-width: 90%;
-    max-height: 90vh;
-    overflow: hidden !important; /* nu permite scrollbars */
-    border-radius: 18px;         /* aceeași rotunjire ca imaginea */
-    position: relative;
-}
-
-/* imaginea poate fi mărită dar rămâne decupată */
-.lightbox-inner img {
-    transition: transform 0.25s ease;
-    border-radius: 18px;         /* păstrează colțurile */
-    transform-origin: center center; /* zoom din centru */
-}
-
-/* ZOOM activ */
-.lightbox-inner.zoomed img {
-    transform: scale(1.7);  /* zoom mai estetic */
-}
-
-/* LIGHTBOX – container imagine, fără scrollbars, colțuri rotunjite */
-.lightbox-inner {
-    max-width: 90%;
-    max-height: 90vh;
-    position: relative;
-    overflow: hidden;      /* ascunde excesul de imagine, nu și butoanele (le ținem în interior) */
-    border-radius: 18px;
-}
-
-/* imaginea din lightbox */
-.lightbox-inner img {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 18px;
-    transition: transform 0.25s ease;
-    transform-origin: center center;
-}
-
-/* stare de zoom */
-.lightbox-inner.zoomed img {
-    transform: scale(1.7);
-}
-
-/* butoane & counter mereu deasupra imaginii */
-.lightbox-close,
-.lightbox-nav,
-.lightbox-counter {
-    position: absolute;
-    z-index: 2;
-}
-
-/* X-ul sus dreapta, în interiorul cadrului */
-.lightbox-close {
-    top: 12px !important;
-    right: 18px !important;
-    font-size: 32px;
-}
-
-/* săgeata stânga – centrată pe verticală, în interior */
-.lightbox-prev {
-    top: 50% !important;
-    left: 18px !important;
-    transform: translateY(-50%);
-    font-size: 40px;
-}
-
-/* săgeata dreapta – la fel, dar în dreapta */
-.lightbox-next {
-    top: 50% !important;
-    right: 18px !important;
-    transform: translateY(-50%);
-    font-size: 40px;
-}
-
-/* counter jos, la mijloc */
-.lightbox-counter {
-    bottom: 12px !important;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 14px;
-    color: #fff;
 }
 
 /* ============================================================
    PREMIUM SKIN – GLOBAL
-   (se aplică peste stilurile existente, fără să schimbe structura)
 ============================================================ */
 
-/* fundal general puțin mai elegant */
 body {
     background: radial-gradient(circle at top left, #f5f2eb 0, #f3f4f6 40%, #e9edf5 100%);
     color: var(--text-main);
 }
 
-/* container mai „respirat” */
 .band {
     padding: 64px 0;
 }
 
-/* titluri de secțiune mai premium */
 .section-kicker {
     letter-spacing: 0.25em;
     font-size: 11px;
@@ -1710,7 +1429,6 @@ body {
     letter-spacing: -0.02em;
 }
 
-/* paragrafe mai lizibile */
 .band p,
 .event-L-text p {
     font-size: 15.5px;
@@ -1718,14 +1436,11 @@ body {
     color: #384152;
 }
 
-/* listă mai elegantă */
 .event-detail-list li {
     margin-bottom: 6px;
 }
 
-/* ============================================================
-   HEADER / NAVBAR
-============================================================ */
+/* header / navbar skin */
 
 .header {
     background: rgba(255,255,255,0.92);
@@ -1765,9 +1480,7 @@ body {
     box-shadow: 0 10px 25px rgba(148,163,184,0.45);
 }
 
-/* ============================================================
-   HERO – PAGINA PRINCIPALĂ & PAGINI INTERNE
-============================================================ */
+/* inner hero skin */
 
 .inner-hero {
     padding: 80px 0 60px;
@@ -1791,12 +1504,9 @@ body {
 .inner-hero-photo img {
     border-radius: 24px;
     box-shadow: var(--shadow-soft);
-    object-fit: cover;
 }
 
-/* ============================================================
-   CARDURI – evenimente, info, regiuni, etc.
-============================================================ */
+/* carduri skin */
 
 .event-card,
 .event-info-card,
@@ -1820,14 +1530,11 @@ body {
     box-shadow: 0 22px 55px rgba(15,23,42,0.16);
 }
 
-/* header-ul cardului de eveniment */
 .event-image img {
     border-radius: 18px 18px 0 0;
 }
 
-/* ============================================================
-   GALERIE FOTO – imagine mai „curată”
-============================================================ */
+/* galerie foto skin */
 
 .gallery-grid {
     gap: 18px;
@@ -1845,9 +1552,7 @@ body {
     box-shadow: 0 20px 55px rgba(15,23,42,0.18);
 }
 
-/* ============================================================
-   LIGHTBOX – premium look (folosește ce ai deja + fixuri)
-============================================================ */
+/* lightbox premium */
 
 .lightbox {
     background: rgba(15,23,42,0.82);
@@ -1870,12 +1575,10 @@ body {
     transform-origin: center center;
 }
 
-/* stare ZOOM (click pe poză) */
 .lightbox-inner.zoomed img {
     transform: scale(1.7);
 }
 
-/* butoane peste imagine, mereu vizibile */
 .lightbox-close,
 .lightbox-nav,
 .lightbox-counter {
@@ -1911,84 +1614,8 @@ body {
     color: #f9fafb;
 }
 
-/* blocăm scroll-ul paginii când lightbox e deschis */
 body.no-scroll {
     overflow: hidden;
-}
-
-/* ============================================================
-   SECTIUNEA CONFERINTA – L LAYOUT PREMIUM
-============================================================ */
-
-.event-L-wrapper {
-    background: #ffffff;
-    padding: 40px 42px;
-    border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(15,23,42,0.12);
-}
-
-.event-L-aside {
-    float: right;
-    width: 340px;
-    margin-left: 32px;
-    margin-bottom: 20px;
-}
-
-.event-info-card-single {
-    padding-bottom: 22px;
-}
-
-.event-L-photo-top {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
-    border-radius: 18px 18px 0 0;
-    display: block;
-    margin-bottom: 16px;
-}
-
-.event-info-card-single h3 {
-    margin: 0 0 10px 20px;
-    font-size: 18px;
-}
-
-.event-info-card-single ul.event-detail-list {
-    padding-left: 28px;
-    margin-bottom: 12px;
-}
-
-.event-info-card-single li {
-    margin-bottom: 6px;
-}
-
-.event-info-card-single .event-source {
-    padding-left: 20px;
-    font-size: 14px;
-    color: #6b7280;
-}
-
-.event-L-text {
-    overflow: visible !important; /* permite textului să curgă în jurul float-ului */
-}
-
-/* clearing pentru float */
-.event-L-wrapper::after {
-    content: "";
-    display: block;
-    clear: both;
-}
-
-/* responsive */
-@media (max-width: 900px) {
-    .event-L-aside {
-        float: none;
-        width: 100%;
-        margin: 0 0 24px 0;
-    }
-
-    .event-L-wrapper {
-        padding: 28px 22px;
-    }
 }
 
 /* Elimină underline pentru butonul "Contact" */
@@ -2016,307 +1643,17 @@ body.no-scroll {
     object-fit: cover;
     object-position: top center;
 }
+
 /* Repozitionare imagine din cardul de informații */
 .event-info-card-single .event-L-photo-top {
     object-fit: cover;
-    object-position: top center;   /* coboară imaginea */
-}
-/* ================================
-   EVENIMENTE RECENTE – 2 coloane
-=================================== */
-
-.events-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-    margin-top: 40px;
+    object-position: top center;
 }
 
-/* Card eveniment */
-.event-card {
-    display: block;
-    border-radius: 22px;
-    overflow: hidden;
-    background: white;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-    transition: transform .2s ease, box-shadow .2s ease;
-}
-
-/* Imagine card */
-.event-card img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-}
-
-/* Responsive – 1 pe rând */
-@media (max-width: 900px) {
-    .events-grid {
-        grid-template-columns: 1fr;
-    }
-}
-/* ============================================================
-   CAROUSEL EVENIMENTE – card central clar, laterale blur
-============================================================ */
-
-.events-carousel {
-    margin-top: 32px;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-}
-
-.events-track {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    position: relative;
-}
-
-/* bază pentru fiecare slide */
-.event-slide {
-    flex: 0 0 28%;
-    max-width: 28%;
-    opacity: 0.35;
-    filter: blur(2px);
-    transform: scale(0.9);
-    transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
-    pointer-events: none; /* nu poți da click pe cele laterale */
-}
-
-/* slide-ul din mijloc – evidențiat */
-.event-slide.is-center {
-    flex: 0 0 44%;
-    max-width: 44%;
-    opacity: 1;
-    filter: none;
-    transform: scale(1);
-    pointer-events: auto;
-    z-index: 2;
-}
-
-/* slide-uri laterale (stânga/dreapta) – blur ușor + mai mici */
-.event-slide.is-left,
-.event-slide.is-right {
-    opacity: 0.6;
-    filter: blur(1.4px);
-    transform: scale(0.95);
-}
-
-/* cardurile folosite în evenimente (le rafinăm puțin) */
-.event-card {
-    background: #ffffff;
-    border-radius: 22px;
-    overflow: hidden;
-    box-shadow: 0 18px 45px rgba(15,23,42,0.12);
-    border: 1px solid rgba(148,163,184,0.18);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.event-card .event-image img {
-    width: 100%;
-    height: 210px;
-    object-fit: cover;
-}
-
-.event-card .event-body {
-    padding: 18px 22px 20px;
-}
-
-/* săgeți stânga/dreapta */
-.events-arrow {
-    border: none;
-    background: #ffffff;
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
-    box-shadow: 0 10px 30px rgba(15,23,42,0.18);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 20px;
-    color: #111827;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-
-.events-arrow:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 40px rgba(15,23,42,0.25);
-    background: #f9fafb;
-}
-
-/* mobil – doar cardul central, fără blur */
-@media (max-width: 900px) {
-    .events-carousel {
-        gap: 12px;
-    }
-
-    .events-track {
-        gap: 0;
-    }
-
-    .event-slide {
-        display: none;
-    }
-
-    .event-slide.is-center {
-        display: block;
-        flex: 1 1 100%;
-        max-width: 100%;
-        filter: none;
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    .event-card .event-image img {
-        height: 200px;
-    }
-}
-/* ============================================================
-   CAROUSEL EVENIMENTE – POZIȚII REALE (LEFT / CENTER / RIGHT)
-============================================================ */
-
-.events-carousel {
-    margin-top: 40px;
-    position: relative;
-}
-
-.events-track {
-    position: relative;
-    height: 360px; /* înălțime fixă pt. carduri */
-}
-
-/* toate slide-urile devin poziționate ABSOLUT */
-.event-slide {
-    position: absolute;
-    top: 0;
-    width: 32%;
-    transition: all 0.35s ease;
-    opacity: 0.5;
-    filter: blur(2px);
-    transform: scale(0.85);
-    pointer-events: none;
-}
-
-/* CARDUL DIN CENTRU */
-.event-slide.is-center {
-    left: 50%;
-    transform: translateX(-50%) scale(1);
-    opacity: 1;
-    filter: none;
-    z-index: 3;
-    pointer-events: auto;
-}
-
-/* CARDUL DIN STÂNGA */
-.event-slide.is-left {
-    left: 0%;
-    transform: translateX(0) scale(0.9);
-    opacity: 0.7;
-    z-index: 2;
-}
-
-/* CARDUL DIN DREAPTA */
-.event-slide.is-right {
-    left: 100%;
-    transform: translateX(-100%) scale(0.9);
-    opacity: 0.7;
-    z-index: 2;
-}
-
-/* ============================================================
-   LIGHTBOX – centrat corect + fără outline
-============================================================ */
-
-/* overlay – ascuns implicit, JS îl face display:flex */
-.lightbox {
-    position: fixed;
-    inset: 0;
-    display: none; /* IMPORTANT: ascuns la load */
-    align-items: center;
-    justify-content: center;
-    background: rgba(15, 23, 42, 0.75);
-    z-index: 9999;
-}
-
-/* container intern, centrat de flex */
-.lightbox-inner {
-    position: relative;
-    max-width: 90vw;
-    max-height: 90vh;
-    padding: 18px;
-    border-radius: 24px;
-    background: rgba(15, 23, 42, 0.95);
-    box-shadow: 0 24px 60px rgba(15,23,42,0.4);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* anulăm orice poziționări vechi */
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    margin: 0 !important;
-}
-
-/* imaginea – încape frumos în container */
-.lightbox-inner img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 18px;
-    display: block;
-}
-
-/* butoane X + săgeți – fără outline, peste imagine */
-.lightbox-close,
-.lightbox-nav {
-    position: absolute;
-    border: none;
-    background: transparent;
-    color: #f9fafb;
-    cursor: pointer;
-    outline: none;
-}
-
-/* X sus-dreapta */
-.lightbox-close {
-    top: 10px;
-    right: 14px;
-    font-size: 26px;
-}
-
-/* săgeata stânga */
-.lightbox-prev {
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 26px;
-}
-
-/* săgeata dreapta */
-.lightbox-next {
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 26px;
-}
-
-/* scoatem și outline-ul de focus complet */
-.lightbox-close:focus,
-.lightbox-nav:focus {
-    outline: none;
-}
-/* ===============================
+/* =========================================================
    CONTACT SUCCESS OVERLAY
-==================================*/
+========================================================= */
+
 .contact-overlay {
     position: fixed;
     inset: 0;
@@ -2363,8 +1700,6 @@ body.no-scroll {
     margin-bottom: 4px;
 }
 
-/* BIFA ANIMATĂ */
-
 .contact-checkmark-wrapper {
     display: flex;
     justify-content: center;
@@ -2397,71 +1732,192 @@ body.no-scroll {
 }
 
 @keyframes circleDraw {
-    to {
-        stroke-dashoffset: 0;
-    }
+    to { stroke-dashoffset: 0; }
 }
 
 @keyframes tickDraw {
-    to {
-        stroke-dashoffset: 0;
-    }
+    to { stroke-dashoffset: 0; }
 }
 
-/* ============================================
-   EVENIMENTE – FIX LAYOUT MOBIL
-=============================================== */
+/* =========================================
+   EVENIMENTE – SLIDER COVERFLOW FINAL
+   ========================================= */
+
+/* Banda de evenimente – un pic mai compactă */
+#evenimente.band {
+    padding-top: 48px;
+    padding-bottom: 40px;
+}
+
+/* Container slider */
+.events-carousel {
+    position: relative;
+    max-width: 1120px;
+    margin: 32px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Track-ul pe care JS mută clasele (is-center / is-left / is-right) */
+.events-track {
+    position: relative;
+    width: 100%;
+    height: 430px;        /* suficient pentru card + umbră, fără gol imens */
+}
+
+/* Bază pentru fiecare slide */
+.event-slide {
+    position: absolute;
+    top: 0;
+    width: 360px;
+    max-width: 100%;
+    transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease;
+    opacity: 0;           /* implicit invizibil – doar left/center/right se văd */
+    filter: blur(2px);
+    transform: scale(0.9);
+    pointer-events: none;
+}
+
+/* CARDUL CENTRAL – clar, plin, clicabil */
+.event-slide.is-center {
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+    filter: none;
+    z-index: 3;
+    pointer-events: auto;
+}
+
+/* CARD STÂNGA – puțin mai mic + blur */
+.event-slide.is-left {
+    left: 50%;
+    transform: translateX(-170%) scale(0.92);
+    opacity: 0.7;
+    filter: blur(1.5px);
+    z-index: 2;
+}
+
+/* CARD DREAPTA – puțin mai mic + blur */
+.event-slide.is-right {
+    left: 50%;
+    transform: translateX(70%) scale(0.92);
+    opacity: 0.7;
+    filter: blur(1.5px);
+    z-index: 2;
+}
+
+/* Cardul în sine – păstrăm look-ul premium */
+.event-card {
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.12);
+}
+
+/* Imagine card */
+.event-card .event-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Butoane stânga / dreapta */
+.events-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: #ffffff;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    color: #111827;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    z-index: 5; /* peste carduri și blur */
+}
+
+.events-arrow-left  { left: 8px; }
+.events-arrow-right { right: 8px; }
+
+.events-arrow:hover {
+    transform: translateY(-50%) translateY(-2px);
+    box-shadow: 0 16px 40px rgba(15,23,42,0.25);
+    background: #f9fafb;
+}
+
+/* =========================================
+   RESPONSIVE – MOBILE (SLIDE SMOOTH)
+   ========================================= */
+
 @media (max-width: 900px) {
-    /* caruselul devine bloc normal, săgețile vor pluti peste card */
+
+    /* secțiunea un pic mai compactă */
+    #evenimente.band {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+
     .events-carousel {
-        display: block;
-        position: relative;
-        margin-top: 28px;
-    }
-
-    .events-track {
-        display: block;
-        height: auto;           /* anulăm înălțimea fixă */
-    }
-
-    /* în mod normal ascundem toate slide-urile */
-    .event-slide {
-        display: none;
-        position: static;       /* anulăm orice absolute din versiuni mai vechi */
-        flex: none;
+        margin-top: 24px;
         max-width: 100%;
-        opacity: 1;
-        filter: none;
-        transform: none;
+    }
+
+    /* înălțime fixă suficientă pentru card */
+    .events-track {
+        height: 380px;
+    }
+
+    /* toate slide-urile sunt absolut poziționate, unul peste altul,
+       iar tranziția se face prin transform + opacity */
+    .event-slide {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100%;
+        max-width: 360px;
+        transform: translateX(-50%) scale(0.9);
+        opacity: 0;
+        filter: none;              /* fără blur pe mobil */
         pointer-events: none;
     }
 
-    /* doar cardul central este vizibil și clicabil, full width */
+    /* slide-ul activ – la mijloc, se animează smooth datorită
+       transition-ului setat pe .event-slide în CSS-ul desktop */
     .event-slide.is-center {
-        display: block;
-        width: 100%;
-        max-width: 100%;
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
         pointer-events: auto;
     }
 
-    /* săgețile nu mai ocupă loc în flex, stau peste card */
-    .events-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 5;
+    /* pentru stânga/dreapta le ținem ușor în afara ecranului,
+       doar pentru direcția de mișcare; practic nu se văd */
+    .event-slide.is-left {
+        transform: translateX(-160%) scale(0.9);
+        opacity: 0;
     }
 
-    .events-arrow-left {
-        left: 8px;
+    .event-slide.is-right {
+        transform: translateX(60%) scale(0.9);
+        opacity: 0;
     }
 
-    .events-arrow-right {
-        right: 8px;
+    /* card puțin mai îngust pe mobil */
+    .event-card {
+        max-width: 360px;
+        margin: 0 auto;
     }
 
-    /* imaginea un pic mai joasă pe mobil */
-    .event-card .event-image img {
-        height: 200px;
-    }
+    /* săgețile rămân vizibile, în interior */
+    .events-arrow-left  { left: 8px; }
+    .events-arrow-right { right: 8px; }
 }
+
