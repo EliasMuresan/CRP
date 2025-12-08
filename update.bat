@@ -1,32 +1,32 @@
 @echo off
-echo ============================
-echo  Git quick update pentru CRP
-echo ============================
-
-REM mergem în folderul scriptului (proiectului)
 cd /d "%~dp0"
 
-REM arătăm statusul curent
+echo ==========================
+echo   GIT UPDATE - CRP SITE
+echo ==========================
 echo.
+
+REM 1. Arătăm statusul
 git status
-
 echo.
-set /p MSG=Mesaj pentru commit (enter pentru "update"): 
 
-if "%MSG%"=="" set MSG=update
-
-echo.
-echo --- Rulez: git add .
+REM 2. Adăugăm toate modificările
 git add .
-
 echo.
-echo --- Rulez: git commit -m "%MSG%"
-git commit -m "%MSG%"
 
+REM 3. Facem commit (dacă nu e nimic de commit, continuă mai departe)
+git commit -m "Update site (CSS + slider)" || echo Nici o modificare de commit...
 echo.
-echo --- Rulez: git push
-git push
 
+REM 4. Tragem ce e nou de pe GitHub (branch main)
+git pull origin main
 echo.
-echo Gata. Apasa o tasta pentru a inchide.
-pause >nul
+
+REM 5. Trimitem modificările pe GitHub
+git push origin main
+echo.
+
+echo --------------------------
+echo   GATA - UPDATE TERMINAT
+echo --------------------------
+pause
