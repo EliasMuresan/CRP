@@ -2132,125 +2132,32 @@ body.no-scroll {
 .lightbox-close {
     touch-action: manipulation; /* doar click/tap, fara gesturi de zoom */
 }
-
 /* ============================================================
-   LIGHTBOX FULLSCREEN + FIX POZIȚIONARE + BLOCARE SCROLL
+   LIGHTBOX – FULLSCREEN FĂRĂ SĂ STRICE DESKTOP
 ============================================================ */
 
-/* blocare scroll când lightbox-ul e deschis */
-body.no-scroll {
-    overflow: hidden !important;   /* blochează scroll-ul pe pagină */
-    touch-action: none !important; /* blochează gesturile de page pan/zoom */
-    /* fără height:100vh aici – pe iOS strică centrare */
-}
-
-/* overlay care acoperă TOT ecranul */
+/* overlay-ul acoperă tot ecranul, dar e invizibil implicit */
 #lightbox {
-    position: fixed !important;
-    inset: 0 !important; /* top:0, right:0, bottom:0, left:0 */
-    width: 100vw !important;
-    height: 100vh !important;
+    position: fixed;
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    width: 100vw;
+    height: 100vh;
 
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 12px;
-
-    background: rgba(15, 23, 42, 0.88) !important;
-    backdrop-filter: blur(4px);
-    z-index: 99999 !important;
-}
-
-/* clasa pusă de JS la deschidere */
-#lightbox.open {
-    display: flex !important;
-}
-
-/* containerul imaginii – ține poza centrată */
-.lightbox-inner {
-    position: relative;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-/* imaginea propriu-zisă */
-#lightboxImage {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain !important;
-
-    touch-action: none !important;
-}
-
-/* săgeți */
-#lightboxPrev,
-#lightboxNext {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100000;
-    touch-action: manipulation;
-}
-
-#lightboxPrev {
-    left: 20px;
-}
-
-#lightboxNext {
-    right: 20px;
-}
-
-/* buton X */
-#lightboxClose {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 100000;
-    touch-action: manipulation;
-}
-
-/* contorul (ex: 19 / 19) */
-#lightboxCounter {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-size: 0.95rem;
-    font-weight: 500;
-    z-index: 100000;
-}
-/* ============================================================
-   LIGHTBOX FULLSCREEN + FIX POZIȚIONARE + BLOCARE SCROLL
-============================================================ */
-
-/* overlay care acoperă TOT ecranul */
-#lightbox {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-
-    display: flex;
+    display: none;            /* ascuns implicit */
     align-items: center;
     justify-content: center;
 
     padding: 16px;
-    background: rgba(15, 23, 42, 0.88) !important;
+    background: rgba(15, 23, 42, 0.88);
     backdrop-filter: blur(4px);
-    z-index: 99999 !important;
+    z-index: 9999;
 
-    overflow-y: auto; /* scroll doar în overlay */
+    overflow-y: auto;         /* dacă poza e foarte înaltă, poți derula în overlay */
+}
+
+/* când JS pune .open, devine vizibil */
+#lightbox.open {
+    display: flex;
 }
 
 /* containerul imaginii – centrat */
@@ -2265,12 +2172,11 @@ body.no-scroll {
     overflow: hidden;
 }
 
-/* imaginea */
+/* imaginea – încape complet în ecran */
 #lightboxImage {
     max-width: 100%;
     max-height: 100%;
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain !important;
-    touch-action: none !important;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
