@@ -335,4 +335,32 @@ function initEventsCarousel() {
 }
 
 document.addEventListener("DOMContentLoaded", initEventsCarousel);
+/* =========================================================
+   BLOCARE DOUBLE-TAP ZOOM PE MOBILE
+   ========================================================= */
+(function () {
+    let lastTouchEnd = 0;
 
+    document.addEventListener(
+        "touchend",
+        function (event) {
+            const now = Date.now();
+
+            // dacă două touchend vin la < 300ms → considerăm double-tap
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        },
+        { passive: false }
+    );
+
+    // pentru unele versiuni de iOS – blochează gesture zoom
+    document.addEventListener(
+        "gesturestart",
+        function (event) {
+            event.preventDefault();
+        },
+        { passive: false }
+    );
+})();
