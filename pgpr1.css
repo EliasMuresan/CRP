@@ -37,6 +37,11 @@ body {
     line-height: 1.6;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;   /* NU mai permite extinderea pe orizontală */
+}
+
 /* =========================================================
    CONTAINER & BENZI
    ========================================================= */
@@ -1220,6 +1225,35 @@ body {
         grid-template-columns: repeat(2, minmax(0,1fr));
     }
 }
+
+@media (max-width: 900px) {
+
+    .events-carousel {
+        max-width: 100%;
+        overflow: hidden;   /* important: ascunde orice iese pe orizontală */
+    }
+
+    /* păstrăm cardul central mare, dar nu lăsăm banda să depășească vizual pagina */
+    .event-slide {
+        width: 85%;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+    }
+
+    .event-slide.is-center {
+        width: 90%;
+        transform: translateX(-50%) scale(1);
+    }
+
+    .event-slide.is-left {
+        left: 20%;
+    }
+
+    .event-slide.is-right {
+        left: 80%;
+    }
+}
+
 
 @media (max-width: 768px) {
 
