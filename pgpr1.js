@@ -335,3 +335,27 @@ function initEventsCarousel() {
 }
 
 document.addEventListener("DOMContentLoaded", initEventsCarousel);
+/* ================================
+   MOBILE SWIPE FOR EVENTS CAROUSEL
+   ================================ */
+const track = document.getElementById("eventsTrack");
+let startX = 0;
+let endX = 0;
+
+track.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+});
+
+track.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    
+    const diff = endX - startX;
+
+    if (Math.abs(diff) > 40) {  
+        if (diff < 0) {
+            document.getElementById("eventsNext").click();  // swipe left → next
+        } else {
+            document.getElementById("eventsPrev").click();  // swipe right → prev
+        }
+    }
+});

@@ -1409,6 +1409,7 @@ body {
 body {
     background: radial-gradient(circle at top left, #f5f2eb 0, #f3f4f6 40%, #e9edf5 100%);
     color: var(--text-main);
+    overflow-x: hidden;   /* blocăm scroll-ul orizontal la nivel de pagină */
 }
 
 .band {
@@ -1738,114 +1739,97 @@ body.no-scroll {
 @keyframes tickDraw {
     to { stroke-dashoffset: 0; }
 }
-
-/* =========================================
-   EVENIMENTE – SLIDER COVERFLOW FINAL
-   ========================================= */
-
-/* Banda de evenimente – un pic mai compactă */
-#evenimente.band {
-    padding-top: 48px;
-    padding-bottom: 40px;
-}
-
-/* Container slider */
-.events-carousel {
-    position: relative;
-    max-width: 1120px;
-    margin: 32px auto 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Track-ul pe care JS mută clasele (is-center / is-left / is-right) */
-.events-track {
-    position: relative;
-    width: 100%;
-    height: 430px;        /* suficient pentru card + umbră, fără gol imens */
-}
-
-/* Bază pentru fiecare slide */
-.event-slide {
-    position: absolute;
-    top: 0;
-    width: 360px;
-    max-width: 100%;
-    transition: transform 0.35s ease, opacity 0.35s ease, filter 0.35s ease;
-    opacity: 0;           /* implicit invizibil – doar left/center/right se văd */
-    filter: blur(2px);
-    transform: scale(0.9);
-    pointer-events: none;
-}
-
-/* CARDUL CENTRAL – clar, plin, clicabil */
-.event-slide.is-center {
-    left: 50%;
-    transform: translateX(-50%) scale(1);
-    opacity: 1;
-    filter: none;
-    z-index: 3;
-    pointer-events: auto;
-}
-
-/* CARD STÂNGA – puțin mai mic + blur */
-.event-slide.is-left {
-    left: 50%;
-    transform: translateX(-170%) scale(0.92);
-    opacity: 0.7;
-    filter: blur(1.5px);
-    z-index: 2;
-}
-
-/* CARD DREAPTA – puțin mai mic + blur */
-.event-slide.is-right {
-    left: 50%;
-    transform: translateX(70%) scale(0.92);
-    opacity: 0.7;
-    filter: blur(1.5px);
-    z-index: 2;
-}
-
-/* Cardul în sine – păstrăm look-ul premium */
-.event-card {
-    width: 100%;
-    border-radius: 24px;
-    overflow: hidden;
-    background: #ffffff;
-    box-shadow: 0 18px 45px rgba(15,23,42,0.12);
-}
-
-/* Imagine card */
-.event-card .event-image img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-}
-
-/* Butoane stânga / dreapta */
+/* =============================
+   OVERRIDE FINAL PENTRU SĂGEȚI
+   ============================= */
 .events-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #111827;
+    color: #ffffff;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     border: none;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.30);
+    cursor: pointer;
+    z-index: 1000;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.events-arrow-left {
+    left: 16px;
+}
+
+.events-arrow-right {
+    right: 16px;
+}
+
+
+/* =============================
+   CARDURILE – ACEEAȘI ÎNĂLȚIME
+   ============================= */
+
+.event-card {
+    width: 100%;
+    height: 520px;                      /* forțăm egalitatea cardurilor */
     background: #ffffff;
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
-    box-shadow: 0 10px 30px rgba(15,23,42,0.18);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.12);
     display: flex;
+    flex-direction: column;             /* pentru a împinge conținutul jos */
+}
+
+/* IMAGINE FIXĂ – aceleași dimensiuni la toate */
+.event-card .event-image img {
+    width: 100%;
+    height: 230px;                      /* fixă la toate evenimentele */
+    object-fit: cover;
+    display: block;
+}
+
+/* conținutul devine flexibil */
+.event-card .content {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+/* =============================
+   SĂGEȚI – VIZIBILE ȘI CENTRATE
+   ============================= */
+
+.events-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(15,23,42,0.10);
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.20);
+    display: flex !important;          /* forțăm să fie afișate */
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 20px;
+    z-index: 50;                        /* deasupra cardurilor */
     color: #111827;
+    font-size: 20px;
     transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    z-index: 5; /* peste carduri și blur */
 }
 
-.events-arrow-left  { left: 8px; }
+.events-arrow-left  { left: 8px; }      /* nu mai sunt în afara containerului */
 .events-arrow-right { right: 8px; }
 
 .events-arrow:hover {
@@ -1854,116 +1838,213 @@ body.no-scroll {
     background: #f9fafb;
 }
 
-/* =========================================
-   RESPONSIVE – MOBILE (SLIDE SMOOTH)
-   ========================================= */
+/* pe mobil rămân la fel */
+@media (max-width: 900px) {
+    .events-arrow-left  { left: 6px; }
+    .events-arrow-right { right: 6px; }
+}
+
+
+.events-arrow-left  { left: -22px; }
+.events-arrow-right { right: -22px; }
+
+/* hover mai fin */
+.events-arrow:hover {
+    transform: translateY(-50%) translateY(-2px);
+    box-shadow: 0 14px 36px rgba(15,23,42,0.25);
+}
+
+/* =============================
+   RESPONSIVE
+   ============================= */
 
 @media (max-width: 900px) {
 
-    /* secțiunea un pic mai compactă */
-    #evenimente.band {
-        padding-top: 32px;
-        padding-bottom: 32px;
-    }
-
-    .events-carousel {
-        margin-top: 24px;
-        max-width: 100%;
-    }
-
-    /* înălțime fixă suficientă pentru card */
     .events-track {
-        height: 380px;
+        height: 480px; /* ușor mai mic pe telefon */
     }
 
-    /* toate slide-urile sunt absolut poziționate, unul peste altul,
-       iar tranziția se face prin transform + opacity */
     .event-slide {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 100%;
+        width: 88%;
         max-width: 360px;
-        transform: translateX(-50%) scale(0.9);
+        left: 50%;
+        transform: translateX(-50%) scale(0.92);
         opacity: 0;
-        filter: none;              /* fără blur pe mobil */
+        filter: none;
+    }
+
+    .event-slide.is-center {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+
+    .event-card {
+        height: 480px;
+    }
+
+    .event-card .event-image img {
+        height: 210px;
+    }
+
+    .events-arrow-left  { left: 6px; }
+    .events-arrow-right { right: 6px; }
+}
+/* =====================================
+   FIX EVENIMENTE – RESTAURARE COVERFLOW
+   ===================================== */
+
+.events-track {
+    position: relative;
+}
+
+.event-slide {
+    position: absolute !important;
+    top: 0;
+    left: 50%;
+    width: 32%;
+    transform: translateX(-50%) scale(0.9);
+    opacity: 0.4;
+    filter: blur(1.5px);
+    pointer-events: none;
+    transition: all 0.35s ease;
+    z-index: 1;
+}
+
+/* slide central */
+.event-slide.is-center {
+    transform: translateX(-50%) scale(1) !important;
+    opacity: 1 !important;
+    filter: none !important;
+    pointer-events: auto;
+    z-index: 3;
+}
+
+/* slide stânga */
+.event-slide.is-left {
+    left: 15% !important;
+    transform: translateX(-50%) scale(0.92) !important;
+    opacity: 0.75 !important;
+    filter: blur(1px) !important;
+    z-index: 2;
+}
+
+/* slide dreapta */
+.event-slide.is-right {
+    left: 85% !important;
+    transform: translateX(-50%) scale(0.92) !important;
+    opacity: 0.75 !important;
+    filter: blur(1px) !important;
+    z-index: 2;
+}
+
+/* === EVENIMENTE – SPATIU SUB SLIDER CA SA NU MAI CALCE PESTE CONTACT === */
+
+#evenimente.band {
+    padding-top: 48px;
+    padding-bottom: 120px;   /* mai mult spațiu sub slider */
+}
+
+/* containerul sliderului poate rămâne overflow: visible,
+   dar banda de evenimente trebuie să fie mai înaltă */
+.events-carousel {
+    position: relative;
+    max-width: 880px;
+    margin: 32px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+/* Pista sliderului: mai înaltă decât cardul, ca să includă și umbra */
+.events-track {
+    position: relative;
+    width: 100%;
+    height: 620px;   /* mărit ca să încapă complet cardul + umbrea */
+}
+/* ====== Reglaj final spațiere evenimente ====== */
+
+#evenimente.band {
+    padding-top: 48px;
+    padding-bottom: 60px;   /* redus de la 120 la 60 */
+}
+
+.events-track {
+    height: 560px;          /* redus de la 620 — acum cardurile nu taie jos, dar nu lasă spațiu mare */
+}
+/* ===============================
+   MOBILE COVERFLOW – CARD CENTRAL MARE
+   =============================== */
+@media (max-width: 900px) {
+
+    /* container */
+    .events-carousel {
+        max-width: 100%;
+        overflow: visible;
+    }
+
+    /* pista sliderului – suficient de înaltă pentru cardul mare */
+    .events-track {
+        height: 650px;
+    }
+
+    /* toate cardurile mobile au această bază */
+    .event-slide {
+        width: 75%;
+        left: 50%;
+        transform: translateX(-50%) scale(0.75);  /* mic default */
+        opacity: 0.4;
+        filter: blur(2px);
         pointer-events: none;
     }
 
-    /* slide-ul activ – la mijloc, se animează smooth datorită
-       transition-ului setat pe .event-slide în CSS-ul desktop */
+    /* card lateral stânga */
+    .event-slide.is-left {
+        left: 20%;
+        transform: translateX(-50%) scale(0.70);
+        opacity: 0.3;
+        filter: blur(3px);
+    }
+
+    /* card lateral dreapta */
+    .event-slide.is-right {
+        left: 80%;
+        transform: translateX(-50%) scale(0.70);
+        opacity: 0.3;
+        filter: blur(3px);
+    }
+
+    /* CARD CENTRAL – MARE */
     .event-slide.is-center {
+        width: 85%;
         transform: translateX(-50%) scale(1);
         opacity: 1;
+        filter: none;
         pointer-events: auto;
     }
 
-    /* pentru stânga/dreapta le ținem ușor în afara ecranului,
-       doar pentru direcția de mișcare; practic nu se văd */
-    .event-slide.is-left {
-        transform: translateX(-160%) scale(0.9);
-        opacity: 0;
-    }
-
-    .event-slide.is-right {
-        transform: translateX(60%) scale(0.9);
-        opacity: 0;
-    }
-
-    /* card puțin mai îngust pe mobil */
+    /* cardul în sine devine mare */
     .event-card {
-        max-width: 360px;
-        margin: 0 auto;
+        height: 600px;        /* cardul mare central */
     }
 
-    /* săgețile rămân vizibile, în interior */
-    .events-arrow-left  { left: 8px; }
-    .events-arrow-right { right: 8px; }
+    /* imaginea din card */
+    .event-card .event-image img {
+        height: 220px;
+    }
+
+    /* reduce spațiul sub secțiune */
+    #evenimente.band {
+        padding-bottom: 40px;
+    }
+
+    /* sageti mobile */
+    .events-arrow-left  { left: 14px; }
+    .events-arrow-right { right: 14px; }
 }
-/* ==========================
-   FIX SCROLL ORIZONTAL MOBIL
-   ========================== */
-
-@media (max-width: 768px) {
-    html,
-    body {
-        max-width: 100%;
-        overflow-x: hidden;
-    }
-
-    .container {
-        overflow-x: hidden;
-    }
-
-    /* sliderul să nu iasă în lateral */
-    .events-carousel {
-        max-width: 100%;
-        padding-left: 0;
-        padding-right: 0;
-        overflow: hidden;
-    }
-
-    .events-track {
-        overflow: hidden;
-    }
-
-    .event-slide {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-
-    .event-card {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    /* săgețile rămân înăuntru, nu mai împing layout-ul */
-    .events-arrow-left {
-        left: 8px;
-    }
-
-    .events-arrow-right {
-        right: 8px;
-    }
+.section-title-centered {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
 }
 
