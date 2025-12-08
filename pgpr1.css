@@ -1,0 +1,2194 @@
+/* =========================================================
+   VARIABILE & RESET
+   ========================================================= */
+
+:root {
+    --bg-page: #f3f4f6;
+    --bg-light: #ffffff;
+    --bg-muted: #f3f6fb;
+
+    --text-main: #0f172a;
+    --text-muted: #6b7280;
+
+    --accent: #c8a96b;
+    --accent-dark: #7b5c29;
+
+    --shadow-soft: 0 18px 40px rgba(15,23,42,0.10);
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;   /* NU mai permite extinderea pe orizontală */
+}
+
+/* =========================================================
+   CONTAINER & BENZI
+   ========================================================= */
+
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.band {
+    width: 100%;
+    padding: 68px 0;
+}
+
+.band-light {
+    background: var(--bg-light);
+}
+
+.band-muted {
+    background: var(--bg-muted);
+}
+
+/* =========================================================
+   HEADER / NAVBAR
+   ========================================================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 12px 0;
+}
+
+.header-container {
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.site-logo {
+    width: 45px;
+    height: auto;
+    opacity: 0.9;
+}
+
+.site-title h1 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: 600;
+    color: #222;
+}
+
+.site-title span {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #666;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.nav-link {
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--text-muted);
+    padding-bottom: 2px;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--text-main);
+}
+
+.nav-btn {
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: #fdf7ea;
+    color: var(--accent-dark);
+    font-size: 14px;
+}
+
+/* toggle mobil */
+
+.nav-toggle {
+    display: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid rgba(148,163,184,0.7);
+    background: #ffffff;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    width: 16px;
+    height: 2px;
+    background: #0f172a;
+    border-radius: 999px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle.active span:first-child {
+    transform: translateY(4px) rotate(45deg);
+}
+.nav-toggle.active span:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+}
+
+/* =========================================================
+   HERO – FUNDAL POZEMAIN + CARD JOS
+   ========================================================= */
+
+.band-hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 120px 16px 40px;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.10)),
+        url("images/pozemain.png");
+    background-size: cover;
+    background-position: center top;
+    filter: brightness(1.05) blur(0.4px);
+    z-index: 1;
+}
+
+.hero {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Cardul – glassmorphism */
+
+.hero-card {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    padding: 40px 48px;
+    text-align: center;
+
+    background: linear-gradient(
+        135deg,
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.35)
+    );
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.28);
+}
+
+.hero-card,
+.hero-card h1,
+.hero-card p,
+.hero-card .hero-kicker {
+    color: #ffffff !important;
+}
+
+.hero-kicker {
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    opacity: 0.85;
+    margin-bottom: 10px;
+}
+
+.hero-card h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 24px;
+}
+
+/* butoane hero */
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 11px 26px;
+    border-radius: 999px;
+    font-size: 15px;
+}
+
+/* buton principal */
+
+.btn.primary {
+    background: rgba(255,255,255,0.92);
+    color: #1f2937;
+    font-weight: 600;
+    border: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    transition: 0.2s ease;
+}
+
+.btn.primary:hover {
+    background: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* buton secundar */
+
+.btn.ghost {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #ffffff;
+    backdrop-filter: blur(6px);
+    transition: 0.2s ease;
+}
+
+.btn.ghost:hover {
+    background: rgba(255,255,255,0.35);
+}
+
+/* =========================================================
+   SECTION HEADER / GRID
+   ========================================================= */
+
+.section-header {
+    margin-bottom: 26px;
+}
+
+.section-kicker {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent-dark);
+    margin-bottom: 4px;
+}
+
+.section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    margin-bottom: 4px;
+}
+
+.section-intro {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.grid {
+    display: grid;
+    gap: 24px;
+}
+
+/* =========================================================
+   DESPRE NOI – CARD PREMIUM
+   ========================================================= */
+
+.about-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+    padding: 40px 42px;
+    border-radius: 32px;
+    background:
+        radial-gradient(circle at top left, rgba(200,169,107,0.18), transparent 55%),
+        #ffffff;
+    box-shadow: 0 22px 60px rgba(15,23,42,0.10);
+    border: 1px solid rgba(226,232,240,0.9);
+}
+
+.about-content .section-kicker {
+    margin-bottom: 6px;
+}
+
+.about-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.about-content .section-intro {
+    margin-bottom: 14px;
+}
+
+.about-text p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.checklist {
+    list-style: none;
+    font-size: 14px;
+}
+
+.checklist li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 4px;
+}
+
+.checklist li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 10px;
+    color: var(--accent-dark);
+}
+
+/* imaginea din dreapta */
+
+.about-photo {
+    width: 100%;
+    min-height: 320px;
+}
+
+.about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: var(--shadow-soft);
+}
+
+/* =========================================================
+   COMITET – LIDERI + MEMBRI (layout premium)
+   ========================================================= */
+
+#comitet .section-header {
+    text-align: center;
+    max-width: 540px;
+    margin: 0 auto 40px;
+}
+
+#comitet .section-intro {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Lideri principali */
+
+.team-main-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    margin-bottom: 42px;
+    flex-wrap: wrap;
+}
+
+.team-card-main {
+    text-align: center;
+}
+
+.team-photo-main {
+    width: 180px;
+    height: 180px;
+    border-radius: 999px;
+    padding: 4px;
+    background:
+        radial-gradient(circle at top, rgba(200,169,107,0.35), transparent 60%),
+        #ffffff;
+    box-shadow: 0 20px 40px rgba(15,23,42,0.22);
+    margin: 0 auto 14px;
+}
+
+.team-photo-main img {
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    object-fit: cover;
+    display: block;
+}
+
+.team-card-main h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.team-card-main .team-role {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent-dark);
+}
+
+/* Membri – carduri jos */
+
+.team-secondary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.team-card-secondary {
+    position: relative;
+    background: #ffffff;
+    border-radius: 26px;
+    padding: 52px 18px 22px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+    text-align: center;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.team-card-secondary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 26px 60px rgba(15,23,42,0.18);
+    border-color: rgba(200,169,107,0.55);
+}
+
+.team-photo-secondary {
+    width: 96px;
+    height: 96px;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 0 auto 14px;
+    border: 3px solid rgba(200, 169, 107, 0.9);
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(15,23,42,0.18);
+}
+
+.team-photo-secondary img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.04);
+}
+
+.team-card-secondary h3 {
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.team-role {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent-dark);
+}
+
+/* =========================================================
+   ACTIVITĂȚI – PANEL + CARDURI JUDEȚE
+   ========================================================= */
+
+.activities-shell {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.activities-header {
+    text-align: center;
+    max-width: 520px;
+    margin: 0 auto 26px;
+}
+
+#activitati .section-header .section-kicker {
+    display: none;
+}
+
+/* titlu mai mare la activități */
+#activitati .activities-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+#activitati .activities-header .section-intro {
+    font-size: 16px;
+}
+
+/* fără card mare, doar conținut */
+
+.activities-panel {
+    position: relative;
+    padding-top: 18px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* tagline cu linii */
+
+.activities-tagline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 26px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.tagline-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        rgba(148,163,184,0.1),
+        rgba(148,163,184,0.7),
+        rgba(148,163,184,0.1)
+    );
+}
+
+/* carduri județe */
+
+.regions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 20px;
+    margin-top: 4px;
+}
+
+.region-card {
+    position: relative;
+    border-radius: 24px;
+    padding: 20px 22px;
+    background: #ffffff;
+    color: #1f2937;
+    box-shadow: 0 20px 45px rgba(15,23,42,0.08);
+    border: 1px solid rgba(200,169,107,0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: all 0.18s ease;
+    cursor: default;
+    overflow: hidden;
+}
+
+.region-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(200,169,107,0.18), transparent 65%);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.region-name {
+    position: relative;
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.region-sub {
+    position: relative;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    opacity: 0.8;
+}
+
+.region-arrow {
+    position: relative;
+    margin-top: 10px;
+    font-size: 16px;
+    align-self: flex-end;
+    opacity: 0.7;
+    color: #1f2937;
+}
+
+.region-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 55px rgba(15,23,42,0.14);
+    background: #fafafa;
+    border-color: rgba(200,169,107,0.6);
+}
+
+/* =========================================================
+   EVENIMENTE – CARDURI (layout grid clasic – folosit la nevoie)
+   ========================================================= */
+
+.events-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr);
+    gap: 24px;
+    margin-top: 18px;
+}
+
+.event-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.event-card {
+    border-radius: 26px;
+    overflow: hidden;
+    background: #f9fafb;
+    box-shadow: 0 22px 55px rgba(15,23,42,0.16);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* imagine sus */
+
+.event-image img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+}
+
+/* partea de jos */
+
+.event-body {
+    position: relative;
+    padding: 20px 22px 22px;
+    background:
+        radial-gradient(circle at top left, rgba(200,169,107,0.12), transparent 60%),
+        #ffffff;
+    border-top: 1px solid rgba(226,232,240,0.9);
+}
+
+.event-date {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent-dark);
+    margin-bottom: 10px;
+}
+
+.event-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.event-divider {
+    width: 46px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: 10px;
+}
+
+.event-text {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.event-card-link:hover .event-card {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 60px rgba(15,23,42,0.20);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* overlay "Citește articolul" la hover */
+
+.event-card::after {
+    content: "Citește articolul";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1f2937;
+    background: rgba(255,255,255,0.86);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.event-card-link:hover .event-card::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   CONTACT – LAYOUT PREMIUM
+   ========================================================= */
+
+.contact-shell {
+    background:
+        radial-gradient(circle at top left, rgba(200,169,107,0.16), transparent 60%),
+        #ffffff;
+    border-radius: 28px;
+    padding: 28px 30px;
+    box-shadow: 0 22px 60px rgba(15,23,42,0.12);
+    border: 1px solid rgba(226,232,240,0.9);
+    margin-top: 10px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: minmax(0,1.1fr) minmax(0,1fr);
+    gap: 32px;
+    align-items: stretch;
+}
+
+/* partea stângă – informații */
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+}
+
+.contact-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: #fdf7ea;
+    color: var(--accent-dark);
+    width: fit-content;
+}
+
+.contact-title {
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    margin: 4px 0;
+}
+
+.contact-text {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 420px;
+}
+
+.contact-meta {
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+.contact-meta p {
+    margin-bottom: 6px;
+}
+
+.contact-meta span {
+    display: inline-block;
+    min-width: 90px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.contact-meta a {
+    color: var(--accent-dark);
+    text-decoration: none;
+}
+
+.contact-meta a:hover {
+    text-decoration: underline;
+}
+
+.contact-note {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 10px;
+}
+
+/* partea dreaptă – formular */
+
+.contact-form {
+    background:
+        radial-gradient(circle at top right, rgba(200,169,107,0.18), transparent 55%),
+        #ffffff;
+    border-radius: 22px;
+    padding: 22px 22px 24px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(226,232,240,0.9);
+}
+
+.field {
+    margin-bottom: 14px;
+}
+
+.field label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: #4b5563;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 9px 11px;
+    font-size: 13px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.field input:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: rgba(200,169,107,0.9);
+    box-shadow: 0 0 0 1px rgba(200,169,107,0.35);
+    background: #ffffff;
+}
+
+/* mesaje formular */
+
+.form-status {
+    display: none;
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+#formStatus {
+    color: #15803d;
+}
+
+.form-status-error {
+    color: #b91c1c;
+}
+
+/* responsive contact */
+
+@media (max-width: 768px) {
+    .contact-shell {
+        padding: 20px 16px;
+        border-radius: 22px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    background: #ffffff;
+    padding: 20px 16px 26px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.footer-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* =========================================================
+   PAGINĂ EVENIMENT – HERO MIC + DETALII
+   ========================================================= */
+
+.inner-hero {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.inner-hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: center;
+}
+
+.inner-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.inner-hero-meta {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+.inner-hero-photo img {
+    width: 100%;
+    border-radius: 24px;
+    box-shadow: var(--shadow-soft);
+    object-fit: cover;
+}
+
+/* DETALII CONFERINȚĂ */
+
+.event-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: flex-start;
+}
+
+.event-detail-main h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.event-detail-main p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.event-detail-list {
+    margin-top: 8px;
+    padding-left: 18px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.event-detail-list li {
+    margin-bottom: 6px;
+}
+
+.event-detail-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.event-info-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 18px 18px 20px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(226,232,240,0.9);
+    font-size: 14px;
+}
+
+.event-info-card h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.event-source {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.event-source a {
+    color: #4b5563;
+    text-decoration: underline;
+}
+
+/* GALERIE FOTO */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 16px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+}
+
+/* =========================================================
+   REVEAL ANIMATION
+   ========================================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================
+   LIGHTBOX GALERIE FOTO
+========================== */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.88);
+    display: none; /* se deschide din JS cu clasa .open */
+    z-index: 9999;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+/* când e deschis, facem flex + centrare absolută */
+.lightbox.open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-inner {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* important: centrează vertical imaginea */
+    gap: 8px;
+}
+
+.lightbox-inner img {
+    display: block;
+    max-width: 100%;
+    max-height: calc(100vh - 120px); /* lăsăm loc pentru butoane + counter */
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 18px;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+    background: #000;
+}
+
+.lightbox-counter {
+    font-size: 13px;
+    color: #e5e7eb;
+    text-align: center;
+    margin-top: 4px;
+}
+
+/* butoane close + săgeți */
+
+.lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    border: none;
+    background: rgba(15,23,42,0.8);
+    color: #f9fafb;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: rgba(15,23,42,0.75);
+    color: #f9fafb;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-prev {
+    left: 24px;
+}
+
+.lightbox-next {
+    right: 24px;
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+    background: rgba(15,23,42,0.95);
+}
+
+/* mobil: adaptăm înălțimea ca să rămână pe mijloc și pe iPhone */
+
+@media (max-width: 640px) {
+    .lightbox {
+        padding: 12px;
+    }
+
+    .lightbox-inner {
+        max-width: 100%;
+        max-height: 100vh;
+    }
+
+    .lightbox-inner img {
+        max-height: calc(100vh - 96px);
+    }
+
+    .lightbox-prev {
+        left: 12px;
+    }
+
+    .lightbox-next {
+        right: 12px;
+    }
+}
+
+/* =========================================================
+   RESPONSIVE – GRIDURI
+   ========================================================= */
+
+@media (max-width: 1100px) {
+    .team-secondary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .regions-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(3, minmax(0,1fr));
+    }
+}
+
+@media (max-width: 960px) {
+    .about-card {
+        grid-template-columns: 1fr;
+        padding: 28px 22px;
+        gap: 24px;
+    }
+
+    .inner-hero-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .event-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .team-main-grid {
+        gap: 32px;
+    }
+    .team-secondary-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+}
+
+@media (max-width: 900px) {
+
+    .events-carousel {
+        max-width: 100%;
+        overflow: hidden;   /* important: ascunde orice iese pe orizontală */
+    }
+
+    /* păstrăm cardul central mare, dar nu lăsăm banda să depășească vizual pagina */
+    .event-slide {
+        width: 85%;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+    }
+
+    .event-slide.is-center {
+        width: 90%;
+        transform: translateX(-50%) scale(1);
+    }
+
+    .event-slide.is-left {
+        left: 20%;
+    }
+
+    .event-slide.is-right {
+        left: 80%;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    /* NAV mobil */
+
+    .nav {
+        position: fixed;
+        inset: 60px 16px auto 16px;
+        background: #ffffff;
+        border-radius: 16px;
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 14px;
+        box-shadow: 0 18px 45px rgba(15,23,42,0.25);
+        opacity: 0;
+        transform: translateY(-16px);
+        pointer-events: none;
+        transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+
+    .nav.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    .nav-toggle {
+        display: inline-flex;
+    }
+
+    .team-main-grid,
+    .team-secondary-grid,
+    .contact-grid,
+    .regions-grid,
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-card {
+        padding: 28px 20px;
+        border-radius: 22px;
+    }
+
+    .hero-card h1 {
+        font-size: 30px;
+    }
+
+    .hero-subtitle {
+        font-size: 14px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .activities-panel {
+        padding: 0;
+    }
+
+    .activities-tagline {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .tagline-line {
+        width: 60%;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ============================================================
+   L LAYOUT – PAGINA CONFERINȚĂ
+============================================================ */
+
+.event-L-wrapper {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+    overflow: hidden;
+    position: relative;
+}
+
+.event-L-aside {
+    float: right;
+    width: 340px;
+    margin-left: 32px;
+    margin-bottom: 20px;
+}
+
+.event-info-card-single {
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+    overflow: hidden;
+    padding-bottom: 24px;
+}
+
+.event-L-photo-top {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 18px 18px 0 0;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.event-info-card-single h3 {
+    font-size: 18px;
+    margin: 0 0 10px 20px;
+}
+
+.event-info-card-single ul {
+    padding-left: 20px;
+    margin-bottom: 12px;
+}
+
+.event-info-card-single .event-source {
+    padding-left: 20px;
+    font-size: 14px;
+    color: #777;
+}
+
+/* text principal */
+
+.event-L-text {
+    font-size: 17px;
+    line-height: 1.68;
+    color: #222;
+    padding-top: 20px;
+}
+
+.event-L-text h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+
+.event-L-text ul.event-detail-list {
+    padding-left: 30px;
+    margin-left: 8px;
+}
+
+.event-L-text ul.event-detail-list li {
+    margin-bottom: 8px;
+}
+
+/* clearing float */
+
+.event-L-wrapper::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+@media (max-width: 900px) {
+    .event-L-aside {
+        float: none;
+        width: 100%;
+        margin: 0 0 24px 0;
+    }
+
+    .event-L-photo-top {
+        height: 260px;
+    }
+
+    .event-L-wrapper {
+        padding: 28px 22px;
+    }
+
+    .event-L-text {
+        padding-top: 0;
+    }
+}
+
+/* ============================================================
+   PREMIUM SKIN – GLOBAL
+============================================================ */
+
+body {
+    background: radial-gradient(circle at top left, #f5f2eb 0, #f3f4f6 40%, #e9edf5 100%);
+    color: var(--text-main);
+    overflow-x: hidden;   /* blocăm scroll-ul orizontal la nivel de pagină */
+}
+
+.band {
+    padding: 64px 0;
+}
+
+.section-kicker {
+    letter-spacing: 0.25em;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent-dark);
+}
+
+.section-header h2,
+.inner-hero-title,
+.event-L-text h2 {
+    letter-spacing: -0.02em;
+}
+
+.band p,
+.event-L-text p {
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: #384152;
+}
+
+.event-detail-list li {
+    margin-bottom: 6px;
+}
+
+/* header / navbar skin */
+
+.header {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 14px 40px rgba(15,23,42,0.06);
+}
+
+.nav-link {
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+    padding-bottom: 4px;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+    transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.nav-btn::after {
+    width: 100%;
+}
+
+.nav-link.nav-btn {
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 10px 25px rgba(148,163,184,0.45);
+}
+
+/* inner hero skin */
+
+.inner-hero {
+    padding: 80px 0 60px;
+}
+
+.inner-hero-layout {
+    align-items: center;
+    gap: 48px;
+}
+
+.inner-hero-title {
+    font-size: 34px;
+    line-height: 1.25;
+}
+
+.inner-hero-meta p {
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.inner-hero-photo img {
+    border-radius: 24px;
+    box-shadow: var(--shadow-soft);
+}
+
+/* carduri skin */
+
+.event-card,
+.event-info-card,
+.event-info-card-single,
+.committee-card,
+.region-card,
+.contact-card {
+    border-radius: 22px;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.10);
+    border: 1px solid rgba(148,163,184,0.18);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, translate 0.18s ease;
+    background: #ffffff;
+}
+
+.event-card-link:hover .event-card,
+.committee-card:hover,
+.region-card:hover,
+.contact-card:hover,
+.event-info-card-single:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 55px rgba(15,23,42,0.16);
+}
+
+.event-image img {
+    border-radius: 18px 18px 0 0;
+}
+
+/* galerie foto skin */
+
+.gallery-grid {
+    gap: 18px;
+}
+
+.gallery-item img {
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(15,23,42,0.16);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    object-fit: cover;
+}
+
+.gallery-item img:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 20px 55px rgba(15,23,42,0.18);
+}
+
+/* lightbox premium */
+
+.lightbox {
+    background: rgba(15,23,42,0.82);
+}
+
+.lightbox-inner {
+    max-width: 90%;
+    max-height: 90vh;
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+.lightbox-inner img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 18px;
+    transition: transform 0.25s ease;
+    transform-origin: center center;
+}
+
+.lightbox-inner.zoomed img {
+    transform: scale(1.7);
+}
+
+.lightbox-close,
+.lightbox-nav,
+.lightbox-counter {
+    position: absolute;
+    z-index: 2;
+}
+
+.lightbox-close {
+    top: 12px;
+    right: 18px;
+    font-size: 32px;
+}
+
+.lightbox-prev {
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    font-size: 40px;
+}
+
+.lightbox-next {
+    top: 50%;
+    right: 18px;
+    transform: translateY(-50%);
+    font-size: 40px;
+}
+
+.lightbox-counter {
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    color: #f9fafb;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* Elimină underline pentru butonul "Contact" */
+.nav-link.nav-btn::after {
+    display: none !important;
+}
+
+/* Lightbox image – nu mai iese din ecran */
+.lightbox-inner img {
+    max-width: 85vw !important;
+    max-height: 85vh !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 20px;
+}
+
+.lightbox-inner {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Repozitionare poze galerie – fețele nu mai sunt tăiate */
+.gallery-item img {
+    object-fit: cover;
+    object-position: top center;
+}
+
+/* Repozitionare imagine din cardul de informații */
+.event-info-card-single .event-L-photo-top {
+    object-fit: cover;
+    object-position: top center;
+}
+
+/* =========================================================
+   CONTACT SUCCESS OVERLAY
+========================================================= */
+
+.contact-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.contact-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.contact-overlay-box {
+    background: #fff;
+    padding: 40px 48px 32px;
+    border-radius: 22px;
+    max-width: 460px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    animation: popIn 0.35s ease;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.85); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.contact-overlay-box h2 {
+    margin-bottom: 8px;
+    font-family: "Playfair Display", serif;
+    font-size: 26px;
+}
+
+.contact-overlay-box p {
+    color: #475569;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.contact-checkmark-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.contact-checkmark {
+    width: 64px;
+    height: 64px;
+}
+
+.contact-checkmark-circle {
+    stroke: #22c55e;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    animation: circleDraw 0.6s ease-out forwards;
+}
+
+.contact-checkmark-tick {
+    stroke: #22c55e;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: tickDraw 0.4s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+@keyframes circleDraw {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes tickDraw {
+    to { stroke-dashoffset: 0; }
+}
+/* =============================
+// EVENTS – ARROWS & CARDS SIZE
+============================= */
+
+.events-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #111827;
+    color: #ffffff;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.30);
+    cursor: pointer;
+    z-index: 1000;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.events-arrow-left {
+    left: 16px;
+}
+
+.events-arrow-right {
+    right: 16px;
+}
+
+
+/* =============================
+// CARDURILE – ACEEAȘI ÎNĂLȚIME
+============================= */
+
+.event-card {
+    width: 100%;
+    height: 520px;                      /* forțăm egalitatea cardurilor */
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.12);
+    display: flex;
+    flex-direction: column;             /* pentru a împinge conținutul jos */
+}
+
+/* IMAGINE FIXĂ – aceleași dimensiuni la toate */
+.event-card .event-image img {
+    width: 100%;
+    height: 230px;                      /* fixă la toate evenimentele */
+    object-fit: cover;
+    display: block;
+}
+
+/* conținutul devine flexibil */
+.event-card .content {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+/* =============================
+// SĂGEȚI – VIZIBILE ȘI CENTRATE
+============================= */
+
+.events-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(15,23,42,0.10);
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.20);
+    display: flex !important;          /* forțăm să fie afișate */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 50;                        /* deasupra cardurilor */
+    color: #111827;
+    font-size: 20px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.events-arrow-left  { left: 8px; }      /* nu mai sunt în afara containerului */
+.events-arrow-right { right: 8px; }
+
+.events-arrow:hover {
+    transform: translateY(-50%) translateY(-2px);
+    box-shadow: 0 16px 40px rgba(15,23,42,0.25);
+    background: #f9fafb;
+}
+
+/* pe mobil rămân la fel */
+@media (max-width: 900px) {
+    .events-arrow-left  { left: 6px; }
+    .events-arrow-right { right: 6px; }
+}
+
+
+.events-arrow-left  { left: -22px; }
+.events-arrow-right { right: -22px; }
+
+/* hover mai fin */
+.events-arrow:hover {
+    transform: translateY(-50%) translateY(-2px);
+    box-shadow: 0 14px 36px rgba(15,23,42,0.25);
+}
+
+/* =============================
+// RESPONSIVE
+============================= */
+
+@media (max-width: 900px) {
+
+    .events-track {
+        height: 480px; /* ușor mai mic pe telefon */
+    }
+
+    .event-slide {
+        width: 88%;
+        max-width: 360px;
+        left: 50%;
+        transform: translateX(-50%) scale(0.92);
+        opacity: 0;
+        filter: none;
+    }
+
+    .event-slide.is-center {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+
+    .event-card {
+        height: 480px;
+    }
+
+    .event-card .event-image img {
+        height: 210px;
+    }
+
+    .events-arrow-left  { left: 6px; }
+    .events-arrow-right { right: 6px; }
+}
+/* =====================================
+// FIX EVENIMENTE – RESTAURARE COVERFLOW
+===================================== */
+
+.events-track {
+    position: relative;
+}
+
+.event-slide {
+    position: absolute !important;
+    top: 0;
+    left: 50%;
+    width: 32%;
+    transform: translateX(-50%) scale(0.9);
+    opacity: 0.4;
+    filter: blur(1.5px);
+    pointer-events: none;
+    transition: all 0.35s ease;
+    z-index: 1;
+}
+
+/* slide central */
+.event-slide.is-center {
+    transform: translateX(-50%) scale(1) !important;
+    opacity: 1 !important;
+    filter: none !important;
+    pointer-events: auto;
+    z-index: 3;
+}
+
+/* slide stânga */
+.event-slide.is-left {
+    left: 15% !important;
+    transform: translateX(-50%) scale(0.92) !important;
+    opacity: 0.75 !important;
+    filter: blur(1px) !important;
+    z-index: 2;
+}
+
+/* slide dreapta */
+.event-slide.is-right {
+    left: 85% !important;
+    transform: translateX(-50%) scale(0.92) !important;
+    opacity: 0.75 !important;
+    filter: blur(1px) !important;
+    z-index: 2;
+}
+
+/* === EVENIMENTE – SPATIU SUB SLIDER CA SA NU MAI CALCE PESTE CONTACT === */
+
+#evenimente.band {
+    padding-top: 48px;
+    padding-bottom: 120px;   /* mai mult spațiu sub slider */
+}
+
+/* containerul sliderului poate rămâne overflow: visible,
+   dar banda de evenimente trebuie să fie mai înaltă */
+.events-carousel {
+    position: relative;
+    max-width: 880px;
+    margin: 32px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+/* Pista sliderului: mai înaltă decât cardul, ca să includă și umbra */
+.events-track {
+    position: relative;
+    width: 100%;
+    height: 620px;   /* mărit ca să încapă complet cardul + umbrea */
+}
+/* ====== Reglaj final spațiere evenimente ====== */
+
+#evenimente.band {
+    padding-top: 48px;
+    padding-bottom: 60px;   /* redus de la 120 la 60 */
+}
+
+.events-track {
+    height: 560px;          /* redus de la 620 — acum cardurile nu taie jos, dar nu lasă spațiu mare */
+}
+/* ===============================
+// MOBILE COVERFLOW – CARD CENTRAL MARE
+=============================== */
+@media (max-width: 900px) {
+
+    /* container */
+    .events-carousel {
+        max-width: 100%;
+        overflow: visible;
+    }
+
+    /* pista sliderului – suficient de înaltă pentru cardul mare */
+    .events-track {
+        height: 650px;
+    }
+
+    /* toate cardurile mobile au această bază */
+    .event-slide {
+        width: 75%;
+        left: 50%;
+        transform: translateX(-50%) scale(0.75);  /* mic default */
+        opacity: 0.4;
+        filter: blur(2px);
+        pointer-events: none;
+    }
+
+    /* card lateral stânga */
+    .event-slide.is-left {
+        left: 20%;
+        transform: translateX(-50%) scale(0.70);
+        opacity: 0.3;
+        filter: blur(3px);
+    }
+
+    /* card lateral dreapta */
+    .event-slide.is-right {
+        left: 80%;
+        transform: translateX(-50%) scale(0.70);
+        opacity: 0.3;
+        filter: blur(3px);
+    }
+
+    /* CARD CENTRAL – MARE */
+    .event-slide.is-center {
+        width: 85%;
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+        filter: none;
+        pointer-events: auto;
+    }
+
+    /* cardul în sine devine mare */
+    .event-card {
+        height: 600px;        /* cardul mare central */
+    }
+
+    /* imaginea din card */
+    .event-card .event-image img {
+        height: 220px;
+    }
+
+    /* reduce spațiul sub secțiune */
+    #evenimente.band {
+        padding-bottom: 40px;
+    }
+
+    /* sageti mobile */
+    .events-arrow-left  { left: 14px; }
+    .events-arrow-right { right: 14px; }
+}
+.section-title-centered {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.events-arrow,
+.lightbox-arrow,
+.gallery-item img {
+    touch-action: manipulation;
+}
+/* ============================================
+// BLOCARE SCROLL & FULLSCREEN LA LIGHTBOX
+============================================ */
+
+/* cand lightbox-ul e deschis, blocam scroll-ul pe body */
+body.no-scroll {
+    overflow: hidden;
+    height: 100%;
+    touch-action: none;   /* blocheaza pan/zoom pe body pe mobil */
+}
+
+/* overlay-ul lightbox-ului ocupa TOT ecranul */
+.lightbox {
+    position: fixed;      /* tine overlay-ul lipit de viewport, nu de pagina */
+    inset: 0;             /* top:0; right:0; bottom:0; left:0; */
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.90); /* fundal intunecat, poti ajusta */
+    display: none;        /* ramane ascuns implicit (presupun ca asa e si la tine) */
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;        /* peste tot ce exista pe pagina */
+}
+
+/* clasa care face overlay-ul vizibil */
+.lightbox.open {
+    display: flex;
+}
+
+/* imaginea din lightbox – fara zoom & gesturi */
+.lightbox img,
+.lightbox-content img,
+.lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    touch-action: none;   /* fara pinch/double-tap pe imagine */
+}
+
+/* butoanele de navigare din lightbox */
+.lightbox-arrow,
+.lightbox-arrow-left,
+.lightbox-arrow-right,
+.lightbox-close {
+    touch-action: manipulation; /* doar click/tap, fara gesturi de zoom */
+}
+/* ============================================================
+// LIGHTBOX – FULLSCREEN FĂRĂ SĂ STRICE DESKTOP
+============================================================ */
+
+/* overlay-ul acoperă tot ecranul, dar e invizibil implicit */
+#lightbox {
+    position: fixed;
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    width: 100vw;
+    height: 100vh;
+
+    display: none;            /* ascuns implicit */
+    align-items: center;
+    justify-content: center;
+
+    padding: 16px;
+    background: rgba(15, 23, 42, 0.88);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+
+    overflow-y: auto;         /* dacă poza e foarte înaltă, poți derula în overlay */
+}
+
+/* când JS pune .open, devine vizibil */
+#lightbox.open {
+    display: flex;
+}
+
+/* containerul imaginii – centrat */
+.lightbox-inner {
+    position: relative;
+    margin: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* imaginea – încape complet în ecran */
+#lightboxImage {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
