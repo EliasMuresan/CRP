@@ -2082,28 +2082,9 @@ body.no-scroll {
     font-size: 2rem;
 }
 
-/* =========================================================
-   BLOCARE DOUBLE-TAP ZOOM DOAR PE SĂGEȚILE SLIDERULUI
-   ========================================================= */
-(function () {
-    const arrows = document.querySelectorAll(".events-arrow");
-    let lastTapTime = 0;
+.events-arrow,
+.lightbox-arrow,
+.gallery-item img {
+    touch-action: manipulation;
+}
 
-    arrows.forEach((btn) => {
-        btn.addEventListener(
-            "touchend",
-            function (event) {
-                const currentTime = Date.now();
-                const tapInterval = currentTime - lastTapTime;
-
-                // dacă al doilea tap vine la < 300ms = double-tap ⇒ blocăm zoom-ul
-                if (tapInterval > 0 && tapInterval < 300) {
-                    event.preventDefault();   // oprește zoom-ul pe buton
-                }
-
-                lastTapTime = currentTime;
-            },
-            { passive: false }
-        );
-    });
-})();

@@ -364,3 +364,27 @@ document.addEventListener("DOMContentLoaded", initEventsCarousel);
         { passive: false }
     );
 })();
+/* =========================================================
+   BLOCHEAZĂ DOUBLE-TAP ZOOM PE TOATĂ PAGINA
+   (dar lasă pinch-zoom)
+   ========================================================= */
+
+(function () {
+    var lastTouchEnd = 0;
+
+    document.addEventListener(
+        "touchend",
+        function (event) {
+            var now = Date.now();
+            var delta = now - lastTouchEnd;
+
+            // dacă sunt două touchend-uri la < 300ms => considerăm double-tap
+            if (delta > 0 && delta < 300) {
+                event.preventDefault(); // blocăm comportamentul implicit (zoom)
+            }
+
+            lastTouchEnd = now;
+        },
+        { passive: false }
+    );
+})();
