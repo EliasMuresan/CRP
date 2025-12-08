@@ -2408,3 +2408,60 @@ body.no-scroll {
     }
 }
 
+/* ============================================
+   EVENIMENTE – FIX LAYOUT MOBIL
+=============================================== */
+@media (max-width: 900px) {
+    /* caruselul devine bloc normal, săgețile vor pluti peste card */
+    .events-carousel {
+        display: block;
+        position: relative;
+        margin-top: 28px;
+    }
+
+    .events-track {
+        display: block;
+        height: auto;           /* anulăm înălțimea fixă */
+    }
+
+    /* în mod normal ascundem toate slide-urile */
+    .event-slide {
+        display: none;
+        position: static;       /* anulăm orice absolute din versiuni mai vechi */
+        flex: none;
+        max-width: 100%;
+        opacity: 1;
+        filter: none;
+        transform: none;
+        pointer-events: none;
+    }
+
+    /* doar cardul central este vizibil și clicabil, full width */
+    .event-slide.is-center {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        pointer-events: auto;
+    }
+
+    /* săgețile nu mai ocupă loc în flex, stau peste card */
+    .events-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 5;
+    }
+
+    .events-arrow-left {
+        left: 8px;
+    }
+
+    .events-arrow-right {
+        right: 8px;
+    }
+
+    /* imaginea un pic mai joasă pe mobil */
+    .event-card .event-image img {
+        height: 200px;
+    }
+}
