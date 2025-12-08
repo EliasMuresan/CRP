@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <title>Biserici penticostale din Arad – Comunitatea Regională</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS principal al site-ului -->
+    <link rel="stylesheet" href="pgpr1.css" />
+
+    <!-- CSS specific pentru pagina Arad (hartă + grid) -->
+    <style>
+        .arad-hero-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(28px, 3vw, 34px);
+            margin-bottom: 10px;
+        }
+
+        .arad-hero-intro {
+            max-width: 720px;
+            color: #4b5563;
+        }
+
+        .arad-map-wrapper {
+            margin-top: 28px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        #aradMap {
+            width: 100%;
+            height: 480px;
+        }
+
+        .arad-churches-section {
+            margin-top: 40px;
+        }
+
+        .arad-churches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+            margin-top: 18px;
+        }
+
+        .arad-church-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 18px 20px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .arad-church-name {
+            font-family: "Playfair Display", serif;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .arad-church-address {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 6px;
+        }
+
+        .arad-church-meta {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .arad-church-meta a {
+            color: var(--accent-dark, #8b5e34);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .arad-church-meta a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            #aradMap {
+                height: 360px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-container">
+
+        <div class="logo-area">
+            <a href="index.html#acasa" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+                <img src="images/logo1.png" class="site-logo" alt="CRP Arad">
+                <div class="site-title">
+                    <h1>Comunitatea Regională</h1>
+                    <span>PENTICOSTALĂ ARAD</span>
+                </div>
+            </a>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Deschide meniul">
+            <span></span><span></span>
+        </button>
+
+        <nav class="nav" id="mainNav">
+            <a href="index.html#acasa" class="nav-link">Acasă</a>
+<a href="index.html#despre" class="nav-link">Despre</a>
+<a href="index.html#comitet" class="nav-link">Comitet</a>
+<a href="index.html#evenimente" class="nav-link">Evenimente</a>
+<a href="index.html#contact" class="nav-link nav-btn">Contact</a>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+
+    <!-- HERO + HARTĂ -->
+    <section class="band band-light">
+        <div class="container reveal">
+            <div class="section-header">
+                <p class="section-kicker">Harta comunității</p>
+                <h2 class="arad-hero-title">Biserici penticostale din Arad</h2>
+                <p class="arad-hero-intro">
+                    Vizualizezi pe hartă o selecție de biserici penticostale din municipiul Arad, împreună cu
+                    adresele și site-urile lor. Lista poate fi actualizată ori de câte ori apar
+                    biserici noi în comunitate sau avem date suplimentare.
+                </p>
+            </div>
+
+            <div class="arad-map-wrapper">
+                <div id="aradMap"></div>
+            </div>
+
+            <!-- LISTA BISERICILOR SUB HARTĂ -->
+            <section class="arad-churches-section">
+                <h3 class="section-subtitle">Biserici listate</h3>
+                <p class="section-intro">
+                    Selectarea unui pin pe hartă îți arată rapid numele bisericii și adresa ei.
+                    Mai jos găsești aceleași informații într-o listă structurată.
+                </p>
+
+                <div class="arad-churches-grid" id="aradChurchesGrid">
+                    <!-- Cardurile se populează din JavaScript pe baza aceluiași array folosit pentru hartă -->
+                </div>
+            </section>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        &copy; <span id="yearSpan"></span> Comunitatea Regională Penticostală Arad. Toate drepturile rezervate.
+    </div>
+</footer>
+
+<!-- JS global al site-ului (nav, lightbox, contact, etc.) -->
+<script src="pgpr1.js"></script>
+
+<!-- Datele bisericilor (municipiul Arad) -->
+<script>
+    // Lista se bazează pe informații publice (site-uri de biserici, Waze, baze de date de firme).
+    // Poți adăuga foarte ușor biserici noi în același format.
+
+    const churches = [
+        {
+            name: "Biserica Penticostală Betania",
+            address: "Strada Vișinului 49-51, 310158 Arad",
+            website: "https://bisericabetania.ro"
+        },
+        {
+            name: "Biserica Creștină Penticostală Gloria",
+            address: "Strada Gloriei 5, 310466 Arad",
+            website: "https://bisericagloria.ro"
+        },
+        {
+            name: "Biserica Creștină Penticostală Noua Philadelphia",
+            address: "Strada Măgurei 10, 310452 Arad",
+            website: "https://www.nouaphiladelphia.ro"
+        },
+        {
+            name: "Biserica Creștină Penticostală Micălaca",
+            address: "Strada Renașterii 2B, 310323 Arad",
+            website: ""
+        },
+        {
+            name: "Biserica Penticostală Izvorul Vieții",
+            address: "Strada Ady Endre 6, 310048 Arad",
+            website: ""
+        },
+        {
+            name: "Biserica Penticostală Măslinul",
+            address: "Strada Hunedoarei 57, 310190 Arad",
+            website: ""
+        },
+        {
+            name: "Biserica Creștină Penticostală Vox Domini",
+            address: "Calea Timișorii 2, 310059 Arad",
+            website: ""
+        }
+        // aici poți continua cu alte biserici (Rosia Nouă, Sânnicolau Mic etc., dacă vrei să incluzi tot județul)
+    ];
+
+    // Populare listă de carduri sub hartă
+    function renderChurchList() {
+        const grid = document.getElementById("aradChurchesGrid");
+        if (!grid) return;
+
+        grid.innerHTML = "";
+
+        churches.forEach((ch) => {
+            const card = document.createElement("article");
+            card.className = "arad-church-card";
+
+            const nameEl = document.createElement("h4");
+            nameEl.className = "arad-church-name";
+            nameEl.textContent = ch.name;
+
+            const addrEl = document.createElement("p");
+            addrEl.className = "arad-church-address";
+            addrEl.textContent = ch.address;
+
+            const metaEl = document.createElement("p");
+            metaEl.className = "arad-church-meta";
+
+            if (ch.website && ch.website.trim() !== "") {
+                const link = document.createElement("a");
+                link.href = ch.website;
+                link.target = "_blank";
+                link.rel = "noopener";
+                link.textContent = "Vizitează site-ul";
+                metaEl.appendChild(link);
+            } else {
+                metaEl.textContent = "Site oficial: în curs de actualizare";
+            }
+
+            card.appendChild(nameEl);
+            card.appendChild(addrEl);
+            card.appendChild(metaEl);
+            grid.appendChild(card);
+        });
+    }
+
+    // Callback pentru Google Maps API
+    function initAradMap() {
+        const mapElement = document.getElementById("aradMap");
+        if (!mapElement) return;
+
+        // Centru aproximativ pentru Arad
+        const aradCenter = { lat: 46.1866, lng: 21.3123 };
+
+        const map = new google.maps.Map(mapElement, {
+            zoom: 12,
+            center: aradCenter,
+            mapTypeControl: false,
+            streetViewControl: false
+        });
+
+        const geocoder = new google.maps.Geocoder();
+        const infoWindow = new google.maps.InfoWindow();
+
+        churches.forEach((church) => {
+            const query = church.address + ", România";
+
+            geocoder.geocode({ address: query }, (results, status) => {
+                if (status === "OK" && results && results[0]) {
+                    const position = results[0].geometry.location;
+
+                    const marker = new google.maps.Marker({
+                        map,
+                        position,
+                        title: church.name
+                    });
+
+                    const contentParts = [
+                        "<strong>" + church.name + "</strong>",
+                        "<br>",
+                        church.address
+                    ];
+
+                    if (church.website && church.website.trim() !== "") {
+                        contentParts.push(
+                            '<br><a href="' + church.website + '" target="_blank" rel="noopener">Deschide site-ul</a>'
+                        );
+                    }
+
+                    const contentString = contentParts.join("");
+
+                    marker.addListener("click", () => {
+                        infoWindow.setContent(contentString);
+                        infoWindow.open(map, marker);
+                    });
+                } else {
+                    // Dacă geocodarea nu reușește, pur și simplu nu punem marker,
+                    // dar biserica rămâne în listă.
+                    console.warn("Nu s-a putut geocoda adresa pentru:", church.name, status);
+                }
+            });
+        });
+
+        // Populăm și lista de mai jos
+        renderChurchList();
+    }
+
+    // Dacă dintr-un motiv Google Maps nu pornește (cheie greșită etc.),
+    // măcar lista să se încarce.
+    document.addEventListener("DOMContentLoaded", renderChurchList);
+</script>
+
+<!-- Google Maps API (înlocuiește YOUR_API_KEY cu cheia ta) -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initAradMap" async defer></script>
+
+</body>
+</html>
