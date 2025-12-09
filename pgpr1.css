@@ -1792,7 +1792,7 @@ body.no-scroll {
 #churchSearch {
     width: 100%;
     padding: 12px 16px;
-    font-size: 15px;
+    font-size: 1px;
     border-radius: 14px;
     border: 1px solid #d1d5db;
     box-shadow: 0 4px 14px rgba(0,0,0,0.06);
@@ -1868,4 +1868,10 @@ mark {
 .header .logo-area .site-title h1,
 .header .logo-area .site-title span {
     text-decoration: none;
+}
+/* --- Fix iOS auto-zoom on search bar --- */
+#churchSearch {
+    font-size: 16px !important;      /* Previene zoom-ul pe iPhone */
+    -webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
 }
