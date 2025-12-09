@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <title>Biserici penticostale din județul Hunedoara</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS principal site -->
+    <link rel="stylesheet" href="pgpr1.css" />
+
+    <!-- CSS specific paginii Hunedoara (identic cu Arad, doar numele paginii diferă) -->
+    <style>
+        main {
+            padding-top: 90px;
+        }
+        .arad-wrapper {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 24px 16px 80px;
+        }
+        .arad-header {
+            margin-bottom: 24px;
+        }
+        .arad-header h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(28px, 3vw, 34px);
+            margin-bottom: 6px;
+        }
+        .arad-header p {
+            color: var(--text-muted);
+        }
+        .churches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+        .church-card {
+            background: var(--bg-light);
+            border-radius: var(--radius-lg, 18px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+            padding: 16px 14px;
+            font-size: 14px;
+        }
+        .church-card h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .church-card p {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        .church-card p strong {
+            font-weight: 600;
+        }
+        .church-card a {
+            color: var(--accent-dark);
+            text-decoration: none;
+        }
+        .church-card a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 640px) {
+            .church-card {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-container">
+
+        <div class="logo-area">
+            <a href="index.html#acasa" class="logo-link">
+                <img src="images/logo1.png" class="site-logo" alt="CRP Arad">
+                <div class="site-title">
+                    <h1>Comunitatea Regională</h1>
+                    <span>PENTICOSTALĂ ARAD</span>
+                </div>
+            </a>
+        </div>
+
+        <nav id="mainNav" class="nav">
+            <a href="index.html#acasa" class="nav-link">Acasă</a>
+            <a href="index.html#despre" class="nav-link">Despre</a>
+            <a href="index.html#conducere" class="nav-link">Conducere</a>
+            <a href="index.html#judete" class="nav-link">Județe</a>
+            <a href="index.html#contact" class="nav-link nav-btn">Contact</a>
+        </nav>
+
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</header>
+
+<main>
+    <section class="arad-wrapper"
+         style="padding-top:4px; margin-top:-14px;">
+        <header class="arad-header">
+            <h2>Bisericile penticostale din județul Hunedoara</h2>
+            <p>Lista completă a bisericilor și punctelor de lucru raportate în județul Hunedoara.</p>
+        </header>
+
+        <div class="arad-search-wrapper">
+            <input id="churchSearch" type="text"
+                   placeholder="Caută: nume, localitate, pastor..." autocomplete="off" />
+            <div id="searchSuggestions" class="search-suggestions"></div>
+            <div id="searchResultsCount" class="search-results-count"></div>
+            <div id="didYouMean" class="search-didyoumean"></div>
+        </div>
+
+        <div class="churches-grid">
+           <article class="church-card">
+  <h3>1. Biserica Penticostală Betania</h3>
+  <p>Locație: Deva, str. V. Braniște, nr. 4, jud. Hunedoara, cod 330048</p>
+  <p>Pastori: Hada Daniel, Rad Liviu</p>
+  <p>Site biserica: www.betania-deva.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>2. Biserica Penticostală Sârbi</h3>
+  <p>Locație: Sârbi, nr. 4, jud. Hunedoara, cod 337278</p>
+  <p>Pastori: Bera Ionuț Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>3. Biserica Penticostală Elim</h3>
+  <p>Locație: Zam, nr. 139/A, nr. 197, jud. Hunedoara, cod 337550</p>
+  <p>Pastori: Bera Ionuț Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>4. Biserica Penticostală Certeju de Sus</h3>
+  <p>Locație: Certeju de Sus, nr. 49/A, jud. Hunedoara, cod 337190</p>
+  <p>Pastori: Mureșan Mircea Titus</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>5. Biserica Penticostală Chimindia</h3>
+  <p>Locație: Chimindia, nr. 102/C, jud. Hunedoara, cod 337268</p>
+  <p>Pastori: Mureșan Mircea Titus</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>6. Biserica Penticostală Speranța</h3>
+  <p>Locație: Hărau, nr. 4, jud. Hunedoara, cod 337265</p>
+  <p>Pastori: Bogdan Ovidiu Viorel</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>7. Biserica Penticostală Vulcez</h3>
+  <p>Locație: Vețel, str. Trandafirilor, nr. 43, jud. Hunedoara, cod 337525</p>
+  <p>Pastori: Mureșan Mircea Titus</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>8. Biserica Penticostală Elim</h3>
+  <p>Locație: Câmpuri Surduc, nr. 104/A, jud. Hunedoara, cod 337251</p>
+  <p>Pastori: Mureșan Mircea Titus</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>9. Biserica Penticostală Filadelfia</h3>
+  <p>Locație: Cozia, nr. 92, jud. Hunedoara, cod 337178</p>
+  <p>Pastori: Bera Ionuț Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>10. Biserica Penticostală Bacea</h3>
+  <p>Locație: Bacea, nr. 149, jud. Hunedoara, cod 337271</p>
+  <p>Pastori: Mureșan Mircea Titus</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>11. Biserica Penticostală Eben-Ezer</h3>
+  <p>Locație: Fintoag, nr. 95, jud. Hunedoara, cod 337283</p>
+  <p>Pastori: Mureșan Mircea Titus</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>12. Biserica Penticostală Betesda</h3>
+  <p>Locație: Hondol, nr. 65, jud. Hunedoara, cod 337193</p>
+  <p>Pastori: Ionescu Mihai</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>13. Biserica Penticostală Stăncești</h3>
+  <p>Locație: Stăncești, nr. 7/A, jud. Hunedoara, cod 337227</p>
+  <p>Pastori: Ionescu Mihai</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>14. Biserica Penticostală Emanuel</h3>
+  <p>Locație: Ilia, str. Libertății, nr. 68/B, jud. Hunedoara, cod 337270</p>
+  <p>Pastori: Ionescu Mihai</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>15. Biserica Penticostală Filadelfia</h3>
+  <p>Locație: Călan, str. Pietii, nr. 9, jud. Hunedoara, cod 335300</p>
+  <p>Pastori: Tînțean Dumitru Dănuț</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>16. Biserica Penticostală Petreni</h3>
+  <p>Locație: Petreni, nr. 86, jud. Hunedoara, cod 337041</p>
+  <p>Pastori: Tînțean Dumitru Dănuț</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>17. Biserica Penticostală Betania</h3>
+  <p>Locație: Nădăștia de Jos, nr. 39/A, jud. Hunedoara, cod 335304</p>
+  <p>Pastori: Tînțean Dumitru Dănuț</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>18. Biserica Penticostală Betania</h3>
+  <p>Locație: Strei, nr. 53, jud. Hunedoara, cod 335309</p>
+  <p>Pastori: Tînțean Dumitru Dănuț</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>19. Biserica Penticostală Betania</h3>
+  <p>Locație: Batiz, nr. 129, jud. Hunedoara, cod 335301</p>
+  <p>Pastori: Tînțean Dumitru Dănuț</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>20. Biserica Penticostală Golgota</h3>
+  <p>Locație: Hunedoara, B-dul M. Viteazu, nr. 28, jud. Hunedoara, cod 331039</p>
+  <p>Pastori: Hada Daniel, Pintilie Dorin, Ionașcu Liviu</p>
+  <p>Site biserica: www.golgotahd.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>21. Biserica Penticostală Betel</h3>
+  <p>Locație: Teliucu Inferior, nr. 19/B, jud. Hunedoara, cod 337465</p>
+  <p>Pastori: Hada Daniel, Pintilie Dorin, Ionașcu Liviu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>22. Biserica Penticostală Eben Ezer</h3>
+  <p>Locație: Clopotiva, nr. 272/A, jud. Hunedoara, cod 337382</p>
+  <p>Pastori: Hada Daniel, Pintilie Dorin, Ionașcu Liviu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>23. Biserica Penticostală Boșorod</h3>
+  <p>Locație: Boșorod, nr. 141/A, jud. Hunedoara, cod 337095</p>
+  <p>Pastori: Bratu Gheorghiță</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>24. Biserica Penticostală Bățălar</h3>
+  <p>Locație: Bățălar, nr. 42, jud. Hunedoara, cod 337116</p>
+  <p>Pastori: Bratu Gheorghiță</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>25. Biserica Penticostală Bretea Streiului</h3>
+  <p>Locație: Bretea Streiului, nr. 90, jud. Hunedoara, cod 337118</p>
+  <p>Pastori: Bratu Gheorghiță</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>26. Biserica Penticostală Vălcele</h3>
+  <p>Locație: Vălcele, nr. 66, jud. Hunedoara, cod 337128</p>
+  <p>Pastori: Bratu Gheorghiță</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>27. Biserica Penticostală Chitid</h3>
+  <p>Locație: Chitid, nr. 16/A, jud. Hunedoara, cod 337098</p>
+  <p>Pastori: Bratu Gheorghiță</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>28. Biserica Penticostală Filadelfia</h3>
+  <p>Locație: Cinciș-Cerna, str. Aleea Trandafirilor, nr. 4/A, jud. Hunedoara, cod 337446</p>
+  <p>Pastori: Mihailesc Dorin</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>29. Biserica Penticostală Hașdău</h3>
+  <p>Locație: Hașdău, nr. 47, jud. Hunedoara, cod 337486</p>
+  <p>Pastori: Mihailesc Dorin</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>30. Biserica Penticostală Betel</h3>
+  <p>Locație: Cernișoara Florese, nr. 23/A, jud. Hunedoara, cod 337162</p>
+  <p>Pastori: Mihailesc Dorin</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>31. Biserica Penticostală Maranata</h3>
+  <p>Locație: Hunedoara, str. Batiz, nr. 19/A, jud. Hunedoara, cod 331149</p>
+  <p>Pastori: Hoca Ovidiu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>32. Biserica Penticostală Betel</h3>
+  <p>Locație: Orăștie, str. T. Vladimirescu, nr. 16, jud. Hunedoara, cod 335700</p>
+  <p>Pastori: Hoca Ovidiu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>33. Biserica Penticostală Betania</h3>
+  <p>Locație: Petroșani, str. T. Vladimirescu, nr. 1, jud. Hunedoara, cod 332042</p>
+  <p>Pastori: Hoca Ovidiu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>34. Biserica Penticostală Betel</h3>
+  <p>Locație: Brad, str. A. Iancu, nr. 29, jud. Hunedoara, cod 335200</p>
+  <p>Pastori: Tăbieș Dănuț</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>35. Biserica Penticostală După Piatră</h3>
+  <p>Locație: După Piatră, com. Buceș, nr. 152, jud. Hunedoara, cod 337137</p>
+  <p>Pastori: Muntean Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>36. Biserica Penticostală Panc Săliște</h3>
+  <p>Locație: Panc Săliște, nr. 52, jud. Hunedoara, cod 337223</p>
+  <p>Pastori: Muntean Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>37. Biserica Penticostală Teiu</h3>
+  <p>Locație: Teiu, nr. 60/A, jud. Hunedoara, cod 337291</p>
+  <p>Pastori: Muntean Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>38. Biserica Penticostală Lăpușnic</h3>
+  <p>Locație: Lăpușnic, nr. 70, jud. Hunedoara, cod 337219</p>
+  <p>Pastori: Muntean Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>39. Biserica Penticostală Betania</h3>
+  <p>Locație: Dobra, str. Libertății, nr. 2, jud. Hunedoara, cod 337215</p>
+  <p>Pastori: Toderesc Solomon</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>40. Biserica Penticostală Golgota</h3>
+  <p>Locație: Tisa, nr. 128, jud. Hunedoara, cod 337171</p>
+  <p>Pastori: Toderesc Solomon</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>41. Biserica Penticostală Cosești</h3>
+  <p>Locație: Cosești, nr. 19/A, jud. Hunedoara, cod 337282</p>
+  <p>Pastori: Toderesc Solomon</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>42. Biserica Penticostală Emanuel</h3>
+  <p>Locație: Deva, str. M. Eminescu, nr. 52, cod 330172</p>
+  <p>Pastori: Buble Simion, Orșa Daniel</p>
+  <p>Site biserica: www.emanueldeva.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>43. Biserica Penticostală Betel</h3>
+  <p>Locație: Bârcea Mare, nr. 6, cod 335901</p>
+  <p>Pastori: Buble Simion</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>44. Biserica Penticostală Bretea Mureșană</h3>
+  <p>Locație: Bretea Mureșană, str. Gării, nr. 28/A, cod 337273</p>
+  <p>Pastori: Buble Simion</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>45. Biserica Penticostală Lăpugiu de Sus</h3>
+  <p>Locație: Lăpugiu de Sus, nr. 22, cod 337287</p>
+  <p>Pastori: Buble Simion</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>46. Biserica Penticostală Betel</h3>
+  <p>Locație: Visca, nr. 148, cod 337547</p>
+  <p>Pastori: Buble Simion</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>47. Biserica Penticostală Maranata</h3>
+  <p>Locație: Valea Poienii, nr. 49, cod 337546</p>
+  <p>Pastori: Buble Simion</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>48. Biserica Penticostală Ohaba</h3>
+  <p>Locație: Ohaba, nr. 72, cod 337289</p>
+  <p>Pastori: Orșa Daniel</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>49. Biserica Penticostală Betel</h3>
+  <p>Locație: Hațeg, str. Progresului, nr. 26, cod 335500</p>
+  <p>Pastori: Demean Florin</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>50. Biserica Penticostală Ohaba Sibisel</h3>
+  <p>Locație: Ohaba Sibisel, nr. 59, cod 337383</p>
+  <p>Pastori: Alb Voicu Pantilie</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>51. Biserica Penticostală Betel</h3>
+  <p>Locație: Nucșoara, nr. 145, cod 337423</p>
+  <p>Pastori: Demean Florin</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>52. Biserica Penticostală Hățăgel</h3>
+  <p>Locație: Hațgel, nr. 37, cod 337207</p>
+  <p>Pastori: Demean Florin</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>53. Biserica Penticostală Vălioara</h3>
+  <p>Locație: Vălioara, nr. 40, cod 337177</p>
+  <p>Pastori: Demean Florin</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>54. Biserica Penticostală Bolomir</h3>
+  <p>Locație: Bolomir, nr. 107, cod 337377</p>
+  <p>Pastori: Demean Florin</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>55. Biserica Penticostală Maranata</h3>
+  <p>Locație: Reea, nr. 74, cod 337494</p>
+  <p>Pastori: Lela Dorin</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>56. Biserica Penticostală Betania</h3>
+  <p>Locație: Densuș, nr. 117, cod 337205</p>
+  <p>Pastori: Dunga Ion</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>57. Biserica Penticostală Sarmizegetusa</h3>
+  <p>Locație: Sarmizegetusa, nr. 70, cod 337415</p>
+  <p>Pastori: Dunga Ion</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>58. Biserica Penticostală Breazova</h3>
+  <p>Locație: Breazova, nr. 58/A, cod 337416</p>
+  <p>Pastori: Dunga Ion</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>59. Biserica Penticostală Filadelfia</h3>
+  <p>Locație: Hațeg, str. Râul Galben, nr. 49, cod 335500</p>
+  <p>Pastori: Dunga Ion</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>60. Biserica Penticostală Betel</h3>
+  <p>Locație: Răchitova, nr. 47/A, cod 337370</p>
+  <p>Pastori: Dunga Ion</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>61. Biserica Penticostală Betel</h3>
+  <p>Locație: Baru, nr. 223, cod 337035</p>
+  <p>Pastori: Răducanu Nicolae</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>62. Biserica Penticostală Crivadia</h3>
+  <p>Locație: Crivadia, nr. 59, cod 337066</p>
+  <p>Pastori: Răducanu Nicolae</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>63. Biserica Penticostală Peștenița</h3>
+  <p>Locație: Peștenița, nr. 94, cod 337209</p>
+  <p>Pastori: Anca Daniel</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>64. Biserica Penticostală Betel</h3>
+  <p>Locație: Păclișa, nr. 126, cod 337493</p>
+  <p>Pastori: Anca Daniel</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>65. Biserica Penticostală Betania</h3>
+  <p>Locație: Totești, nr. 129, cod 337490</p>
+  <p>Pastori: Anca Daniel</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>66. Biserica Penticostală Golgota</h3>
+  <p>Locație: Râu de Mori, nr. 18, cod 337380</p>
+  <p>Pastori: Mitucă Iosif</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>67. Biserica Penticostală Betel</h3>
+  <p>Locație: Valea Dâljii, nr. 5, cod 337392</p>
+  <p>Pastori: Mitucă Iosif</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>68. Biserica Penticostală Betel</h3>
+  <p>Locație: Unciuc, nr. 75/A, cod 337391</p>
+  <p>Pastori: Stoica Eugen</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>69. Biserica Penticostală Eben Ezer</h3>
+  <p>Locație: Sânpetru, nr. 153, cod 337447</p>
+  <p>Pastori: Brândușan Ioan Dan</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>70. Biserica Penticostală Subcetate</h3>
+  <p>Locație: Subcetate, nr. 124, cod 337448</p>
+  <p>Pastori: Brândușan Ioan Dan</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>71. Biserica Penticostală Emanuel</h3>
+  <p>Locație: Petros, nr. 111, cod 337037</p>
+  <p>Pastori: Brândușan Ioan Dan</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>72. Biserica Penticostală Golgota</h3>
+  <p>Locație: Vălcelele Bune, nr. 83, cod 337128</p>
+  <p>Pastori: Gușe Claudiu Marcel</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>73. Biserica Penticostală Betel</h3>
+  <p>Locație: Peșteana, nr. 85, cod 337208</p>
+  <p>Pastori: Lela Dorin</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>74. Biserica Penticostală Peștișu Mare</h3>
+  <p>Locație: Peștișu Mare, nr. 75, cod 331004</p>
+  <p>Pastori: Ghergely Tiberiu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>75. Biserica Penticostală Poienița Tomii</h3>
+  <p>Locație: Poienița Tomii, nr. 12, cod 337186</p>
+  <p>Pastori: Ghergely Tiberiu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>76. Biserica Penticostală Lunca Cernii de Sus</h3>
+  <p>Locație: Lunca Cernii de Sus, nr. 92, cod 337304</p>
+  <p>Pastori: Ghergely Tiberiu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>77. Biserica Penticostală Maranata</h3>
+  <p>Locație: Nandru, nr. 57/A, cod 337343</p>
+  <p>Pastori: Ghergely Tiberiu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>78. Biserica Penticostală Emanuel</h3>
+  <p>Locație: Săulești, nr. 100/A, cod 335905</p>
+  <p>Pastori: Ghergely Tiberiu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>79. Biserica Penticostală Betleem</h3>
+  <p>Locație: Orăștie, str. C-tin Dobrogeanu Gherea, nr. 16/A, cod 335700</p>
+  <p>Pastori: Gagea Adrian</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>80. Biserica Penticostală Emanuel</h3>
+  <p>Locație: Aurel Vlaicu, nr. 229/A, cod 335401</p>
+  <p>Pastori: Gagea Adrian</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>81. Biserica Penticostală Maranata</h3>
+  <p>Locație: Căstău, nr. 247/A, cod 337076</p>
+  <p>Pastori: Gagea Adrian</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>82. Biserica Penticostală Bucium</h3>
+  <p>Locație: Bucium, nr. 56/A, cod 337326</p>
+  <p>Pastori: Gagea Adrian</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>83. Biserica Penticostală Dincu Mare</h3>
+  <p>Locație: Dincu Mare, nr. 66/A, cod 337316</p>
+  <p>Pastori: Gagea Adrian</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>84. Biserica Penticostală Pricaz</h3>
+  <p>Locație: Pricaz, nr. 92, cod 337496</p>
+  <p>Pastori: Gagea Adrian</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>85. Biserica Penticostală Betania</h3>
+  <p>Locație: Geoagiu, str. Teilor, nr. 1/A, cod 335400</p>
+  <p>Pastori: Tecariu Ioan</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>86. Biserica Penticostală Ekklesia</h3>
+  <p>Locație: Balșa, nr. 50, cod 337015</p>
+  <p>Pastori: Tecariu Ioan</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>87. Biserica Penticostală Betel</h3>
+  <p>Locație: Romoș, nr. 41/A, cod 337410</p>
+  <p>Pastori: Tecariu Ioan</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>88. Biserica Penticostală Vaidei</h3>
+  <p>Locație: Vaidei, nr. 313, cod 337414</p>
+  <p>Pastori: Tecariu Ioan</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>89. Biserica Penticostală Cărpiniș</h3>
+  <p>Locație: Cărpiniș, nr. 47/A, cod 335902</p>
+  <p>Pastori: Bala Zaharie</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>90. Biserica Penticostală Simeria</h3>
+  <p>Locație: Simeria, str. I. Creangă, nr. 18, cod 335900</p>
+  <p>Pastori: Bala Zaharie</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>91. Biserica Penticostală Banpotoc</h3>
+  <p>Locație: Banpotoc, nr. 175, cod 337266</p>
+  <p>Pastori: Bala Zaharie</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>92. Biserica Penticostală Vârmaga</h3>
+  <p>Locație: Vârmaga, nr. 144, cod 337199</p>
+  <p>Pastori: Bala Zaharie</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>93. Biserica Penticostală Filadelfia</h3>
+  <p>Locație: Petroșani, str. 9 Mai, nr. 1/A, cod 332042</p>
+  <p>Pastori: Coicheci Gheorghe</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>94. Biserica Penticostală Petroșani</h3>
+  <p>Locație: Petroșani, str. Digului, nr. 27, cod 332054</p>
+  <p>Pastori: Coicheci Gheorghe</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>95. Biserica Penticostală Iscroni</h3>
+  <p>Locație: Iscroni, nr. 306/A, cod 335101</p>
+  <p>Pastori: Coicheci Gheorghe</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>96. Biserica Penticostală Bănița</h3>
+  <p>Locație: Bănița, nr. 235, cod 337065</p>
+  <p>Pastori: Coicheci Gheorghe</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>97. Biserica Penticostală Maranata</h3>
+  <p>Locație: Lupeni, str. B-dul Păcii, nr. 2/B, cod 335600</p>
+  <p>Pastori: Cazacu Filip</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>98. Biserica Penticostală Speranța</h3>
+  <p>Locație: Uricani, str. Aleea Teilor, nr. 2, cod 317090</p>
+  <p>Pastori: Cazacu Filip</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>99. Biserica Penticostală Uricani</h3>
+  <p>Locație: Uricani, str. Stadionului, nr. 43, cod 317090</p>
+  <p>Pastori: Nemeș Daniel</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>100. Biserica Penticostală Betel</h3>
+  <p>Locație: Cimpa, str. Birăoni, nr. 152/A, cod 338580</p>
+  <p>Pastori: Cotan Corneliu</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>101. Biserica Penticostală Maranata</h3>
+  <p>Locație: Vulcan, str. B-dul M. Viteazul, nr. 336/2Q, cod 336200</p>
+  <p>Pastori: Cazacu Filip</p>
+  <p>Site biserica: www.maranatavulcan.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>102. Biserica Penticostală Muntele Sionului</h3>
+  <p>Locație: Petrila, str. Jiului, nr. 21, cod 335800</p>
+  <p>Pastori: Boantă Ioan</p>
+  <p>Site biserica: www.mspetrila.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>103. Biserica Penticostală Muntele Sionului</h3>
+  <p>Locație: Pui, nr. 69, cod 337345</p>
+  <p>Pastori: Boantă Ioan</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>104. Biserica Penticostală Betania</h3>
+  <p>Locație: Petrila, str. Republicii, nr. 218/B, cod 335800</p>
+  <p>Pastori: Boantă Ioan</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>105. Biserica Penticostală Muntele Sionului</h3>
+  <p>Locație: Deva, str. V. Babeș, nr. 43, cod 331074</p>
+  <p>Pastori: Boariu Cristian, Neagoe Daniel, Răducanu Paul</p>
+  <p>Site biserica: www.siondeva.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>106. Biserica Penticostală Popești</h3>
+  <p>Locație: Popești, nr. 6, cod 337119</p>
+  <p>Pastori: Răducanu Cornel</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>107. Biserica Penticostală Runcșor</h3>
+  <p>Locație: Runcșor, nr. 40, cod 337254</p>
+  <p>Pastori: Răducanu Cornel</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>108. Biserica Penticostală Tămăvița</h3>
+  <p>Locație: Tămăvița, nr. 78, cod 337116</p>
+  <p>Pastori: Răducanu Cornel</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>109. Biserica Penticostală Maranata</h3>
+  <p>Locație: Cărjiți, nr. 46, cod 337175</p>
+  <p>Pastori: Șuteru Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>110. Biserica Penticostală Hășdat</h3>
+  <p>Locație: Hășdat, nr. 94, cod 337169</p>
+  <p>Pastori: Șuteru Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>111. Biserica Penticostală Almașel</h3>
+  <p>Locație: Almașel, nr. 30, cod 337552</p>
+  <p>Pastori: Șuteru Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>112. Biserica Penticostală Filadelfia</h3>
+  <p>Locație: Pojoga, nr. 145, cod 337561</p>
+  <p>Pastori: Șuteu Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>113. Biserica Penticostală Lăpugiu de Jos</h3>
+  <p>Locație: Lăpugiu de Jos, nr. 76, cod 337280</p>
+  <p>Pastori: Șuteu Petru</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>114. Biserica Penticostală Roșcani</h3>
+  <p>Locație: Roșcani, nr. 188, cod 337226</p>
+  <p>Pastori: Magda Marius</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>115. Biserica Penticostală Maranata</h3>
+  <p>Locație: Panc, nr. 88, cod 337222</p>
+  <p>Pastori: Magda Marius</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>116. Biserica Penticostală Elim</h3>
+  <p>Locație: Hunedoara, str. Bogdan Vodă, nr. 1, cod 331116</p>
+  <p>Pastori: Hanganu Marius</p>
+  <p>Site biserica: www.elimhunedoara.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>117. Biserica Penticostală Betel</h3>
+  <p>Locație: Hunedoara, str. Răcăștia, nr. 82, cod 331005</p>
+  <p>Pastori: Hanganu Marius</p>
+  <p>Site biserica: —</p>
+</article>
+
+<article class="church-card">
+  <h3>118. Biserica Penticostală Rapoltu Mare</h3>
+  <p>Locație: Rapoltu Mare, nr. 120, cod 337365</p>
+  <p>Pastori: Hanganu Marius</p>
+  <p>Site biserica: —</p>
+</article>
+
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <p>&copy; <span id="footer-year"></span> Comunitatea Regională Penticostală Arad</p>
+    </div>
+</footer>
+
+<script src="pgpr1.js" defer></script>
+<script>
+// -----------------------------------------------------------
+// 1. Utilitare: normalizare + fuzzy
+// -----------------------------------------------------------
+function normalize(str) {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+}
+
+function levenshtein(a, b) {
+    a = normalize(a);
+    b = normalize(b);
+
+    const dp = Array.from({ length: a.length + 1 }, () => []);
+    for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+    for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+
+    for (let i = 1; i <= a.length; i++) {
+        for (let j = 1; j <= b.length; j++) {
+            dp[i][j] = Math.min(
+                dp[i - 1][j] + 1,
+                dp[i][j - 1] + 1,
+                dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
+            );
+        }
+    }
+    return dp[a.length][b.length];
+}
+
+// -----------------------------------------------------------
+// 2. Pregătire carduri și index pentru căutare
+// -----------------------------------------------------------
+const cards = [...document.querySelectorAll(".church-card, .biserica-card")];
+
+// salvăm HTML-ul original (fără highlight)
+cards.forEach(card => {
+    card.dataset.originalContent = card.innerHTML;
+});
+
+// index: folosim numele (h3) + textul întreg
+const index = cards.map(card => {
+    const titleEl = card.querySelector("h3");
+    const titleText = titleEl ? titleEl.innerText : "";
+    const fullText = card.innerText;
+
+    return {
+        element: card,
+        title: normalize(titleText),
+        text: normalize(fullText),
+        originalHTML: card.dataset.originalContent,
+        titleDisplay: titleText
+    };
+});
+
+// -----------------------------------------------------------
+// 3. Highlight temporar
+// -----------------------------------------------------------
+function highlightHTML(html, query) {
+    const words = query
+        .split(" ")
+        .map(w => w.trim())
+        .filter(w => w.length > 0);
+
+    if (words.length === 0) return html;
+
+    let result = html;
+    words.forEach(w => {
+        const escaped = w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${escaped})`, "gi");
+        result = result.replace(regex, "<mark>$1</mark>");
+    });
+
+    return result;
+}
+
+function removeHighlights() {
+    cards.forEach(card => {
+        card.innerHTML = card.dataset.originalContent;
+    });
+}
+
+// -----------------------------------------------------------
+// 4. Elemente UI
+// -----------------------------------------------------------
+const input = document.getElementById("churchSearch");
+const suggestionsBox = document.getElementById("searchSuggestions");
+const resultsCount = document.getElementById("searchResultsCount");
+const didYouMean = document.getElementById("didYouMean");
+const wrapper = document.querySelector(".arad-search-wrapper");
+
+// safety: dacă ceva lipsește, ieșim
+if (input && suggestionsBox && resultsCount && didYouMean) {
+
+    // -------------------------------------------------------
+    // 5. Căutarea principală
+    // -------------------------------------------------------
+    input.addEventListener("input", function () {
+        const rawQuery = this.value;
+        const q = normalize(rawQuery.trim());
+
+        // reset texte auxiliare
+        suggestionsBox.innerHTML = "";
+        resultsCount.innerHTML = "";
+        didYouMean.innerHTML = "";
+
+        // dacă e gol -> reset pagină
+        if (!q) {
+            removeHighlights();
+            cards.forEach(c => {
+                c.style.display = "block";
+            });
+            suggestionsBox.style.display = "none";
+            return;
+        }
+
+        // scoatem highlight vechi
+        removeHighlights();
+
+        const queryWords = q.split(" ").filter(w => w.length > 0);
+
+        const results = index
+            .map(item => {
+                let score = 0;
+
+                queryWords.forEach(word => {
+                    // match puternic în titlu
+                    if (item.title.includes(word)) score += 15;
+
+                    // match în restul textului
+                    if (item.text.includes(word)) score += 5;
+
+                    // fuzzy doar pe titlu (nu pe tot textul)
+                    const dist = levenshtein(item.title, word);
+                    if (dist > 0 && dist <= 2) score += 4;
+                    else if (dist <= 4) score += 2;
+                });
+
+                return { ...item, score };
+            })
+            .filter(r => r.score > 0)
+            .sort((a, b) => b.score - a.score);
+
+        // ascundem toate cardurile
+        cards.forEach(c => (c.style.display = "none"));
+
+        if (results.length === 0) {
+            didYouMean.innerHTML = "Niciun rezultat. Încearcă un alt termen.";
+            suggestionsBox.style.display = "none";
+            return;
+        }
+
+        resultsCount.innerHTML = `Rezultate: ${results.length}`;
+
+        // afișăm doar rezultatele + highlight temporar
+        results.forEach(r => {
+            r.element.style.display = "block";
+            r.element.innerHTML = highlightHTML(r.originalHTML, rawQuery);
+        });
+
+        // sugestii (primele 6 titluri)
+        if (q.length >= 2) {
+            suggestionsBox.innerHTML = results
+                .slice(0, 6)
+                .map(r => `<div class="search-suggestion-item">${r.titleDisplay}</div>`)
+                .join("");
+            suggestionsBox.style.display = "block";
+        } else {
+            suggestionsBox.style.display = "none";
+        }
+    });
+
+    // -------------------------------------------------------
+    // 6. Click pe sugestii
+    // -------------------------------------------------------
+    suggestionsBox.addEventListener("click", function (e) {
+        if (e.target.classList.contains("search-suggestion-item")) {
+            input.value = e.target.innerText;
+            suggestionsBox.style.display = "none";
+            input.dispatchEvent(new Event("input"));
+        }
+    });
+
+    // -------------------------------------------------------
+    // 7. Închidere automată
+    // -------------------------------------------------------
+
+    // ENTER -> păstrăm filtrarea, dar:
+    // - ascundem sugestiile
+    // - scoatem highlight-ul
+    // - scoatem focusul din input
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            suggestionsBox.style.display = "none";
+            removeHighlights();
+            this.blur();
+        }
+    });
+
+    // golire completă input -> resetare
+    input.addEventListener("input", function () {
+        if (!this.value.trim()) {
+            removeHighlights();
+            cards.forEach(c => (c.style.display = "block"));
+            suggestionsBox.style.display = "none";
+            resultsCount.innerHTML = "";
+            didYouMean.innerHTML = "";
+        }
+    });
+
+    // click în afara zonei de căutare
+    document.addEventListener("click", function (e) {
+        if (wrapper && !wrapper.contains(e.target)) {
+            suggestionsBox.style.display = "none";
+            // nu resetăm filtrarea, doar ascundem sugestiile
+        }
+    });
+
+    // mic delay ca să permită click pe sugestie
+    input.addEventListener("blur", function () {
+        setTimeout(() => {
+            suggestionsBox.style.display = "none";
+        }, 150);
+    });
+}
+</script>
+</body>
+</html>

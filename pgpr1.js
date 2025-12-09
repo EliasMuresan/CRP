@@ -1,13 +1,25 @@
 /* ============================================================
-   NAVBAR MOBILE
+   NAVBAR MOBILE – FIX
 ============================================================ */
 const navToggle = document.getElementById("navToggle");
 const mainNav = document.getElementById("mainNav");
 
 if (navToggle && mainNav) {
+    // deschide/închide meniul
     navToggle.addEventListener("click", () => {
         mainNav.classList.toggle("open");
-        navToggle.classList.toggle("open");
+        navToggle.classList.toggle("active"); // se potrivește cu CSS-ul tău
+    });
+
+    // când apeși pe un link, închidem meniul pe mobil
+    const navLinks = mainNav.querySelectorAll(".nav-link");
+    navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            if (window.innerWidth <= 768) {
+                mainNav.classList.remove("open");
+                navToggle.classList.remove("active");
+            }
+        });
     });
 }
 

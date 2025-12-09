@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <title>Biserici penticostale din județul Timiș</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS principal site -->
+    <link rel="stylesheet" href="pgpr1.css" />
+
+    <!-- CSS specific paginii Timiș (am păstrat aceleași clase .arad-* ca în arad.html ca să meargă direct) -->
+    <style>
+        main {
+            padding-top: 90px;
+        }
+        .arad-wrapper {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 24px 16px 80px;
+        }
+        .arad-header {
+            margin-bottom: 24px;
+        }
+        .arad-header h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(28px, 3vw, 34px);
+            margin-bottom: 6px;
+        }
+        .arad-header p {
+            color: var(--text-muted);
+        }
+        .churches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+        .church-card {
+            background: var(--bg-light);
+            border-radius: var(--radius-lg, 18px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+            padding: 16px 14px;
+            font-size: 14px;
+        }
+        .church-card h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .church-card p {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        .church-card p strong {
+            font-weight: 600;
+        }
+        .church-card a {
+            color: var(--accent-dark);
+            text-decoration: none;
+        }
+        .church-card a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 640px) {
+            .church-card {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-container">
+
+        <div class="logo-area">
+            <a href="index.html#acasa" class="logo-link">
+                <img src="images/logo1.png" class="site-logo" alt="CRP Arad">
+                <div class="site-title">
+                    <h1>Comunitatea Regională</h1>
+                    <span>PENTICOSTALĂ ARAD</span>
+                </div>
+            </a>
+        </div>
+
+        <nav id="mainNav" class="nav">
+            <a href="index.html#acasa" class="nav-link">Acasă</a>
+            <a href="index.html#despre" class="nav-link">Despre</a>
+            <a href="index.html#conducere" class="nav-link">Conducere</a>
+            <a href="index.html#judete" class="nav-link">Județe</a>
+            <a href="index.html#contact" class="nav-link nav-btn">Contact</a>
+        </nav>
+
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</header>
+
+<main>
+    <section class="arad-wrapper" style="padding-top:4px; margin-top:-14px;">
+        <header class="arad-header">
+            <h2>Bisericile penticostale din județul Timiș</h2>
+            <p>Lista completă a bisericilor și punctelor de lucru raportate în județul Timiș.</p>
+        </header>
+
+        <div class="arad-search-wrapper">
+            <input id="churchSearch" type="text"
+                   placeholder="Caută: nume, localitate, pastor..." autocomplete="off" />
+            <div id="searchSuggestions" class="search-suggestions"></div>
+            <div id="searchResultsCount" class="search-results-count"></div>
+            <div id="didYouMean" class="search-didyoumean"></div>
+        </div>
+
+        <div class="churches-grid">
+
+            <article class="church-card">
+  <h3>1. Biserica Penticostală Filadelfia Timișoara</h3>
+  <p>Locație: Timișoara, str. Ștefan cel Mare, nr. 50, jud. Timiș, cod 300116</p>
+  <p>Site: http://www.filadelfia-tm.ro</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>2. Biserica Penticostală Speranța Chișoda</h3>
+  <p>Locație: Chișoda, str. Cooperatorilor, nr. 55/A, jud. Timiș, cod 307221</p>
+  <p>Site:</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>3. Biserica Penticostală Filadelfia Bechicherecu Mic</h3>
+  <p>Locație: Bechicherecu Mic, str. Calea Banatului, nr. 5/A, jud. Timiș, cod 307040</p>
+  <p>Site:</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>4. Biserica Penticostală Filadelfia Bencecu de Sus</h3>
+  <p>Locație: Bencecu de Sus, nr. 135, jud. Timiș, cod 307327</p>
+  <p>Site:</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>5. Biserica Penticostală Salem Livezile</h3>
+  <p>Locație: Livezile, str. Gornului, nr. 34, jud. Timiș, cod 307012</p>
+  <p>Site:</p>
+  <p>Pastor: Pop Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>6. Biserica Penticostală Salem Jimbolia</h3>
+  <p>Locație: Jimbolia, str. Spre Sud, nr. 24, jud. Timiș, cod 305400</p>
+  <p>Site:</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>7. Biserica Penticostală Filadelfia Vucova</h3>
+  <p>Locație: Vucova, nr. 289/A, jud. Timiș, cod 307107</p>
+  <p>Site:</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>8. Biserica Penticostală Sânmihaiu German</h3>
+  <p>Locație: Sânmihaiu German, nr. 118/C, jud. Timiș, cod 307381</p>
+  <p>Site:</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>9. Biserica Penticostală Filadelfia Urseni</h3>
+  <p>Locație: Urseni, str. Coloniștilor, nr. 12, jud. Timiș, cod 307289</p>
+  <p>Site:</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>10. Biserica Penticostală Betesda Fibis</h3>
+  <p>Locație: Fibis, nr. 466, jud. Timiș, cod 307272</p>
+  <p>Site:</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>11. Biserica Penticostală Beregsău Mic</h3>
+  <p>Locație: Beregsău Mic, nr. 184, jud. Timiș, cod 307372</p>
+  <p>Site:</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>12. Biserica Penticostală Maranata Timișoara</h3>
+  <p>Locație: Timișoara, str. Cocoșatului, nr. 8, jud. Timiș, cod 300327</p>
+  <p>Site: http://www.bisericamaranataghiroda.ro</p>
+  <p>Pastor: Panțiș Ciprian</p>
+</article>
+
+<article class="church-card">
+  <h3>13. Biserica Penticostală Maranata Ghiroda</h3>
+  <p>Locație: Ghiroda, str. Brateș, nr. 23/D, jud. Timiș, cod 307200</p>
+  <p>Site:</p>
+  <p>Pastor: Panțiș Ciprian</p>
+</article>
+
+<article class="church-card">
+  <h3>14. Biserica Penticostală Învierea Recaș</h3>
+  <p>Locație: Recaș, str. Florilor, nr. 20, jud. Timiș, cod 307340</p>
+  <p>Site:</p>
+  <p>Pastor: Bala Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>15. Biserica Penticostală Bazoșu Vechi</h3>
+  <p>Locație: Bazoșu Vechi, nr. 139, jud. Timiș, cod 307341</p>
+  <p>Site:</p>
+  <p>Pastor: Bala Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>16. Biserica Penticostală Betel Gătaia</h3>
+  <p>Locație: Gătaia, str. Petrișor Hătegan, nr. 30, jud. Timiș, cod 307185</p>
+  <p>Site:</p>
+  <p>Pastor: Cazacu Costică</p>
+</article>
+
+<article class="church-card">
+  <h3>17. Biserica Penticostală Giarmata Vii</h3>
+  <p>Locație: Giarmata Vii, str. Teilor, nr. 129, jud. Timiș</p>
+  <p>Site:</p>
+  <p>Pastor: Cazacu Costică</p>
+</article>
+
+<article class="church-card">
+  <h3>18. Biserica Penticostală Poarta Cerului Timișoara</h3>
+  <p>Locație: Timișoara, str. Zalău, nr. 4, jud. Timiș, cod 300402</p>
+  <p>Site: http://www.poartacerului.ro</p>
+  <p>Pastor: Filip Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>19. Biserica Penticostală Carmel Timișoara</h3>
+  <p>Locație: Timișoara, str. Madona, nr. 7, jud. Timiș, cod 300612</p>
+  <p>Site: carmel.go.ro</p>
+  <p>Pastor: Mandici Marius Florin</p>
+</article>
+
+<article class="church-card">
+  <h3>20. Biserica Penticostală Elim Timișoara</h3>
+  <p>Locație: Timișoara, str. V. Madgearu, nr. 39, jud. Timiș, cod 300199</p>
+  <p>Site: http://www.elim.ro</p>
+  <p>Pastor: Mehedinți Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>21. Biserica Penticostală Alioș</h3>
+  <p>Locație: Alioș, nr. 112/A, jud. Timiș, cod 307271</p>
+  <p>Site:</p>
+  <p>Pastor: Mehedinți Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>22. Biserica Penticostală Porumbelul Timișoara</h3>
+  <p>Locație: Timișoara, str. M. Kogălniceanu, nr. 20, jud. Timiș, cod 300126</p>
+  <p>Site:</p>
+  <p>Pastor: Mehedinți Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>23. Biserica Penticostală La muntele unde Domnul va purta de grijă Timișoara</h3>
+  <p>Locație: Timișoara, str. Emile Zola, nr. 153, jud. Timiș, cod 300448</p>
+  <p>Site:</p>
+  <p>Pastor: Mehedinți Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>24. Biserica Penticostală Betel Obad</h3>
+  <p>Locație: Obad, nr. 31/A, jud. Timiș, cod 307116</p>
+  <p>Site:</p>
+  <p>Pastor: Mehedinți Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>25. Biserica Penticostală Filadelfia Iohanisfeld (Ionel)</h3>
+  <p>Locație: Iohanisfeld (Ionel), nr. 200, jud. Timiș</p>
+  <p>Site:</p>
+  <p>Pastor: Pascălin Victor</p>
+</article>
+
+<article class="church-card">
+  <h3>26. Biserica Penticostală Cruceni</h3>
+  <p>Locație: Cruceni, nr. 101/A, jud. Timiș, cod 307176</p>
+  <p>Site:</p>
+  <p>Pastor: Radeș Albert Liviu</p>
+</article>
+
+<article class="church-card">
+  <h3>27. Biserica Penticostală Betesda Foeni</h3>
+  <p>Locație: Foeni, nr. 301, jud. Timiș, cod 307175</p>
+  <p>Site:</p>
+  <p>Pastor: Pascălin Victor</p>
+</article>
+
+<article class="church-card">
+  <h3>28. Biserica Penticostală Toager</h3>
+  <p>Locație: Toager, nr. 211, jud. Timiș, cod 307217</p>
+  <p>Site:</p>
+  <p>Pastor: Pascălin Victor</p>
+</article>
+
+<article class="church-card">
+  <h3>29. Biserica Penticostală Emanuel Sânmartinu Sârbesc</h3>
+  <p>Locație: Sânmartinu Sârbesc, nr. 254, jud. Timiș, cod 307341</p>
+  <p>Site:</p>
+  <p>Pastor: Șerban Emanoila</p>
+</article>
+
+<article class="church-card">
+  <h3>30. Biserica Penticostală Maranata Dinias</h3>
+  <p>Locație: Dinias, nr. 200, jud. Timiș, cod 307311</p>
+  <p>Site:</p>
+  <p>Pastor: Șerban Emanoila</p>
+</article>
+
+<article class="church-card">
+  <h3>31. Biserica Penticostală Betel Chizătău</h3>
+  <p>Locație: Chizătău, nr. 280, jud. Timiș, cod 307047</p>
+  <p>Site:</p>
+  <p>Pastor: Mehedinți Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>32. Biserica Penticostală Betel Giroc</h3>
+  <p>Locație: Giroc, str. Dunărea, nr. 81, jud. Timiș, cod 307220</p>
+  <p>Site: www.betelgiroc.ro</p>
+  <p>Pastor: Stupar Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>33. Biserica Penticostală Elim Dumbrăvița</h3>
+  <p>Locație: Dumbrăvița, str. Petofi Alexandru, nr. 56, jud. Timiș, cod 307160</p>
+  <p>Site:</p>
+  <p>Pastor: Stupar Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>34. Biserica Penticostală Filadelfia Sânmihaiu Român</h3>
+  <p>Locație: Sânmihaiu Român, nr. 18/B, jud. Timiș, cod 307380</p>
+  <p>Site:</p>
+  <p>Pastor: Stupar Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>35. Biserica Penticostală Săcălaz</h3>
+  <p>Locație: Săcălaz, str. V., nr. 423, jud. Timiș, cod 307370</p>
+  <p>Site:</p>
+  <p>Pastor: Stupar Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>36. Biserica Penticostală Sânandrei</h3>
+  <p>Locație: Sânandrei, str. Liliacului, nr. 60, jud. Timiș, cod 307375</p>
+  <p>Site:</p>
+  <p>Pastor: Stupar Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>37. Biserica Penticostală Maranata Seceani</h3>
+  <p>Locație: Seceani, nr. 64, jud. Timiș, cod 307308</p>
+  <p>Site:</p>
+  <p>Pastor: Gliția Aurel</p>
+</article>
+
+<article class="church-card">
+  <h3>38. Biserica Penticostală Betel Orțișoara</h3>
+  <p>Locație: Orțișoara, nr. 306/A, jud. Timiș, cod 307305</p>
+  <p>Site:</p>
+  <p>Pastor: Mehedinți Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>40. Biserica Penticostală Alfa Giarmata</h3>
+  <p>Locație: Giarmata, str. Gării, nr. 17, jud. Timiș, cod 307210</p>
+  <p>Site:</p>
+  <p>Pastor: Duma Ilie</p>
+</article>
+
+<article class="church-card">
+  <h3>41. Biserica Penticostală Gosen Timișoara</h3>
+  <p>Locație: Timișoara, str. Nicolae Tincu Velea, nr. 1/A, jud. Timiș, cod 300232</p>
+  <p>Site:</p>
+  <p>Pastor: Todor Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>42. Biserica Penticostală Emanuel Timișoara</h3>
+  <p>Locație: Timișoara, str. Uzinei, nr. 2, jud. Timiș, cod 300314</p>
+  <p>Site:</p>
+  <p>Pastor: Mihai Dorin</p>
+</article>
+
+<article class="church-card">
+  <h3>43. Biserica Penticostală Filadelfia Biled</h3>
+  <p>Locație: Biled, nr. 306, jud. Timiș, cod 307306</p>
+  <p>Site:</p>
+  <p>Pastor: Scheul Ion</p>
+</article>
+
+<article class="church-card">
+  <h3>44. Biserica Penticostală Maranata Dudeștii Noi</h3>
+  <p>Locație: Dudeștii Noi, str. Școlii Vechi, nr. 4, jud. Timiș, cod 307041</p>
+  <p>Site:</p>
+  <p>Pastor: Scheul Ion</p>
+</article>
+
+<article class="church-card">
+  <h3>45. Biserica Penticostală Birda</h3>
+  <p>Locație: Birda, nr. 175/A, jud. Timiș, cod 307187</p>
+  <p>Site:</p>
+  <p>Pastor: Bîrsan Vasilică</p>
+</article>
+
+<article class="church-card">
+  <h3>46. Biserica Penticostală Speranța Clopodia</h3>
+  <p>Locație: Clopodia, nr. 106, jud. Timiș, cod 307231</p>
+  <p>Site:</p>
+  <p>Pastor: Radeș Albert Liviu</p>
+</article>
+
+<article class="church-card">
+  <h3>47. Biserica Penticostală Cadar</h3>
+  <p>Locație: Cadar, nr. 99/A, jud. Timiș, cod 307431</p>
+  <p>Site:</p>
+  <p>Pastor: Bîrsan Vasilică</p>
+</article>
+
+<article class="church-card">
+  <h3>48. Biserica Penticostală Emanuel Sacoșu Turcesc</h3>
+  <p>Locație: Sacoșu Turcesc, nr. 99, jud. Timiș, cod 307355</p>
+  <p>Site:</p>
+  <p>Pastor: Bîrsan Vasilică</p>
+</article>
+
+<article class="church-card">
+  <h3>49. Biserica Penticostală Apele Vii Timișoara</h3>
+  <p>Locație: Timișoara, str. Dr. Pavel Vasici Ungureanu, nr. 15, jud. Timiș, cod 300489</p>
+  <p>Site: www.apelevii.ro</p>
+  <p>Pastor: Cioncă George</p>
+</article>
+
+<article class="church-card">
+  <h3>50. Biserica Penticostală Betel Darova</h3>
+  <p>Locație: Darova, nr. 61/bis, jud. Timiș, cod 307140</p>
+  <p>Site:</p>
+  <p>Pastor: Farkaș Adalbert</p>
+</article>
+
+<article class="church-card">
+  <h3>51. Biserica Penticostală Bacova</h3>
+  <p>Locație: Bacova, nr. 203, jud. Timiș, cod 305101</p>
+  <p>Site:</p>
+  <p>Pastor: Farkaș Adalbert</p>
+</article>
+
+<article class="church-card">
+  <h3>52. Biserica Penticostală Cenei</h3>
+  <p>Locație: Cenei, nr. 48, jud. Timiș, cod 307100</p>
+  <p>Site:</p>
+  <p>Pastor: Farkaș Adalbert</p>
+</article>
+
+<article class="church-card">
+  <h3>53. Biserica Penticostală Apele Vii Tormac</h3>
+  <p>Locație: Tormac, nr. 443, jud. Timiș, cod 307430</p>
+  <p>Site:</p>
+  <p>Pastor: Farkaș Adalbert</p>
+</article>
+
+<article class="church-card">
+  <h3>54. Biserica Penticostală Betel Dragomirești</h3>
+  <p>Locație: Dragomirești, nr. 87/A, jud. Timiș, cod 307401</p>
+  <p>Site:</p>
+  <p>Pastor: Bejera Daniel</p>
+</article>
+
+<article class="church-card">
+  <h3>55. Biserica Penticostală Filadelfia Știuca</h3>
+  <p>Locație: Știuca, nr. 34, jud. Timiș, cod 307400</p>
+  <p>Site:</p>
+  <p>Pastor: Bejera Daniel</p>
+</article>
+
+<article class="church-card">
+  <h3>56. Biserica Penticostală Poganesti</h3>
+  <p>Locație: Poganesti, nr. 48, jud. Timiș, cod 307031</p>
+  <p>Site:</p>
+  <p>Pastor: Bejera Daniel</p>
+</article>
+
+<article class="church-card">
+  <h3>57. Biserica Penticostală Betel Sinersig</h3>
+  <p>Locație: Sinersig, nr. 14, jud. Timiș, cod 307083</p>
+  <p>Site:</p>
+  <p>Pastor: Bejera Daniel</p>
+</article>
+
+<article class="church-card">
+  <h3>58. Biserica Penticostală Eden Comloșu Mare</h3>
+  <p>Locație: Comloșu Mare, nr. 1069, jud. Timiș, cod 307120</p>
+  <p>Site:</p>
+  <p>Pastor: Gavrilovici Viorel</p>
+</article>
+
+<article class="church-card">
+  <h3>59. Biserica Penticostală Speranța Sălbăgel</h3>
+  <p>Locație: Sălbăgel, nr. 32/bis, jud. Timiș, cod 307183</p>
+  <p>Site:</p>
+  <p>Pastor: Ianov Rafael</p>
+</article>
+
+<article class="church-card">
+  <h3>61. Biserica Penticostală Betel Peciu Nou</h3>
+  <p>Locație: Peciu Nou, nr. 479, jud. Timiș, cod 307310</p>
+  <p>Site:</p>
+  <p>Pastor: Ianov Rafael</p>
+</article>
+
+<article class="church-card">
+  <h3>62. Biserica Penticostală Eben Ezer Cladova</h3>
+  <p>Locație: Cladova, nr. 114/A, jud. Timiș, cod 307051</p>
+  <p>Site:</p>
+  <p>Pastor: Hanț Dominic</p>
+</article>
+
+<article class="church-card">
+  <h3>63. Biserica Penticostală Betel Ohaba Română</h3>
+  <p>Locație: Ohaba Română, nr. 177, jud. Timiș, cod 307303</p>
+  <p>Site:</p>
+  <p>Pastor: Hanț Dominic</p>
+</article>
+
+<article class="church-card">
+  <h3>64. Biserica Penticostală Dubești</h3>
+  <p>Locație: Dubești, nr. 161/A, jud. Timiș, cod 307301</p>
+  <p>Site:</p>
+  <p>Pastor: Hanț Dominic</p>
+</article>
+
+<article class="church-card">
+  <h3>65. Biserica Penticostală Filadelfia Ohaba Lungă</h3>
+  <p>Locație: Ohaba Lungă, nr. 38, jud. Timiș, cod 307300</p>
+  <p>Site:</p>
+  <p>Pastor: Bîrsan Vasilică</p>
+</article>
+
+<article class="church-card">
+  <h3>66. Biserica Penticostală Emanuel Bethausen</h3>
+  <p>Locație: Bethausen, nr. 132/A, jud. Timiș, cod 307050</p>
+  <p>Site:</p>
+  <p>Pastor: Hanț Dominic</p>
+</article>
+
+<article class="church-card">
+  <h3>67. Biserica Penticostală Tabor Timișoara</h3>
+  <p>Locație: Timișoara, str. Căpitan Dămășescu, nr. 39, jud. Timiș, cod 300150</p>
+  <p>Site:</p>
+  <p>Pastor: Rozsa Ștefan</p>
+</article>
+
+<article class="church-card">
+  <h3>68. Biserica Penticostală Betel Crai Nou</h3>
+  <p>Locație: Crai Nou, nr. 98/A, jud. Timiș, cod 307226</p>
+  <p>Site:</p>
+  <p>Pastor: Stupar Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>69. Biserica Penticostală Giulvăz</h3>
+  <p>Locație: Giulvăz, nr. 281, cod 307225</p>
+  <p>Site:</p>
+  <p>Pastor: Rădeanu Iosif</p>
+</article>
+
+<article class="church-card">
+  <h3>70. Biserica Penticostală Parța</h3>
+  <p>Locație: Parța, nr. 606, jud. Timiș, cod 307396</p>
+  <p>Site:</p>
+  <p>Pastor: Rădeanu Iosif</p>
+</article>
+
+<article class="church-card">
+  <h3>71. Biserica Penticostală Betel Remetea Mare</h3>
+  <p>Locație: Remetea Mare, str. III, nr. 96/B, jud. Timiș, cod 307350</p>
+  <p>Site:</p>
+  <p>Pastor: Turanschi Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>72. Biserica Penticostală Speranța Șag</h3>
+  <p>Locație: Șag, str. II, nr. 3, jud. Timiș, cod 307395</p>
+  <p>Site:</p>
+  <p>Pastor: Rădeanu Iosif</p>
+</article>
+
+<article class="church-card">
+  <h3>73. Biserica Penticostală Ciacova</h3>
+  <p>Locație: Ciacova, str. T. Vladimirescu, nr. 27, jud. Timiș, cod 307110</p>
+  <p>Site:</p>
+  <p>Pastor: Manea Marinel</p>
+</article>
+
+<article class="church-card">
+  <h3>74. Biserica Penticostală Filadelfia Voiteg</h3>
+  <p>Locație: Voiteg, nr. 253/B, jud. Timiș, cod 307470</p>
+  <p>Site:</p>
+  <p>Pastor: Radeș Albert Liviu</p>
+</article>
+
+<article class="church-card">
+  <h3>75. Biserica Penticostală Izvin</h3>
+  <p>Locație: Izvin, str. O. Goga, nr. 58, jud. Timiș, cod 307343</p>
+  <p>Site:</p>
+  <p>Pastor: Dubei Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>76. Biserica Penticostală Gosen Topolovățu Mare</h3>
+  <p>Locație: Topolovățu Mare, str. Alexandru Ioan Cuza, nr. 115/A, jud. Timiș, cod 307420</p>
+  <p>Site:</p>
+  <p>Pastor: Dubei Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>77. Biserica Penticostală Betania Balinț</h3>
+  <p>Locație: Balinț, nr. 77, jud. Timiș, cod 307005</p>
+  <p>Site:</p>
+  <p>Pastor: Dubei Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>78. Biserica Penticostală Ictar Budinți</h3>
+  <p>Locație: Ictar Budinți, nr. 136/A, jud. Timiș, cod 307422</p>
+  <p>Site:</p>
+  <p>Pastor: Dubei Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>79. Biserica Penticostală Betel Țipari</h3>
+  <p>Locație: Țipari, str. Stejarului, nr. 10, com. Coșteiu, jud. Timiș, cod 307128</p>
+  <p>Site:</p>
+  <p>Pastor: Dubei Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>80. Biserica Penticostală Filadelfia Cerneteaz</h3>
+  <p>Locație: Cerneteaz, str. Nica Iancu Iancovici, nr. 45/A, jud. Timiș, cod 307211</p>
+  <p>Site:</p>
+  <p>Pastor: Dubei Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>81. Biserica Penticostală Betel Recaș</h3>
+  <p>Locație: Recaș, str. Vinului, nr. 5, jud. Timiș, cod 307340</p>
+  <p>Site:</p>
+  <p>Pastor: Aslam Dorel</p>
+</article>
+
+<article class="church-card">
+  <h3>82. Biserica Penticostală Pietroasa</h3>
+  <p>Locație: Pietroasa, nr. 2, jud. Timiș, cod 307320</p>
+  <p>Site:</p>
+  <p>Pastor: Costeant Daniel</p>
+</article>
+
+<article class="church-card">
+  <h3>83. Biserica Penticostală Pe Stâncă Lugoj</h3>
+  <p>Locație: Lugoj, str. A. Iancu, nr. 16, jud. Timiș, cod 305500</p>
+  <p>Site:</p>
+  <p>Pastor: Berzava John</p>
+</article>
+
+<article class="church-card">
+  <h3>84. Biserica Penticostală Betania Darova</h3>
+  <p>Locație: Darova, nr. 169/A, jud. Timiș, cod 307140</p>
+  <p>Site:</p>
+  <p>Pastor: Berzava John</p>
+</article>
+
+<article class="church-card">
+  <h3>85. Biserica Penticostală Betel Criciova</h3>
+  <p>Locație: Criciova, nr. 62/D, jud. Timiș, cod 307130</p>
+  <p>Site:</p>
+  <p>Pastor: Berzava John</p>
+</article>
+
+<article class="church-card">
+  <h3>86. Biserica Penticostală Fârdea</h3>
+  <p>Locație: Fârdea, nr. 83/A, jud. Timiș, cod 307165</p>
+  <p>Site:</p>
+  <p>Pastor: Berzava John</p>
+</article>
+
+<article class="church-card">
+  <h3>87. Biserica Penticostală Smirna Timișoara</h3>
+  <p>Locație: Timișoara, str. Molidului, nr. 7, jud. Timiș, cod 300262</p>
+  <p>Site: www.smirna.ro</p>
+  <p>Pastor: Stoia Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>88. Biserica Penticostală Filadelfia Săcălaz</h3>
+  <p>Locație: Săcălaz, str. IV, nr. 380/A, jud. Timiș, cod 307370</p>
+  <p>Site:</p>
+  <p>Pastor: Jarda George</p>
+</article>
+
+<article class="church-card">
+  <h3>89. Biserica Penticostală Speranța Timișoara</h3>
+  <p>Locație: Timișoara, str. Cernăuți, nr. 49, jud. Timiș, cod 300362</p>
+  <p>Site: https://speranta-tm.ro</p>
+  <p>Pastor: Avram Aurel</p>
+</article>
+
+<article class="church-card">
+  <h3>90. Biserica Penticostală Elim Sânnicolau Mare</h3>
+  <p>Locație: Sânnicolau Mare, str. Calea lui Traian, nr. 68, jud. Timiș, cod 305600</p>
+  <p>Site:</p>
+  <p>Pastor: Petroesc Mihai</p>
+</article>
+
+<article class="church-card">
+  <h3>91. Biserica Penticostală Logos Timișoara</h3>
+  <p>Locație: Timișoara, str. P-ța Axente, nr. 8, jud. Timiș, cod 300587</p>
+  <p>Site:</p>
+  <p>Pastor: Cătană Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>92. Biserica Penticostală Smirna Hodoni</h3>
+  <p>Locație: Hodoni, nr. 257/A, jud. Timiș, cod 307367</p>
+  <p>Site:</p>
+  <p>Pastor: Avram Aurel</p>
+</article>
+
+<article class="church-card">
+  <h3>93. Biserica Penticostală Betesda Satchinez</h3>
+  <p>Locație: Satchinez, str. Petuniei, nr. 31/A, jud. Timiș, cod 307365</p>
+  <p>Site:</p>
+  <p>Pastor: Coțul Lucian</p>
+</article>
+
+<article class="church-card">
+  <h3>94. Biserica Penticostală nr. 1 Timișoara</h3>
+  <p>Locație: Timișoara, str. Țibleșului, nr. 2, jud. Timiș, cod 300543</p>
+  <p>Site:</p>
+  <p>Pastor: Țunea Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>95. Biserica Penticostală Autentic Timișoara</h3>
+  <p>Locație: Timișoara, str. Gh. Ranetti, nr. 28, jud. Timiș, cod 300417</p>
+  <p>Site: www.biserica-autentic.ro</p>
+  <p>Pastor: Cornea Silviu</p>
+</article>
+
+<article class="church-card">
+  <h3>96. Biserica Penticostală Filadelfia Utvin</h3>
+  <p>Locație: Utvin, nr. 543, jud. Timiș, cod 307382</p>
+  <p>Site:</p>
+  <p>Pastor: Mirăuță Augustin</p>
+</article>
+
+<article class="church-card">
+  <h3>97. Biserica Penticostală Betania Șandra</h3>
+  <p>Locație: Șandra, nr. 445/A, jud. Timiș, cod 307065</p>
+  <p>Site:</p>
+  <p>Pastor: Bujdei Dorel</p>
+</article>
+
+<article class="church-card">
+  <h3>98. Biserica Penticostală Betel Pesac</h3>
+  <p>Locație: Pesac, nr. 492, jud. Timiș, cod 307316</p>
+  <p>Site:</p>
+  <p>Pastor: Bujdei Dorel</p>
+</article>
+
+<article class="church-card">
+  <h3>99. Biserica Penticostală Speranța Satchinez</h3>
+  <p>Locație: Satchinez, str. X, nr. 7, jud. Timiș, cod 307365</p>
+  <p>Site:</p>
+  <p>Pastor: Tiron Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>100. Biserica Penticostală Betel Mașloc</h3>
+  <p>Locație: Mașloc, nr. 103/B, jud. Timiș, cod 307270</p>
+  <p>Site:</p>
+  <p>Pastor: Avram Aurel</p>
+</article>
+
+<article class="church-card">
+  <h3>101. Biserica Penticostală Emanuel Cornești</h3>
+  <p>Locație: Cornești, nr. 181, jud. Timiș, cod 307307</p>
+  <p>Site:</p>
+  <p>Pastor: Avram Aurel</p>
+</article>
+
+<article class="church-card">
+  <h3>102. Biserica Penticostală Betania Jebel</h3>
+  <p>Locație: Jebel, nr. 308/A, jud. Timiș, cod 307235</p>
+  <p>Site: www.betania-jebel.ro</p>
+  <p>Pastor: Borca Iosif</p>
+</article>
+
+<article class="church-card">
+  <h3>103. Biserica Penticostală Harul Ghilad</h3>
+  <p>Locație: Ghilad, nr. 736, jud. Timiș, cod 307113</p>
+  <p>Site:</p>
+  <p>Pastor: Silaghi Darius</p>
+</article>
+
+<article class="church-card">
+  <h3>104. Biserica Penticostală Betania Folea</h3>
+  <p>Locație: Folea, nr. 356, jud. Timiș, cod 307471</p>
+  <p>Site:</p>
+  <p>Pastor: Silaghi Darius</p>
+</article>
+
+<article class="church-card">
+  <h3>105. Biserica Penticostală Betania Petroman</h3>
+  <p>Locație: Petroman, nr. 101/B, jud. Timiș, cod 307117</p>
+  <p>Site:</p>
+  <p>Pastor: Silaghi Darius</p>
+</article>
+
+<article class="church-card">
+  <h3>106. Biserica Penticostală Betel Pădureni</h3>
+  <p>Locație: Pădureni, nr. 385/A, jud. Timiș, cod 307236</p>
+  <p>Site:</p>
+  <p>Pastor: Moisa Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>107. Biserica Penticostală Betel Liebling</h3>
+  <p>Locație: Liebling, nr. 3, jud. Timiș, cod 307245</p>
+  <p>Site:</p>
+  <p>Pastor: Moisa Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>108. Biserica Penticostală Filadelfia Iosif</h3>
+  <p>Locație: Iosif, nr. 100, jud. Timiș, cod 307247</p>
+  <p>Site:</p>
+  <p>Pastor: Moisa Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>109. Biserica Penticostală Beregsău Mare</h3>
+  <p>Locație: Beregsău Mare, nr. 198, jud. Timiș, cod 307371</p>
+  <p>Site:</p>
+  <p>Pastor: Moisa Ioan</p>
+</article>
+
+<article class="church-card">
+  <h3>110. Biserica Penticostală Harul Cebza</h3>
+  <p>Locație: Cebza, nr. 211/B, jud. Timiș, cod 307111</p>
+  <p>Site:</p>
+  <p>Pastor: Pițu Constantin</p>
+</article>
+
+<article class="church-card">
+  <h3>111. Biserica Penticostală Betel Butin</h3>
+  <p>Locație: Butin, nr. 137, jud. Timiș, cod 307188</p>
+  <p>Site:</p>
+  <p>Pastor: Pițu Constantin</p>
+</article>
+
+<article class="church-card">
+  <h3>112. Biserica Penticostală Carmel Macedonia</h3>
+  <p>Locație: Macedonia, nr. 215, jud. Timiș, cod 307114</p>
+  <p>Site:</p>
+  <p>Pastor: Pițu Constantin</p>
+</article>
+
+<article class="church-card">
+  <h3>113. Biserica Penticostală Stânca Vieții Jebel</h3>
+  <p>Locație: Jebel, nr. 1037/A, jud. Timiș, cod 307235</p>
+  <p>Site:</p>
+  <p>Pastor: Pițu Constantin</p>
+</article>
+
+<article class="church-card">
+  <h3>114. Biserica Penticostală Filadelfia Mănăștire</h3>
+  <p>Locație: Mănăștire, nr. 59, jud. Timiș, cod 307189</p>
+  <p>Site:</p>
+  <p>Pastor: Lifa Iacob</p>
+</article>
+
+<article class="church-card">
+  <h3>115. Biserica Penticostală Opatița</h3>
+  <p>Locație: Opatița, nr. 226, jud. Timiș, cod 305201</p>
+  <p>Site:</p>
+  <p>Pastor: Mihai Pavel</p>
+</article>
+
+<article class="church-card">
+  <h3>116. Biserica Penticostală Deta</h3>
+  <p>Locație: Deta, str. Elena Ghenescu, nr. 22, jud. Timiș, cod 305200</p>
+  <p>Site:</p>
+  <p>Pastor: Popa Matei</p>
+</article>
+
+<article class="church-card">
+  <h3>117. Biserica Penticostală Denta</h3>
+  <p>Locație: Denta, nr. 371, jud. Timiș, cod 307145</p>
+  <p>Site:</p>
+  <p>Pastor: Popa Matei</p>
+</article>
+
+<article class="church-card">
+  <h3>118. Biserica Penticostală Betel Moravița</h3>
+  <p>Locație: Moravița, nr. 267/A, jud. Timiș, cod 307280</p>
+  <p>Site:</p>
+  <p>Pastor: Popa Matei</p>
+</article>
+
+<article class="church-card">
+  <h3>119. Biserica Penticostală Maranata Gottlob</h3>
+  <p>Locație: Gottlob, nr. 282, jud. Timiș, cod 307251</p>
+  <p>Site:</p>
+  <p>Pastor: Crețu Beunian / Crețu Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>120. Biserica Penticostală Uihei</h3>
+  <p>Locație: Uihei, nr. 117, jud. Timiș, cod 307061</p>
+  <p>Site:</p>
+  <p>Pastor: Crețu Beunian / Crețu Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>121. Biserica Penticostală Golgota Tomnatic</h3>
+  <p>Locație: Tomnatic, nr. 234, jud. Timiș, cod 307255</p>
+  <p>Site:</p>
+  <p>Pastor: Crețu Beunian / Crețu Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>122. Biserica Penticostală Rugul Aprins Bulgăruș</h3>
+  <p>Locație: Bulgăruș, nr. 669, jud. Timiș, cod 307241</p>
+  <p>Site:</p>
+  <p>Pastor: Crețu Beunian / Crețu Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>123. Biserica Penticostală Betel Grabaț</h3>
+  <p>Locație: Grabaț, nr. 255, jud. Timiș, cod 307242</p>
+  <p>Site:</p>
+  <p>Pastor: Crețu Beunian / Crețu Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>124. Biserica Penticostală Alfa Lenauheim</h3>
+  <p>Locație: Lenauheim, nr. 288, jud. Timiș, cod 307240</p>
+  <p>Site:</p>
+  <p>Pastor: Crețu Beunian / Crețu Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>125. Biserica Penticostală Efes Pesac</h3>
+  <p>Locație: Pesac, nr. 506, jud. Timiș, cod 307316</p>
+  <p>Site:</p>
+  <p>Pastor: Crețu Beunian / Crețu Nicolae</p>
+</article>
+
+<article class="church-card">
+  <h3>126. Biserica Penticostală Filadelfia Teremia Mare</h3>
+  <p>Locație: Teremia Mare, nr. 688/A, jud. Timiș, cod 307405</p>
+  <p>Site:</p>
+  <p>Pastor: Alda Filip Daniel</p>
+</article>
+
+<article class="church-card">
+  <h3>127. Biserica Penticostală Lovrin</h3>
+  <p>Locație: Lovrin, str. Nisip, nr. 1096, jud. Timiș, cod 307250</p>
+  <p>Site: www.bisericapenticostalalovrin.ro</p>
+  <p>Pastor: Pulvere Mircea</p>
+</article>
+
+<article class="church-card">
+  <h3>128. Biserica Penticostală Betel Variaș</h3>
+  <p>Locație: Variaș, nr. 861, jud. Timiș, cod 307455</p>
+  <p>Site:</p>
+  <p>Pastor: Pulberea Mircea</p>
+</article>
+
+<article class="church-card">
+  <h3>129. Biserica Penticostală Filadelfia Cărpiniș</h3>
+  <p>Locație: Cărpiniș, str. VI, nr. 83, jud. Timiș, cod 307090</p>
+  <p>Site:</p>
+  <p>Pastor: Ropotca Petru</p>
+</article>
+
+<article class="church-card">
+  <h3>130. Biserica Penticostală Harul Iecea Mică</h3>
+  <p>Locație: Iecea Mică, nr. 124, jud. Timiș, cod 307092</p>
+  <p>Site:</p>
+  <p>Pastor: Ropotca Petru</p>
+</article>
+
+<article class="church-card">
+  <h3>131. Biserica Penticostală Checea</h3>
+  <p>Locație: Checea, nr. 132/A, jud. Timiș, cod 307102</p>
+  <p>Site:</p>
+  <p>Pastor: Ropotca Petru</p>
+</article>
+
+<article class="church-card">
+  <h3>132. Biserica Penticostală Elim Iecea Mare</h3>
+  <p>Locație: Iecea Mare, nr. 346/A, jud. Timiș, cod 307101</p>
+  <p>Site:</p>
+  <p>Pastor: Ilie Aurel</p>
+</article>
+
+<article class="church-card">
+  <h3>133. Biserica Penticostală Emanuel Ulm</h3>
+  <p>Locație: Ulm, nr. 110, jud. Timiș, cod 307445</p>
+  <p>Site:</p>
+  <p>Pastor: Ropotca Petru</p>
+</article>
+
+<article class="church-card">
+  <h3>134. Biserica Penticostală Betania Periam</h3>
+  <p>Locație: Periam, str. Panseluțelor, nr. 59, jud. Timiș, cod 307040</p>
+  <p>Site:</p>
+  <p>Pastor: Mureșan Ioan Gedeon</p>
+</article>
+
+<article class="church-card">
+  <h3>135. Biserica Penticostală Betel Cărpiniș</h3>
+  <p>Locație: Cărpiniș, str. VI, nr. 55, jud. Timiș, cod 307090</p>
+  <p>Site:</p>
+  <p>Pastor: Ropotca Petru</p>
+</article>
+
+<article class="church-card">
+  <h3>136. Biserica Penticostală Filadelfia Sânnicolau Mare</h3>
+  <p>Locație: Sânnicolau Mare, str. V. Babeș, nr. 36, jud. Timiș, cod 305600</p>
+  <p>Site: www.filadelfia-sm.ro</p>
+  <p>Pastor: Strugari Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>137. Biserica Penticostală Sfânta Treime Sânpetru Mare</h3>
+  <p>Locație: Sânpetru Mare, nr. 65, jud. Timiș, cod 307351</p>
+  <p>Site:</p>
+  <p>Pastor: Strugari Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>138. Biserica Penticostală Maranata Cenad</h3>
+  <p>Locație: Cenad, nr. 1351, jud. Timiș, cod 307347</p>
+  <p>Site:</p>
+  <p>Pastor: Strugari Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>139. Biserica Penticostală Harul Nerău</h3>
+  <p>Locație: Nerău, nr. 139, jud. Timiș, cod 307036</p>
+  <p>Site:</p>
+  <p>Pastor: Strugari Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>140. Biserica Penticostală Sărvăzel</h3>
+  <p>Locație: Sărvăzel, nr. 944, jud. Timiș, cod 307387</p>
+  <p>Site:</p>
+  <p>Pastor: Strugari Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>141. Biserica Penticostală Betel Sărvăzel</h3>
+  <p>Locație: Sărvăzel, nr. 135, jud. Timiș, cod 307311</p>
+  <p>Site:</p>
+  <p>Pastor: Strugari Adrian</p>
+</article>
+
+<article class="church-card">
+  <h3>142. Biserica Penticostală Filadelfia Moșnița Nouă</h3>
+  <p>Locație: Moșnița Nouă, str. Nuciilor, nr. 41, jud. Timiș, cod 307285</p>
+  <p>Site: filadelfiamosnita.ro</p>
+  <p>Pastor: Stanciu Cornel</p>
+</article>
+
+<article class="church-card">
+  <h3>143. Biserica Penticostală Șipet</h3>
+  <p>Locație: Șipet, nr. 56, jud. Timiș, cod 307432</p>
+  <p>Site:</p>
+  <p>Pastor: Stanciu Cornel</p>
+</article>
+
+<article class="church-card">
+  <h3>144. Biserica Penticostală Căpârț</h3>
+  <p>Locație: Căpârț, nr. 19/A, jud. Timiș, cod 307331</p>
+  <p>Site:</p>
+  <p>Pastor: Stanciu Cornel</p>
+</article>
+
+<article class="church-card">
+  <h3>145. Biserica Penticostală Harul Drăgsina</h3>
+  <p>Locație: Drăgsina, nr. 158/B, jud. Timiș, cod 307106</p>
+  <p>Site:</p>
+  <p>Pastor: Stanciu Cornel</p>
+</article>
+
+<article class="church-card">
+  <h3>146. Biserica Penticostală Boldur</h3>
+  <p>Locație: Boldur, str. 52/B, jud. Timiș, cod 307080</p>
+  <p>Site:</p>
+  <p>Pastor: Stanciu Cornel</p>
+</article>
+
+<article class="church-card">
+  <h3>147. Biserica Penticostală Betel Moșnița Veche</h3>
+  <p>Locație: Moșnița Veche, str. Șuvagău Dănilă, nr. 3, jud. Timiș, cod 307287</p>
+  <p>Site: www.betelmosnitaveche.ro</p>
+  <p>Pastor: Hilboceanu Radu</p>
+</article>
+
+<article class="church-card">
+  <h3>148. Biserica Penticostală Buziaș</h3>
+  <p>Locație: Buziaș, str. Șoimilor, nr. 6/B, jud. Timiș, cod 3072852 (codul din tabel e 307352, îl păstrez exact cum este)</p>
+  <p>Site:</p>
+  <p>Pastor: Daniliuc Ionuț</p>
+</article>
+
+<article class="church-card">
+  <h3>149. Biserica Penticostală Betel Bucovăț</h3>
+  <p>Locație: Bucovăț, nr. 131, jud. Timiș, cod 307352</p>
+  <p>Site:</p>
+  <p>Pastor: Daniliuc Ionuț</p>
+</article>
+
+<article class="church-card">
+  <h3>150. Biserica Penticostală Emanuel Lugoj</h3>
+  <p>Locație: Lugoj, str. Episcop Dr. Ioan Bălan, nr. 22, jud. Timiș, cod 305500</p>
+  <p>Site:</p>
+  <p>Pastor: Stăuceanu Constantin</p>
+</article>
+
+<article class="church-card">
+  <h3>151. Biserica Penticostală Nădrag</h3>
+  <p>Locație: Nădrag, str. Aleea Bradului, nr. 1, jud. Timiș, cod 307290</p>
+  <p>Site:</p>
+  <p>Pastor: Stăuceanu Constantin</p>
+</article>
+
+<article class="church-card">
+  <h3>152. Biserica Penticostală Maranata Zgribești</h3>
+  <p>Locație: Zgribești, nr. 114/A, jud. Timiș, cod 307493</p>
+  <p>Site:</p>
+  <p>Pastor: Stăuceanu Constantin</p>
+</article>
+
+<article class="church-card">
+  <h3>153. Biserica Penticostală Jdioara</h3>
+  <p>Locație: Jdioara, nr. 11, jud. Timiș, cod 307133</p>
+  <p>Site:</p>
+  <p>Pastor: Stăuceanu Constantin</p>
+</article>
+
+<article class="church-card">
+  <h3>154. Biserica Penticostală Maranata Șuștra</h3>
+  <p>Locație: Șuștra, nr. 109, jud. Timiș, cod 307424</p>
+  <p>Site:</p>
+  <p>Pastor: Stăuceanu Constantin</p>
+</article>
+
+<article class="church-card">
+  <h3>155. Biserica Penticostală Emanuel Belinț</h3>
+  <p>Locație: Belinț, nr. 628, jud. Timiș, cod 307045</p>
+  <p>Site:</p>
+  <p>Pastor: Stăuceanu Constantin</p>
+</article>
+
+<article class="church-card">
+  <h3>156. Biserica Penticostală Maranata Ghizela</h3>
+  <p>Locație: Ghizela, nr. 389, jud. Timiș, cod 307205</p>
+  <p>Site:</p>
+  <p>Pastor: Vidoni Doru</p>
+</article>
+
+<article class="church-card">
+  <h3>157. Biserica Penticostală Răchita</h3>
+  <p>Locație: Răchita, nr. 364/B, jud. Timiș, cod 307157</p>
+  <p>Site:</p>
+  <p>Pastor: Vidoni Doru</p>
+</article>
+
+<article class="church-card">
+  <h3>158. Biserica Penticostală Remetea Luncă</h3>
+  <p>Locație: Remetea Luncă, nr. 706/B, jud. Timiș, cod 307277</p>
+  <p>Site:</p>
+  <p>Pastor: Vidoni Doru</p>
+</article>
+
+<article class="church-card">
+  <h3>159. Biserica Penticostală Filadelfia Lugoj</h3>
+  <p>Locație: Lugoj, str. Mureșului, nr. 20, jud. Timiș, cod 305500</p>
+  <p>Site: www.filadelfialugoj.ro</p>
+  <p>Pastor: Paveloni Cadmiel</p>
+</article>
+
+<article class="church-card">
+  <h3>160. Biserica Penticostală Elim Jabar</h3>
+  <p>Locație: Jabar, nr. 118, jud. Timiș, cod 307015</p>
+  <p>Site:</p>
+  <p>Pastor: Zerbea Emiliu</p>
+</article>
+
+<article class="church-card">
+  <h3>161. Biserica Penticostală Temerești</h3>
+  <p>Locație: Temerești, nr. 113, jud. Timiș, cod 305310</p>
+  <p>Site:</p>
+  <p>Pastor: Zerbea Emiliu</p>
+</article>
+
+<article class="church-card">
+  <h3>162. Biserica Penticostală Sântești</h3>
+  <p>Locație: Sântești, nr. 127, jud. Timiș, cod 307112</p>
+  <p>Site:</p>
+  <p>Pastor: Homoșdean Zorinel</p>
+</article>
+
+<article class="church-card">
+  <h3>163. Biserica Penticostală Traian Vuia</h3>
+  <p>Locație: Traian Vuia, nr. 67, jud. Timiș, cod 307435</p>
+  <p>Site:</p>
+  <p>Pastor: Homoșdean Zorinel</p>
+</article>
+
+<article class="church-card">
+  <h3>164. Biserica Penticostală Begheiu Mic</h3>
+  <p>Locație: Begheiu Mic, nr. 31, jud. Timiș, cod 307285</p>
+  <p>Site:</p>
+  <p>Pastor: Homoșdean Zorinel</p>
+</article>
+
+<article class="church-card">
+  <h3>165. Biserica Penticostală Logos Săceni</h3>
+  <p>Locație: Săceni, nr. 40/A, jud. Timiș, cod 307197</p>
+  <p>Site:</p>
+  <p>Pastor: Homoșdean Zorinel</p>
+</article>
+
+<article class="church-card">
+  <h3>166. Biserica Penticostală Betesda Bucovăț</h3>
+  <p>Locație: Bucovăț, nr. 157, jud. Timiș, cod 307351</p>
+  <p>Site:</p>
+  <p>Pastor: Homoșdean Zorinel</p>
+</article>
+
+<article class="church-card">
+  <h3>167. Biserica Penticostală Betesda Lugoj</h3>
+  <p>Locație: Lugoj, str. D. Cantemir, nr. 20, jud. Timiș, cod 305500</p>
+  <p>Site:</p>
+  <p>Pastor: Neag Filip</p>
+</article>
+
+<article class="church-card">
+  <h3>168. Biserica Penticostală Coșteiu</h3>
+  <p>Locație: Coșteiu, str. Frezilor, nr. 6, jud. Timiș, cod 307125</p>
+  <p>Site:</p>
+  <p>Pastor: Neag Filip</p>
+</article>
+
+<article class="church-card">
+  <h3>169. Biserica Penticostală Betesda Sudriaș</h3>
+  <p>Locație: Sudriaș, nr. 10/A, jud. Timiș, cod 307438</p>
+  <p>Site:</p>
+  <p>Pastor: Neag Filip</p>
+</article>
+
+<article class="church-card">
+  <h3>170. Biserica Penticostală Bethausen</h3>
+  <p>Locație: Bethausen, nr. 224/B, jud. Timiș, cod 307450</p>
+  <p>Site:</p>
+  <p>Pastor: Neag Filip</p>
+</article>
+
+<article class="church-card">
+  <h3>171. Biserica Penticostală Betania Jupani</h3>
+  <p>Locație: Jupani, nr. 57, jud. Timiș, cod 307436</p>
+  <p>Site:</p>
+  <p>Pastor: Cărăbaș Sorin</p>
+</article>
+
+<article class="church-card">
+  <h3>172. Biserica Penticostală Maranata Leucușești</h3>
+  <p>Locație: Leucușești, nr. 12, jud. Timiș, cod 307054</p>
+  <p>Site:</p>
+  <p>Pastor: Cărăbaș Sorin</p>
+</article>
+
+<article class="church-card">
+  <h3>173. Biserica Penticostală Muntele Sionului Sudriaș</h3>
+  <p>Locație: Sudriaș, nr. 164, jud. Timiș, cod 307438</p>
+  <p>Site:</p>
+  <p>Pastor: Cărăbaș Sorin</p>
+</article>
+
+<article class="church-card">
+  <h3>174. Biserica Penticostală Petroasa Mare</h3>
+  <p>Locație: Petroasa Mare, nr. 21, jud. Timiș, cod 307464</p>
+  <p>Site:</p>
+  <p>Pastor: Cărăbaș Sorin</p>
+</article>
+
+<article class="church-card">
+  <h3>175. Biserica Penticostală Coșteiu de Sus</h3>
+  <p>Locație: Coșteiu de Sus, nr. 48, jud. Timiș, cod 307264</p>
+  <p>Site:</p>
+  <p>Pastor: Coșteant Daniel</p>
+</article>
+
+<article class="church-card">
+  <h3>176. Biserica Penticostală Muntele Sionului Poieni</h3>
+  <p>Locație: Poieni, nr. 68, jud. Timiș, cod 307232</p>
+  <p>Site:</p>
+  <p>Pastor: Coșteant Daniel</p>
+</article>
+
+<article class="church-card">
+  <h3>177. Biserica Penticostală Homojdia</h3>
+  <p>Locație: Homojdia, nr. 11/A, jud. Timiș, cod 307137</p>
+  <p>Site:</p>
+  <p>Pastor: Coșteant Daniel</p>
+</article>
+
+<article class="church-card">
+  <h3>178. Biserica Penticostală Maranata Coșava</h3>
+  <p>Locație: Coșava, nr. 102, jud. Timiș, cod 307210</p>
+  <p>Site:</p>
+  <p>Pastor: Bucur Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>179. Biserica Penticostală Mănăștiur</h3>
+  <p>Locație: Mănăștiur, nr. 269, jud. Timiș, cod 307260</p>
+  <p>Site:</p>
+  <p>Pastor: Bucur Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>180. Biserica Penticostală Românești</h3>
+  <p>Locație: Românești, nr. 130, jud. Timiș, cod 307146</p>
+  <p>Site:</p>
+  <p>Pastor: Bucur Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>181. Biserica Penticostală Curtea</h3>
+  <p>Locație: Curtea, nr. 249, jud. Timiș, cod 307155</p>
+  <p>Site:</p>
+  <p>Pastor: Bucur Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>182. Biserica Penticostală Tomești</h3>
+  <p>Locație: Tomești, nr. 90, jud. Timiș, cod 307347</p>
+  <p>Site:</p>
+  <p>Pastor: Bucur Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>183. Biserica Penticostală Colonia Fabricii</h3>
+  <p>Locație: Colonia Fabricii, nr. 27, jud. Timiș, cod 307412</p>
+  <p>Site:</p>
+  <p>Pastor: Bucur Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>184. Biserica Penticostală Luncanii de Jos</h3>
+  <p>Locație: Luncanii de Jos, nr. 60, jud. Timiș, cod 307131</p>
+  <p>Site:</p>
+  <p>Pastor: Bucur Gheorghe</p>
+</article>
+
+<article class="church-card">
+  <h3>185. Biserica Penticostală Gladna Română</h3>
+  <p>Locație: Gladna Română, nr. 46, jud. Timiș, cod 307581</p>
+  <p>Site:</p>
+  <p>Pastor: Nemes Alin</p>
+</article>
+
+<article class="church-card">
+  <h3>186. Biserica Penticostală Jupânești</h3>
+  <p>Locație: Jupânești, nr. 63, jud. Timiș, cod 305308</p>
+  <p>Site:</p>
+  <p>Pastor: Nemes Alin</p>
+</article>
+
+<article class="church-card">
+  <h3>187. Biserica Penticostală Efrata Făget</h3>
+  <p>Locație: Făget, str. Unirii, nr. 13, jud. Timiș, cod 305300</p>
+  <p>Site: https://bisericaefrata.ro/</p>
+  <p>Pastor: Nemes Alin</p>
+</article>
+
+<article class="church-card">
+  <h3>188. Biserica Penticostală Filadelfia Breazova</h3>
+  <p>Locație: Breazova, nr. 122, jud. Timiș, cod 307261</p>
+  <p>Site:</p>
+  <p>Pastor: Merticariu George Samuel</p>
+</article>
+
+<article class="church-card">
+  <h3>189. Biserica Penticostală Surducu Mic</h3>
+  <p>Locație: Surducu Mic, nr. 84, jud. Timiș, cod 307439</p>
+  <p>Site:</p>
+  <p>Pastor: Merticariu George Samuel</p>
+</article>
+
+<article class="church-card">
+  <h3>190. Biserica Penticostală Betesda Mănăștiur</h3>
+  <p>Locație: Mănăștiur, nr. 142, jud. Timiș, cod 307275</p>
+  <p>Site:</p>
+  <p>Pastor: Nemes Alin</p>
+</article>
+
+<article class="church-card">
+  <h3>191. Biserica Penticostală Eben Ezer Bătești</h3>
+  <p>Locație: Bătești, nr. 7/2B, jud. Timiș, cod 305301</p>
+  <p>Site:</p>
+  <p>Pastor: Șereu Nelu</p>
+</article>
+
+<article class="church-card">
+  <h3>192. Biserica Penticostală Betel Crivina de Sus</h3>
+  <p>Locație: Crivina de Sus, nr. 30, jud. Timiș, cod 307321</p>
+  <p>Site:</p>
+  <p>Pastor: Șereu Nelu</p>
+</article>
+
+<article class="church-card">
+  <h3>193. Biserica Penticostală Betania Bichigi</h3>
+  <p>Locație: Bichigi, nr. 67, jud. Timiș, cod 305303</p>
+  <p>Site:</p>
+  <p>Pastor: Șereu Nelu</p>
+</article>
+
+<article class="church-card">
+  <h3>194. Biserica Penticostală Brănești</h3>
+  <p>Locație: Brănești, nr. 135/A, jud. Timiș, cod 307244</p>
+  <p>Site:</p>
+  <p>Pastor: Șereu Nelu</p>
+</article>
+
+<article class="church-card">
+  <h3>195. Biserica Penticostală Maranata Botinești</h3>
+  <p>Locație: Botinești, nr. 95/A, jud. Timiș, cod 307027</p>
+  <p>Site:</p>
+  <p>Pastor: Șereu Nelu</p>
+</article>
+
+<article class="church-card">
+  <h3>196. Biserica Penticostală Maranata Covaci</h3>
+  <p>Locație: Covaci, str. Școlii, nr. 55, jud. Timiș, cod 307377</p>
+  <p>Site:</p>
+  <p>Pastor: Șereu Nelu</p>
+</article>
+
+<article class="church-card">
+  <h3>197. Biserica Penticostală Betesda Gelu</h3>
+  <p>Locație: Gelu, nr. 428, jud. Timiș, cod 307456</p>
+  <p>Site: www.bisericabetesdagelu.ro</p>
+  <p>Pastor: Barboni Bosbici Mihai Cosmin</p>
+</article>
+
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <p>&copy; <span id="footer-year"></span> Comunitatea Regională Penticostală Arad</p>
+    </div>
+</footer>
+
+<script src="pgpr1.js" defer></script>
+<script>
+// -----------------------------------------------------------
+// 1. Utilitare: normalizare + fuzzy
+// -----------------------------------------------------------
+function normalize(str) {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+}
+
+function levenshtein(a, b) {
+    a = normalize(a);
+    b = normalize(b);
+
+    const dp = Array.from({ length: a.length + 1 }, () => []);
+    for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+    for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+
+    for (let i = 1; i <= a.length; i++) {
+        for (let j = 1; j <= b.length; j++) {
+            dp[i][j] = Math.min(
+                dp[i - 1][j] + 1,
+                dp[i][j - 1] + 1,
+                dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
+            );
+        }
+    }
+    return dp[a.length][b.length];
+}
+
+// -----------------------------------------------------------
+// 2. Pregătire carduri și index pentru căutare
+// -----------------------------------------------------------
+const cards = [...document.querySelectorAll(".church-card")];
+
+// salvăm HTML-ul original (fără highlight)
+cards.forEach(card => {
+    card.dataset.originalContent = card.innerHTML;
+});
+
+// index: folosim numele (h3) + textul întreg
+const index = cards.map(card => {
+    const titleEl = card.querySelector("h3");
+    const titleText = titleEl ? titleEl.innerText : "";
+    const fullText = card.innerText;
+
+    return {
+        element: card,
+        title: normalize(titleText),
+        text: normalize(fullText),
+        originalHTML: card.dataset.originalContent,
+        titleDisplay: titleText
+    };
+});
+
+// -----------------------------------------------------------
+// 3. Highlight temporar
+// -----------------------------------------------------------
+function highlightHTML(html, query) {
+    const words = query
+        .split(" ")
+        .map(w => w.trim())
+        .filter(w => w.length > 0);
+
+    if (words.length === 0) return html;
+
+    let result = html;
+    words.forEach(w => {
+        const escaped = w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${escaped})`, "gi");
+        result = result.replace(regex, "<mark>$1</mark>");
+    });
+
+    return result;
+}
+
+function removeHighlights() {
+    cards.forEach(card => {
+        card.innerHTML = card.dataset.originalContent;
+    });
+}
+
+// -----------------------------------------------------------
+// 4. Elemente UI
+// -----------------------------------------------------------
+const input = document.getElementById("churchSearch");
+const suggestionsBox = document.getElementById("searchSuggestions");
+const resultsCount = document.getElementById("searchResultsCount");
+const didYouMean = document.getElementById("didYouMean");
+const wrapper = document.querySelector(".arad-search-wrapper");
+
+// safety: dacă ceva lipsește, ieșim
+if (input && suggestionsBox && resultsCount && didYouMean) {
+
+    // -------------------------------------------------------
+    // 5. Căutarea principală
+    // -------------------------------------------------------
+    input.addEventListener("input", function () {
+        const rawQuery = this.value;
+        const q = normalize(rawQuery.trim());
+
+        // reset texte auxiliare
+        suggestionsBox.innerHTML = "";
+        resultsCount.innerHTML = "";
+        didYouMean.innerHTML = "";
+
+        // dacă e gol -> reset pagină
+        if (!q) {
+            removeHighlights();
+            cards.forEach(c => {
+                c.style.display = "block";
+            });
+            suggestionsBox.style.display = "none";
+            return;
+        }
+
+        // scoatem highlight vechi
+        removeHighlights();
+
+        const queryWords = q.split(" ").filter(w => w.length > 0);
+
+        const results = index
+            .map(item => {
+                let score = 0;
+
+                queryWords.forEach(word => {
+                    // match puternic în titlu
+                    if (item.title.includes(word)) score += 15;
+
+                    // match în restul textului
+                    if (item.text.includes(word)) score += 5;
+
+                    // fuzzy doar pe titlu (nu pe tot textul)
+                    const dist = levenshtein(item.title, word);
+                    if (dist > 0 && dist <= 2) score += 4;
+                    else if (dist <= 4) score += 2;
+                });
+
+                return { ...item, score };
+            })
+            .filter(r => r.score > 0)
+            .sort((a, b) => b.score - a.score);
+
+        // ascundem toate cardurile
+        cards.forEach(c => (c.style.display = "none"));
+
+        if (results.length === 0) {
+            didYouMean.innerHTML = "Niciun rezultat. Încearcă un alt termen.";
+            suggestionsBox.style.display = "none";
+            return;
+        }
+
+        resultsCount.innerHTML = `Rezultate: ${results.length}`;
+
+        // afișăm doar rezultatele + highlight temporar
+        results.forEach(r => {
+            r.element.style.display = "block";
+            r.element.innerHTML = highlightHTML(r.originalHTML, rawQuery);
+        });
+
+        // sugestii (primele 6 titluri)
+        if (q.length >= 2) {
+            suggestionsBox.innerHTML = results
+                .slice(0, 6)
+                .map(r => `<div class="search-suggestion-item">${r.titleDisplay}</div>`)
+                .join("");
+            suggestionsBox.style.display = "block";
+        } else {
+            suggestionsBox.style.display = "none";
+        }
+    });
+
+    // -------------------------------------------------------
+    // 6. Click pe sugestii
+    // -------------------------------------------------------
+    suggestionsBox.addEventListener("click", function (e) {
+        if (e.target.classList.contains("search-suggestion-item")) {
+            input.value = e.target.innerText;
+            suggestionsBox.style.display = "none";
+            input.dispatchEvent(new Event("input"));
+        }
+    });
+
+    // -------------------------------------------------------
+    // 7. Închidere automată
+    // -------------------------------------------------------
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            suggestionsBox.style.display = "none";
+            removeHighlights();
+            this.blur();
+        }
+    });
+
+    input.addEventListener("input", function () {
+        if (!this.value.trim()) {
+            removeHighlights();
+            cards.forEach(c => (c.style.display = "block"));
+            suggestionsBox.style.display = "none";
+            resultsCount.innerHTML = "";
+            didYouMean.innerHTML = "";
+        }
+    });
+
+    document.addEventListener("click", function (e) {
+        if (wrapper && !wrapper.contains(e.target)) {
+            suggestionsBox.style.display = "none";
+        }
+    });
+
+    input.addEventListener("blur", function () {
+        setTimeout(() => {
+            suggestionsBox.style.display = "none";
+        }, 150);
+    });
+}
+</script>
+</body>
+</html>
