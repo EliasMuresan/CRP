@@ -296,6 +296,37 @@ document.addEventListener("DOMContentLoaded", () => {
         loadZoomableImages();
     }
     initEventsCarousel();
+    // Scroll lin pentru link-urile interne din pagină
+const internalLinks = document.querySelectorAll('a[href^="#"]');
+
+internalLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+
+        // ignoră doar "#" gol
+        if (!href || href === '#') return;
+
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (!targetElement) return;
+
+        e.preventDefault();
+
+        // înălțimea header-ului fix (ajustează dacă e nevoie)
+        const header = document.querySelector('.header');
+        const headerHeight = header ? header.offsetHeight : 0;
+
+        const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerHeight - 12; // mic spațiu de respiro
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    });
+});
+
 });
 
 /* ============================================================
@@ -347,3 +378,48 @@ document.addEventListener(
    DEBUG
 ============================================================ */
 console.log("pgpr1.js loaded with lightbox + carousel + mobile protections.");
+// Funcție pentru eliminarea diacriticelor
+function normalizeText(str) {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+}
+
+// Funcție de fuzzy matching (match tolerant la greșeli mici)
+function fuzzyMatch(input, target) {
+    input = normalizeText(input);
+    target = normalizeText(target);
+
+    if (target.includes(input)) return true; // match normal
+
+    // Permite greșeli de 1-2 litere
+    let mismatches = 0;
+    let i = 0, j = 0;
+
+    while (i < input.length && j < target.length) {
+        if (input[i] !== target[j]) {
+            mismatches++;
+            if (mismatches > 2) return false;
+            i++; // ignorăm o literă
+        } else {
+            i++;
+            j++;
+        }
+    }
+
+    return true;
+}
+
+// Filtrare carduri
+document.getElementById("churchSearch").addEventListener("input", function () {
+    const query = this.value.trim();
+    const cards = document.querySelectorAll(".church-card");
+
+    cards.forEach(card => {
+        const text = card.innerText;
+        const match = fuzzyMatch(query, text);
+
+        card.style.display = match ? "block" : "none";
+    });
+});

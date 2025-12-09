@@ -1759,28 +1759,101 @@ body.no-scroll {
         gap: 18px;
     }
 }
-.header {
-    background: #fff;
+.arad-search-wrapper {
+    max-width: 420px;
+    margin: 0 auto 24px;
+}
+
+#churchSearch {
     width: 100%;
-    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 16px;
+    font-size: 15px;
+    border-radius: 14px;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    transition: 0.2s ease;
 }
 
-.header-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+#churchSearch:focus {
+    outline: none;
+    border-color: var(--accent-dark);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10);
 }
 
-.logo-area {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+/* Search wrapper */
+.arad-search-wrapper {
+    max-width: 480px;
+    margin: 0 auto 28px;
+    position: relative;
 }
 
-.logo-link {
+/* Input */
+#churchSearch {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    border-radius: 14px;
+    border: 1px solid #d1d5db;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    transition: 0.2s ease;
+    background: #ffffff;
+}
+
+#churchSearch:focus {
+    outline: none;
+    border-color: var(--accent-dark);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.1);
+}
+
+/* Sugestii dropdown */
+.search-suggestions {
+    position: absolute;
+    top: 48px;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    display: none;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 20;
+}
+
+.search-suggestions div {
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.search-suggestions div:hover {
+    background: #fafafa;
+}
+
+/* Did you mean */
+.search-didyoumean {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #374151;
+    font-style: italic;
+}
+
+/* Număr rezultate */
+.search-results-count {
+    margin-top: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Highlight text găsit */
+mark {
+    background: #fff3a2;
+    padding: 0 2px;
+    border-radius: 2px;
+}
+/* Forțează logo-ul să arate la fel ca pe celelalte pagini */
+.header .logo-area a {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -1788,31 +1861,11 @@ body.no-scroll {
     color: inherit;
 }
 
-.site-logo {
-    height: 48px;
-}
-
-.site-title h1 {
-    font-size: 22px;
-    font-weight: 600;
-    margin: 0;
-}
-
-.site-title span {
-    font-size: 12px;
-    color: #6b7280;
-    letter-spacing: 1px;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 22px;
-}
-
-.nav-links li a {
+.header .logo-area a:hover {
     text-decoration: none;
-    color: #1e1e3f;
-    font-weight: 500;
+}
+
+.header .logo-area .site-title h1,
+.header .logo-area .site-title span {
+    text-decoration: none;
 }
