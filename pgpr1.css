@@ -1687,25 +1687,39 @@ body.no-scroll {
    STILURI SPECIALE PENTRU PAGINA ARAD (LISTA BISERICI)
    ========================================================= */
 
+/* Secțiunea de sus – mai aproape de meniu */
+/* Secțiunea de sus – lipită de meniu */
+.arad-wrapper {
+    padding-top: 0;      /* fără spațiu interior sus */
+    padding-bottom: 40px;
+    margin-top: -20px;   /* trage secțiunea cu 10px în sus */
+}
+
+/* Titlu + subtitlu centrate */
+.arad-header {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 24px;
+}
+
+.arad-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(28px, 3vw, 40px);
+    margin: 0 0 6px;        /* elimină spațiul mare de sus */
+}
+
+.arad-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+/* Wrapper pentru grid + search */
 .arad-lista-wrapper {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 20px;
-}
-
-.arad-lista-title {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(28px, 3vw, 40px);
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-.arad-lista-subtitle {
-    text-align: center;
-    color: #6b7280;
-    margin-bottom: 32px;
-    font-size: 16px;
+    padding: 0 20px;
 }
 
 /* GRID CARDURI BISERICI */
@@ -1751,53 +1765,30 @@ body.no-scroll {
         padding: 18px 20px;
     }
 
-    .arad-lista-title {
-        font-size: 26px;
-    }
-
     .arad-grid {
         gap: 18px;
     }
 }
-.arad-search-wrapper {
-    max-width: 420px;
-    margin: 0 auto 24px;
-}
 
-#churchSearch {
-    width: 100%;
-    padding: 12px 16px;
-    font-size: 15px;
-    border-radius: 14px;
-    border: 1px solid #d1d5db;
-    background: #ffffff;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-    transition: 0.2s ease;
-}
-
-#churchSearch:focus {
-    outline: none;
-    border-color: var(--accent-dark);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.10);
-}
-
-/* Search wrapper */
+/* SEARCH – wrapper centrat */
 .arad-search-wrapper {
     max-width: 480px;
-    margin: 0 auto 28px;
+    margin: 16px auto 28px;
     position: relative;
 }
 
-/* Input */
+/* Input – UN SINGUR #churchSearch, fără font-size: 1px :) */
 #churchSearch {
     width: 100%;
     padding: 12px 16px;
-    font-size: 1px;
+    font-size: 16px;               /* + fix iOS zoom */
     border-radius: 14px;
     border: 1px solid #d1d5db;
+    background: #ffffff;
     box-shadow: 0 4px 14px rgba(0,0,0,0.06);
     transition: 0.2s ease;
-    background: #ffffff;
+    -webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
 }
 
 #churchSearch:focus {
@@ -1852,6 +1843,7 @@ mark {
     padding: 0 2px;
     border-radius: 2px;
 }
+
 /* Forțează logo-ul să arate la fel ca pe celelalte pagini */
 .header .logo-area a {
     display: flex;
@@ -1868,12 +1860,6 @@ mark {
 .header .logo-area .site-title h1,
 .header .logo-area .site-title span {
     text-decoration: none;
-}
-/* --- Fix iOS auto-zoom on search bar --- */
-#churchSearch {
-    font-size: 16px !important;      /* Previene zoom-ul pe iPhone */
-    -webkit-text-size-adjust: 100%;
-    touch-action: manipulation;
 }
 
 /* =========================================================
@@ -2502,4 +2488,14 @@ mark {
     opacity: 1;
     transform: translateY(0);
 }
+/* ===== OVERRIDE DISTANȚĂ TITLU ARAD vs. MENIU ===== */
 
+/* Trage titlul + subtitlul mai sus */
+.arad-header {
+    margin-top: -46px !important;   /* încearcă -24, apoi ajustezi la -16 / -32 etc. */
+}
+
+/* Elimină orice padding suplimentar pe secțiune */
+.arad-wrapper {
+    padding-top: 0 !important;
+}
