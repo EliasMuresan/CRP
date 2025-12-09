@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <title>Wiki Comunitatea Regională Penticostală Arad</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="pgpr1.css" />
+
+    <!-- Stiluri specifice paginii Wiki (fără .wiki-block, care e în pgpr1.css) -->
+    <style>
+        .wiki-hero {
+            padding-top: 96px;
+            padding-bottom: 32px;
+            background: var(--bg-page);
+        }
+
+        .wiki-hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .wiki-hero-kicker {
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .wiki-hero-inner h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(32px, 4vw, 42px);
+            margin-bottom: 12px;
+        }
+
+        .wiki-hero-inner p {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        .wiki-article-band {
+            background: var(--bg-page);
+            padding-bottom: 64px;
+        }
+
+        .wiki-article {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-soft);
+            padding: 32px 32px 40px;
+        }
+
+        .wiki-article h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .wiki-article p {
+            color: #4b5563;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .wiki-article section + section {
+            margin-top: 32px;
+        }
+
+        @media (max-width: 900px) {
+            .wiki-article {
+                padding: 24px 20px 32px;
+            }
+        }
+    </style>
+</head>
+  <body class="page-transition-active">
+
+<!-- ================= HEADER (identic cu index) ================= -->
+<header class="header">
+    <div class="header-container">
+
+        <div class="logo-area">
+            <img src="images/logo1.png" alt="Logo CRP Arad" class="site-logo">
+            <div class="site-title">
+                <h1>Comunitatea Regională</h1>
+                <span>PENTICOSTALĂ ARAD</span>
+            </div>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Deschide meniul">
+            <span></span><span></span>
+        </button>
+
+        <nav class="nav" id="mainNav">
+            <a href="index.html#acasa" class="nav-link">Acasă</a>
+            <a href="index.html#despre" class="nav-link">Despre</a>
+            <a href="index.html#comitet" class="nav-link">Comitet</a>
+            <a href="index.html#judete" class="nav-link">Județe</a>
+            <a href="index.html#evenimente" class="nav-link">Evenimente</a>
+            <a href="index.html#contact" class="nav-link nav-btn">Contact</a>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+
+    <!-- ================= HERO SCURT WIKI ================= -->
+    <section class="wiki-hero">
+        <div class="wiki-hero-inner">
+            <p class="wiki-hero-kicker">WIKICOM</p>
+            <h1>Istoria și identitatea Comunității Regionale Penticostale Arad</h1>
+            <p>
+                O privire amplă asupra începuturilor, dezvoltării și lucrării actuale
+                a comunității, însoțită de imagini de arhivă și repere importante.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================= ARTICOL PRINCIPAL ================= -->
+    <section class="wiki-article-band">
+        <article class="wiki-article">
+
+            <!-- INTRODUCERE -->
+            <section>
+                <h2>Introducere</h2>
+                <p>
+                    Comunitatea Regională Penticostală Arad reunește bisericile penticostale din județele
+                    Arad, Timiș, Hunedoara și Caraș-Severin, oferind un cadru de colaborare, coordonare și
+                    sprijin pentru lucrarea locală. Într-o regiune cunoscută pentru diversitatea culturală
+                    și religioasă, bisericile penticostale au reușit să își păstreze identitatea, să își
+                    dezvolte structurile interne și să contribuie la viața spirituală a generațiilor care
+                    s-au succedat.
+                </p>
+                <p>
+                    În această zonă, în anii dificili ai secolului trecut, credincioșii s-au adunat în
+                    case modeste, în șuri, în poduri sau în spații improvizate, doar pentru a avea un
+                    loc în care să se roage împreună, să cânte și să studieze Scriptura. De multe ori,
+                    aceste întâlniri aveau loc în condiții de persecuție, lipsuri sau opoziție socială,
+                    însă ele au stat la baza formării unor comunități puternice, unite de valori comune.
+                </p>
+                <p>
+                    Istoria comunității este vastă și încă neexplorată în totalitate. Fiecare localitate,
+                    fiecare biserică are propriile ei povești, propriile momente de biruință, provocări și
+                    oameni care au marcat direcția lucrării. Această pagină își propune să devină locul
+                    în care aceste mărturii pot fi adunate, ordonate și păstrate pentru generațiile
+                    viitoare, într-un format accesibil și ușor de parcurs.
+                </p>
+            </section>
+
+            <!-- BLOC 1 – imagine stânga -->
+            <section class="wiki-block">
+                <div class="wiki-image">
+                    <img src="images/placeholder.png" alt="Imagine arhivă - primele adunări">
+                </div>
+
+                <div class="wiki-text">
+                    <h3>1. Primele adunări și pionierii lucrării</h3>
+                    <p>
+                        În primele decenii, lucrarea penticostală s-a răspândit organic, fără o structură
+                        formală. Credincioșii se bazau aproape exclusiv pe legături personale, pe vizitele
+                        misionarilor și pe dorința interioară de a împărtăși Evanghelia. Deși resursele erau
+                        puține, iar presiunile autorităților sau ale societății erau reale, credincioșii au
+                        continuat să se întâlnească, uneori în secret, pentru a-și încuraja unii altora
+                        credința.
+                    </p>
+                    <p>
+                        Există mărturii ale unor familii care găzduiau în casele lor întâlniri cu zeci de
+                        persoane, chiar dacă acest lucru putea atrage consecințe nedorite. Atmosfera era una
+                        caldă, familială, în care fiecare cânta, se ruga sau dădea mărturie despre felul în
+                        care Dumnezeu lucra în viața lui. Pentru mulți, acele adunări de început au
+                        reprezentat punctul de plecare al unei transformări profunde, personale și comunitare.
+                    </p>
+                    <p>
+                        Primii lideri spirituali erau oameni simpli, dar plini de credință și curaj. Ei
+                        parcurgeau distanțe mari, pe jos sau cu bicicleta, pentru a întări credincioșii din
+                        satele apropiate. Mulți dintre acești pionieri nu au lăsat documente scrise, însă
+                        influența lor se regăsește în mărturiile generațiilor următoare și în bisericile
+                        care există astăzi în întreaga regiune.
+                    </p>
+                </div>
+            </section>
+
+            <!-- BLOC 2 – imagine dreapta -->
+            <section class="wiki-block reverse">
+                <div class="wiki-image">
+                    <img src="images/placeholder.png" alt="Imagine arhivă - structură regională">
+                </div>
+
+                <div class="wiki-text">
+                    <h3>2. Formarea structurii regionale</h3>
+                    <p>
+                        Odată cu dezvoltarea lucrării, a devenit evidentă nevoia unei coordonări unitare.
+                        Bisericile erau deja numeroase, răspândite în patru județe, iar întâlnirile
+                        pastorilor se desfășurau neoficial, după posibilități. Apariția Comunității
+                        Regionale a reprezentat un pas crucial, oferind un cadru administrativ clar,
+                        o voce comună și o platformă în care lucrătorii să poată colabora eficient.
+                    </p>
+                    <p>
+                        În timp, au fost stabilite întâlniri regulate ale pastorilor, s-au creat
+                        departamente specializate (misiune, copii, tineret, familii, educație teologică)
+                        și s-au implementat proiecte comune între biserici. Unitatea nu s-a construit peste
+                        noapte; a fost rezultatul unei convingeri împărtășite că lucrarea fiecărei biserici
+                        poate fi potențată atunci când există un cadru de sprijin și colaborare.
+                    </p>
+                    <p>
+                        Formarea structurii regionale nu a însemnat pierderea identității fiecărei biserici
+                        locale. Dimpotrivă, acest cadru a încurajat diversitatea, a încurajat creativitatea
+                        și a oferit oportunitatea ca fiecare comunitate să aducă o contribuție unică la
+                        viața întregii regiuni.
+                    </p>
+                </div>
+            </section>
+
+            <!-- BLOC 3 – imagine stânga -->
+            <section class="wiki-block">
+                <div class="wiki-image">
+                    <img src="images/placeholder.png" alt="Imagine arhivă - conferințe și tineret">
+                </div>
+
+                <div class="wiki-text">
+                    <h3>3. Conferințe, misiune și lucrarea tineretului</h3>
+                    <p>
+                        De-a lungul anilor, conferințele regionale au fost momente de referință.
+                        Pastorii, liderii și credincioșii se adunau în număr mare pentru a învăța,
+                        pentru a se ruga împreună și pentru a primi direcție pentru următoarea
+                        etapă a lucrării. Unele conferințe au fost organizate în contexte dificile,
+                        dar atmosfera de unitate și entuziasm a oferit mereu o motivație puternică
+                        celor prezenți.
+                    </p>
+                    <p>
+                        Lucrarea cu tinerii a fost una dintre cele mai dinamice componente ale
+                        comunității. Întâlnirile municipale, taberele și proiectele de misiune au
+                        contribuit la formarea spirituală a mii de tineri. Mulți dintre ei au devenit
+                        ulterior lideri, pastori sau oameni implicați activ în bisericile locale,
+                        ducând mai departe viziunea primită.
+                    </p>
+                    <p>
+                        Proiectele sociale – vizite la bătrâni, colecte pentru familii nevoiașe,
+                        sprijin pentru comunitățile afectate de calamități – au reprezentat un alt
+                        pilon al lucrării regionale. Aceste inițiative au demonstrat că Evanghelia are
+                        impact atât asupra sufletului, cât și asupra nevoilor cotidiene ale oamenilor.
+                    </p>
+                </div>
+            </section>
+
+            <!-- BLOC 4 – imagine dreapta -->
+            <section class="wiki-block reverse">
+                <div class="wiki-image">
+                    <img src="images/placeholder.png" alt="Imagine arhivă - documente și mărturii">
+                </div>
+
+                <div class="wiki-text">
+                    <h3>4. Documente, arhive și mărturii scrise</h3>
+                    <p>
+                        Comunitatea Regională a acumulat în timp o serie de documente valoroase:
+                        rapoarte anuale, hotărâri ale comitetului, corespondență oficială, programe
+                        de conferințe, buletine și materiale de arhivă. Multe dintre ele au fost
+                        păstrate în format fizic, în depozite sau arhive locale, fiind acum în
+                        proces de digitalizare.
+                    </p>
+                    <p>
+                        Importanța acestor documente este enormă. Ele oferă o perspectivă clară
+                        asupra modului în care lucrarea s-a dezvoltat, asupra provocărilor
+                        întâmpinate și asupra felului în care Dumnezeu a deschis uși într-un mod
+                        miraculos în momente cheie. Digitalizarea și centralizarea lor pe această
+                        platformă poate deveni un proiect major pentru generațiile următoare.
+                    </p>
+                    <p>
+                        În viitor, această pagină ar putea deveni un adevărat „muzeu virtual”, în care
+                        fiecare biserică din regiune să își poată încărca propriile documente istorice,
+                        fotografii și mărturii pentru a contribui la memoria colectivă a comunității.
+                    </p>
+                </div>
+            </section>
+
+            <!-- ÎNCHEIERE -->
+            <section>
+                <h2>Privind înainte</h2>
+                <p>
+                    Privind înainte, Comunitatea Regională Penticostală Arad are oportunitatea de a
+                    continua lucrarea începută cu multe decenii în urmă – lucrarea credincioșilor
+                    simpli, dar plini de pasiune pentru Dumnezeu. Prezentul este rezultatul
+                    credincioșiei lor, iar viitorul va depinde de modul în care generațiile actuale
+                    vor continua să investească în slujire, unitate și misiune.
+                </p>
+                <p>
+                    Această pagină este doar începutul unei platforme care poate crește considerabil
+                    în timp. Cu implicarea bisericilor, cu resurse istorice autentice și cu dorința
+                    de a păstra memoria lucrării lui Dumnezeu în această regiune, WikiCom poate deveni
+                    o arhivă remarcabilă pentru întreaga comunitate penticostală și o resursă de
+                    inspirație pentru cei care vor veni după noi.
+                </p>
+            </section>
+
+        </article>
+    </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-inner">
+        &copy; <span id="yearSpan"></span> Comunitatea Regională Penticostală Arad. Toate drepturile rezervate.
+    </div>
+</footer>
+
+<!-- JS site – pentru meniu mobil, animații etc. -->
+<script src="pgpr1.js"></script>
+</body>
+</html>

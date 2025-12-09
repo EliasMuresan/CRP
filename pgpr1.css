@@ -1508,6 +1508,53 @@ body.no-scroll {
     }
 }
 
+/* ========= Buton "codiță" Despre noi ========= */
+
+.about-card {
+    position: relative;
+    padding-bottom: 70px;  /* creează loc sub card pentru buton */
+    overflow: visible !important;
+} /* <- LIPSEA acolada asta !!! */
+
+/* Wrapperul butonului care iese sub card */
+.about-tail-wrap {
+    position: absolute;
+    left: 50%;
+    bottom: -35px;    /* îl scoate vizibil sub card */
+    transform: translateX(-50%);
+    z-index: 20;
+}
+
+/* Butonul propriu-zis */
+.about-tail-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 26px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 14px 30px rgba(15,23,42,0.20);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+    white-space: nowrap;
+}
+
+/* Hover efect */
+.about-tail-btn:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 38px rgba(15,23,42,0.26);
+}
+
+/* Click efect */
+.about-tail-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 10px 20px rgba(15,23,42,0.18);
+}
+
 @media (max-width: 900px) {
     .team-main-grid {
         gap: 32px;
@@ -2507,4 +2554,302 @@ mark {
 /* Elimină orice padding suplimentar pe secțiune */
 .arad-wrapper {
     padding-top: 0 !important;
+}
+
+/* =========================================================
+   WIKICOM – Blocuri cu text și imagini pătrate stânga/dreapta
+   ========================================================= */
+
+.wiki-block {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-top: 40px;
+}
+
+.wiki-block.reverse {
+    flex-direction: row-reverse;
+}
+
+/* imagine pătrată */
+.wiki-image {
+    width: 260px;
+    height: 260px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--bg-muted);
+    box-shadow: var(--shadow-soft);
+    flex-shrink: 0;
+}
+
+.wiki-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wiki-text {
+    flex: 1;
+}
+
+.wiki-text h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.wiki-text p {
+    color: #4b5563;
+    line-height: 1.75;
+}
+
+/* =======================
+   RESPONSIVE – pentru telefon
+   ======================= */
+@media (max-width: 900px) {
+    .wiki-block,
+    .wiki-block.reverse {
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .wiki-image {
+        width: 210px;
+        height: 210px;
+        margin: 0 auto;
+    }
+
+    .wiki-text {
+        text-align: left;
+    }
+}
+/* =========================================================
+   COMPACTARE SECȚIUNI & LAYOUT MAI PLIN
+   (POȚI APLICA PE INDEX ȘI PE ALTE PAGINI)
+   ========================================================= */
+
+/* Secțiuni mai „strânse” ca spațiu vertical */
+.compact-section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+
+.compact-section .section-title {
+    margin-bottom: 10px;
+}
+
+.compact-section .section-subtitle {
+    margin-bottom: 16px;
+}
+
+/* Dacă vrei linii discrete între secțiunile de pe home */
+.home-section + .home-section {
+    border-top: 1px solid rgba(148, 163, 184, 0.25);
+    padding-top: 28px;
+}
+
+/* Layout 2 coloane – ideal pentru „Despre noi” */
+.split-2 {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 32px;
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .split-2 {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Bandă cu statistici / info mică sub text */
+.info-strip {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+}
+
+.info-pill {
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    line-height: 1.3;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(148, 163, 184, 0.55);
+    backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-pill span.label {
+    font-weight: 600;
+}
+
+.info-pill span.value {
+    opacity: 0.85;
+}
+
+/* Carduri mici pentru „Ce găsești pe site” */
+.mini-cards-grid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.mini-card {
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    font-size: 14px;
+}
+
+.mini-card strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+/* Ușor mai mic spațiul dintre secțiuni mari generice (fallback) */
+section {
+    scroll-margin-top: 80px; /* să se potrivească cu header-ul când dai scroll la ancore */
+}
+/* Centrează DOAR titlul și paragraful de intro, direct în secțiune */
+.contact-header-centered > h2,
+.contact-header-centered > p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+}
+/* Spațiu mare sus și jos pentru secțiunea de contact */
+.contact-header-centered {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/* Pe mobil reducem puțin ca să nu fie exagerat */
+@media (max-width: 768px) {
+    .contact-header-centered {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+}
+/* Detalii contact în cardul din stânga */
+.contact-details {
+    margin: 24px 0 12px;
+    text-align: left;               /* scoatem centratul */
+}
+
+.contact-details ul {
+    list-style: disc;               /* bullet points clasice */
+    padding-left: 1.5rem;           /* spațiu pentru bullets */
+    margin: 0;
+}
+
+.contact-details li {
+    margin-bottom: 6px;
+    line-height: 1.5;
+}
+
+.contact-details strong {
+    margin-right: 6px;
+}
+
+/* Textul mic de sub listă */
+.contact-note {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: left;
+}
+.contact-card {
+    text-align: left;
+}
+/* Eliminăm complet galbenul/cremul din cardurile de contact */
+.contact-card,
+.contact-left,
+.contact-right,
+.contact-form-wrapper {
+    background: #ffffff !important;          /* alb curat */
+    border-radius: 24px;                     /* colțuri frumoase */
+    border: 1px solid rgba(0, 0, 0, 0.05);   /* un contur foarte subtil */
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08); /* umbră elegantă */
+}
+
+/* Dacă există gradient setat în versiunea mobilă sau în alt media query, îl blocăm */
+@media (max-width: 768px) {
+    .contact-card,
+    .contact-left,
+    .contact-right,
+    .contact-form-wrapper {
+        background: #ffffff !important;
+    }
+}
+/* =========================================
+   OVERRIDE CONTACT – fără galben, doar alb
+   ========================================= */
+
+/* Card mare contact (stânga + dreapta) */
+.contact-shell {
+    background: #ffffff !important;     /* scoatem radial-gradient-ul crem */
+    border-radius: 28px;
+    box-shadow: 0 22px 60px rgba(15,23,42,0.10);
+    border: 1px solid rgba(226,232,240,0.9);
+}
+
+/* Badge-ul "Biroul comunității regionale" – din crem în alb-gri */
+.contact-pill {
+    background: #f9fafb !important;     /* gri foarte deschis */
+    color: var(--accent-dark);
+    border: 1px solid rgba(226,232,240,0.9);
+}
+
+/* Formularul din dreapta – fundal alb simplu */
+.contact-form {
+    background: #ffffff !important;     /* scoatem gradientul crem */
+    border-radius: 22px;
+    padding: 22px 22px 24px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(226,232,240,0.9);
+}
+/* Tot textul din cardul de contact să fie la stânga */
+.contact-shell p {
+    text-align: left;
+}
+/* =========================================
+   Contact – buton mai mare și centrat
+   ========================================= */
+
+.contact-form button,
+.contact-form input[type="submit"] {
+    display: block;
+    margin: 60px auto 0;     /* COBORĂM butonul */
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid rgba(15, 23, 42, 0.10);
+    box-shadow: 0 12px 28px rgba(15,23,42,0.18);
+    cursor: pointer;
+    transition: 0.18s ease;
+}
+
+.contact-form button:hover,
+.contact-form input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 34px rgba(15,23,42,0.22);
+    background: #f9fafb;
+}
+
+.contact-form button:active,
+.contact-form input[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: 0 10px 20px rgba(15,23,42,0.15);
 }

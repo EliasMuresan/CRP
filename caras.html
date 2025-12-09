@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <title>Biserici penticostale din județul Caraș-Severin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS principal site -->
+    <link rel="stylesheet" href="pgpr1.css" />
+
+    <!-- CSS specific paginii Hunedoara (identic cu Arad, doar numele paginii diferă) -->
+    <style>
+        main {
+            padding-top: 90px;
+        }
+        .arad-wrapper {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 24px 16px 80px;
+        }
+        .arad-header {
+            margin-bottom: 24px;
+        }
+        .arad-header h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(28px, 3vw, 34px);
+            margin-bottom: 6px;
+        }
+        .arad-header p {
+            color: var(--text-muted);
+        }
+        .churches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+        .church-card {
+            background: var(--bg-light);
+            border-radius: var(--radius-lg, 18px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+            padding: 16px 14px;
+            font-size: 14px;
+        }
+        .church-card h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .church-card p {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        .church-card p strong {
+            font-weight: 600;
+        }
+        .church-card a {
+            color: var(--accent-dark);
+            text-decoration: none;
+        }
+        .church-card a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 640px) {
+            .church-card {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body class="page-transition-active">
+
+<header class="header">
+    <div class="header-container">
+
+        <div class="logo-area">
+            <a href="index.html#acasa" class="logo-link">
+                <img src="images/logo1.png" class="site-logo" alt="CRP Arad">
+                <div class="site-title">
+                    <h1>Comunitatea Regională</h1>
+                    <span>PENTICOSTALĂ ARAD</span>
+                </div>
+            </a>
+        </div>
+
+        <nav id="mainNav" class="nav">
+            <a href="index.html#acasa" class="nav-link">Acasă</a>
+            <a href="index.html#despre" class="nav-link">Despre</a>
+            <a href="index.html#conducere" class="nav-link">Conducere</a>
+            <a href="index.html#judete" class="nav-link">Județe</a>
+            <a href="index.html#contact" class="nav-link nav-btn">Contact</a>
+        </nav>
+
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</header>
+
+<main>
+    <section class="arad-wrapper"
+         style="padding-top:4px; margin-top:-14px;">
+        <header class="arad-header">
+            <h2>Bisericile penticostale din județul Caraș-Severin</h2>
+            <p>Lista completă a bisericilor și punctelor de lucru raportate în județul Caraș-Severin.</p>
+        </header>
+
+        <div class="arad-search-wrapper">
+            <input id="churchSearch" type="text"
+                   placeholder="Caută: nume, localitate, pastor..." autocomplete="off" />
+            <div id="searchSuggestions" class="search-suggestions"></div>
+            <div id="searchResultsCount" class="search-results-count"></div>
+            <div id="didYouMean" class="search-didyoumean"></div>
+        </div>
+
+        <div class="churches-grid">
+       <!-- MUNICIPIU REȘIȚA -->
+
+<article class="church-card">
+  <h3>1. Biserica Penticostală Cezareea</h3>
+  <p>Locație: Reșița, str. Castanilor, nr. 119, jud. Caraș-Severin</p>
+  <p>Pastor: Ciochină Florin</p>
+  <p>Site biserica: www.cezareea.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>2. Biserica Penticostală Izvorul Vieții</h3>
+  <p>Locație: Reșița, str. Făgărașului nr. 13, jud. Caraș-Severin, cod 320162</p>
+  <p>Pastori: Bârsan Ciprian; Ungureanu Mihai</p>
+  <p>Site biserica: www.izvorulvietii.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>3. Biserica Penticostală Muntele Moria</h3>
+  <p>Locație: Reșița, str. Mociur, nr. 18, jud. Caraș-Severin, cod 320062</p>
+  <p>Pastori: Bârsan Ciprian; Ungureanu Mihai</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>4. Biserica Penticostală Filadelfia Reșița</h3>
+  <p>Locație: Reșița, str. G. Coșbuc, nr. 33, jud. Caraș-Severin, cod 320076</p>
+  <p>Pastori: Bârsan Ciprian; Ungureanu Mihai</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>5. Biserica Penticostală Betel Reșița</h3>
+  <p>Locație: Reșița, str. Primăverii, nr. 35, jud. Caraș-Severin, cod 320012</p>
+  <p>Pastori: Bârsan Ciprian; Ungureanu Mihai</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>6. Biserica Penticostală Emanuel Reșița</h3>
+  <p>Locație: Reșița, str. Aleea Gugu, FN, jud. Caraș-Severin, cod 320228</p>
+  <p>Pastor: Todor David Tile</p>
+  <p>Site biserica: –</p>
+</article>
+
+<!-- RESTUL LOCALITĂȚILOR (SATE / ORAȘE) -->
+
+<article class="church-card">
+  <h3>7. Biserica Penticostală Betania</h3>
+  <p>Locație: Valeadeni, nr. 107, jud. Caraș-Severin, cod 327047</p>
+  <p>Pastor: Izvernar Samuel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>8. Biserica Penticostală Gherteniș</h3>
+  <p>Locație: Gherteniș, nr. 348, jud. Caraș-Severin, cod 327032</p>
+  <p>Pastor: Hirție Dan</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>9. Biserica Penticostală Emanuel</h3>
+  <p>Locație: Secu, nr. 122, jud. Caraș-Severin, cod 320005</p>
+  <p>Pastor: Hirție Dan</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>10. Biserica Penticostală Eben Ezer</h3>
+  <p>Locație: Bocșa Montană, str. Mihail Gaspar, nr. 37, jud. Caraș-Severin, cod 325300</p>
+  <p>Pastor: Merticariu Gheorghe</p>
+  <p>Site biserica: www.ebenezerbocsa.ro</p>
+</article>
+
+<article class="church-card">
+  <h3>11. Biserica Penticostală Betania</h3>
+  <p>Locație: Biniș, nr. 91, jud. Caraș-Severin, cod 327176</p>
+  <p>Pastor: Merticariu Gheorghe</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>12. Biserica Penticostală Filadelfia</h3>
+  <p>Locație: Dognecea, nr. 264, jud. Caraș-Severin, cod 327180</p>
+  <p>Pastor: Merticariu Gheorghe</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>13. Biserica Penticostală Maranata</h3>
+  <p>Locație: Ticvaniu Mare, nr. 370, jud. Caraș-Severin, cod 327395</p>
+  <p>Pastor: Merticariu Gheorghe</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>14. Biserica Penticostală Betel</h3>
+  <p>Locație: Goruia, nr. 253/A, jud. Caraș-Severin, cod 327225</p>
+  <p>Pastor: Merticariu Gheorghe</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>15. Biserica Penticostală Betania</h3>
+  <p>Locație: Comorâște, nr. 74, jud. Caraș-Severin, cod 327212</p>
+  <p>Pastor: Merticariu Gheorghe</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>16. Biserica Penticostală Muntele Sionului</h3>
+  <p>Locație: Valea Mare, nr. 12, jud. Caraș-Severin, cod 327206</p>
+  <p>Pastor: Merticariu Gheorghe</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>17. Biserica Penticostală Apa Vieții</h3>
+  <p>Locație: Moldova Nouă, str. Șoseaua Dunării, nr. 18/A, jud. Caraș-Severin, cod 325500</p>
+  <p>Pastor: Trișcă Vasile</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>18. Biserica Penticostală Smirna</h3>
+  <p>Locație: Zlatița, nr. 265, jud. Caraș-Severin, cod 327445</p>
+  <p>Pastor: Trișcă Vasile</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>19. Biserica Penticostală Maranata</h3>
+  <p>Locație: Liubcova, nr. 259, jud. Caraș-Severin, cod 327029</p>
+  <p>Pastor: Trișcă Vasile</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>20. Biserica Penticostală Golgota</h3>
+  <p>Locație: Naidăș, nr. 692, jud. Caraș-Severin, cod 327280</p>
+  <p>Pastor: Trișcă Vasile</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>21. Biserica Penticostală Betesda</h3>
+  <p>Locație: Bocșa Română, str. Liliacului, nr. 5, jud. Caraș-Severin, cod 325300</p>
+  <p>Pastor: Mariș Ioan</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>22. Biserica Penticostală Ocna de Fier</h3>
+  <p>Locație: Ocna de Fier, nr. 8, jud. Caraș-Severin, cod 327290</p>
+  <p>Pastor: Mariș Ioan</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>23. Biserica Penticostală Ocna de Fier</h3>
+  <p>Locație: Ocna de Fier, nr. 8, jud. Caraș-Severin, cod 327290</p>
+  <p>Pastor: Mariș Ioan</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>24. Biserica Penticostală Doclin</h3>
+  <p>Locație: Doclin, nr. 131, jud. Caraș-Severin, cod 327175</p>
+  <p>Pastor: Mariș Ioan</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>25. Biserica Penticostală Ramna</h3>
+  <p>Locație: Ramna, nr. 142, jud. Caraș-Severin, cod 327310</p>
+  <p>Pastor: Moșuleț Maricel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>26. Biserica Penticostală Măureni</h3>
+  <p>Locație: Măureni, str. Augustin Pacha, nr. 2, jud. Caraș-Severin, cod 327265</p>
+  <p>Pastor: Deiacomu Gheorghe</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>27. Biserica Penticostală Șoșdea</h3>
+  <p>Locație: Șoșdea, nr. 59, jud. Caraș-Severin, cod 327266</p>
+  <p>Pastor: Ungureanu Mihai</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>28. Biserica Penticostală Maranata</h3>
+  <p>Locație: Oravița, str. Spitalului, nr. 37, jud. Caraș-Severin, cod 325600</p>
+  <p>Pastor: Moșuleț Maricel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>29. Biserica Penticostală Târnova</h3>
+  <p>Locație: Târnova, nr. 354, jud. Caraș-Severin, cod 327385</p>
+  <p>Pastor: Deiacomu Gheorghe</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>30. Biserica Penticostală Filadelfia</h3>
+  <p>Locație: Bocșa Măgura, str. Viitorului, nr. 6, jud. Caraș-Severin, cod 325300</p>
+  <p>Pastor: Prezbiter Dragomir Vasile</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>31. Biserica Penticostală Berzovia</h3>
+  <p>Locație: Berzovia, nr. 323, jud. Caraș-Severin, cod 327030</p>
+  <p>Pastor: Deiacomu Gheorghe</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>32. Biserica Penticostală Betel</h3>
+  <p>Locație: Forotic, nr. 249/A, jud. Caraș-Severin, cod 327210</p>
+  <p>Pastor: Moșuleț Maricel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>33. Biserica Penticostală Anina</h3>
+  <p>Locație: Anina, str. Uzinei, nr. 4/B, jud. Caraș-Severin, cod 325100</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>34. Biserica Penticostală Eftimie Murgu</h3>
+  <p>Locație: Eftimie Murgu, nr. 195, jud. Caraș-Severin, cod 327190</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>35. Biserica Penticostală Anina</h3>
+  <p>Locație: Anina, str. Victoriei, nr. 29, jud. Caraș-Severin, cod 325100</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>36. Biserica Penticostală Anina</h3>
+  <p>Locație: Anina, str. Uzinei, nr. 4/B, jud. Caraș-Severin, cod 325100</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>37. Biserica Penticostală Anina</h3>
+  <p>Locație: Anina, str. Victoriei, nr. 29, jud. Caraș-Severin, cod 325100</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>38. Biserica Penticostală Muntele Sionului</h3>
+  <p>Locație: Anina, str. Brădet, nr. 4, jud. Caraș-Severin, cod 325100</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>39. Biserica Penticostală Betel</h3>
+  <p>Locație: Bozovici, str. Gh. Doja, nr. 756/A, jud. Caraș-Severin, cod 327040</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>40. Biserica Penticostală Ciclova Română</h3>
+  <p>Locație: Ciclova Română, nr. 621, jud. Caraș-Severin, cod 327075</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>41. Biserica Penticostală Betel</h3>
+  <p>Locație: Oravița, str. Eftimie Murgu, nr. 33/A, jud. Caraș-Severin, cod 325600</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>42. Biserica Penticostală Betel</h3>
+  <p>Locație: Răcășdia, nr. 170/A, jud. Caraș-Severin, cod 327315</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>43. Biserica Penticostală Muntele Sionului</h3>
+  <p>Locație: Milcoveni, nr. 190, jud. Caraș-Severin, cod 327022</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>44. Biserica Penticostală Siloam</h3>
+  <p>Locație: Bogodinț, nr. 135, jud. Caraș-Severin, cod 327331</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>45. Biserica Penticostală Smirna</h3>
+  <p>Locație: Mercina, nr. 24, jud. Caraș-Severin, cod 327421</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>46. Biserica Penticostală Sion</h3>
+  <p>Locație: Nicolinț, nr. 185, jud. Caraș-Severin, cod 327082</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>47. Biserica Penticostală Betania</h3>
+  <p>Locație: Zlatița, nr. 30, jud. Caraș-Severin, cod 327445</p>
+  <p>Pastor: Secoșan Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>48. Biserica Penticostală Menorah</h3>
+  <p>Locație: Caransebeș, str. Romanilor, nr. 78–80, jud. Caraș-Severin, cod 325400</p>
+  <p>Pastor: Coroban Ioan Titus</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>49. Biserica Penticostală Cetățuie</h3>
+  <p>Locație: Slatina Timiș, nr. 430, jud. Caraș-Severin, cod 327360</p>
+  <p>Pastori: Coroban Ioan Titus; Jura Ionel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>50. Biserica Penticostală Filadelfia</h3>
+  <p>Locație: Caransebeș, str. S. Bărnuțiu, nr. 43, jud. Caraș-Severin, cod 325400</p>
+  <p>Pastori: Coroban Ioan Titus; Jura Ionel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>51. Biserica Penticostală Nădejdea</h3>
+  <p>Locație: Păltiniș, nr. 87, jud. Caraș-Severin, cod 327295</p>
+  <p>Pastori: Coroban Ioan Titus; Jura Ionel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>52. Biserica Penticostală Harul Domnului</h3>
+  <p>Locație: Iaz, nr. 130, jud. Caraș-Severin, cod 327287</p>
+  <p>Pastori: Coroban Ioan Titus; Jura Ionel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>53. Biserica Penticostală Zăvoi</h3>
+  <p>Locație: Zăvoi, nr. 130, jud. Caraș-Severin, cod 327435</p>
+  <p>Pastor: Coroban Ioan Titus</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>54. Biserica Penticostală Emanuel</h3>
+  <p>Locație: Iaz, nr. 190/B, jud. Caraș-Severin, cod 327287</p>
+  <p>Pastor: Petrovici Partenie Petrișor</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>55. Biserica Penticostală Muntele Sionului</h3>
+  <p>Locație: Obreja, nr. 138, jud. Caraș-Severin, cod 327285</p>
+  <p>Pastor: Petrovici Partenie Petrișor</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>56. Biserica Penticostală Maranata</h3>
+  <p>Locație: Var, nr. 83, jud. Caraș-Severin, cod 327288</p>
+  <p>Pastor: Petrovici Partenie Petrișor</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>57. Biserica Penticostală Betel</h3>
+  <p>Locație: Glimboca, nr. 276, jud. Caraș-Severin, cod 327220</p>
+  <p>Pastor: Petrovici Partenie Petrișor</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>58. Biserica Penticostală Delinești</h3>
+  <p>Locație: Delinești, nr. 164, jud. Caraș-Severin, cod 327297</p>
+  <p>Pastor: Prezbiter Livanu Lungu Eusebiu</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>59. Biserica Penticostală Betania</h3>
+  <p>Locație: Prisián, nr. 99, jud. Caraș-Severin, cod 327058</p>
+  <p>Pastor: Prezbiter Tiuc Mihai</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>60. Biserica Penticostală Cornuțel</h3>
+  <p>Locație: Cornuțel, nr. 283, jud. Caraș-Severin, cod 327296</p>
+  <p>Pastor: Prezbiter Tiuc Mihai</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>61. Biserica Penticostală Harul</h3>
+  <p>Locație: Sacu, str. Gării, nr. 11, jud. Caraș-Severin, cod 327224</p>
+  <p>Pastor: Ularu Lucian</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>62. Biserica Penticostală Zăgujeni</h3>
+  <p>Locație: Zăgujeni, nr. 187/A, jud. Caraș-Severin, cod 327097</p>
+  <p>Pastor: Ularu Lucian</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>63. Biserica Penticostală Tabor</h3>
+  <p>Locație: Copăcele, nr. 99, jud. Caraș-Severin, cod 327100</p>
+  <p>Pastor: Ularu Lucian</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>64. Biserica Penticostală Jupa</h3>
+  <p>Locație: Jupa, str. Prof. Constantin Daicoviciu, nr. 31/A, jud. Caraș-Severin, cod 325401</p>
+  <p>Pastor: Ularu Lucian</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>65. Biserica Penticostală Tincova</h3>
+  <p>Locație: Tincova, nr. 223/A, jud. Caraș-Severin, cod 327327</p>
+  <p>Pastor: Coroban Ioan Titus</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>66. Biserica Penticostală Maranata</h3>
+  <p>Locație: Tincova, nr. 159, jud. Caraș-Severin, cod 327327</p>
+  <p>Pastor: Ularu Lucian</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>67. Biserica Penticostală Emanuel</h3>
+  <p>Locație: Băile Herculane, str. Pecinișca, nr. 149, jud. Caraș-Severin, cod 325200</p>
+  <p>Pastor: Lazăr Viorel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>68. Biserica Penticostală Betania</h3>
+  <p>Locație: Topleț, nr. 327, jud. Caraș-Severin, cod 327400</p>
+  <p>Pastor: Lazăr Viorel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>69. Biserica Penticostală Betesda</h3>
+  <p>Locație: Mehadica, nr. 220, jud. Caraș-Severin, cod 327275</p>
+  <p>Pastor: Lazăr Viorel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>70. Biserica Penticostală Zervești</h3>
+  <p>Locație: Zervești, nr. 119, jud. Caraș-Severin, cod 327409</p>
+  <p>Pastori: Bogdan Alexandru; Berneanțu Ion</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>71. Biserica Penticostală Betel</h3>
+  <p>Locație: Turnu Ruieni, nr. 139, jud. Caraș-Severin, cod 327405</p>
+  <p>Pastori: Bogdan Alexandru; Berneanțu Ion</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>72. Biserica Penticostală Filadelfia</h3>
+  <p>Locație: Borlova, nr. 360, jud. Caraș-Severin, cod 327406</p>
+  <p>Pastori: Bogdan Alexandru; Berneanțu Ion</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>73. Biserica Penticostală Betesda</h3>
+  <p>Locație: Vărciorova, nr. 101, jud. Caraș-Severin, cod 327036</p>
+  <p>Pastori: Bogdan Alexandru; Berneanțu Ion</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>74. Biserica Penticostală Betel</h3>
+  <p>Locație: Borlova, nr. 332, jud. Caraș-Severin, cod 327406</p>
+  <p>Pastori: Bogdan Alexandru; Berneanțu Ion</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>75. Biserica Penticostală Betel</h3>
+  <p>Locație: Dalci, nr. 67, jud. Caraș-Severin, cod 327408</p>
+  <p>Pastori: Bogdan Alexandru; Berneanțu Ion</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>76. Biserica Penticostală Mal</h3>
+  <p>Locație: Mal, nr. 102, jud. Caraș-Severin, cod 325702</p>
+  <p>Pastor: Prezbiter cu atribuții pastorale Roi Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>77. Biserica Penticostală Măru</h3>
+  <p>Locație: Măru, nr. 242, jud. Caraș-Severin, cod 327438</p>
+  <p>Pastor: Prezbiter cu atribuții pastorale Roi Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>78. Biserica Penticostală Băuțar</h3>
+  <p>Locație: Băuțar, str. Frasina, nr. 461, jud. Caraș-Severin, cod 327015</p>
+  <p>Pastor: Prezbiter cu atribuții pastorale Roi Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>79. Biserica Penticostală Măgura</h3>
+  <p>Locație: Măgura, nr. 72, jud. Caraș-Severin, cod 327437</p>
+  <p>Pastor: Prezbiter cu atribuții pastorale Roi Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>80. Biserica Penticostală Valea Bistrei</h3>
+  <p>Locație: Valea Bistrei, nr. 107, jud. Caraș-Severin, cod 327441</p>
+  <p>Pastor: Prezbiter cu atribuții pastorale Roi Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>81. Biserica Penticostală Bucova</h3>
+  <p>Locație: Bucova, nr. 156/A, jud. Caraș-Severin, cod 327016</p>
+  <p>Pastor: Prezbiter cu atribuții pastorale Roi Daniel</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>82. Biserica Penticostală Betel</h3>
+  <p>Locație: Oțelu Roșu, str. Al. Odobescu, nr. 5, jud. Caraș-Severin, cod 325700</p>
+  <p>Pastor: Barbu Petru</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>83. Biserica Penticostală Rusca Montană</h3>
+  <p>Locație: Rusca Montană, nr. 90/A, jud. Caraș-Severin, cod 327320</p>
+  <p>Pastor: Barbu Petru</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>84. Biserica Penticostală Apele Vii</h3>
+  <p>Locație: Marga, nr. 241/A, jud. Caraș-Severin, cod 327260</p>
+  <p>Pastor: Barbu Petru</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>85. Biserica Penticostală Secășeni</h3>
+  <p>Locație: Secășeni, nr. 330, jud. Caraș-Severin, cod 327397</p>
+  <p>Pastori: Bârsan Ciprian; Ungureanu Mihai</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>86. Biserica Penticostală Betesda</h3>
+  <p>Locație: Ciclova Montană, str. Muncii, nr. 9, jud. Caraș-Severin, cod 325604</p>
+  <p>Pastori: Bârsan Ciprian; Ungureanu Mihai</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>87. Biserica Penticostală Soceni</h3>
+  <p>Locație: Soceni, nr. 95, jud. Caraș-Severin, cod 327196</p>
+  <p>Pastori: Bârsan Ciprian; Ungureanu Mihai</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>88. Biserica Penticostală Fizeș</h3>
+  <p>Locație: Fizeș, nr. 311, jud. Caraș-Severin, cod 327031</p>
+  <p>Pastori: Bârsan Ciprian; Ungureanu Mihai</p>
+  <p>Site biserica: –</p>
+</article>
+
+<article class="church-card">
+  <h3>89. Biserica Penticostală Mehadia</h3>
+  <p>Locație: Mehadia, nr. 243, jud. Caraș-Severin</p>
+  <p>Pastor: Coroban Ioan Titus</p>
+  <p>Site biserica: –</p>
+</article>
+
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-inner">
+        <p>&copy; <span id="footer-year"></span> Comunitatea Regională Penticostală Arad</p>
+    </div>
+</footer>
+
+<script src="pgpr1.js" defer></script>
+<script>
+// -----------------------------------------------------------
+// 1. Utilitare: normalizare + fuzzy
+// -----------------------------------------------------------
+function normalize(str) {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+}
+
+function levenshtein(a, b) {
+    a = normalize(a);
+    b = normalize(b);
+
+    const dp = Array.from({ length: a.length + 1 }, () => []);
+    for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+    for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+
+    for (let i = 1; i <= a.length; i++) {
+        for (let j = 1; j <= b.length; j++) {
+            dp[i][j] = Math.min(
+                dp[i - 1][j] + 1,
+                dp[i][j - 1] + 1,
+                dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
+            );
+        }
+    }
+    return dp[a.length][b.length];
+}
+
+// -----------------------------------------------------------
+// 2. Pregătire carduri și index pentru căutare
+// -----------------------------------------------------------
+const cards = [...document.querySelectorAll(".church-card, .biserica-card")];
+
+// salvăm HTML-ul original (fără highlight)
+cards.forEach(card => {
+    card.dataset.originalContent = card.innerHTML;
+});
+
+// index: folosim numele (h3) + textul întreg
+const index = cards.map(card => {
+    const titleEl = card.querySelector("h3");
+    const titleText = titleEl ? titleEl.innerText : "";
+    const fullText = card.innerText;
+
+    return {
+        element: card,
+        title: normalize(titleText),
+        text: normalize(fullText),
+        originalHTML: card.dataset.originalContent,
+        titleDisplay: titleText
+    };
+});
+
+// -----------------------------------------------------------
+// 3. Highlight temporar
+// -----------------------------------------------------------
+function highlightHTML(html, query) {
+    const words = query
+        .split(" ")
+        .map(w => w.trim())
+        .filter(w => w.length > 0);
+
+    if (words.length === 0) return html;
+
+    let result = html;
+    words.forEach(w => {
+        const escaped = w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(${escaped})`, "gi");
+        result = result.replace(regex, "<mark>$1</mark>");
+    });
+
+    return result;
+}
+
+function removeHighlights() {
+    cards.forEach(card => {
+        card.innerHTML = card.dataset.originalContent;
+    });
+}
+
+// -----------------------------------------------------------
+// 4. Elemente UI
+// -----------------------------------------------------------
+const input = document.getElementById("churchSearch");
+const suggestionsBox = document.getElementById("searchSuggestions");
+const resultsCount = document.getElementById("searchResultsCount");
+const didYouMean = document.getElementById("didYouMean");
+const wrapper = document.querySelector(".arad-search-wrapper");
+
+// safety: dacă ceva lipsește, ieșim
+if (input && suggestionsBox && resultsCount && didYouMean) {
+
+    // -------------------------------------------------------
+    // 5. Căutarea principală
+    // -------------------------------------------------------
+    input.addEventListener("input", function () {
+        const rawQuery = this.value;
+        const q = normalize(rawQuery.trim());
+
+        // reset texte auxiliare
+        suggestionsBox.innerHTML = "";
+        resultsCount.innerHTML = "";
+        didYouMean.innerHTML = "";
+
+        // dacă e gol -> reset pagină
+        if (!q) {
+            removeHighlights();
+            cards.forEach(c => {
+                c.style.display = "block";
+            });
+            suggestionsBox.style.display = "none";
+            return;
+        }
+
+        // scoatem highlight vechi
+        removeHighlights();
+
+        const queryWords = q.split(" ").filter(w => w.length > 0);
+
+        const results = index
+            .map(item => {
+                let score = 0;
+
+                queryWords.forEach(word => {
+                    // match puternic în titlu
+                    if (item.title.includes(word)) score += 15;
+
+                    // match în restul textului
+                    if (item.text.includes(word)) score += 5;
+
+                    // fuzzy doar pe titlu (nu pe tot textul)
+                    const dist = levenshtein(item.title, word);
+                    if (dist > 0 && dist <= 2) score += 4;
+                    else if (dist <= 4) score += 2;
+                });
+
+                return { ...item, score };
+            })
+            .filter(r => r.score > 0)
+            .sort((a, b) => b.score - a.score);
+
+        // ascundem toate cardurile
+        cards.forEach(c => (c.style.display = "none"));
+
+        if (results.length === 0) {
+            didYouMean.innerHTML = "Niciun rezultat. Încearcă un alt termen.";
+            suggestionsBox.style.display = "none";
+            return;
+        }
+
+        resultsCount.innerHTML = `Rezultate: ${results.length}`;
+
+        // afișăm doar rezultatele + highlight temporar
+        results.forEach(r => {
+            r.element.style.display = "block";
+            r.element.innerHTML = highlightHTML(r.originalHTML, rawQuery);
+        });
+
+        // sugestii (primele 6 titluri)
+        if (q.length >= 2) {
+            suggestionsBox.innerHTML = results
+                .slice(0, 6)
+                .map(r => `<div class="search-suggestion-item">${r.titleDisplay}</div>`)
+                .join("");
+            suggestionsBox.style.display = "block";
+        } else {
+            suggestionsBox.style.display = "none";
+        }
+    });
+
+    // -------------------------------------------------------
+    // 6. Click pe sugestii
+    // -------------------------------------------------------
+    suggestionsBox.addEventListener("click", function (e) {
+        if (e.target.classList.contains("search-suggestion-item")) {
+            input.value = e.target.innerText;
+            suggestionsBox.style.display = "none";
+            input.dispatchEvent(new Event("input"));
+        }
+    });
+
+    // -------------------------------------------------------
+    // 7. Închidere automată
+    // -------------------------------------------------------
+
+    // ENTER -> păstrăm filtrarea, dar:
+    // - ascundem sugestiile
+    // - scoatem highlight-ul
+    // - scoatem focusul din input
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            suggestionsBox.style.display = "none";
+            removeHighlights();
+            this.blur();
+        }
+    });
+
+    // golire completă input -> resetare
+    input.addEventListener("input", function () {
+        if (!this.value.trim()) {
+            removeHighlights();
+            cards.forEach(c => (c.style.display = "block"));
+            suggestionsBox.style.display = "none";
+            resultsCount.innerHTML = "";
+            didYouMean.innerHTML = "";
+        }
+    });
+
+    // click în afara zonei de căutare
+    document.addEventListener("click", function (e) {
+        if (wrapper && !wrapper.contains(e.target)) {
+            suggestionsBox.style.display = "none";
+            // nu resetăm filtrarea, doar ascundem sugestiile
+        }
+    });
+
+    // mic delay ca să permită click pe sugestie
+    input.addEventListener("blur", function () {
+        setTimeout(() => {
+            suggestionsBox.style.display = "none";
+        }, 150);
+    });
+}
+</script>
+</body>
+</html>

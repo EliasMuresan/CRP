@@ -435,3 +435,6 @@ document.getElementById("churchSearch").addEventListener("input", function () {
         card.style.display = match ? "block" : "none";
     });
 });
+/* aici ai tu codul tău existent în pgpr1.js */
+
+
