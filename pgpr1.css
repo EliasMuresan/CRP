@@ -1875,3 +1875,631 @@ mark {
     -webkit-text-size-adjust: 100%;
     touch-action: manipulation;
 }
+
+/* =========================================================
+   HEADER & NAV PREMIUM
+   ========================================================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.03);
+}
+
+.header-container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+/* Logo + titlu */
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Logo fără decupare, fără fundal alb forțat */
+.site-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 0;       /* NU mai taie poza */
+    box-shadow: none;       /* Fără glow alb în jur */
+    background: none;       /* Sigur fără fundal */
+}
+
+.site-title h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 2px;
+}
+
+.site-title span {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* NAV DESKTOP ------------------------------------------------ */
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px;
+    background: rgba(248, 250, 252, 0.9);
+    border-radius: 999px;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.07);
+}
+
+/* linkuri normale (Acasă, Despre, Conducere, etc.) */
+
+.nav-link {
+    position: relative;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        color 0.18s ease,
+        transform 0.12s ease;
+    z-index: 1;
+}
+
+/* OVAL („cadran”) în spatele textului */
+.nav-link:not(.nav-btn)::before {
+    content: "";
+    position: absolute;
+    inset: -4px -10px; /* puțin mai mare decât textul */
+    border-radius: 999px;
+    background: rgba(200, 169, 107, 0.10);
+    opacity: 0;
+    transform: scale(0.85);
+    transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+    z-index: -1;
+}
+
+/* Linia elegantă sub text */
+.nav-link:not(.nav-btn)::after {
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    height: 2px;
+    width: 0;                           /* pornește invizibil */
+    background: var(--accent);
+    border-radius: 999px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.22s ease;
+}
+
+/* Hover – animăm atât ovalul, cât și bara */
+.nav-link:hover {
+    transform: translateY(-1px);
+}
+
+.nav-link:not(.nav-btn):hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.nav-link:not(.nav-btn):hover::after {
+    width: 28px;                        /* lungimea barei */
+}
+
+/* stare activă – dacă îi pui .is-active în HTML */
+.nav-link.is-active {
+    color: #111827;
+}
+
+.nav-link.is-active::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.nav-link.is-active::after {
+    width: 28px;
+}
+
+/* BUTON Contact ------------------------------------------------ */
+
+/* BUTON Contact — versiune alb premium */
+.nav-btn {
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #0f172a !important;
+    font-weight: 600;
+    border: 1px solid rgba(15, 23, 42, 0.10);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.10);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background 0.18s ease,
+        transform 0.12s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.nav-btn:hover {
+    background: #f3f4f6;
+    border-color: rgba(15, 23, 42, 0.25);
+    transform: translateY(-1px);
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.18);
+}
+
+/* NAV MOBILE ------------------------------------------------- */
+
+.nav-toggle {
+    display: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    border: none;
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.nav-toggle span {
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background: #111827;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        padding-inline: 14px;
+    }
+
+    .nav {
+        position: fixed;
+        top: 72px;
+        left: 16px;
+        right: 16px;
+        padding: 10px 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 22px 45px rgba(15, 23, 42, 0.16);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-6px);
+        transition: opacity 0.18s ease, transform 0.18s ease;
+        display: none; /* ascuns implicit */
+    }
+
+    /* când JS adaugă .nav-open pe body */
+    .nav-open .nav {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .nav-link {
+        width: 100%;
+        padding: 8px 10px;
+        justify-content: flex-start;
+    }
+
+    /* bara și ovalul se aliniază la stânga pe mobil */
+    .nav-link:not(.nav-btn)::before {
+        inset: -2px -6px;
+    }
+
+    .nav-link:not(.nav-btn)::after {
+        left: 16px;
+        transform: none;
+    }
+
+    .nav-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+}
+
+/* ===========================
+   FIX imagine în secțiunea DESPRE NOI
+   Face poza să ocupe complet partea dreaptă
+   =========================== */
+
+.about-card {
+    display: flex;
+    align-items: stretch;     /* important: întinde copilul pe verticală */
+    gap: 40px;
+}
+
+/* Foto container */
+.about-photo {
+    flex: 1;
+    height: 100%;
+    min-height: 340px;        /* îl poți crește dacă vrei o poză mai înaltă */
+    border-radius: 24px;
+    overflow: hidden;         /* elimină complet marginile albe */
+}
+
+/* Foto în sine */
+.about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* întinde imaginea pe TOT spațiul, fără goluri */
+    display: block;
+}
+
+/* Textul din stânga */
+.about-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Mobile fix */
+
+@media (max-width: 900px) {
+    .about-card {
+        flex-direction: column;
+    }
+
+    .about-photo {
+        min-height: 260px;
+    }
+}
+
+/* =========================================
+   DESPRE NOI – imagine pe toată înălțimea
+   ========================================= */
+
+.about-card {
+    display: flex;
+    align-items: stretch !important;   /* ambele coloane aceeași înălțime */
+    gap: 40px;
+    min-height: 360px;                 /* poți ajusta dacă vrei card mai înalt/scund */
+}
+
+.about-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Coloană foto – ocupă toată înălțimea cardului */
+.about-photo {
+    flex: 1;
+    align-self: stretch;
+    margin: 0;                         /* anulăm eventuale margini vechi */
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+/* Imaginea se întinde complet în container */
+.about-photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;                 /* taie din imagine ca să nu rămână goluri */
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .about-card {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .about-photo {
+        min-height: 260px;
+    }
+}
+/* =========================================
+   DESPRE NOI – card cu poză full height + margine estetică
+   ========================================= */
+
+.about-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 40px;
+    border-radius: 32px;
+    background: linear-gradient(135deg, #fff7eb 0%, #ffffff 40%, #f9fafb 100%);
+    box-shadow: var(--shadow-soft);
+
+    padding: 0;               /* nu atingem padding-ul global */
+    overflow: hidden;         /* pentru colțuri rotunjite corecte */
+}
+
+/* Textul păstrează padding frumos */
+.about-content {
+    padding: 40px 40px 32px;
+}
+
+/* Container imagine cu spațiu interior */
+.about-photo {
+    position: relative;
+    padding: 20px;            /* SPAȚIU ÎN JURUL IMAGINII */
+    display: flex;
+}
+
+/* Imaginea rămâne rotunjită și nu atinge cardul */
+.about-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;      /* colțuri rotunjite frumoase */
+    display: block;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .about-card {
+        grid-template-columns: 1fr;
+    }
+
+    .about-content {
+        padding: 28px 20px 24px;
+    }
+
+    .about-photo {
+        padding: 14px;
+        min-height: 260px;
+    }
+}
+/* =========================================
+   SEȚIUNEA JUDEȚE – Carduri Premium
+   ========================================= */
+
+.judete-shell {
+    padding-block: 80px;
+}
+
+.judete-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(26px, 3vw, 36px);
+    margin-bottom: 10px;
+}
+
+.judete-header .section-intro {
+    max-width: 700px;
+}
+
+.judete-panel {
+    margin-top: 40px;
+}
+
+.judete-tagline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 26px;
+    font-weight: 600;
+    color: var(--accent-dark);
+    letter-spacing: 0.15em;
+}
+
+.tagline-line {
+    flex: 1;
+    max-width: 140px;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0.4;
+}
+
+/* GRID CU 4 CARDURI */
+.judete-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* CARD JUDEȚ */
+.judet-card {
+    position: relative;
+    padding: 24px 22px;
+    background: #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    cursor: pointer;
+}
+
+.judet-card:hover {
+    transform: translateY(-3px);
+    background: #fdf8ef;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+.judet-name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #111827;
+}
+
+.judet-sub {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.judet-arrow {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    font-size: 20px;
+    color: var(--accent-dark);
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+
+.judet-card:hover .judet-arrow {
+    transform: translateX(4px);
+}
+
+/* Link card */
+.judet-link {
+    text-decoration: none;
+    color: inherit;
+}
+/* Centrare text pentru secțiunea JUDEȚE */
+.judete-header {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.judete-header .section-intro {
+    margin-left: auto;
+    margin-right: auto;
+}
+/* ================================
+   CARDURI JUDEȚE – TEXT CENTRAT
+   ================================ */
+
+.judete-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.judet-card {
+    position: relative;
+    padding: 26px 22px 32px;
+    background: #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    cursor: pointer;
+    text-align: center;        /* CENTRARE TOTALĂ */
+}
+
+/* Titlu județ centrat */
+.judet-name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #111827;
+    display: block;
+}
+
+/* Subtitlu centrat */
+.judet-sub {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    display: block;
+}
+
+/* SĂGEATA SUB TITLU */
+.judet-arrow {
+    display: block;
+    margin: 12px auto 0;   /* o pune fix SUB titlu */
+    font-size: 20px;
+    color: var(--accent-dark);
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+
+/* Efect hover */
+.judet-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+.judet-card:hover .judet-arrow {
+    transform: translateY(-2px);
+    opacity: 1;
+}
+/* ===============================================
+   OVERLAY PREMIUM LIGHT PENTRU CARDURILE DE JUDEȚE
+   =============================================== */
+
+.judet-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Overlay elegant, deschis la culoare */
+.judet-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.80),
+        rgba(250,247,240,0.85),
+        rgba(245,240,225,0.90)
+    );
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    border-radius: inherit;
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    
+    backdrop-filter: blur(6px);
+}
+
+/* Text premium */
+.judet-overlay p {
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: #3a3a3a;
+}
+
+/* La hover apare overlay-ul */
+.judet-card:hover .judet-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
