@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <title>Regulament electoral 2026–2031 – Cultul Creștin Penticostal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonts (la fel ca pe index) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
+    <!-- CSS principal al site-ului -->
+    <link rel="stylesheet" href="pgpr1.css" />
+
+    <!-- CSS specific pentru pagina Regulament electoral -->
+    <style>
+        /* Pagina regulament */
+        .reg-page {
+            padding: 40px 16px 70px;
+            background: radial-gradient(circle at top, #ffffff 0, #f4f5fb 40%, #e9edf7 100%);
+        }
+
+        .reg-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .reg-header {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 32px;
+        }
+
+        .reg-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 10px 30px rgba(15,23,42,0.10);
+            color: var(--accent-dark);
+            margin-bottom: 14px;
+        }
+        .reg-pill::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        .reg-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(26px, 3vw, 34px);
+            margin-bottom: 6px;
+        }
+
+        .reg-subtitle {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Carduri pentru articole */
+        .reg-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 10px;
+        }
+
+        .reg-card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 20px 22px 22px;
+            box-shadow: 0 18px 40px rgba(15,23,42,0.08);
+        }
+
+        .reg-card h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .reg-card h3 {
+            font-size: 16px;
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+
+        .reg-card p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .reg-card ul {
+            padding-left: 18px;
+            margin: 4px 0 6px;
+        }
+
+        .reg-card li {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-main);
+        }
+
+        .reg-note {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        /* Card cu buton download */
+        .reg-card-download {
+            text-align: left;
+        }
+
+        .reg-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 14px;
+            padding: 10px 20px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            box-shadow: 0 14px 40px rgba(15,23,42,0.25);
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .reg-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 50px rgba(15,23,42,0.30);
+        }
+
+        .reg-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 10px 30px rgba(15,23,42,0.24);
+        }
+
+        /* Pozele scanate – sub carduri */
+        .reg-scans {
+            margin-top: 22px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 22px;
+            padding: 16px 16px 18px;
+            box-shadow: 0 16px 36px rgba(15,23,42,0.12);
+        }
+
+        .reg-scans h4 {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .reg-scan-img {
+            width: 100%;
+            border-radius: 14px;
+            display: block;
+            margin-bottom: 10px;
+            box-shadow: 0 12px 30px rgba(15,23,42,0.12);
+        }
+
+        .reg-scans small {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="header-container">
+
+        <div class="logo-area">
+            <a href="index.html#acasa" class="logo-link">
+                <img src="images/logo1.png" class="site-logo" alt="CRP Arad">
+                <div class="site-title">
+                    <h1>Comunitatea Regională</h1>
+                    <span>PENTICOSTALĂ ARAD</span>
+                </div>
+            </a>
+        </div>
+
+        <nav id="mainNav" class="nav">
+          <a href="index.html#acasa" class="nav-link">Acasă</a>
+<a href="index.html#despre" class="nav-link">Despre</a>
+<a href="index.html#comitet" class="nav-link">Comitet</a>
+<a href="index.html#judete" class="nav-link">Județe</a>
+<a href="index.html#evenimente" class="nav-link">Evenimente</a>
+<a href="index.html#seminarii" class="nav-link">Seminarii</a>
+<a href="index.html#locatie" class="nav-link">Locație</a>
+<a href="index.html#contact" class="nav-link nav-btn">Contact</a>
+
+        </nav>
+
+        <button class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</header>
+
+
+    <main>
+        <section class="band band-light reg-page">
+            <div class="reg-wrapper">
+
+                <header class="reg-header">
+                    <span class="reg-pill">Document oficial</span>
+                    <h1 class="reg-title">Regulament electoral 2026–2031</h1>
+                    <p class="reg-subtitle">
+                        Regulament electoral pentru organizarea alegerilor în bisericile locale și filii,
+                        la Comunitățile Regionale, Teritoriale sau Etnice și la nivelul central al
+                        Cultului Creștin Penticostal din România.
+                    </p>
+                </header>
+
+                <div class="reg-cards">
+
+                    <!-- Card 1: titlu + început capitol -->
+                    <article class="reg-card">
+                        <h2>I. Alegerile în bisericile locale și filii</h2>
+                        <p>
+                            Regulamentul detaliază modul de organizare a alegerilor în bisericile locale,
+                            în filii și în structurile superioare ale Cultului Creștin Penticostal, pentru
+                            mandatul 2026–2031.
+                        </p>
+                    </article>
+
+                    <!-- Card 2: Art. 1–3 -->
+                    <article class="reg-card">
+                        <h3>Art. 1.</h3>
+                        <p>
+                            Adunarea Generală a bisericii este alcătuită din toți membrii care beneficiază
+                            de drepturi depline și este statutară indiferent de numărul celor prezenți,
+                            dacă a fost anunțată de către pastor sau un delegat al acestuia cu cel puțin
+                            două săptămâni înainte, precizându-se scopul convocării.
+                        </p>
+
+                        <h3>Art. 2.</h3>
+                        <p>
+                            Alegerile de comitet se organizează o dată la 5 ani. Adunarea Generală
+                            a bisericii poate acorda, prin vot secret, cu majoritate simplă,
+                            cel mult un nou mandat comitetului în exercițiu.
+                        </p>
+
+                        <h3>Art. 3.</h3>
+                        <p>
+                            În situații de criză, constatate de conducerea Comunității Regionale,
+                            Teritoriale sau Etnice (CRTE), aceasta își asumă sarcina de a coordona
+                            procesul alegerilor.
+                        </p>
+                    </article>
+
+                    <!-- Card 3: Art. 4–5 -->
+                    <article class="reg-card">
+                        <h3>Art. 4.</h3>
+                        <p>a) Comitetul bisericii locale se compune din:</p>
+                        <ul>
+                            <li>pastorul principal și pastorii asistenți, care intră din oficiu;</li>
+                            <li>conducător (acolo unde nu există un pastor local) ales, cu precădere, dintre prezbiteri și diaconi;</li>
+                            <li>secretar, casier și alți membri, după cum decide Adunarea Generală.</li>
+                        </ul>
+                        <p>
+                            Numărul membrilor Comitetului este între 3 și 11, în funcție de numărul
+                            membrilor bisericii. Bisericile cu peste 1000 de membri pot avea până la
+                            15 membri în Comitet.
+                        </p>
+                        <p>
+                            b) În situația în care se impune punerea la vot de reconfirmare a pastorului
+                            coordonator într-o biserică, acesta va fi supus la vot împreună cu pastorii
+                            asistenți din echipa sa, în mod nominal. Votul de reconfirmare a oricăruia
+                            dintre pastori poate fi solicitat de către comitet cu majoritate simplă sau
+                            de către o treime din numărul membrilor bisericii, conform art. 53 din Statutul Cultului.
+                            Solicitarea de reconfirmare a pastorilor trebuie transmisă în scris Comunității,
+                            cu cel puțin 30 de zile înainte de data alegerilor.
+                        </p>
+
+                        <h3>Art. 5.</h3>
+                        <p>
+                            Pastorii cu atribuții pastorale în alte biserici decât cea în care sunt membri,
+                            precum și prezbiterii și diaconii, pot fi propuși pe lista de candidați pentru comitet.
+                            În cazul în care un slujitor ordinat nu obține voturile necesare pentru a fi ales în comitet,
+                            acesta va putea continua slujirea sub coordonarea pastorului coordonator.
+                        </p>
+                    </article>
+
+                    <!-- Card 4: Art. 6–7 -->
+                    <article class="reg-card">
+                        <h3>Art. 6.</h3>
+                        <p>
+                            Propunerile candidaților pentru comitetul bisericii vor fi făcute de pastorul bisericii
+                            împreună cu o comisie de propuneri formată din persoane cu experiență în lucrare.
+                        </p>
+
+                        <h3>Art. 7.</h3>
+                        <p>
+                            Candidații propuși pentru a fi aleși în comitetul bisericii trebuie să îndeplinească
+                            următoarele condiții:
+                        </p>
+                        <ul>
+                            <li>a) să aibă un caracter evlavios și o conduită creștină exemplară;</li>
+                            <li>b) să aibă o bună mărturie familială, dovedită prin conlocuire și o viață conjugală armonioasă;</li>
+                            <li>c) să aibă capacitatea și disponibilitatea de a îndeplini sarcinile încredințate;</li>
+                            <li>d) să aibă o vechime de cel puțin 5 ani în Cultul Creștin Penticostal și 2 ani în biserica respectivă; fac excepție bisericile nou-înființate și slujitorii ordinați, recunoscuți conform prevederilor statutare;</li>
+                            <li>e) să se fi achitat de toate îndatoririle ce decurg din calitatea de membru, conform prevederilor statutare;</li>
+                            <li>f) să nu fi fost sancționat disciplinar pe linie bisericească, conform art. 28, al. 3, lit. d) și e).</li>
+                        </ul>
+                    </article>
+
+                    <!-- Card 5: Art. 8–11 + buton download -->
+                    <article class="reg-card reg-card-download">
+                        <h3>Art. 8.</h3>
+                        <p>Procedura alegerilor este următoarea:</p>
+                        <ul>
+                            <li>Procesul electoral va fi condus de către pastor sau, în cazuri excepționale, de un delegat al CRTE;</li>
+                            <li>Conducătorul ședinței propune, prin vot deschis, alegerea unui secretar de ședință, care va întocmi procesul-verbal al Adunării Generale Elective;</li>
+                            <li>Se vor face propuneri pentru alegerea, prin vot deschis, a comisiei de numărare a voturilor;</li>
+                            <li>Alegerea membrilor comitetului se face prin vot secret, pe baza buletinelor de vot validate de pastor. Cu aprobarea Adunării Generale se poate face vot electronic; în acest caz procedura va fi propusă de comitetul bisericii și aprobată de Adunarea Generală;</li>
+                            <li>Intrarea în comitet se face în ordinea descrescătoare a voturilor, până la completarea numărului stabilit de Adunarea Generală;</li>
+                            <li>Dacă nu există pastor local, la propunerea pastorului coordonator se va alege un conducător al bisericii dintre membrii comitetului conform mențiunilor de la art. 4; alegerea se va face cu vot secret, cu majoritate simplă din numărul voturilor valabil exprimate de către Adunarea Generală;</li>
+                            <li>Comitetul nou ales stabilește dintre membrii acestuia un secretar și un casier;</li>
+                            <li>Cenzorii vor fi aleși prin vot deschis de către Adunarea Generală, cu precădere dintre credincioșii cu studii de specialitate;</li>
+                            <li>Fiecare filie își va alege, sub supravegherea pastorului, un conducător. El poate fi ajutat de alți doi membri care se vor ocupa de administrație și de alte responsabilități încredințate. Procedura de alegere este identică cu cea pentru biserici.</li>
+                        </ul>
+
+                        <h3>Art. 9.</h3>
+                        <p>
+                            În termen de 15 zile, un exemplar al procesului-verbal încheiat și semnat de Biroul de zi
+                            va fi trimis la CRTE.
+                        </p>
+
+                        <h3>Art. 10.</h3>
+                        <p>
+                            Eventualele contestații se vor depune la CRTE în termen de maximum 15 zile de la data alegerilor.
+                        </p>
+
+                        <h3>Art. 11.</h3>
+                        <p>
+                            Perioada alegerilor în bisericile locale trebuie stabilită în primele 4 luni ale anului electoral.
+                        </p>
+
+                        <p class="reg-note">
+                            Voturi valabil exprimate înseamnă voturi pentru sau împotrivă; nu sunt luate în considerare
+                            voturile nule și abținerile.
+                        </p>
+
+                        <!-- Butonul de la ultimul card -->
+                        <!-- Schimbă href cu calea reală către PDF -->
+                        <a href="scans/CULTUL CREŞTIN PENTICOSTAL DIN ROMÂNIA.docx" class="reg-btn" download>
+                            Descarcă fișierul
+                        </a>
+                    </article>
+                </div>
+
+                <!-- Pozele scanate, sub cadrane -->
+                <div class="reg-scans">
+                    <h4>Previzualizare regulament scanat</h4>
+                    <!-- Schimbă src cu numele fișierelor tale reale -->
+                    <img src="scans/scangp1.png"
+                         alt="Regulament electoral 2026–2031 – pagina 1"
+                         class="reg-scan-img">
+                    <img src="scans/scanpg2.png"
+                         alt="Regulament electoral 2026–2031 – pagina 2"
+                         class="reg-scan-img">
+                    <small>Imaginile sunt pentru vizualizare rapidă. Pentru calitate maximă, folosiți fișierul PDF.</small>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER dacă vrei, îl poți copia identic din celelalte pagini -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p>&copy; <span id="footerYear"></span> Comunitatea Regională Penticostală Arad – Regiunea 1.</p>
+        </div>
+    </footer>
+
+    <!-- JS principal (meniu, scroll, etc.) -->
+    <script src="pgpr1.js"></script>
+</body>
+</html>
