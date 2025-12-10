@@ -2853,3 +2853,700 @@ section {
     transform: translateY(0);
     box-shadow: 0 10px 20px rgba(15,23,42,0.15);
 }
+/* =========================================
+   EVENIMENTE – titlu centrat doar în această secțiune
+   ========================================= */
+
+#evenimente .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#evenimente .section-header .section-intro {
+    margin-left: auto;
+    margin-right: auto;
+}
+/* CONTACT – titlu + subtitlu centrate */
+#contact .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#contact .section-header .section-intro {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+/* =========================================
+   LOCAȚIE – "Unde ne găsiți" + hartă
+   ========================================= */
+
+/* Titlu + subtitlu centrate, ca la Evenimente/Contact */
+#locatie .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#locatie .section-header .section-intro {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Card hartă */
+.location-shell {
+    margin-top: 28px;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 22px 55px rgba(15,23,42,0.14);
+    border: 1px solid rgba(226,232,240,0.9);
+    background: #ffffff;
+}
+
+/* Harta propriu-zisă */
+.location-map iframe {
+    display: block;
+    width: 100%;
+    height: 380px;
+    border: 0;
+}
+
+/* pe mobil facem harta puțin mai înaltă */
+@media (max-width: 768px) {
+    .location-map iframe {
+        height: 320px;
+    }
+}
+#locatie .section-intro {
+    white-space: pre-line;
+}
+/* =========================================
+   SEMINARII – Secțiune nouă
+   ========================================= */
+
+#seminarii .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#seminarii .section-header .section-intro {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Grid carduri */
+.seminars-grid {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    align-items: stretch; /* toate cardurile se întind uniform */
+}
+
+
+
+
+/* Card */
+.seminar-card {
+    background: #ffffff;
+    padding: 24px 26px;
+    border-radius: 22px;
+    box-shadow: 0 14px 35px rgba(15,23,42,0.08);
+    border: 1px solid rgba(226,232,240,0.9);
+    transition: 0.18s ease;
+
+    /* nou - centrare completă */
+    display: flex;
+    flex-direction: column;
+    align-items: center;        /* centrează titlul și textul pe orizontală */
+    justify-content: center;    /* centrează pe verticală */
+    text-align: center;         /* tot textul centrat */
+    
+    min-height: 180px; /* sau mai mult dacă vrei carduri mai înalte */
+}
+
+
+.seminar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 45px rgba(15,23,42,0.12);
+    border-color: rgba(200,169,107,0.55);
+}
+
+.seminar-card h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 20px;
+    line-height: 1.3;
+}
+
+
+.seminar-card p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+/* Face cardurile de seminarii clicabile */
+.seminar-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.seminar-card-link .seminar-card {
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.seminar-card-link:hover .seminar-card {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 45px rgba(15,23,42,0.12);
+}
+/* =========================================
+   SEMINAR 1 – titlu centrat + carduri frumos aranjate
+   ========================================= */
+
+/* Titlu + intro centrate doar pe pagina de seminar */
+.seminar-page-hero .section-header {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 28px;
+}
+
+.seminar-page-hero .section-header .section-intro {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Grid pentru cardurile de informatii */
+.seminar-info-grid {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.seminar-info-grid .event-info-card {
+    text-align: left;
+}
+/* SEMINAR – CARDURI TEXT PRINCIPALE */
+/* CARDURILE SĂ FIE UNA SUB ALTA */
+.seminar-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* O singură coloană */
+    gap: 28px;
+    margin-top: 20px;
+}
+
+.seminar-card {
+    background: #ffffff;
+    padding: 24px 26px;
+    border-radius: 22px;
+    box-shadow: 0 14px 32px rgba(15,23,42,0.10);
+    border: 1px solid rgba(226,232,240,0.9);
+}
+
+.seminar-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.seminar-card p,
+.seminar-card ul {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.65;
+}
+
+.seminar-card ul {
+    margin-left: 18px;
+    margin-top: 6px;
+}
+
+/* Grid pentru cardurile de informatii de jos */
+.seminar-info-grid {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+/* Reduce distanța dintre hero și primul card din pagina seminar */
+.seminar-page-hero {
+    padding-bottom: 10px !important;
+}
+
+.seminar-cards-grid {
+    margin-top: 10px !important;
+}
+.seminar-page-hero .section-header {
+    margin-bottom: 10px !important;
+}
+/* Imagine finală în pagina seminarului */
+.seminar-image-wrapper {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.seminar-bottom-image {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(15,23,42,0.12);
+    display: block;
+}
+/* GRID 2 COLUMNS: CARDURI STÂNGA + POZA DREAPTA */
+.seminar-two-col {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 20px;
+}
+
+/* Coloană stânga cu cardurile */
+.seminar-left {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Poza mare în dreapta */
+.seminar-right {
+    display: flex;
+    justify-content: center;
+}
+
+.seminar-side-image {
+    width: 100%;
+    height: auto;
+    border-radius: 22px;
+    box-shadow: 0 18px 40px rgba(15,23,42,0.15);
+    object-fit: cover;
+}
+
+/* Responsive – pe telefon devine 1 coloană */
+@media (max-width: 900px) {
+    .seminar-two-col {
+        grid-template-columns: 1fr;
+    }
+
+    .seminar-right {
+        margin-top: 20px;
+    }
+}
+/* Imagine mai mică, centrată sub carduri */
+.seminar-image-wrapper {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.seminar-bottom-image {
+    width: 100%;
+    max-width: 520px;          /* mai mică decât lățimea containerului */
+    border-radius: 18px;
+    box-shadow: 0 14px 32px rgba(15,23,42,0.15);
+    display: block;
+}
+/* Override pentru poza din pagina de seminar:
+   rămâne mare, centrată, dar funcționează ca imagine de galerie */
+.seminar-image-wrapper .gallery-item {
+    max-width: 520px;
+    width: 100%;
+}
+
+.seminar-image-wrapper .gallery-item img.seminar-bottom-image {
+    width: 100%;
+    height: auto;          /* anulăm height:170px din .gallery-item img */
+    max-width: 520px;
+    border-radius: 18px;
+    box-shadow: 0 14px 32px rgba(15,23,42,0.15);
+    display: block;
+}
+/* Overlay pe cardurile de seminarii */
+.seminar-card-link {
+    position: relative;
+    display: block;
+}
+
+.seminar-card-link::after {
+    content: "Vezi detalii înscriere";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #1f2937;
+
+    background: rgba(255,255,255,0.88);
+    border-radius: 22px;
+
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+/* Apariția overlay-ului la hover */
+.seminar-card-link:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* ============================================
+   SEMINAR – OVERLAY PREMIUM
+============================================ */
+
+.seminar-card-link {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 22px; /* se aliniază perfect cu cardul */
+}
+
+/* Overlay premium */
+.seminar-card-link::after {
+    content: "Vezi detalii înscriere";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #1b1f29;
+
+    /* gradient premium alb + glow auriu foarte discret */
+    background: radial-gradient(
+        circle at center,
+        rgba(255,255,255,0.96) 0%,
+        rgba(255,255,255,0.92) 40%,
+        rgba(255,255,255,0.88) 65%,
+        rgba(230,210,170,0.15) 100%
+    );
+
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+    filter: blur(2px);
+
+    border-radius: inherit;
+    transition:
+        opacity 0.45s cubic-bezier(.25,.1,.25,1),
+        transform 0.45s cubic-bezier(.25,.1,.25,1),
+        filter 0.45s ease;
+}
+
+/* Efect premium la hover */
+.seminar-card-link:hover::after {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+}
+/* Titlul cardurilor centrat – FORȚAT pentru toate cardurile */
+.seminar-card > h2,
+.seminar-card > h3 {
+    text-align: center !important;
+}
+
+/* Textul rămâne la stânga – FORȚAT */
+.seminar-card p,
+.seminar-card ul,
+.seminar-card li {
+    text-align: left !important;
+}
+.inner-hero-title .line-break {
+    display: block;
+}
+/* Aliniere stânga pentru TEXTUL din cardurile seminarului */
+.seminar-card p,
+.seminar-card ul,
+.seminar-card li {
+    text-align: left;
+}
+/* =========================================
+   OVERWRITE SEMINAR – carduri home vs. pagina seminar
+   ========================================= */
+
+/* 1) Pe HOME (#seminarii) cardurile rămân centrate, mici și egale */
+#seminarii .seminar-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 180px;
+}
+
+/* 2) Pe PAGINA DE SEMINAR:
+      cardurile cu mult text (în .seminar-cards-grid) devin bloc normal,
+      titlul centrat, restul textului aliniat la stânga */
+
+/* cardul în sine – nu mai e flex, textul de bază la stânga */
+.seminar-cards-grid .seminar-card {
+    display: block;
+    text-align: left;
+    align-items: stretch;
+    justify-content: flex-start;
+    min-height: auto;
+}
+
+/* titlul cardului centrat */
+.seminar-cards-grid .seminar-card h2,
+.seminar-cards-grid .seminar-card h3 {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+/* textul informativ aliniat la stânga */
+.seminar-cards-grid .seminar-card p,
+.seminar-cards-grid .seminar-card ul,
+.seminar-cards-grid .seminar-card li {
+    text-align: left;
+}
+/* =========================================================
+   COMITET – LOOK NOU, MAI PREMIUM
+   (overwrite pentru cardurile existente)
+   ========================================================= */
+
+/* Fundal ușor mai „ceremonial” pentru toată secțiunea */
+#comitet.band-muted {
+    background: radial-gradient(circle at top, #eef2ff 0, #f6f7fb 45%, #f3f4f6 100%);
+}
+
+/* Header – mai compact și mai elegant */
+#comitet .section-header {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 36px;
+}
+
+#comitet .section-kicker {
+    letter-spacing: 0.24em;
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+#comitet .section-header h2 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(26px, 3vw, 34px);
+    letter-spacing: -0.02em;
+}
+
+#comitet .section-intro {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* ---------------------------------------------------------
+   LIDERI PRINCIPALI – carduri mai clare, cu fundal alb
+   --------------------------------------------------------- */
+
+.team-main-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 38px;
+    flex-wrap: wrap;
+}
+
+.team-card-main {
+    position: relative;
+    text-align: center;
+    padding: 20px 22px 18px;
+    border-radius: 26px;
+    background: #ffffff;
+    box-shadow: 0 18px 40px rgba(15,23,42,0.16);
+    border: 1px solid rgba(226,232,240,0.9);
+    min-width: 240px;
+}
+
+/* cercul cu poză iese un pic din card */
+.team-photo-main {
+    width: 150px;
+    height: 150px;
+    margin: -64px auto 10px;
+    border-radius: 999px;
+    padding: 4px;
+    background:
+        radial-gradient(circle at top, rgba(200,169,107,0.4), transparent 70%),
+        #ffffff;
+    box-shadow: 0 16px 34px rgba(15,23,42,0.30);
+}
+
+.team-card-main h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.team-card-main .team-role {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+}
+
+/* mic text de sub rol – dacă există (ex. biserică) */
+.team-card-main p {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+/* hover discret pentru liderii principali */
+.team-card-main:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 55px rgba(15,23,42,0.22);
+    border-color: rgba(200,169,107,0.7);
+    transition: 0.2s ease;
+}
+
+/* ---------------------------------------------------------
+   MEMBRI – carduri mai curate, păstrând mărimea
+   --------------------------------------------------------- */
+
+.team-secondary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* card „board member” mai simplu și mai clar */
+.team-card-secondary {
+    position: relative;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 38px 18px 20px; /* păstrează cam aceeași înălțime */
+    box-shadow: 0 14px 32px rgba(15,23,42,0.12);
+    text-align: center;
+    border: 1px solid rgba(226,232,240,0.9);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+/* cercul cu poză – inel auriu mai fin */
+.team-photo-secondary {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 12px;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 3px solid rgba(200,169,107,0.85);
+    background: #ffffff;
+    box-shadow: 0 10px 26px rgba(15,23,42,0.20);
+}
+
+/* nume + rol */
+.team-card-secondary h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.team-card-secondary .team-role {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #9ca3af;
+}
+
+/* text suplimentar (opțional) */
+.team-card-secondary p {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* hover – ușor „lift” */
+.team-card-secondary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 42px rgba(15,23,42,0.18);
+    border-color: rgba(200,169,107,0.6);
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE – păstrăm layout curat pe mobil
+   --------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+    .team-secondary-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .team-secondary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .team-main-grid {
+        margin-bottom: 30px;
+    }
+
+    .team-card-main {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .team-secondary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   COMITET – fix hover smooth pentru PRIMII 3
+   ========================================= */
+
+/* ne asigurăm că și în comitet cardurile AU transition pe transform + shadow */
+#comitet .team-card-main,
+#comitet .team-card-secondary {
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    will-change: transform, box-shadow;
+}
+
+/* efectul de „ridicare” la hover, la fel pentru toate cardurile din comitet */
+#comitet .team-card-main:hover,
+#comitet .team-card-secondary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(15,23,42,0.22);
+}
+/* =========================================================
+   COMITET – mărire spațiu între titlu și primele 3 carduri
+   ========================================================= */
+
+#comitet .team-grid,
+#comitet .team-wrapper,
+#comitet .comitet-grid {
+    margin-top: 48px !important;
+
+}
+/* =========================================================
+   COMITET – spațiu mai mare între titlu și PRIMII 3
+   ========================================================= */
+
+/* reset – nu vrem margini aiurea pe toate cardurile */
+#comitet .team-card-main,
+#comitet .team-card-secondary {
+    margin-top: 0;
+}
+
+/* doar primii 3 lideri – ridicați mai jos de titlu */
+#comitet .team-card-main:nth-of-type(1),
+#comitet .team-card-main:nth-of-type(2),
+#comitet .team-card-main:nth-of-type(3) {
+    margin-top: 32px !important;   /* crești la 40/48 dacă vrei și mai mult */
+}
