@@ -2,6 +2,23 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8" />
+
+    <!-- Redirect instant la pagina de mentenanță -->
+    <script>
+    (() => {
+      const MAINTENANCE_MODE = true;            // pune false când dai drumul la site
+      const MAINTENANCE_PAGE = "/in-constructie.html";
+
+      const qs = new URLSearchParams(location.search);
+      const bypass = qs.get("preview") === "1"; // intri cu ?preview=1 ca să vezi site-ul real
+      const onMaintenance = location.pathname.endsWith(MAINTENANCE_PAGE);
+
+      if (MAINTENANCE_MODE && !bypass && !onMaintenance) {
+        location.replace(MAINTENANCE_PAGE);
+      }
+    })();
+    </script>
+
     <title>Comunitatea Regională Penticostală Arad</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -10,6 +27,8 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="pgpr1.css" />
+
+    <!-- JS (restul funcțiilor site-ului) -->
     <script src="pgpr1.js" defer></script>
 </head>
 <body class="page-transition-active">
