@@ -1,3 +1,16 @@
+// ===== Maintenance mode =====
+const MAINTENANCE_MODE = true;                 // <-- pune false când dai drumul la site
+const MAINTENANCE_PAGE = "/in-constructie.html";
+const DEV_BYPASS_PARAM = "preview";            // folosește ?preview=1 ca să vezi site-ul real
+
+if (MAINTENANCE_MODE) {
+  const url = new URL(window.location.href);
+  const bypass = url.searchParams.get(DEV_BYPASS_PARAM) === "1";
+  const onMaintenance = window.location.pathname.endsWith(MAINTENANCE_PAGE);
+  if (!bypass && !onMaintenance) {
+    window.location.replace(MAINTENANCE_PAGE);
+  }
+
 /* ============================================================
    NAVBAR MOBILE – FIX
 ============================================================ */
