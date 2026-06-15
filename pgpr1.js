@@ -718,19 +718,27 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     window.__crpInlineCmsBooted = true;
 
     const CONTENT_PATH = "content/site.json";
+    const PAGE_TEXT_DIR = "content/page-text";
     const DRAFT_KEY = "crp-inline-cms-draft";
     const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "https://crp-cms.crparad.workers.dev";
+    const pageName = window.location.pathname.split("/").pop() || "index.html";
+    const isHomePage = pageName === "index.html";
+    const pageSlug = slugifyFilePart(pageName.replace(/\.html?$/i, "") || "index");
+    const pageTextPath = `${PAGE_TEXT_DIR}/${pageSlug}.json`;
+    const activeContentPath = isHomePage ? CONTENT_PATH : pageTextPath;
 
     const state = {
         canEdit: false,
         editing: false,
         dirty: false,
+        contentPath: activeContentPath,
         content: null,
         originalContent: null,
         fields: [],
         images: [],
         pendingAssets: [],
-        assetCounter: 0
+        assetCounter: 0,
+        pageTextHasSaved: false
     };
 
     const preparedNodes = new WeakSet();
@@ -794,6 +802,139 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         const node = (root || document).querySelector(selector);
         if (!node) return;
         addImage(images, node, node.parentElement || node, path, label, "image");
+    }
+
+    function getPageTextRoot() {
+        return document.querySelector("main") || document.body;
+    }
+
+    function isInsideSkippedArea(node) {
+        const element = node.nodeType === 1 ? node : node.parentElement;
+        if (!element) return true;
+
+        return Boolean(element.closest([
+            ".header",
+            ".footer",
+            ".site-footer",
+            ".nav",
+            ".auth-modal",
+            ".cms-editor-bar",
+            ".lightbox",
+            "#lightbox",
+            ".contact-success-overlay",
+            "#contactSuccessOverlay",
+            "script",
+            "style",
+            "noscript",
+            "template",
+            "svg",
+            "canvas",
+            "input",
+            "textarea",
+            "select"
+        ].join(",")));
+    }
+
+    function splitTextSpacing(value) {
+        const raw = String(value || "");
+        const prefix = (raw.match(/^\s*/) || [""])[0];
+        const suffix = (raw.match(/\s*$/) || [""])[0];
+        return {
+            prefix,
+            suffix,
+            text: raw.trim()
+        };
+    }
+
+    function collectPageTextNodes() {
+        const root = getPageTextRoot();
+        if (!root || isHomePage) return [];
+
+        const nodes = [];
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+            acceptNode(node) {
+                if (!node || !node.parentElement) return NodeFilter.FILTER_REJECT;
+                if (isInsideSkippedArea(node)) return NodeFilter.FILTER_REJECT;
+
+                const text = splitTextSpacing(node.nodeValue).text;
+                if (!text) return NodeFilter.FILTER_REJECT;
+
+                return NodeFilter.FILTER_ACCEPT;
+            }
+        });
+
+        while (walker.nextNode()) {
+            nodes.push(walker.currentNode);
+        }
+
+        return nodes.map((node, index) => {
+            const spacing = splitTextSpacing(node.nodeValue);
+            return {
+                node,
+                key: `t${String(index + 1).padStart(4, "0")}`,
+                text: spacing.text,
+                prefix: spacing.prefix,
+                suffix: spacing.suffix
+            };
+        });
+    }
+
+    function createPageTextContent() {
+        const texts = {};
+        collectPageTextNodes().forEach((record) => {
+            texts[record.key] = record.text;
+        });
+
+        return {
+            page: pageName,
+            updatedAt: null,
+            texts
+        };
+    }
+
+    function normalizePageTextContent(data) {
+        const base = createPageTextContent();
+        const savedTexts = data && data.texts && typeof data.texts === "object" ? data.texts : {};
+
+        Object.keys(base.texts).forEach((key) => {
+            if (typeof savedTexts[key] === "string") {
+                base.texts[key] = savedTexts[key];
+            }
+        });
+
+        if (data && typeof data.updatedAt === "string") {
+            base.updatedAt = data.updatedAt;
+        }
+
+        return base;
+    }
+
+    function applyPageTextContent(data) {
+        if (isHomePage || !data || !data.texts) return;
+
+        collectPageTextNodes().forEach((record) => {
+            const value = data.texts[record.key];
+            if (typeof value === "string") {
+                record.node.nodeValue = `${record.prefix}${value}${record.suffix}`;
+            }
+        });
+    }
+
+    function collectPageTextFields() {
+        return collectPageTextNodes().map((record) => {
+            const wrapper = document.createElement("span");
+            wrapper.textContent = record.text;
+            record.node.parentNode.replaceChild(wrapper, record.node);
+
+            return {
+                node: wrapper,
+                path: ["texts", record.key],
+                label: `Text ${record.key.replace(/^t0*/, "")}`,
+                wrapper: true,
+                prefix: record.prefix,
+                suffix: record.suffix
+            };
+        });
     }
 
     function collectFields() {
@@ -962,7 +1103,30 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     }
 
     async function ensureContent() {
-        if (state.content) return state.content;
+        if (state.content) {
+            if (!isHomePage && !state.pageTextHasSaved && !state.editing) {
+                state.content = createPageTextContent();
+            }
+            return state.content;
+        }
+
+        if (!isHomePage) {
+            try {
+                const response = await fetch(pageTextPath, { cache: "no-cache" });
+                if (response.ok) {
+                    state.content = normalizePageTextContent(await response.json());
+                    state.pageTextHasSaved = true;
+                    applyPageTextContent(state.content);
+                    return state.content;
+                }
+            } catch (error) {
+                console.info("Page text content is not available yet.", error);
+            }
+
+            state.content = createPageTextContent();
+            state.pageTextHasSaved = false;
+            return state.content;
+        }
 
         if (window.CRP_SITE_CONTENT) {
             state.content = cloneContent(window.CRP_SITE_CONTENT);
@@ -1136,9 +1300,9 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     }
 
     function activateFields() {
-        state.fields = collectFields();
+        state.fields = isHomePage ? collectFields() : collectPageTextFields();
         state.fields.forEach(prepareField);
-        state.images = collectImages();
+        state.images = isHomePage ? collectImages() : [];
         state.images.forEach(prepareImage);
     }
 
@@ -1148,6 +1312,10 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             field.node.removeAttribute("data-cms-path");
             field.node.removeAttribute("contenteditable");
             field.node.removeAttribute("aria-label");
+            if (field.wrapper) {
+                const text = document.createTextNode(`${field.prefix || ""}${field.node.textContent || ""}${field.suffix || ""}`);
+                field.node.replaceWith(text);
+            }
         });
         state.images.forEach((image) => {
             image.node.removeAttribute("data-cms-image");
@@ -1179,7 +1347,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         document.body.classList.add("cms-editing");
         activateFields();
         updateToolbar();
-        setStatus("Click pe text sau pe Schimba poza si modifica direct in pagina.");
+        setStatus(isHomePage ? "Click pe text sau pe Schimba poza si modifica direct in pagina." : "Click pe text si modifica direct in pagina.");
     }
 
     function cancelEditing() {
@@ -1190,8 +1358,10 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         document.body.classList.remove("cms-editing");
         deactivateFields();
         state.content = cloneContent(state.originalContent);
-        if (typeof window.CRP_RENDER_HOME === "function") {
+        if (isHomePage && typeof window.CRP_RENDER_HOME === "function") {
             window.CRP_RENDER_HOME(state.content);
+        } else if (!isHomePage) {
+            applyPageTextContent(state.content);
         } else {
             window.location.reload();
             return;
@@ -1212,7 +1382,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         if (!SAVE_ENDPOINT) {
             localStorage.setItem(DRAFT_KEY, JSON.stringify({
                 savedAt: new Date().toISOString(),
-                path: CONTENT_PATH,
+                path: state.contentPath,
                 content: state.content,
                 pendingAssets: state.pendingAssets.map((asset) => ({
                     path: asset.path,
@@ -1232,6 +1402,10 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             if (!user) throw new Error("Sesiunea de admin nu mai este activa.");
 
             const token = await user.getIdToken();
+            if (!isHomePage) {
+                state.content.page = pageName;
+                state.content.updatedAt = new Date().toISOString();
+            }
             const response = await fetch(SAVE_ENDPOINT, {
                 method: "POST",
                 headers: {
@@ -1239,7 +1413,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
                     "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    path: CONTENT_PATH,
+                    path: state.contentPath,
                     content: state.content,
                     assets: state.pendingAssets
                 })
@@ -1248,11 +1422,14 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             const result = await response.json().catch(() => ({}));
             if (!response.ok) throw new Error(result.error || "Salvarea nu a reusit.");
 
-            window.CRP_SITE_CONTENT = cloneContent(state.content);
+            if (isHomePage) {
+                window.CRP_SITE_CONTENT = cloneContent(state.content);
+            }
             localStorage.removeItem(DRAFT_KEY);
             state.originalContent = cloneContent(state.content);
             state.dirty = false;
             state.pendingAssets = [];
+            if (!isHomePage) state.pageTextHasSaved = true;
             setStatus("Salvat in GitHub. Deploy-ul se actualizeaza automat.");
         } catch (error) {
             setStatus(error.message || "Salvarea nu a reusit.", true);
@@ -1284,10 +1461,25 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         cancel: cancelEditing
     };
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", buildToolbar, { once: true });
-    } else {
+    function bootInlineCms() {
         buildToolbar();
+        if (!isHomePage) {
+            ensureContent().catch((error) => {
+                console.info("Page text content is not ready.", error);
+            });
+        }
+    }
+
+    window.addEventListener("crp-page-dom-updated", () => {
+        if (!isHomePage && state.content && state.pageTextHasSaved && !state.editing) {
+            applyPageTextContent(state.content);
+        }
+    });
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", bootInlineCms, { once: true });
+    } else {
+        bootInlineCms();
     }
 })();
 /* ============================================================
@@ -1619,6 +1811,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
 
         if (typeof loadZoomableImages === "function") loadZoomableImages();
         if (typeof revealOnScroll === "function") revealOnScroll();
+        window.dispatchEvent(new CustomEvent("crp-page-dom-updated"));
     }
 
     window.CRP_RENDER_HOME = renderHome;

@@ -1,6 +1,8 @@
 const DEFAULT_ADMIN_EMAIL = "crparad@gmail.com";
 const ALLOWED_CONTENT_FILES = new Set(["content/site.json"]);
+const PAGE_TEXT_PATTERN = /^content\/page-text\/[a-z0-9-]+\.json$/;
 const MAX_ASSET_SIZE = 8 * 1024 * 1024;
+const MAX_PAGE_TEXT_SIZE = 1024 * 1024;
 const ASSET_PATH_PATTERN = /^images\/cms\/[a-z0-9][a-z0-9._-]*\.(jpg|jpeg|png|webp|gif)$/i;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"]);
 
@@ -33,13 +35,14 @@ export default {
             const body = await request.json();
             const path = String(body.path || "");
 
-            if (!ALLOWED_CONTENT_FILES.has(path)) {
+            if (!isAllowedContentPath(path)) {
                 return json({ error: "Fisierul nu poate fi editat din editorul inline." }, 400, cors);
             }
 
             if (!body.content || typeof body.content !== "object" || Array.isArray(body.content)) {
                 return json({ error: "Continut invalid." }, 400, cors);
             }
+            validateContent(path, body.content);
 
             const assets = validateAssets(body.assets || []);
             const result = await commitChangesToGitHub(env, path, body.content, assets);
@@ -53,6 +56,39 @@ export default {
         }
     }
 };
+
+function isAllowedContentPath(path) {
+    return ALLOWED_CONTENT_FILES.has(path) || PAGE_TEXT_PATTERN.test(path);
+}
+
+function validateContent(path, content) {
+    if (!PAGE_TEXT_PATTERN.test(path)) return;
+
+    if (typeof content.page !== "string" || !content.page.endsWith(".html")) {
+        throw new Error("Pagina nu este valida.");
+    }
+
+    if (!content.texts || typeof content.texts !== "object" || Array.isArray(content.texts)) {
+        throw new Error("Textele paginii nu sunt valide.");
+    }
+
+    const serialized = JSON.stringify(content);
+    if (serialized.length > MAX_PAGE_TEXT_SIZE) {
+        throw new Error("Pagina are prea mult text pentru o singura salvare.");
+    }
+
+    Object.entries(content.texts).forEach(([key, value]) => {
+        if (!/^t\d{4}$/.test(key)) {
+            throw new Error("Cheie text invalida.");
+        }
+        if (typeof value !== "string") {
+            throw new Error("Text invalid.");
+        }
+        if (value.length > 20000) {
+            throw new Error("Un text este prea lung.");
+        }
+    });
+}
 
 function corsHeaders(origin, env) {
     const allowedOrigin = env.ALLOWED_ORIGIN || origin || "*";
