@@ -14,6 +14,8 @@ Dupa login cu `crparad@gmail.com`, apare bara `Editor site`. Apesi `Editeaza pag
 - Editare inline pentru textele de pe toate celelalte pagini ale site-ului.
 - Schimbare poze direct din pagina pentru hero, despre, comitet, evenimente si liceu.
 - Reordonare carduri in sectiunea Comitet prin tragere cu mouse-ul.
+- Arhivare evenimente direct din pagina principala.
+- Adaugare eveniment nou cu pagina HTML generata automat.
 - Fara dashboard public si fara buton de login vizibil pentru vizitatori.
 - Fara schimbari de layout pentru vizitatori.
 - Daca endpoint-ul de salvare nu este configurat, editorul salveaza draftul local in browser si afiseaza mesajul ca lipseste publicarea in GitHub.
@@ -27,6 +29,23 @@ images/cms/
 ```
 
 Format acceptat la selectie: JPG, PNG, WebP sau GIF. Editorul deschide un cadru de incadrare si exporta poza optimizata ca JPG.
+
+Butonul `Schimba poza` apare doar cand tii cursorul pe poza respectiva, ca sa nu acopere cardurile in mod normal.
+
+## Evenimente
+
+In modul admin, sectiunea `Evenimente` are:
+
+- `Adauga eveniment` - cere numele evenimentului, adauga un card nou pe prima pagina si pregateste automat o pagina HTML dupa numele introdus.
+- `Arhiveaza` - muta evenimentul din prima pagina in lista arhivata.
+
+Modificarile se publica doar cand apesi `Salveaza`, astfel toate schimbarile pleaca intr-un singur commit/deploy.
+
+Pagina arhivata nu este legata in meniul site-ului, dar exista aici:
+
+```text
+evenimente-arhivate.html
+```
 
 ## Texte pe paginile secundare
 

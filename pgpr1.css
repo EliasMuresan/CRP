@@ -478,7 +478,8 @@ body.cms-editing a [data-cms-editable] {
     top: 10px;
     right: 10px;
     z-index: 20;
-    display: none;
+    display: inline-flex;
+    align-items: center;
     min-height: 36px;
     border: 1px solid rgba(255,255,255,.7);
     border-radius: var(--radius-sm);
@@ -490,9 +491,18 @@ body.cms-editing a [data-cms-editable] {
     font-weight: 700;
     box-shadow: 0 10px 26px rgba(20,32,46,.22);
     cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-4px);
+    transition: opacity .14s ease, transform .14s ease, background .14s ease;
 }
 .cms-image-control:hover { background: var(--accent-dark); }
-body.cms-editing .cms-image-control { display: inline-flex; align-items: center; }
+body.cms-editing .cms-image-host:hover .cms-image-control,
+body.cms-editing .cms-image-host:focus-within .cms-image-control {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
 body.cms-editing [data-cms-image] {
     outline: 2px dashed rgba(44,93,134,.55);
     outline-offset: 4px;
@@ -526,6 +536,40 @@ body.cms-editing .cms-reorder-grid {
     outline-offset: 10px;
     border-radius: var(--radius-lg);
 }
+.cms-event-editor-tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+.cms-event-add-button,
+.cms-event-archive-button {
+    border: 1px solid var(--accent-dark);
+    border-radius: var(--radius-sm);
+    background: var(--accent-dark);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(20,32,46,.15);
+}
+.cms-event-add-button {
+    min-height: 42px;
+    padding: 0 16px;
+}
+.cms-event-archive-button {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 25;
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: .78rem;
+}
+.cms-event-add-button:hover,
+.cms-event-archive-button:hover { background: var(--accent); }
+body.cms-editing .event-card { position: relative; }
 body.cms-crop-open { overflow: hidden; }
 .cms-crop-modal {
     position: fixed;
@@ -1072,6 +1116,56 @@ body.cms-crop-open { overflow: hidden; }
 
 /* fallback grid (dacă nu e carousel) */
 .events-grid { display: grid; gap: 24px; margin-top: 18px; }
+
+.archived-events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    margin-top: clamp(28px, 4vw, 44px);
+}
+.archived-event-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: var(--shadow-soft);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+.archived-event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card);
+}
+.archived-event-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.archived-event-card span,
+.archived-event-card strong,
+.archived-event-card p {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.archived-event-card span { margin-top: 18px; }
+.archived-event-card strong {
+    margin-top: 8px;
+    font-size: 1.08rem;
+}
+.archived-event-card p {
+    margin-top: 10px;
+    margin-bottom: 22px;
+    color: var(--text-muted);
+}
+.archived-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-muted);
+}
 
 /* =========================================================
    SEMINARII (home grid)

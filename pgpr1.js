@@ -721,6 +721,29 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     const PAGE_TEXT_DIR = "content/page-text";
     const DRAFT_KEY = "crp-inline-cms-draft";
     const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "https://crp-cms.crparad.workers.dev";
+    const CMS_ASSET_VERSION = "inline-cms-8";
+    const RESERVED_EVENT_PAGES = new Set([
+        "index.html",
+        "evenimente-arhivate.html",
+        "arad.html",
+        "caras.html",
+        "conferinta1.html",
+        "confiliala.html",
+        "conftineret.html",
+        "electoral.html",
+        "hunedoara.html",
+        "liceu.html",
+        "marturisirea-de-credinta.html",
+        "seminar1.html",
+        "seminar2.html",
+        "seminar3.html",
+        "seminar4.html",
+        "seminar5.html",
+        "statut-organizare.html",
+        "statut-slujitorului.html",
+        "timis.html",
+        "wikicom.html"
+    ]);
     const pageName = window.location.pathname.split("/").pop() || "index.html";
     const isHomePage = pageName === "index.html";
     const pageSlug = slugifyFilePart(pageName.replace(/\.html?$/i, "") || "index");
@@ -737,7 +760,9 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         fields: [],
         images: [],
         reorders: [],
+        eventControls: [],
         pendingAssets: [],
+        pendingFiles: [],
         assetCounter: 0,
         pageTextHasSaved: false
     };
@@ -1188,6 +1213,271 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         prepareTeamReorderGroup("members");
     }
 
+    function generateEventPageHtml(event) {
+        const title = escapeCmsHtml(event.title || "Eveniment nou");
+        const titleAttr = escapeCmsAttr(event.title || "Eveniment nou");
+        const date = escapeCmsHtml(event.date || "DATA EVENIMENTULUI");
+        const image = escapeCmsAttr(event.image || "images/placeholder.png");
+
+        return `<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <title>${title} - Comunitatea Regionala Penticostala Arad</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="pgpr1.css?v=${CMS_ASSET_VERSION}" />
+</head>
+<body class="page-transition-active">
+
+<header class="header">
+    <div class="header-container">
+        <div class="logo-area">
+            <a href="index.html#acasa" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;">
+                <img src="images/logo1.png" class="site-logo" alt="CRP Arad">
+                <div class="site-title">
+                    <h1>Comunitatea Regionala</h1>
+                    <span>PENTICOSTALA ARAD</span>
+                </div>
+            </a>
+        </div>
+
+        <nav id="mainNav" class="nav">
+            <a href="index.html#acasa" class="nav-link">Acasa</a>
+            <a href="index.html#despre" class="nav-link">Despre</a>
+            <a href="index.html#comitet" class="nav-link">Comitet</a>
+            <a href="index.html#convingeri" class="nav-link">Convingeri</a>
+            <a href="index.html#judete" class="nav-link">Judete</a>
+            <a href="index.html#evenimente" class="nav-link">Evenimente</a>
+            <a href="index.html#seminarii" class="nav-link">Seminarii</a>
+            <a href="index.html#liceu" class="nav-link">Liceu</a>
+            <a href="index.html#locatie" class="nav-link">Locatie</a>
+            <a href="index.html#contact" class="nav-link nav-btn">Contact</a>
+        </nav>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Deschide meniul">
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>
+
+<section class="band band-light inner-hero">
+    <div class="container inner-hero-layout reveal">
+        <div>
+            <p class="section-kicker">Eveniment</p>
+            <h1 class="inner-hero-title">${title}</h1>
+            <div class="inner-hero-meta">
+                <p><strong>Data:</strong> ${date}</p>
+                <p><strong>Locatie:</strong> Completeaza locatia evenimentului</p>
+                <p><strong>Organizator:</strong> Comunitatea Regionala Penticostala Arad</p>
+            </div>
+        </div>
+
+        <div class="inner-hero-photo">
+            <img src="${image}" alt="${titleAttr}" />
+        </div>
+    </div>
+</section>
+
+<section class="band band-muted">
+    <div class="container">
+        <div class="event-L-wrapper">
+            <aside class="event-L-aside">
+                <div class="event-info-card-single">
+                    <img src="${image}" class="event-L-photo-top media-zoom" alt="${titleAttr}">
+                    <h3>Informatii esentiale</h3>
+                    <ul class="event-detail-list">
+                        <li><strong>Data:</strong> ${date}</li>
+                        <li><strong>Locatie:</strong> Completeaza locatia evenimentului</li>
+                        <li><strong>Organizator:</strong> Comunitatea Regionala Penticostala Arad</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <article class="event-L-text">
+                <h2>${title}</h2>
+                <p>Scrie aici descrierea evenimentului. Acest text poate fi modificat direct din browser dupa ce te loghezi ca admin.</p>
+                <p>Adauga detalii despre program, invitati, locatie si mesajul principal al evenimentului.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band band-light">
+    <div class="container reveal">
+        <div class="section-header">
+            <p class="section-kicker">Galerie foto</p>
+            <h2>Momente din eveniment</h2>
+            <p class="section-intro">Adauga imagini reprezentative pentru acest eveniment.</p>
+        </div>
+        <div class="gallery-grid"></div>
+    </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&#10094;</button>
+        <img id="lightboxImage" src="">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">&#10095;</button>
+        <div class="lightbox-counter" id="lightboxCounter"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-inner">
+        &copy; <span id="yearSpan"></span> Comunitatea Regionala Penticostala Arad. Toate drepturile rezervate.
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="pgpr1.js?v=${CMS_ASSET_VERSION}"></script>
+</body>
+</html>
+`;
+    }
+
+    function rerenderHomeEditor(message) {
+        const wasEditing = state.editing;
+        state.editing = false;
+        deactivateFields();
+
+        if (typeof window.CRP_RENDER_HOME === "function") {
+            window.CRP_RENDER_HOME(state.content);
+        }
+
+        state.editing = wasEditing;
+        if (wasEditing) {
+            document.body.classList.add("cms-editing");
+            activateFields();
+            updateToolbar();
+        }
+
+        setStatus(message);
+    }
+
+    function archiveEvent(index) {
+        if (!state.content || !Array.isArray(state.content.events)) return;
+
+        const event = state.content.events[index];
+        if (!event) return;
+
+        const title = event.title || "acest eveniment";
+        if (!window.confirm(`Arhivezi "${title}"? Evenimentul va disparea de pe prima pagina dupa salvare.`)) {
+            return;
+        }
+
+        syncAllFields();
+
+        const archived = Array.isArray(state.content.archivedEvents)
+            ? state.content.archivedEvents.slice()
+            : [];
+
+        state.content.events = state.content.events.filter((_, itemIndex) => itemIndex !== index);
+        state.content.archivedEvents = [{
+            ...event,
+            archivedAt: new Date().toISOString()
+        }, ...archived];
+        state.dirty = true;
+
+        rerenderHomeEditor(`Evenimentul "${title}" a fost arhivat. Apasa Salveaza ca sa fie publicat.`);
+    }
+
+    function addEventPage() {
+        if (!state.content) return;
+
+        const title = (window.prompt("Cum se numeste evenimentul?") || "").trim();
+        if (!title) return;
+
+        syncAllFields();
+
+        const href = createUniqueEventHref(title);
+        const event = {
+            date: "DATA EVENIMENTULUI",
+            title,
+            text: "Descriere scurta pentru eveniment.",
+            image: "images/placeholder.png",
+            imageAlt: title,
+            href
+        };
+
+        const events = Array.isArray(state.content.events) ? state.content.events.slice() : [];
+        state.content.events = [event, ...events];
+        state.pendingFiles = state.pendingFiles.filter((file) => file.path !== href);
+        state.pendingFiles.push({
+            path: href,
+            contentBase64: toBase64Unicode(generateEventPageHtml(event)),
+            contentType: "text/html; charset=utf-8",
+            kind: "eventPage",
+            createOnly: true
+        });
+        state.dirty = true;
+
+        rerenderHomeEditor(`Evenimentul "${title}" a fost adaugat. Pagina ${href} va fi creata cand apesi Salveaza.`);
+    }
+
+    function refreshPendingEventPages() {
+        if (!state.pendingFiles.length || !state.content) return;
+
+        const allEvents = [
+            ...(Array.isArray(state.content.events) ? state.content.events : []),
+            ...(Array.isArray(state.content.archivedEvents) ? state.content.archivedEvents : [])
+        ];
+
+        state.pendingFiles = state.pendingFiles.map((file) => {
+            if (!file || file.kind !== "eventPage") return file;
+
+            const event = allEvents.find((item) => item && item.href === file.path);
+            if (!event) return file;
+
+            return {
+                ...file,
+                contentBase64: toBase64Unicode(generateEventPageHtml(event))
+            };
+        });
+    }
+
+    function prepareEventManager() {
+        if (!isHomePage || !state.content) return;
+
+        const section = document.getElementById("evenimente");
+        const header = section && section.querySelector(".section-header");
+        if (header) {
+            const tools = document.createElement("div");
+            tools.className = "cms-event-editor-tools";
+
+            const addButton = document.createElement("button");
+            addButton.type = "button";
+            addButton.className = "cms-event-add-button";
+            addButton.textContent = "Adauga eveniment";
+            addButton.addEventListener("click", (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                addEventPage();
+            });
+
+            tools.appendChild(addButton);
+            header.appendChild(tools);
+            state.eventControls.push(() => tools.remove());
+        }
+
+        document.querySelectorAll("#eventsTrack .event-card").forEach((card, index) => {
+            const archiveButton = document.createElement("button");
+            archiveButton.type = "button";
+            archiveButton.className = "cms-event-archive-button";
+            archiveButton.textContent = "Arhiveaza";
+            archiveButton.addEventListener("click", (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                archiveEvent(index);
+            });
+
+            card.appendChild(archiveButton);
+            state.eventControls.push(() => archiveButton.remove());
+        });
+    }
+
     function buildToolbar() {
         if (toolbar) return;
 
@@ -1338,6 +1628,71 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/^-+|-+$/g, "")
             .slice(0, 54) || "poza";
+    }
+
+    function slugifyEventPageTitle(value) {
+        return String(value || "eveniment")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "")
+            .slice(0, 58) || "eveniment";
+    }
+
+    function escapeCmsHtml(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function escapeCmsAttr(value) {
+        return escapeCmsHtml(value).replace(/`/g, "&#096;");
+    }
+
+    function toBase64Unicode(text) {
+        const bytes = new TextEncoder().encode(String(text || ""));
+        let binary = "";
+        const chunkSize = 0x8000;
+
+        for (let index = 0; index < bytes.length; index += chunkSize) {
+            const chunk = bytes.subarray(index, index + chunkSize);
+            binary += String.fromCharCode.apply(null, Array.from(chunk));
+        }
+
+        return btoa(binary);
+    }
+
+    function usedEventHrefs() {
+        const used = new Set(RESERVED_EVENT_PAGES);
+        ["events", "archivedEvents"].forEach((key) => {
+            if (Array.isArray(state.content && state.content[key])) {
+                state.content[key].forEach((event) => {
+                    if (event && typeof event.href === "string") used.add(event.href);
+                });
+            }
+        });
+        state.pendingFiles.forEach((file) => {
+            if (file && file.path) used.add(file.path);
+        });
+        return used;
+    }
+
+    function createUniqueEventHref(title) {
+        const base = slugifyEventPageTitle(title);
+        const used = usedEventHrefs();
+        let slug = base;
+        let counter = 2;
+
+        while (used.has(`${slug}.html`)) {
+            slug = `${base}-${counter}`;
+            counter += 1;
+        }
+
+        return `${slug}.html`;
     }
 
     function readFileAsDataUrl(file) {
@@ -1634,9 +1989,13 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         state.images = isHomePage ? collectImages() : [];
         state.images.forEach(prepareImage);
         prepareTeamReorder();
+        prepareEventManager();
     }
 
     function deactivateFields() {
+        state.eventControls.forEach((cleanup) => cleanup());
+        state.eventControls = [];
+
         state.reorders.forEach((cleanup) => cleanup());
         state.reorders = [];
 
@@ -1677,6 +2036,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         state.editing = true;
         state.dirty = false;
         state.pendingAssets = [];
+        state.pendingFiles = [];
         document.body.classList.add("cms-editing");
         activateFields();
         updateToolbar();
@@ -1688,6 +2048,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         state.editing = false;
         state.dirty = false;
         state.pendingAssets = [];
+        state.pendingFiles = [];
         document.body.classList.remove("cms-editing");
         deactivateFields();
         state.content = cloneContent(state.originalContent);
@@ -1706,6 +2067,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     async function saveChanges() {
         if (!state.editing) return;
         syncAllFields();
+        refreshPendingEventPages();
 
         if (!state.dirty) {
             setStatus("Nu sunt modificari noi.");
@@ -1720,6 +2082,11 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
                 pendingAssets: state.pendingAssets.map((asset) => ({
                     path: asset.path,
                     originalName: asset.originalName
+                })),
+                pendingFiles: state.pendingFiles.map((file) => ({
+                    path: file.path,
+                    contentType: file.contentType,
+                    kind: file.kind
                 }))
             }));
             state.originalContent = cloneContent(state.content);
@@ -1748,7 +2115,8 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
                 body: JSON.stringify({
                     path: state.contentPath,
                     content: state.content,
-                    assets: state.pendingAssets
+                    assets: state.pendingAssets,
+                    files: state.pendingFiles
                 })
             });
 
@@ -1762,6 +2130,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             state.originalContent = cloneContent(state.content);
             state.dirty = false;
             state.pendingAssets = [];
+            state.pendingFiles = [];
             if (!isHomePage) state.pageTextHasSaved = true;
             setStatus("Salvat in GitHub. Deploy-ul se actualizeaza automat.");
         } catch (error) {
@@ -2022,6 +2391,38 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         }
     }
 
+    function renderArchivedEvents(data) {
+        const section = document.getElementById("evenimenteArhivate");
+        const grid = document.getElementById("archivedEventsGrid");
+        if (!section || !grid) return;
+
+        const events = Array.isArray(data && data.archivedEvents) ? data.archivedEvents : [];
+
+        setText(".section-kicker", "ARHIVA", section);
+        setText("h2", "Evenimente arhivate", section);
+        setText(
+            ".section-intro",
+            `Evenimente mutate din pagina principala. Total arhivate: ${events.length}.`,
+            section
+        );
+
+        if (!events.length) {
+            grid.innerHTML = `<p class="archived-empty">Nu exista inca evenimente arhivate.</p>`;
+        } else {
+            grid.innerHTML = events.map((event) => `
+                <a href="${escapeAttr(event.href || "#")}" class="archived-event-card">
+                    <img src="${escapeAttr(event.image || "images/placeholder.png")}" alt="${escapeAttr(event.imageAlt || event.title || "")}">
+                    <span class="event-date">${escapeHtml(event.date || "")}</span>
+                    <strong>${escapeHtml(event.title || "Eveniment arhivat")}</strong>
+                    <p>${escapeHtml(event.text || "")}</p>
+                </a>
+            `).join("");
+        }
+
+        if (typeof revealOnScroll === "function") revealOnScroll();
+        window.dispatchEvent(new CustomEvent("crp-page-dom-updated"));
+    }
+
     function renderSeminars(sectionData, seminars) {
         const section = document.getElementById("seminarii");
         if (!section) return;
@@ -2159,5 +2560,11 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         loadJson("content/galleries/conferinta1.json")
             .then(renderGallery)
             .catch((error) => console.warn("Pages CMS gallery content is not available.", error));
+    }
+
+    if (pageName === "evenimente-arhivate.html") {
+        loadJson("content/site.json")
+            .then(renderArchivedEvents)
+            .catch((error) => console.warn("Archived events content is not available.", error));
     }
 })();

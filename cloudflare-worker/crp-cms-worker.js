@@ -3,8 +3,11 @@ const ALLOWED_CONTENT_FILES = new Set(["content/site.json"]);
 const PAGE_TEXT_PATTERN = /^content\/page-text\/[a-z0-9-]+\.json$/;
 const MAX_ASSET_SIZE = 8 * 1024 * 1024;
 const MAX_PAGE_TEXT_SIZE = 1024 * 1024;
+const MAX_HTML_FILE_SIZE = 1024 * 1024;
 const ASSET_PATH_PATTERN = /^images\/cms\/[a-z0-9][a-z0-9._-]*\.(jpg|jpeg|png|webp|gif)$/i;
+const HTML_FILE_PATTERN = /^[a-z0-9][a-z0-9-]*\.html$/;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"]);
+const RESERVED_HTML_FILES = new Set(["index.html", "evenimente-arhivate.html"]);
 
 export default {
     async fetch(request, env) {
@@ -45,11 +48,13 @@ export default {
             validateContent(path, body.content);
 
             const assets = validateAssets(body.assets || []);
-            const result = await commitChangesToGitHub(env, path, body.content, assets);
+            const files = validateFiles(body.files || []);
+            const result = await commitChangesToGitHub(env, path, body.content, assets, files);
             return json({
                 ok: true,
                 commit: result.commit,
-                assets: result.assets
+                assets: result.assets,
+                files: result.files
             }, 200, cors);
         } catch (error) {
             return json({ error: error.message || "Salvarea nu a reusit." }, 500, cors);
@@ -173,24 +178,70 @@ function validateAssets(assets) {
     });
 }
 
-async function commitChangesToGitHub(env, path, content, assets) {
+function validateFiles(files) {
+    if (!Array.isArray(files)) throw new Error("Lista de fisiere este invalida.");
+    if (files.length > 5) throw new Error("Prea multe fisiere intr-o singura salvare.");
+
+    return files.map((file) => {
+        const path = String(file.path || "");
+        const contentBase64 = String(file.contentBase64 || "");
+        const contentType = String(file.contentType || "").toLowerCase();
+
+        if (!HTML_FILE_PATTERN.test(path) || RESERVED_HTML_FILES.has(path)) {
+            throw new Error("Pagina noua trebuie sa fie un fisier HTML valid.");
+        }
+
+        if (contentType && !contentType.startsWith("text/html")) {
+            throw new Error("Tipul paginii noi nu este acceptat.");
+        }
+
+        if (!contentBase64 || !/^[A-Za-z0-9+/=]+$/.test(contentBase64)) {
+            throw new Error("Pagina noua nu a fost trimisa corect.");
+        }
+
+        const estimatedSize = Math.floor((contentBase64.length * 3) / 4);
+        if (estimatedSize > MAX_HTML_FILE_SIZE) {
+            throw new Error("Pagina noua este prea mare.");
+        }
+
+        return {
+            path,
+            contentBase64,
+            contentType: contentType || "text/html; charset=utf-8",
+            createOnly: file.createOnly !== false
+        };
+    });
+}
+
+async function commitChangesToGitHub(env, path, content, assets, extraFiles) {
     const files = assets.map((asset) => ({
         path: asset.path,
         contentBase64: asset.contentBase64
     }));
+    extraFiles.forEach((file) => {
+        files.push({
+            path: file.path,
+            contentBase64: file.contentBase64,
+            createOnly: file.createOnly
+        });
+    });
     files.push({
         path,
         contentBase64: toBase64(`${JSON.stringify(content, null, 2)}\n`)
     });
 
-    const message = assets.length
-        ? `cms: actualizeaza ${path} si imagini`
+    const details = [];
+    if (assets.length) details.push("imagini");
+    if (extraFiles.length) details.push("pagini noi");
+    const message = details.length
+        ? `cms: actualizeaza ${path} si ${details.join(", ")}`
         : `cms: actualizeaza ${path}`;
     const result = await commitFilesToGitHub(env, files, message);
 
     return {
         commit: result.commit,
-        assets: assets.map((asset) => ({ path: asset.path }))
+        assets: assets.map((asset) => ({ path: asset.path })),
+        files: extraFiles.map((file) => ({ path: file.path }))
     };
 }
 
@@ -219,6 +270,16 @@ async function commitFilesToGitHub(env, files, message) {
         const parentCommit = await githubJson(`${api}/git/commits/${parentSha}`, { headers });
         const baseTree = parentCommit.tree && parentCommit.tree.sha;
         if (!baseTree) throw new Error("Nu pot citi structura repo-ului.");
+
+        const createOnlyPaths = files.filter((file) => file.createOnly).map((file) => file.path);
+        if (createOnlyPaths.length) {
+            const currentTree = await githubJson(`${api}/git/trees/${baseTree}?recursive=1`, { headers });
+            const existingPaths = new Set((currentTree.tree || []).map((entry) => entry.path));
+            const duplicatePath = createOnlyPaths.find((filePath) => existingPaths.has(filePath));
+            if (duplicatePath) {
+                throw new Error(`Fisierul ${duplicatePath} exista deja. Alege alt nume pentru eveniment.`);
+            }
+        }
 
         const tree = [];
         for (const file of files) {
