@@ -542,7 +542,10 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         });
 
         document.addEventListener("keydown", (event) => {
-            const isEditShortcut = event.ctrlKey && event.altKey && event.key.toLowerCase() === "e";
+            const key = event.key.toLowerCase();
+            const isEditShortcut =
+                (event.ctrlKey && event.altKey && key === "e") ||
+                (event.ctrlKey && event.shiftKey && key === "e");
             if (!isEditShortcut || event.repeat) return;
 
             event.preventDefault();
@@ -553,6 +556,11 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         document.addEventListener("keydown", (event) => {
             if (event.key === "Escape") closeAuthModal();
         });
+
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("login") === "1" || params.get("edit") === "1") {
+            window.setTimeout(openAuthModal, 250);
+        }
     }
 
     function openAuthModal() {
