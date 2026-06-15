@@ -14,8 +14,8 @@
     }
   },
   "about": {
-    "kicker": "Despre noi",
-    "title": "O comunitate pentru bisericile din Arad, Timis, Hunedoara, Caras-Severin",
+    "kicker": "DESPRE NOI",
+    "title": "Elias Mureșan Daniel",
     "intro": "Comunitatea Regionala Penticostala Arad apartine Cultului Crestin Penticostal. Coordonam in mod transparent activitatea bisericilor penticostale din judetele Arad, Timis, Hunedoara si Caras-Severin, cultivand unitatea frateasca si responsabilitatea fata de Scriptura.",
     "items": [
       "Sprijin pentru bisericile locale.",
@@ -27,71 +27,71 @@
     "imageAlt": "Cladirea Comunitatii Regionale Penticostale Arad"
   },
   "team": {
-    "kicker": "Comitet",
+    "kicker": "COMITET",
     "title": "Conducerea Comunitatii",
     "intro": "Pastori si slujitori care coordoneaza activitatea comunitatii regionale.",
     "main": [
       {
         "name": "Tomuta Simion",
-        "role": "Presedinte",
+        "role": "PRESEDINTE",
         "image": "images/TomutaSimion.png"
       },
       {
         "name": "Stanciu Cornel",
-        "role": "Vicepresedinte",
+        "role": "VICEPRESEDINTE",
         "image": "images/StanciuCornel.png"
       },
       {
         "name": "Avram Aurel",
-        "role": "Secretar",
+        "role": "SECRETAR",
         "image": "images/AvramAurel.png"
       }
     ],
     "members": [
       {
         "name": "Filip Ioan",
-        "role": "Pastor",
+        "role": "PASTOR",
         "image": "images/IoanFilip.png"
       },
       {
         "name": "Hada Daniel",
-        "role": "Pastor",
+        "role": "PASTOR",
         "image": "images/HadaDaniel.png"
       },
       {
         "name": "Petroiesc Mihai",
-        "role": "Pastor",
+        "role": "PASTOR",
         "image": "images/PetroiescMihai.png"
       },
       {
         "name": "Coroban Titus",
-        "role": "Pastor",
+        "role": "PASTOR",
         "image": "images/CorobanTitus.png"
       },
       {
         "name": "Ilioni Florin",
-        "role": "Pastor",
+        "role": "PASTOR",
         "image": "images/IlioniFlorin.png"
       },
       {
         "name": "Crisan Danut",
-        "role": "Pastor",
+        "role": "PASTOR",
         "image": "images/CrisanDanut.png"
       },
       {
         "name": "Muresan Mircea",
-        "role": "Pastor",
+        "role": "PASTOR",
         "image": "images/MuresanMircea.png"
       },
       {
         "name": "Anca Iosif",
-        "role": "Pastor",
+        "role": "PASTOR",
         "image": "images/IosifAnca.png"
       }
     ]
   },
   "beliefs": {
-    "pill": "Documente oficiale",
+    "pill": "DOCUMENTE OFICIALE",
     "title": "Convingeri",
     "subtitle": "Documentele fundamentale ale credintei si organizarii in cadrul Comunitatii Regionale.",
     "cards": [
@@ -119,7 +119,7 @@
     "meta": "Toate documentele se deschid intr-o fila noua si pot fi descarcate in format electronic."
   },
   "counties": {
-    "kicker": "Regiunile noastre",
+    "kicker": "REGIUNILE NOASTRE",
     "title": "Judetele coordonate de Comunitatea Regionala",
     "intro": "Oferim sprijin, coordonare si resurse bisericilor penticostale din cele patru judete ale regiunii noastre.",
     "tagline": "JUDETE",
@@ -151,13 +151,13 @@
     ]
   },
   "eventsSection": {
-    "kicker": "Evenimente",
+    "kicker": "EVENIMENTE",
     "title": "Cele mai recente evenimente",
     "intro": "O privire de ansamblu asupra intalnirilor si conferintelor importante din comunitatea noastra."
   },
   "events": [
     {
-      "date": "6 decembrie 2025",
+      "date": "6 DECEMBRIE 2025",
       "title": "Conferinta pastorala",
       "text": "Discernamant. Disciplina. Dedicare. - O conferinta care ne reasaza chemarea.",
       "image": "conferinta1/img10.png",
@@ -165,7 +165,7 @@
       "href": "conferinta1.html"
     },
     {
-      "date": "3 decembrie 2025",
+      "date": "3 DECEMBRIE 2025",
       "title": "Intalnire municipala de tineret",
       "text": "O seara de lauda, inchinare si mesaj biblic pentru tinerii din regiune.",
       "image": "conferinta2/pozc17-min.JPG",
@@ -173,7 +173,7 @@
       "href": "conftineret.html"
     },
     {
-      "date": "2 decembrie 2025",
+      "date": "2 DECEMBRIE 2025",
       "title": "Intalnire de suflet la Comunitatea Regionala Penticostala Arad",
       "text": "Educatia teologica - investitie strategica pentru generatiile care vin.",
       "image": "eveniment3/puza1.png",
@@ -215,7 +215,7 @@
   ],
   "school": {
     "title": "Liceul Penticostal Arad",
-    "subtitle": "Informatii",
+    "subtitle": "INFORMATII",
     "hoverText": "Vezi informatii despre Liceul Penticostal Arad",
     "href": "liceu.html",
     "image": "images/liceu-penticostal-arad.jpg",
@@ -228,10 +228,10 @@
     "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2812.8062081369016!2d21.319915!3d46.178825!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474598a8c4e74143%3A0x0000000000000000!2sStrada%20Miron%20Costin%202A%2C%20Arad!5e0!3m2!1sro!2sro!4v1736539200000"
   },
   "contact": {
-    "kicker": "Contact",
+    "kicker": "CONTACT",
     "title": "Luati legatura cu noi",
     "intro": "Pentru intrebari sau colaborari, ne puteti scrie folosind formularul de contact.",
-    "pill": "Biroul Comunitatii Regionale",
+    "pill": "BIROUL COMUNITATII REGIONALE",
     "heading": "Suntem la un mesaj distanta",
     "text": "Ne puteti scrie pentru intrebari legate de evenimente, colaborari sau informatii administrative. Vom directiona mesajul catre persoanele potrivite.",
     "address": "Str. Miron Costin, Nr. 2A, 310146.",
@@ -241,7 +241,7 @@
   },
   "footer": {
     "brand": "Comunitatea Regionala",
-    "subtitle": "Penticostala Arad",
+    "subtitle": "PENTICOSTALA ARAD",
     "text": "Sprijinim bisericile penticostale din judetele Arad, Timis, Hunedoara si Caras-Severin in slujire, inchinare si misiune.",
     "address": "Str. Miron Costin, Nr. 2A, 310146 Arad",
     "email": "crparad@gmail.com",
