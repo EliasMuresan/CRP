@@ -497,6 +497,43 @@ body.cms-editing [data-cms-image] {
     outline: 2px dashed rgba(44,93,134,.55);
     outline-offset: 4px;
 }
+.cms-reorder-card {
+    position: relative;
+}
+.cms-reorder-card.is-dragging {
+    opacity: .45;
+}
+.cms-reorder-controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 25;
+    display: flex;
+    gap: 6px;
+}
+.cms-reorder-button {
+    min-width: 34px;
+    min-height: 34px;
+    border: 1px solid rgba(255,255,255,.72);
+    border-radius: var(--radius-sm);
+    padding: 0 9px;
+    background: rgba(24,34,46,.9);
+    color: #fff;
+    font: inherit;
+    font-size: .78rem;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 10px 26px rgba(20,32,46,.2);
+    cursor: pointer;
+}
+.cms-reorder-button:hover { background: var(--accent-dark); }
+.cms-drag-handle { cursor: grab; }
+.cms-drag-handle:active { cursor: grabbing; }
+body.cms-editing .cms-reorder-grid {
+    outline: 2px dashed rgba(44,93,134,.24);
+    outline-offset: 10px;
+    border-radius: var(--radius-lg);
+}
 body.cms-crop-open { overflow: hidden; }
 .cms-crop-modal {
     position: fixed;

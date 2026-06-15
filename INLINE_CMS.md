@@ -13,6 +13,7 @@ Dupa login cu `crparad@gmail.com`, apare bara `Editor site`. Apesi `Editeaza pag
 - Editare inline pentru textele de pe pagina principala: hero, despre, comitet, documente, judete, evenimente, seminarii, liceu, locatie, contact si footer.
 - Editare inline pentru textele de pe toate celelalte pagini ale site-ului.
 - Schimbare poze direct din pagina pentru hero, despre, comitet, evenimente si liceu.
+- Reordonare carduri in sectiunea Comitet prin tragere sau butoanele cu sageti.
 - Fara dashboard public si fara buton de login vizibil pentru vizitatori.
 - Fara schimbari de layout pentru vizitatori.
 - Daca endpoint-ul de salvare nu este configurat, editorul salveaza draftul local in browser si afiseaza mesajul ca lipseste publicarea in GitHub.

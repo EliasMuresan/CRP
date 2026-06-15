@@ -736,6 +736,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         originalContent: null,
         fields: [],
         images: [],
+        reorders: [],
         pendingAssets: [],
         assetCounter: 0,
         pageTextHasSaved: false
@@ -1055,6 +1056,174 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         addImageBySelector(images, "#liceu .liceu-img-wrapper img", ["school", "image"], "Liceu: poza");
 
         return images;
+    }
+
+    function teamGroupConfig(group) {
+        if (group === "main") {
+            return {
+                key: "main",
+                label: "liderii principali",
+                selector: "#comitet .team-main-grid",
+                cardSelector: ".team-card-main"
+            };
+        }
+
+        return {
+            key: "members",
+            label: "membrii comitetului",
+            selector: "#comitet .team-secondary-grid",
+            cardSelector: ".team-card-secondary"
+        };
+    }
+
+    function teamCards(grid, cardSelector) {
+        return Array.from(grid.children).filter((node) => node.matches(cardSelector));
+    }
+
+    function getGridInsertTarget(grid, cardSelector, x, y) {
+        const cards = teamCards(grid, cardSelector).filter((card) => !card.classList.contains("is-dragging"));
+        return cards.find((card) => {
+            const rect = card.getBoundingClientRect();
+            const centerY = rect.top + rect.height / 2;
+            const centerX = rect.left + rect.width / 2;
+            return y < centerY || (y < rect.bottom && x < centerX);
+        }) || null;
+    }
+
+    function refreshTeamEditorControls() {
+        deactivateFields();
+        activateFields();
+    }
+
+    function commitTeamOrder(group) {
+        if (!state.editing || !state.content || !state.content.team) return;
+
+        const config = teamGroupConfig(group);
+        const grid = document.querySelector(config.selector);
+        if (!grid) return;
+
+        syncAllFields();
+
+        const previous = Array.isArray(state.content.team[config.key]) ? state.content.team[config.key] : [];
+        const cards = teamCards(grid, config.cardSelector);
+        const next = cards.map((card) => previous[Number(card.dataset.cmsTeamIndex)]).filter(Boolean);
+
+        if (next.length !== previous.length) return;
+
+        state.content.team[config.key] = next;
+        state.dirty = true;
+        setStatus(`Ordinea pentru ${config.label} a fost schimbata. Apasa Salveaza.`);
+        refreshTeamEditorControls();
+    }
+
+    function moveTeamCard(card, direction) {
+        const group = card.dataset.cmsTeamGroup;
+        const config = teamGroupConfig(group);
+        const grid = document.querySelector(config.selector);
+        if (!grid) return;
+
+        const cards = teamCards(grid, config.cardSelector);
+        const index = cards.indexOf(card);
+        const target = cards[index + direction];
+        if (!target) return;
+
+        if (direction < 0) {
+            grid.insertBefore(card, target);
+        } else {
+            grid.insertBefore(target, card);
+        }
+
+        commitTeamOrder(group);
+    }
+
+    function prepareTeamReorderGroup(group) {
+        const config = teamGroupConfig(group);
+        const grid = document.querySelector(config.selector);
+        if (!grid || !state.content || !state.content.team || !Array.isArray(state.content.team[config.key])) return;
+
+        let draggingCard = null;
+        grid.classList.add("cms-reorder-grid");
+
+        const onGridDragOver = (event) => {
+            if (!draggingCard) return;
+            event.preventDefault();
+            const target = getGridInsertTarget(grid, config.cardSelector, event.clientX, event.clientY);
+            if (!target) {
+                grid.appendChild(draggingCard);
+            } else if (target !== draggingCard) {
+                grid.insertBefore(draggingCard, target);
+            }
+        };
+
+        grid.addEventListener("dragover", onGridDragOver);
+        state.reorders.push(() => {
+            grid.removeEventListener("dragover", onGridDragOver);
+            grid.classList.remove("cms-reorder-grid");
+        });
+
+        teamCards(grid, config.cardSelector).forEach((card, index) => {
+            card.classList.add("cms-reorder-card");
+            card.dataset.cmsTeamGroup = config.key;
+            card.dataset.cmsTeamIndex = String(index);
+            card.draggable = true;
+
+            const controls = document.createElement("div");
+            controls.className = "cms-reorder-controls";
+            controls.innerHTML = `
+                <button class="cms-reorder-button cms-drag-handle" type="button" title="Trage cardul">Muta</button>
+                <button class="cms-reorder-button" type="button" data-cms-move="-1" title="Muta in stanga/sus">&uarr;</button>
+                <button class="cms-reorder-button" type="button" data-cms-move="1" title="Muta in dreapta/jos">&darr;</button>
+            `;
+            card.appendChild(controls);
+
+            const onDragStart = (event) => {
+                if (!event.target.closest(".cms-drag-handle")) {
+                    event.preventDefault();
+                    return;
+                }
+
+                draggingCard = card;
+                card.classList.add("is-dragging");
+                event.dataTransfer.effectAllowed = "move";
+                event.dataTransfer.setData("text/plain", `${config.key}:${index}`);
+            };
+
+            const onDragEnd = () => {
+                if (!draggingCard) return;
+                card.classList.remove("is-dragging");
+                draggingCard = null;
+                commitTeamOrder(config.key);
+            };
+
+            const onControlClick = (event) => {
+                const moveButton = event.target.closest("[data-cms-move]");
+                if (!moveButton) return;
+                event.preventDefault();
+                event.stopPropagation();
+                moveTeamCard(card, Number(moveButton.dataset.cmsMove));
+            };
+
+            card.addEventListener("dragstart", onDragStart);
+            card.addEventListener("dragend", onDragEnd);
+            controls.addEventListener("click", onControlClick);
+
+            state.reorders.push(() => {
+                card.removeEventListener("dragstart", onDragStart);
+                card.removeEventListener("dragend", onDragEnd);
+                controls.removeEventListener("click", onControlClick);
+                controls.remove();
+                card.classList.remove("cms-reorder-card", "is-dragging");
+                card.removeAttribute("draggable");
+                card.removeAttribute("data-cms-team-group");
+                card.removeAttribute("data-cms-team-index");
+            });
+        });
+    }
+
+    function prepareTeamReorder() {
+        if (!isHomePage) return;
+        prepareTeamReorderGroup("main");
+        prepareTeamReorderGroup("members");
     }
 
     function buildToolbar() {
@@ -1502,9 +1671,13 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         state.fields.forEach(prepareField);
         state.images = isHomePage ? collectImages() : [];
         state.images.forEach(prepareImage);
+        prepareTeamReorder();
     }
 
     function deactivateFields() {
+        state.reorders.forEach((cleanup) => cleanup());
+        state.reorders = [];
+
         state.fields.forEach((field) => {
             field.node.removeAttribute("data-cms-editable");
             field.node.removeAttribute("data-cms-path");
