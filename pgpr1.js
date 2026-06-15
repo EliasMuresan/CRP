@@ -494,19 +494,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     }
 
     function buildAuthUi() {
-        const nav = document.getElementById("mainNav");
-        if (!nav || document.getElementById("crpAuthButton")) return;
-
-        const button = document.createElement("button");
-        button.id = "crpAuthButton";
-        button.className = "auth-nav-button";
-        button.type = "button";
-        button.textContent = "Login";
-        button.addEventListener("click", () => {
-            closeMobileNav();
-            openAuthModal();
-        });
-        nav.appendChild(button);
+        if (document.getElementById("crpAuthModal")) return;
 
         const modal = document.createElement("div");
         modal.id = "crpAuthModal";
@@ -551,6 +539,19 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         modal.querySelector(".auth-close").addEventListener("click", closeAuthModal);
         modal.addEventListener("click", (event) => {
             if (event.target === modal) closeAuthModal();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            const isEditShortcut = event.ctrlKey && event.altKey && event.key.toLowerCase() === "e";
+            if (!isEditShortcut || event.repeat) return;
+
+            event.preventDefault();
+            closeMobileNav();
+            openAuthModal();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") closeAuthModal();
         });
     }
 
@@ -598,13 +599,6 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         document.body.classList.add("auth-ready");
         document.body.classList.toggle("is-authenticated", Boolean(user));
         document.body.classList.toggle("can-edit-site", canEdit);
-
-        const button = document.getElementById("crpAuthButton");
-        if (button) {
-            button.textContent = user ? "Cont" : "Login";
-            button.classList.toggle("is-logged", Boolean(user));
-            button.classList.toggle("can-edit-site", canEdit);
-        }
 
         const modal = document.getElementById("crpAuthModal");
         if (modal) {
