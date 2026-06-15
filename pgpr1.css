@@ -381,6 +381,112 @@ body.auth-modal-open { overflow: hidden; }
 
 .auth-edit-button { width: 100%; margin-top: 18px; }
 
+/* =========================================================
+   INLINE CMS EDITOR
+   ========================================================= */
+
+.cms-editor-bar {
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    z-index: 940;
+    width: min(calc(100vw - 24px), 760px);
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 10px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    box-shadow: 0 18px 50px rgba(20,32,46,.18);
+}
+.cms-editor-bar[hidden] { display: none; }
+.cms-editor-main {
+    min-width: 0;
+    display: grid;
+    gap: 2px;
+}
+.cms-editor-main strong {
+    color: var(--text-main);
+    font-size: .9rem;
+    line-height: 1.2;
+}
+.cms-editor-status {
+    min-height: 18px;
+    color: var(--text-muted);
+    font-size: .82rem;
+    line-height: 1.25;
+}
+.cms-editor-status.is-error { color: #b42318; }
+.cms-editor-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.cms-editor-button {
+    min-height: 40px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    padding: 0 14px;
+    background: #fff;
+    color: var(--text-main);
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.cms-editor-button:hover { background: var(--bg-muted); }
+.cms-editor-button.cms-start,
+.cms-editor-button.cms-save {
+    border-color: var(--accent-dark);
+    background: var(--accent-dark);
+    color: #fff;
+}
+.cms-editor-button.cms-start:hover,
+.cms-editor-button.cms-save:hover { background: var(--accent); }
+
+body.cms-editing { padding-bottom: 84px; }
+body.cms-editing [data-cms-editable] {
+    outline: 2px dashed rgba(44,93,134,.55);
+    outline-offset: 4px;
+    border-radius: 4px;
+    cursor: text;
+}
+body.cms-editing [data-cms-editable]:hover,
+body.cms-editing [data-cms-editable]:focus {
+    outline-style: solid;
+    background: rgba(238,243,248,.86);
+}
+body.cms-editing [data-cms-editable]:focus {
+    outline-color: var(--accent-dark);
+}
+body.cms-editing .hero [data-cms-editable]:hover,
+body.cms-editing .hero [data-cms-editable]:focus {
+    background: rgba(255,255,255,.12);
+}
+body.cms-editing a[data-cms-editable],
+body.cms-editing a [data-cms-editable] {
+    cursor: text;
+}
+
+@media (max-width: 640px) {
+    .cms-editor-bar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+    .cms-editor-actions {
+        justify-content: stretch;
+    }
+    .cms-editor-button {
+        flex: 1 1 0;
+        padding: 0 10px;
+    }
+}
+
 
 /* =========================================================
    HERO

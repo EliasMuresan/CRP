@@ -679,7 +679,10 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             const editButton = document.querySelector(".auth-edit-button");
             if (editButton) {
                 editButton.addEventListener("click", () => {
-                    setStatus("Editorul se deschide in pasul urmator.");
+                    closeAuthModal();
+                    if (window.CRP_CMS && typeof window.CRP_CMS.open === "function") {
+                        window.CRP_CMS.open();
+                    }
                 });
             }
 
@@ -704,6 +707,412 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         document.addEventListener("DOMContentLoaded", bootFirebaseAuth, { once: true });
     } else {
         bootFirebaseAuth();
+    }
+})();
+
+/* ============================================================
+   INLINE CMS EDITOR
+============================================================ */
+(function () {
+    if (window.__crpInlineCmsBooted) return;
+    window.__crpInlineCmsBooted = true;
+
+    const CONTENT_PATH = "content/site.json";
+    const DRAFT_KEY = "crp-inline-cms-draft";
+    const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "";
+
+    const state = {
+        canEdit: false,
+        editing: false,
+        dirty: false,
+        content: null,
+        originalContent: null,
+        fields: []
+    };
+
+    const preparedNodes = new WeakSet();
+    let toolbar = null;
+    let statusNode = null;
+
+    function cloneContent(value) {
+        return JSON.parse(JSON.stringify(value || {}));
+    }
+
+    function pathToString(path) {
+        return path.join(".");
+    }
+
+    function getAtPath(source, path) {
+        return path.reduce((current, key) => current && current[key], source);
+    }
+
+    function setAtPath(source, path, value) {
+        let current = source;
+        path.slice(0, -1).forEach((key) => {
+            if (current[key] === undefined || current[key] === null) current[key] = {};
+            current = current[key];
+        });
+        current[path[path.length - 1]] = value;
+    }
+
+    function normalizeEditableText(node) {
+        return node.innerText
+            .replace(/\u00a0/g, " ")
+            .replace(/[ \t]+\n/g, "\n")
+            .replace(/\n{3,}/g, "\n\n")
+            .trim();
+    }
+
+    function addField(fields, selector, path, label, root, options) {
+        const node = (root || document).querySelector(selector);
+        if (!node) return;
+        fields.push({
+            node,
+            path,
+            label,
+            multiline: Boolean(options && options.multiline),
+            anchor: Boolean(options && options.anchor)
+        });
+    }
+
+    function collectFields() {
+        const fields = [];
+
+        addField(fields, ".hero-kicker", ["hero", "kicker"], "Hero: eticheta");
+        addField(fields, ".hero h1", ["hero", "title"], "Hero: titlu");
+        addField(fields, ".hero-subtitle", ["hero", "subtitle"], "Hero: descriere", document, { multiline: true });
+        addField(fields, ".hero-actions .btn.primary", ["hero", "primaryButton", "label"], "Hero: buton principal", document, { anchor: true });
+        addField(fields, ".hero-actions .btn.ghost", ["hero", "secondaryButton", "label"], "Hero: buton secundar", document, { anchor: true });
+
+        addField(fields, "#despre .section-kicker", ["about", "kicker"], "Despre: eticheta");
+        addField(fields, "#despre h2", ["about", "title"], "Despre: titlu");
+        addField(fields, "#despre .section-intro", ["about", "intro"], "Despre: text", document, { multiline: true });
+        document.querySelectorAll("#despre .checklist li").forEach((item, index) => {
+            fields.push({ node: item, path: ["about", "items", index], label: `Despre: punct ${index + 1}` });
+        });
+
+        addField(fields, "#comitet .section-kicker", ["team", "kicker"], "Comitet: eticheta");
+        addField(fields, "#comitet h2", ["team", "title"], "Comitet: titlu");
+        addField(fields, "#comitet .section-intro", ["team", "intro"], "Comitet: descriere", document, { multiline: true });
+        document.querySelectorAll("#comitet .team-main-grid > div").forEach((card, index) => {
+            addField(fields, "h3", ["team", "main", index, "name"], `Lider principal ${index + 1}: nume`, card);
+            addField(fields, ".team-role", ["team", "main", index, "role"], `Lider principal ${index + 1}: rol`, card);
+        });
+        document.querySelectorAll("#comitet .team-secondary-grid > div").forEach((card, index) => {
+            addField(fields, "h3", ["team", "members", index, "name"], `Membru comitet ${index + 1}: nume`, card);
+            addField(fields, ".team-role", ["team", "members", index, "role"], `Membru comitet ${index + 1}: rol`, card);
+        });
+
+        addField(fields, "#convingeri .conv-pill", ["beliefs", "pill"], "Convingeri: eticheta");
+        addField(fields, "#convingeri .conv-title", ["beliefs", "title"], "Convingeri: titlu");
+        addField(fields, "#convingeri .conv-subtitle", ["beliefs", "subtitle"], "Convingeri: descriere", document, { multiline: true });
+        addField(fields, "#convingeri .conv-meta", ["beliefs", "meta"], "Convingeri: nota", document, { multiline: true });
+        document.querySelectorAll("#convingeri .conv-grid .conv-card").forEach((card, index) => {
+            addField(fields, "h3", ["beliefs", "cards", index, "title"], `Document ${index + 1}: titlu`, card);
+        });
+
+        addField(fields, "#judete .section-kicker", ["counties", "kicker"], "Judete: eticheta");
+        addField(fields, "#judete h2", ["counties", "title"], "Judete: titlu");
+        addField(fields, "#judete .section-intro", ["counties", "intro"], "Judete: descriere", document, { multiline: true });
+        addField(fields, "#judete .judete-tagline span", ["counties", "tagline"], "Judete: titlu panou");
+        document.querySelectorAll("#judete .judete-grid .judet-card").forEach((card, index) => {
+            addField(fields, ".judet-name", ["counties", "cards", index, "name"], `Judet ${index + 1}: nume`, card);
+            addField(fields, ".judet-sub", ["counties", "cards", index, "subtitle"], `Judet ${index + 1}: text`, card);
+            addField(fields, ".judet-overlay p", ["counties", "cards", index, "overlay"], `Judet ${index + 1}: hover`, card, { multiline: true });
+        });
+
+        addField(fields, "#evenimente .section-kicker", ["eventsSection", "kicker"], "Evenimente: eticheta");
+        addField(fields, "#evenimente h2", ["eventsSection", "title"], "Evenimente: titlu");
+        addField(fields, "#evenimente .section-intro", ["eventsSection", "intro"], "Evenimente: descriere", document, { multiline: true });
+        document.querySelectorAll("#eventsTrack .event-card").forEach((card, index) => {
+            addField(fields, ".event-date", ["events", index, "date"], `Eveniment ${index + 1}: data`, card);
+            addField(fields, ".event-title", ["events", index, "title"], `Eveniment ${index + 1}: titlu`, card);
+            addField(fields, ".event-text", ["events", index, "text"], `Eveniment ${index + 1}: text`, card, { multiline: true });
+        });
+
+        addField(fields, "#seminarii .section-kicker", ["seminarsSection", "kicker"], "Seminarii: eticheta");
+        addField(fields, "#seminarii h2", ["seminarsSection", "title"], "Seminarii: titlu");
+        addField(fields, "#seminarii .section-intro", ["seminarsSection", "intro"], "Seminarii: descriere", document, { multiline: true });
+        document.querySelectorAll("#seminarii .seminars-grid .seminar-card").forEach((card, index) => {
+            addField(fields, "h3", ["seminars", index, "title"], `Seminar ${index + 1}: titlu`, card);
+            addField(fields, "p", ["seminars", index, "text"], `Seminar ${index + 1}: text`, card, { multiline: true });
+        });
+
+        addField(fields, "#liceu .liceu-title", ["school", "title"], "Liceu: titlu");
+        addField(fields, "#liceu .liceu-subtitle", ["school", "subtitle"], "Liceu: subtitlu");
+        addField(fields, "#liceu .liceu-hover-overlay span", ["school", "hoverText"], "Liceu: hover");
+
+        addField(fields, "#locatie .section-kicker", ["location", "kicker"], "Locatie: eticheta");
+        addField(fields, "#locatie h2", ["location", "title"], "Locatie: titlu");
+        addField(fields, "#locatie .section-intro", ["location", "intro"], "Locatie: descriere", document, { multiline: true });
+
+        addField(fields, "#contact .section-kicker", ["contact", "kicker"], "Contact: eticheta");
+        addField(fields, "#contact h2", ["contact", "title"], "Contact: titlu");
+        addField(fields, "#contact .section-intro", ["contact", "intro"], "Contact: descriere", document, { multiline: true });
+        addField(fields, "#contact .contact-pill", ["contact", "pill"], "Contact: eticheta card");
+        addField(fields, "#contact .contact-title", ["contact", "heading"], "Contact: titlu card");
+        addField(fields, "#contact .contact-text", ["contact", "text"], "Contact: text card", document, { multiline: true });
+        addField(fields, "#contact .contact-details li:nth-child(1) span", ["contact", "address"], "Contact: adresa");
+        addField(fields, "#contact .contact-details li:nth-child(2) a", ["contact", "email"], "Contact: email", document, { anchor: true });
+        addField(fields, "#contact .contact-details li:nth-child(3) span", ["contact", "phone"], "Contact: telefon");
+        document.querySelectorAll("#contact .contact-note").forEach((note) => {
+            fields.push({ node: note, path: ["contact", "note"], label: "Contact: nota", multiline: true });
+        });
+
+        addField(fields, ".site-footer .footer-brand strong", ["footer", "brand"], "Footer: brand");
+        addField(fields, ".site-footer .footer-sub", ["footer", "subtitle"], "Footer: subtitlu");
+        addField(fields, ".site-footer .footer-brand p", ["footer", "text"], "Footer: text", document, { multiline: true });
+        addField(fields, ".site-footer .footer-col:last-child p:nth-of-type(1)", ["footer", "address"], "Footer: adresa");
+        addField(fields, ".site-footer .footer-col:last-child p:nth-of-type(2) a", ["footer", "email"], "Footer: email", document, { anchor: true });
+        addField(fields, ".site-footer .footer-col:last-child p:nth-of-type(3)", ["footer", "phone"], "Footer: telefon");
+
+        return fields;
+    }
+
+    function buildToolbar() {
+        if (toolbar) return;
+
+        toolbar = document.createElement("div");
+        toolbar.className = "cms-editor-bar";
+        toolbar.hidden = true;
+        toolbar.innerHTML = `
+            <div class="cms-editor-main">
+                <strong>Editor site</strong>
+                <span class="cms-editor-status" role="status"></span>
+            </div>
+            <div class="cms-editor-actions">
+                <button class="cms-editor-button cms-start" type="button">Editeaza pagina</button>
+                <button class="cms-editor-button cms-save" type="button" hidden>Salveaza</button>
+                <button class="cms-editor-button cms-cancel" type="button" hidden>Renunta</button>
+            </div>
+        `;
+        document.body.appendChild(toolbar);
+
+        statusNode = toolbar.querySelector(".cms-editor-status");
+        toolbar.querySelector(".cms-start").addEventListener("click", openEditor);
+        toolbar.querySelector(".cms-save").addEventListener("click", saveChanges);
+        toolbar.querySelector(".cms-cancel").addEventListener("click", cancelEditing);
+    }
+
+    function setStatus(message, isError) {
+        if (!statusNode) return;
+        statusNode.textContent = message || "";
+        statusNode.classList.toggle("is-error", Boolean(isError));
+    }
+
+    function updateToolbar() {
+        buildToolbar();
+        toolbar.hidden = !state.canEdit;
+        toolbar.classList.toggle("is-editing", state.editing);
+
+        const startButton = toolbar.querySelector(".cms-start");
+        const saveButton = toolbar.querySelector(".cms-save");
+        const cancelButton = toolbar.querySelector(".cms-cancel");
+
+        if (startButton) startButton.hidden = state.editing;
+        if (saveButton) saveButton.hidden = !state.editing;
+        if (cancelButton) cancelButton.hidden = !state.editing;
+    }
+
+    async function ensureContent() {
+        if (state.content) return state.content;
+
+        if (window.CRP_SITE_CONTENT) {
+            state.content = cloneContent(window.CRP_SITE_CONTENT);
+            return state.content;
+        }
+
+        const response = await fetch(CONTENT_PATH, { cache: "no-cache" });
+        if (!response.ok) throw new Error("Nu pot incarca fisierul de continut.");
+        state.content = await response.json();
+        return state.content;
+    }
+
+    function syncField(field) {
+        const text = normalizeEditableText(field.node);
+        setAtPath(state.content, field.path, text);
+    }
+
+    function syncAllFields() {
+        state.fields.forEach(syncField);
+    }
+
+    function prepareField(field) {
+        const node = field.node;
+        node.dataset.cmsEditable = field.label;
+        node.dataset.cmsPath = pathToString(field.path);
+        node.contentEditable = "true";
+        node.spellcheck = true;
+        node.setAttribute("aria-label", `Editeaza ${field.label}`);
+
+        const expectedValue = getAtPath(state.content, field.path);
+        if (expectedValue !== undefined && expectedValue !== null && normalizeEditableText(node) === "") {
+            node.textContent = expectedValue;
+        }
+
+        if (preparedNodes.has(node)) return;
+        preparedNodes.add(node);
+
+        node.addEventListener("input", () => {
+            if (!state.editing) return;
+            syncField(field);
+            state.dirty = true;
+            setStatus("Modificari nesalvate.");
+        });
+
+        node.addEventListener("keydown", (event) => {
+            if (!state.editing) return;
+            if (event.key === "Enter") {
+                event.preventDefault();
+                node.blur();
+            }
+        });
+
+        if (field.anchor || node.closest("a")) {
+            node.addEventListener("click", (event) => {
+                if (!state.editing) return;
+                event.preventDefault();
+            });
+        }
+    }
+
+    function activateFields() {
+        state.fields = collectFields();
+        state.fields.forEach(prepareField);
+    }
+
+    function deactivateFields() {
+        state.fields.forEach((field) => {
+            field.node.removeAttribute("data-cms-editable");
+            field.node.removeAttribute("data-cms-path");
+            field.node.removeAttribute("contenteditable");
+            field.node.removeAttribute("aria-label");
+        });
+        state.fields = [];
+    }
+
+    async function openEditor() {
+        buildToolbar();
+        if (!state.canEdit) {
+            setStatus("Trebuie sa fii logat ca admin.", true);
+            return;
+        }
+
+        try {
+            await ensureContent();
+        } catch (error) {
+            setStatus(error.message || "Nu pot porni editorul.", true);
+            return;
+        }
+
+        state.originalContent = cloneContent(state.content);
+        state.editing = true;
+        state.dirty = false;
+        document.body.classList.add("cms-editing");
+        activateFields();
+        updateToolbar();
+        setStatus("Click pe text si modifica direct in pagina.");
+    }
+
+    function cancelEditing() {
+        if (!state.editing) return;
+        state.content = cloneContent(state.originalContent);
+        if (typeof window.CRP_RENDER_HOME === "function") {
+            window.CRP_RENDER_HOME(state.content);
+        } else {
+            window.location.reload();
+            return;
+        }
+        state.editing = false;
+        state.dirty = false;
+        document.body.classList.remove("cms-editing");
+        deactivateFields();
+        updateToolbar();
+        setStatus("Modificarile au fost anulate.");
+    }
+
+    async function saveChanges() {
+        if (!state.editing) return;
+        syncAllFields();
+
+        if (!state.dirty) {
+            setStatus("Nu sunt modificari noi.");
+            return;
+        }
+
+        if (!SAVE_ENDPOINT) {
+            localStorage.setItem(DRAFT_KEY, JSON.stringify({
+                savedAt: new Date().toISOString(),
+                path: CONTENT_PATH,
+                content: state.content
+            }));
+            state.originalContent = cloneContent(state.content);
+            state.dirty = false;
+            setStatus("Salvat local. Pentru publicare in GitHub trebuie conectat endpoint-ul.");
+            return;
+        }
+
+        try {
+            setStatus("Se salveaza in GitHub...");
+            const auth = window.CRP_FIREBASE_AUTH;
+            const user = auth && auth.currentUser;
+            if (!user) throw new Error("Sesiunea de admin nu mai este activa.");
+
+            const token = await user.getIdToken();
+            const response = await fetch(SAVE_ENDPOINT, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    path: CONTENT_PATH,
+                    content: state.content
+                })
+            });
+
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) throw new Error(result.error || "Salvarea nu a reusit.");
+
+            window.CRP_SITE_CONTENT = cloneContent(state.content);
+            localStorage.removeItem(DRAFT_KEY);
+            state.originalContent = cloneContent(state.content);
+            state.dirty = false;
+            setStatus("Salvat in GitHub. Deploy-ul se actualizeaza automat.");
+        } catch (error) {
+            setStatus(error.message || "Salvarea nu a reusit.", true);
+        }
+    }
+
+    window.addEventListener("crp-auth-change", (event) => {
+        state.canEdit = Boolean(event.detail && event.detail.canEdit);
+        if (!state.canEdit && state.editing) {
+            state.editing = false;
+            document.body.classList.remove("cms-editing");
+            deactivateFields();
+        }
+        updateToolbar();
+    });
+
+    window.addEventListener("crp-content-loaded", (event) => {
+        if (event.detail && event.detail.data) {
+            state.content = cloneContent(event.detail.data);
+            if (state.editing) {
+                activateFields();
+            }
+        }
+    });
+
+    window.CRP_CMS = {
+        open: openEditor,
+        save: saveChanges,
+        cancel: cancelEditing
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", buildToolbar, { once: true });
+    } else {
+        buildToolbar();
     }
 })();
 /* ============================================================
@@ -754,6 +1163,19 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             if (!response.ok) throw new Error(`Could not load ${path}`);
             return response.json();
         });
+    }
+
+    function cloneData(data) {
+        return JSON.parse(JSON.stringify(data || {}));
+    }
+
+    function publishHomeContent(data) {
+        window.CRP_SITE_CONTENT = cloneData(data);
+        window.dispatchEvent(new CustomEvent("crp-content-loaded", {
+            detail: {
+                data: window.CRP_SITE_CONTENT
+            }
+        }));
     }
 
     function renderSectionHeader(section, data) {
@@ -998,6 +1420,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
 
         if (typeof initEventsCarousel === "function") initEventsCarousel();
         if (typeof revealOnScroll === "function") revealOnScroll();
+        publishHomeContent(data);
     }
 
     function renderGallery(data) {
@@ -1022,6 +1445,8 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         if (typeof loadZoomableImages === "function") loadZoomableImages();
         if (typeof revealOnScroll === "function") revealOnScroll();
     }
+
+    window.CRP_RENDER_HOME = renderHome;
 
     if (pageName === "index.html") {
         loadJson("content/site.json")
