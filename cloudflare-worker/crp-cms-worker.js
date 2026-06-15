@@ -174,41 +174,31 @@ function validateAssets(assets) {
 }
 
 async function commitChangesToGitHub(env, path, content, assets) {
-    const committedAssets = [];
-
-    for (const asset of assets) {
-        const result = await commitFileToGitHub(
-            env,
-            asset.path,
-            asset.contentBase64,
-            `cms: adauga imagine ${asset.path}`
-        );
-        committedAssets.push({
-            path: asset.path,
-            commit: result.commit
-        });
-    }
-
-    const contentResult = await commitFileToGitHub(
-        env,
+    const files = assets.map((asset) => ({
+        path: asset.path,
+        contentBase64: asset.contentBase64
+    }));
+    files.push({
         path,
-        toBase64(`${JSON.stringify(content, null, 2)}\n`),
-        `cms: actualizeaza ${path}`
-    );
+        contentBase64: toBase64(`${JSON.stringify(content, null, 2)}\n`)
+    });
+
+    const message = assets.length
+        ? `cms: actualizeaza ${path} si imagini`
+        : `cms: actualizeaza ${path}`;
+    const result = await commitFilesToGitHub(env, files, message);
 
     return {
-        commit: contentResult.commit,
-        assets: committedAssets
+        commit: result.commit,
+        assets: assets.map((asset) => ({ path: asset.path }))
     };
 }
 
-async function commitFileToGitHub(env, path, contentBase64, message) {
+async function commitFilesToGitHub(env, files, message) {
     const owner = requiredEnv(env, "GITHUB_OWNER");
     const repo = requiredEnv(env, "GITHUB_REPO");
     const token = requiredEnv(env, "GITHUB_TOKEN");
     const branch = env.GITHUB_BRANCH || "main";
-    const encodedPath = path.split("/").map(encodeURIComponent).join("/");
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedPath}`;
     const headers = {
         "Authorization": `Bearer ${token}`,
         "Accept": "application/vnd.github+json",
@@ -217,28 +207,81 @@ async function commitFileToGitHub(env, path, contentBase64, message) {
         "X-GitHub-Api-Version": "2022-11-28"
     };
 
-    const current = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers });
-    let currentSha = null;
-    if (current.ok) {
-        const currentFile = await current.json();
-        currentSha = currentFile.sha || null;
-    } else if (current.status !== 404) {
-        throw new Error("Nu pot citi fisierul curent din GitHub.");
+    const api = `https://api.github.com/repos/${owner}/${repo}`;
+
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+        const ref = await githubJson(`${api}/git/ref/heads/${encodeURIComponent(branch)}`, {
+            headers
+        });
+        const parentSha = ref.object && ref.object.sha;
+        if (!parentSha) throw new Error("Nu pot citi branch-ul GitHub.");
+
+        const parentCommit = await githubJson(`${api}/git/commits/${parentSha}`, { headers });
+        const baseTree = parentCommit.tree && parentCommit.tree.sha;
+        if (!baseTree) throw new Error("Nu pot citi structura repo-ului.");
+
+        const tree = [];
+        for (const file of files) {
+            const blob = await githubJson(`${api}/git/blobs`, {
+                method: "POST",
+                headers,
+                body: JSON.stringify({
+                    content: file.contentBase64,
+                    encoding: "base64"
+                })
+            });
+
+            tree.push({
+                path: file.path,
+                mode: "100644",
+                type: "blob",
+                sha: blob.sha
+            });
+        }
+
+        const newTree = await githubJson(`${api}/git/trees`, {
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+                base_tree: baseTree,
+                tree
+            })
+        });
+
+        const newCommit = await githubJson(`${api}/git/commits`, {
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+                message,
+                tree: newTree.sha,
+                parents: [parentSha]
+            })
+        });
+
+        try {
+            await githubJson(`${api}/git/refs/heads/${encodeURIComponent(branch)}`, {
+                method: "PATCH",
+                headers,
+                body: JSON.stringify({
+                    sha: newCommit.sha,
+                    force: false
+                })
+            });
+
+            return { commit: newCommit };
+        } catch (error) {
+            if (attempt === 0 && /fast-forward|Reference update failed|not fast/i.test(error.message || "")) {
+                continue;
+            }
+            throw error;
+        }
     }
 
-    const payload = {
-        branch,
-        message,
-        content: contentBase64
-    };
-    if (currentSha) payload.sha = currentSha;
+    throw new Error("Nu am putut actualiza branch-ul GitHub.");
+}
 
-    const response = await fetch(apiUrl, {
-        method: "PUT",
-        headers,
-        body: JSON.stringify(payload)
-    });
-
+async function githubJson(url, options) {
+    const response = await fetch(url, options);
     const result = await response.json().catch(() => ({}));
     if (!response.ok) {
         throw new Error(result.message || "GitHub a refuzat salvarea.");
