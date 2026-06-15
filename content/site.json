@@ -157,28 +157,12 @@
   },
   "events": [
     {
-      "date": "6 DECEMBRIE 2025",
-      "title": "Conferinta pastorala",
-      "text": "Discernamant. Disciplina. Dedicare. - O conferinta care ne reasaza chemarea.",
-      "image": "conferinta1/img10.png",
-      "imageAlt": "Conferinta pastorala",
-      "href": "conferinta1.html"
-    },
-    {
-      "date": "3 DECEMBRIE 2025",
-      "title": "Intalnire municipala de tineret",
-      "text": "O seara de lauda, inchinare si mesaj biblic pentru tinerii din regiune.",
-      "image": "conferinta2/pozc17-min.JPG",
-      "imageAlt": "Intalnire municipala de tineret",
-      "href": "conftineret.html"
-    },
-    {
-      "date": "2 DECEMBRIE 2025",
-      "title": "Intalnire de suflet la Comunitatea Regionala Penticostala Arad",
-      "text": "Educatia teologica - investitie strategica pentru generatiile care vin.",
-      "image": "eveniment3/puza1.png",
-      "imageAlt": "Intalnire de suflet la Comunitatea Regionala Penticostala Arad",
-      "href": "confiliala.html"
+      "date": "DATA EVENIMENTULUI",
+      "title": "alegeri",
+      "text": "Descriere scurta pentru eveniment.",
+      "image": "images/placeholder.png",
+      "imageAlt": "alegeri",
+      "href": "alegeri.html"
     }
   ],
   "seminarsSection": {
@@ -246,5 +230,34 @@
     "address": "Str. Miron Costin, Nr. 2A, 310146 Arad",
     "email": "crparad@gmail.com",
     "phone": "0257-281-398 - 0257-210-404"
-  }
+  },
+  "archivedEvents": [
+    {
+      "date": "3 DECEMBRIE 2025",
+      "title": "Intalnire municipala de tineret",
+      "text": "O seara de lauda, inchinare si mesaj biblic pentru tinerii din regiune.",
+      "image": "conferinta2/pozc17-min.JPG",
+      "imageAlt": "Intalnire municipala de tineret",
+      "href": "conftineret.html",
+      "archivedAt": "2026-06-15T19:56:05.218Z"
+    },
+    {
+      "date": "6 DECEMBRIE 2025",
+      "title": "Conferinta pastorala",
+      "text": "Discernamant. Disciplina. Dedicare. - O conferinta care ne reasaza chemarea.",
+      "image": "conferinta1/img10.png",
+      "imageAlt": "Conferinta pastorala",
+      "href": "conferinta1.html",
+      "archivedAt": "2026-06-15T19:56:02.563Z"
+    },
+    {
+      "date": "2 DECEMBRIE 2025",
+      "title": "Intalnire de suflet la Comunitatea Regionala Penticostala Arad",
+      "text": "Educatia teologica - investitie strategica pentru generatiile care vin.",
+      "image": "eveniment3/puza1.png",
+      "imageAlt": "Intalnire de suflet la Comunitatea Regionala Penticostala Arad",
+      "href": "confiliala.html",
+      "archivedAt": "2026-06-15T19:55:59.421Z"
+    }
+  ]
 }
