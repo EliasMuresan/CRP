@@ -32,14 +32,14 @@
     "intro": "Pastori si slujitori care coordoneaza activitatea comunitatii regionale.",
     "main": [
       {
-        "name": "Stanciu Cornel",
-        "role": "VICEPREȘEDINTE",
-        "image": "images/cms/20260615181329-team-main-1-image-2.png"
-      },
-      {
         "name": "Tomuta Simion",
         "role": "PREȘEDINTE",
         "image": "images/cms/20260615181318-team-main-0-image-1.png"
+      },
+      {
+        "name": "Stanciu Cornel",
+        "role": "VICEPREȘEDINTE",
+        "image": "images/cms/20260615181329-team-main-1-image-2.png"
       },
       {
         "name": "Avram Aurel",
