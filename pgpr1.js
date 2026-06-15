@@ -719,7 +719,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
 
     const CONTENT_PATH = "content/site.json";
     const DRAFT_KEY = "crp-inline-cms-draft";
-    const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "";
+    const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "https://crp-cms.crparad.workers.dev";
 
     const state = {
         canEdit: false,

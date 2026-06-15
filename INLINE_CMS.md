@@ -56,7 +56,13 @@ Ruleaza:
 deploy-cloudflare-worker.bat
 ```
 
-Dupa ce Worker-ul are URL, se pune URL-ul inainte de scriptul principal ca:
+Worker-ul este publicat aici:
+
+```text
+https://crp-cms.crparad.workers.dev
+```
+
+Site-ul foloseste acest endpoint direct din `pgpr1.js`. Daca URL-ul Worker-ului se schimba vreodata, se poate suprascrie inainte de scriptul principal ca:
 
 ```html
 <script>
