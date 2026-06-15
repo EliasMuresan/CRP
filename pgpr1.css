@@ -497,6 +497,82 @@ body.cms-editing [data-cms-image] {
     outline: 2px dashed rgba(44,93,134,.55);
     outline-offset: 4px;
 }
+body.cms-crop-open { overflow: hidden; }
+.cms-crop-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(15,24,34,.62);
+}
+.cms-crop-dialog {
+    width: min(100%, 980px);
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: 0 24px 70px rgba(20,32,46,.24);
+    padding: 16px;
+}
+.cms-crop-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.cms-crop-head strong {
+    color: var(--text-main);
+    font-size: 1rem;
+}
+.cms-crop-close {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.cms-crop-close:hover { background: var(--bg-muted); color: var(--text-main); }
+.cms-crop-canvas {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: var(--radius-sm);
+    background: var(--bg-muted);
+    cursor: grab;
+    touch-action: none;
+}
+.cms-crop-canvas:active { cursor: grabbing; }
+.cms-crop-controls {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 14px;
+}
+.cms-crop-controls label {
+    flex: 1 1 260px;
+    display: grid;
+    gap: 6px;
+    color: var(--text-muted);
+    font-size: .86rem;
+    font-weight: 700;
+}
+.cms-crop-zoom { width: 100%; accent-color: var(--accent-dark); }
+.cms-crop-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
 
 @media (max-width: 640px) {
     .cms-editor-bar {
@@ -509,6 +585,13 @@ body.cms-editing [data-cms-image] {
     .cms-editor-button {
         flex: 1 1 0;
         padding: 0 10px;
+    }
+    .cms-crop-controls {
+        align-items: stretch;
+        flex-direction: column;
+    }
+    .cms-crop-actions {
+        justify-content: stretch;
     }
 }
 

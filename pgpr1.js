@@ -1218,6 +1218,201 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         });
     }
 
+    function loadCropImage(dataUrl) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = () => reject(new Error("Nu pot incarca imaginea."));
+            img.src = dataUrl;
+        });
+    }
+
+    function canvasToDataUrl(canvas) {
+        return canvas.toDataURL("image/jpeg", 0.88);
+    }
+
+    function getCropAspect(image) {
+        const rect = (image.kind === "background" ? image.host : image.node).getBoundingClientRect();
+        if (rect.width > 20 && rect.height > 20) return rect.width / rect.height;
+        return image.kind === "background" ? 16 / 9 : 4 / 3;
+    }
+
+    function getCropOutputSize(image, aspect) {
+        const longSide = image.kind === "background" ? 1920 : 1200;
+        if (aspect >= 1) {
+            return {
+                width: longSide,
+                height: Math.max(1, Math.round(longSide / aspect))
+            };
+        }
+
+        return {
+            width: Math.max(1, Math.round(longSide * aspect)),
+            height: longSide
+        };
+    }
+
+    function getCropStageSize(aspect) {
+        const maxWidth = Math.min(window.innerWidth - 48, 860);
+        const maxHeight = Math.min(window.innerHeight - 270, 560);
+        let width = maxWidth;
+        let height = width / aspect;
+
+        if (height > maxHeight) {
+            height = maxHeight;
+            width = height * aspect;
+        }
+
+        return {
+            width: Math.max(260, Math.round(width)),
+            height: Math.max(180, Math.round(height))
+        };
+    }
+
+    function openCropModal(image, sourceDataUrl) {
+        return loadCropImage(sourceDataUrl).then((sourceImage) => new Promise((resolve) => {
+            const aspect = getCropAspect(image);
+            const stage = getCropStageSize(aspect);
+            const output = getCropOutputSize(image, aspect);
+            const modal = document.createElement("div");
+            modal.className = "cms-crop-modal";
+            modal.innerHTML = `
+                <div class="cms-crop-dialog" role="dialog" aria-modal="true" aria-label="Incadrare poza">
+                    <div class="cms-crop-head">
+                        <strong>Incadrare poza</strong>
+                        <button class="cms-crop-close" type="button" aria-label="Inchide">&times;</button>
+                    </div>
+                    <canvas class="cms-crop-canvas" width="${stage.width}" height="${stage.height}"></canvas>
+                    <div class="cms-crop-controls">
+                        <label>
+                            Zoom
+                            <input class="cms-crop-zoom" type="range" min="1" max="3" step="0.01" value="1">
+                        </label>
+                        <div class="cms-crop-actions">
+                            <button class="cms-editor-button cms-crop-cancel" type="button">Anuleaza</button>
+                            <button class="cms-editor-button cms-save cms-crop-apply" type="button">Foloseste poza</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            document.body.classList.add("cms-crop-open");
+
+            const canvas = modal.querySelector(".cms-crop-canvas");
+            const ctx = canvas.getContext("2d");
+            const zoomInput = modal.querySelector(".cms-crop-zoom");
+            const naturalWidth = sourceImage.naturalWidth || sourceImage.width;
+            const naturalHeight = sourceImage.naturalHeight || sourceImage.height;
+            const baseScale = Math.max(stage.width / naturalWidth, stage.height / naturalHeight);
+            const crop = {
+                zoom: 1,
+                offsetX: 0,
+                offsetY: 0,
+                dragging: false,
+                lastX: 0,
+                lastY: 0
+            };
+
+            function currentDraw() {
+                const scale = baseScale * crop.zoom;
+                const width = naturalWidth * scale;
+                const height = naturalHeight * scale;
+                return {
+                    width,
+                    height,
+                    x: (stage.width - width) / 2 + crop.offsetX,
+                    y: (stage.height - height) / 2 + crop.offsetY
+                };
+            }
+
+            function constrainCrop() {
+                const draw = currentDraw();
+                const maxX = Math.max(0, (draw.width - stage.width) / 2);
+                const maxY = Math.max(0, (draw.height - stage.height) / 2);
+                crop.offsetX = Math.min(maxX, Math.max(-maxX, crop.offsetX));
+                crop.offsetY = Math.min(maxY, Math.max(-maxY, crop.offsetY));
+            }
+
+            function renderCrop() {
+                constrainCrop();
+                const draw = currentDraw();
+                ctx.clearRect(0, 0, stage.width, stage.height);
+                ctx.fillStyle = "#fff";
+                ctx.fillRect(0, 0, stage.width, stage.height);
+                ctx.drawImage(sourceImage, draw.x, draw.y, draw.width, draw.height);
+            }
+
+            function cleanup(result) {
+                modal.remove();
+                document.body.classList.remove("cms-crop-open");
+                resolve(result || null);
+            }
+
+            canvas.addEventListener("pointerdown", (event) => {
+                crop.dragging = true;
+                crop.lastX = event.clientX;
+                crop.lastY = event.clientY;
+                canvas.setPointerCapture(event.pointerId);
+            });
+
+            canvas.addEventListener("pointermove", (event) => {
+                if (!crop.dragging) return;
+                crop.offsetX += event.clientX - crop.lastX;
+                crop.offsetY += event.clientY - crop.lastY;
+                crop.lastX = event.clientX;
+                crop.lastY = event.clientY;
+                renderCrop();
+            });
+
+            canvas.addEventListener("pointerup", () => {
+                crop.dragging = false;
+            });
+            canvas.addEventListener("pointercancel", () => {
+                crop.dragging = false;
+            });
+
+            zoomInput.addEventListener("input", () => {
+                crop.zoom = Number(zoomInput.value) || 1;
+                renderCrop();
+            });
+
+            modal.querySelector(".cms-crop-close").addEventListener("click", () => cleanup(null));
+            modal.querySelector(".cms-crop-cancel").addEventListener("click", () => cleanup(null));
+            modal.addEventListener("click", (event) => {
+                if (event.target === modal) cleanup(null);
+            });
+            modal.querySelector(".cms-crop-apply").addEventListener("click", () => {
+                const draw = currentDraw();
+                const outputCanvas = document.createElement("canvas");
+                outputCanvas.width = output.width;
+                outputCanvas.height = output.height;
+                const outputCtx = outputCanvas.getContext("2d");
+                const ratioX = output.width / stage.width;
+                const ratioY = output.height / stage.height;
+
+                outputCtx.fillStyle = "#fff";
+                outputCtx.fillRect(0, 0, output.width, output.height);
+                outputCtx.drawImage(
+                    sourceImage,
+                    draw.x * ratioX,
+                    draw.y * ratioY,
+                    draw.width * ratioX,
+                    draw.height * ratioY
+                );
+
+                const dataUrl = canvasToDataUrl(outputCanvas);
+                cleanup({
+                    dataUrl,
+                    contentBase64: dataUrl.split(",")[1] || "",
+                    extension: "jpg",
+                    contentType: "image/jpeg"
+                });
+            });
+
+            renderCrop();
+        }));
+    }
+
     function applyImagePreview(image, source) {
         if (image.kind === "background") {
             image.node.style.backgroundImage = `url("${source}")`;
@@ -1235,14 +1430,17 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             return;
         }
 
-        const maxSize = 8 * 1024 * 1024;
+        const maxSize = 20 * 1024 * 1024;
         if (file.size > maxSize) {
-            setStatus("Imaginea e prea mare. Foloseste o poza sub 8 MB.", true);
+            setStatus("Imaginea e prea mare. Foloseste o poza sub 20 MB.", true);
             return;
         }
 
         const dataUrl = await readFileAsDataUrl(file);
-        const contentBase64 = dataUrl.split(",")[1] || "";
+        const cropped = await openCropModal(image, dataUrl);
+        if (!cropped) return;
+
+        const contentBase64 = cropped.contentBase64;
         if (!contentBase64) {
             setStatus("Nu pot pregati imaginea pentru upload.", true);
             return;
@@ -1251,21 +1449,21 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         state.assetCounter += 1;
         const stamp = new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 14);
         const name = slugifyFilePart(`${pathToString(image.path)}-${state.assetCounter}`);
-        const assetPath = `images/cms/${stamp}-${name}.${extension}`;
+        const assetPath = `images/cms/${stamp}-${name}.${cropped.extension}`;
 
         state.pendingAssets = state.pendingAssets.filter((asset) => asset.fieldId !== image.fieldId);
         state.pendingAssets.push({
             fieldId: image.fieldId,
             path: assetPath,
             contentBase64,
-            contentType: file.type || `image/${extension}`,
-            originalName: file.name || `${name}.${extension}`
+            contentType: cropped.contentType,
+            originalName: file.name || `${name}.${cropped.extension}`
         });
 
         setAtPath(state.content, image.path, assetPath);
-        applyImagePreview(image, dataUrl);
+        applyImagePreview(image, cropped.dataUrl);
         state.dirty = true;
-        setStatus("Poza a fost aleasa. Apasa Salveaza ca sa fie urcata in GitHub.");
+        setStatus("Poza a fost incadrata. Apasa Salveaza ca sa fie urcata in GitHub.");
     }
 
     function prepareImage(image) {

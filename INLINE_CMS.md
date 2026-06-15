@@ -25,7 +25,7 @@ Pozele schimbate din editor sunt urcate in GitHub in:
 images/cms/
 ```
 
-Format acceptat: JPG, PNG, WebP sau GIF. Limita recomandata este sub 8 MB per imagine.
+Format acceptat la selectie: JPG, PNG, WebP sau GIF. Editorul deschide un cadru de incadrare si exporta poza optimizata ca JPG.
 
 ## Texte pe paginile secundare
 
