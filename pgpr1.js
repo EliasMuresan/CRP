@@ -727,7 +727,10 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         dirty: false,
         content: null,
         originalContent: null,
-        fields: []
+        fields: [],
+        images: [],
+        pendingAssets: [],
+        assetCounter: 0
     };
 
     const preparedNodes = new WeakSet();
@@ -773,6 +776,24 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             multiline: Boolean(options && options.multiline),
             anchor: Boolean(options && options.anchor)
         });
+    }
+
+    function addImage(images, node, host, path, label, kind) {
+        if (!node || !host) return;
+        images.push({
+            node,
+            host,
+            path,
+            label,
+            kind: kind || "image",
+            fieldId: pathToString(path)
+        });
+    }
+
+    function addImageBySelector(images, selector, path, label, root) {
+        const node = (root || document).querySelector(selector);
+        if (!node) return;
+        addImage(images, node, node.parentElement || node, path, label, "image");
     }
 
     function collectFields() {
@@ -867,6 +888,32 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         addField(fields, ".site-footer .footer-col:last-child p:nth-of-type(3)", ["footer", "phone"], "Footer: telefon");
 
         return fields;
+    }
+
+    function collectImages() {
+        const images = [];
+        addImage(
+            images,
+            document.querySelector(".hero-background"),
+            document.querySelector(".band-hero"),
+            ["hero", "backgroundImage"],
+            "Hero: poza fundal",
+            "background"
+        );
+        addImageBySelector(images, "#despre .about-photo img", ["about", "image"], "Despre: poza cladire");
+
+        document.querySelectorAll("#comitet .team-main-grid > div").forEach((card, index) => {
+            addImageBySelector(images, ".team-photo-main img", ["team", "main", index, "image"], `Lider principal ${index + 1}: poza`, card);
+        });
+        document.querySelectorAll("#comitet .team-secondary-grid > div").forEach((card, index) => {
+            addImageBySelector(images, ".team-photo-secondary img", ["team", "members", index, "image"], `Membru comitet ${index + 1}: poza`, card);
+        });
+        document.querySelectorAll("#eventsTrack .event-card").forEach((card, index) => {
+            addImageBySelector(images, ".event-image img", ["events", index, "image"], `Eveniment ${index + 1}: poza`, card);
+        });
+        addImageBySelector(images, "#liceu .liceu-img-wrapper img", ["school", "image"], "Liceu: poza");
+
+        return images;
     }
 
     function buildToolbar() {
@@ -976,9 +1023,123 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         }
     }
 
+    function getImageExtension(file) {
+        const byName = (file.name || "").split(".").pop().toLowerCase();
+        const allowed = ["jpg", "jpeg", "png", "webp", "gif"];
+        if (allowed.includes(byName)) return byName === "jpeg" ? "jpg" : byName;
+
+        const byType = {
+            "image/jpeg": "jpg",
+            "image/png": "png",
+            "image/webp": "webp",
+            "image/gif": "gif"
+        };
+        return byType[file.type] || "";
+    }
+
+    function slugifyFilePart(value) {
+        return String(value || "poza")
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "")
+            .slice(0, 54) || "poza";
+    }
+
+    function readFileAsDataUrl(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result || ""));
+            reader.onerror = () => reject(new Error("Nu pot citi imaginea."));
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function applyImagePreview(image, source) {
+        if (image.kind === "background") {
+            image.node.style.backgroundImage = `url("${source}")`;
+            return;
+        }
+        image.node.src = source;
+    }
+
+    async function handleImageFile(image, file) {
+        if (!file) return;
+
+        const extension = getImageExtension(file);
+        if (!extension) {
+            setStatus("Alege o imagine JPG, PNG, WebP sau GIF.", true);
+            return;
+        }
+
+        const maxSize = 8 * 1024 * 1024;
+        if (file.size > maxSize) {
+            setStatus("Imaginea e prea mare. Foloseste o poza sub 8 MB.", true);
+            return;
+        }
+
+        const dataUrl = await readFileAsDataUrl(file);
+        const contentBase64 = dataUrl.split(",")[1] || "";
+        if (!contentBase64) {
+            setStatus("Nu pot pregati imaginea pentru upload.", true);
+            return;
+        }
+
+        state.assetCounter += 1;
+        const stamp = new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 14);
+        const name = slugifyFilePart(`${pathToString(image.path)}-${state.assetCounter}`);
+        const assetPath = `images/cms/${stamp}-${name}.${extension}`;
+
+        state.pendingAssets = state.pendingAssets.filter((asset) => asset.fieldId !== image.fieldId);
+        state.pendingAssets.push({
+            fieldId: image.fieldId,
+            path: assetPath,
+            contentBase64,
+            contentType: file.type || `image/${extension}`,
+            originalName: file.name || `${name}.${extension}`
+        });
+
+        setAtPath(state.content, image.path, assetPath);
+        applyImagePreview(image, dataUrl);
+        state.dirty = true;
+        setStatus("Poza a fost aleasa. Apasa Salveaza ca sa fie urcata in GitHub.");
+    }
+
+    function prepareImage(image) {
+        image.node.dataset.cmsImage = image.label;
+        image.host.classList.add("cms-image-host");
+
+        const button = document.createElement("button");
+        button.className = "cms-image-control";
+        button.type = "button";
+        button.textContent = "Schimba poza";
+        button.setAttribute("aria-label", `Schimba ${image.label}`);
+        button.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const input = document.createElement("input");
+            input.type = "file";
+            input.accept = "image/png,image/jpeg,image/webp,image/gif";
+            input.hidden = true;
+            input.addEventListener("change", () => {
+                handleImageFile(image, input.files && input.files[0]).catch((error) => {
+                    setStatus(error.message || "Nu pot schimba poza.", true);
+                });
+                input.remove();
+            }, { once: true });
+            document.body.appendChild(input);
+            input.click();
+        });
+
+        image.control = button;
+        image.host.appendChild(button);
+    }
+
     function activateFields() {
         state.fields = collectFields();
         state.fields.forEach(prepareField);
+        state.images = collectImages();
+        state.images.forEach(prepareImage);
     }
 
     function deactivateFields() {
@@ -988,7 +1149,13 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             field.node.removeAttribute("contenteditable");
             field.node.removeAttribute("aria-label");
         });
+        state.images.forEach((image) => {
+            image.node.removeAttribute("data-cms-image");
+            if (image.control) image.control.remove();
+            if (image.host) image.host.classList.remove("cms-image-host");
+        });
         state.fields = [];
+        state.images = [];
     }
 
     async function openEditor() {
@@ -1008,14 +1175,20 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         state.originalContent = cloneContent(state.content);
         state.editing = true;
         state.dirty = false;
+        state.pendingAssets = [];
         document.body.classList.add("cms-editing");
         activateFields();
         updateToolbar();
-        setStatus("Click pe text si modifica direct in pagina.");
+        setStatus("Click pe text sau pe Schimba poza si modifica direct in pagina.");
     }
 
     function cancelEditing() {
         if (!state.editing) return;
+        state.editing = false;
+        state.dirty = false;
+        state.pendingAssets = [];
+        document.body.classList.remove("cms-editing");
+        deactivateFields();
         state.content = cloneContent(state.originalContent);
         if (typeof window.CRP_RENDER_HOME === "function") {
             window.CRP_RENDER_HOME(state.content);
@@ -1023,10 +1196,6 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             window.location.reload();
             return;
         }
-        state.editing = false;
-        state.dirty = false;
-        document.body.classList.remove("cms-editing");
-        deactivateFields();
         updateToolbar();
         setStatus("Modificarile au fost anulate.");
     }
@@ -1044,7 +1213,11 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             localStorage.setItem(DRAFT_KEY, JSON.stringify({
                 savedAt: new Date().toISOString(),
                 path: CONTENT_PATH,
-                content: state.content
+                content: state.content,
+                pendingAssets: state.pendingAssets.map((asset) => ({
+                    path: asset.path,
+                    originalName: asset.originalName
+                }))
             }));
             state.originalContent = cloneContent(state.content);
             state.dirty = false;
@@ -1067,7 +1240,8 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
                 },
                 body: JSON.stringify({
                     path: CONTENT_PATH,
-                    content: state.content
+                    content: state.content,
+                    assets: state.pendingAssets
                 })
             });
 
@@ -1078,6 +1252,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             localStorage.removeItem(DRAFT_KEY);
             state.originalContent = cloneContent(state.content);
             state.dirty = false;
+            state.pendingAssets = [];
             setStatus("Salvat in GitHub. Deploy-ul se actualizeaza automat.");
         } catch (error) {
             setStatus(error.message || "Salvarea nu a reusit.", true);

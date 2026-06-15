@@ -1,5 +1,8 @@
 const DEFAULT_ADMIN_EMAIL = "crparad@gmail.com";
-const ALLOWED_FILES = new Set(["content/site.json"]);
+const ALLOWED_CONTENT_FILES = new Set(["content/site.json"]);
+const MAX_ASSET_SIZE = 8 * 1024 * 1024;
+const ASSET_PATH_PATTERN = /^images\/cms\/[a-z0-9][a-z0-9._-]*\.(jpg|jpeg|png|webp|gif)$/i;
+const IMAGE_TYPES = new Set(["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"]);
 
 export default {
     async fetch(request, env) {
@@ -30,7 +33,7 @@ export default {
             const body = await request.json();
             const path = String(body.path || "");
 
-            if (!ALLOWED_FILES.has(path)) {
+            if (!ALLOWED_CONTENT_FILES.has(path)) {
                 return json({ error: "Fisierul nu poate fi editat din editorul inline." }, 400, cors);
             }
 
@@ -38,8 +41,13 @@ export default {
                 return json({ error: "Continut invalid." }, 400, cors);
             }
 
-            const result = await commitJsonToGitHub(env, path, body.content);
-            return json({ ok: true, commit: result.commit }, 200, cors);
+            const assets = validateAssets(body.assets || []);
+            const result = await commitChangesToGitHub(env, path, body.content, assets);
+            return json({
+                ok: true,
+                commit: result.commit,
+                assets: result.assets
+            }, 200, cors);
         } catch (error) {
             return json({ error: error.message || "Salvarea nu a reusit." }, 500, cors);
         }
@@ -93,7 +101,72 @@ async function verifyFirebaseUser(idToken, env) {
     return user.email;
 }
 
-async function commitJsonToGitHub(env, path, content) {
+function validateAssets(assets) {
+    if (!Array.isArray(assets)) throw new Error("Lista de imagini este invalida.");
+    if (assets.length > 20) throw new Error("Prea multe imagini intr-o singura salvare.");
+
+    return assets.map((asset) => {
+        const path = String(asset.path || "");
+        const contentBase64 = String(asset.contentBase64 || "");
+        const contentType = String(asset.contentType || "").toLowerCase();
+        const originalName = String(asset.originalName || "");
+
+        if (!ASSET_PATH_PATTERN.test(path)) {
+            throw new Error("Imaginea trebuie salvata in folderul images/cms.");
+        }
+
+        if (!IMAGE_TYPES.has(contentType)) {
+            throw new Error("Tipul imaginii nu este acceptat.");
+        }
+
+        if (!contentBase64 || !/^[A-Za-z0-9+/=]+$/.test(contentBase64)) {
+            throw new Error("Imaginea nu a fost trimisa corect.");
+        }
+
+        const estimatedSize = Math.floor((contentBase64.length * 3) / 4);
+        if (estimatedSize > MAX_ASSET_SIZE) {
+            throw new Error("Imaginea este prea mare.");
+        }
+
+        return {
+            path,
+            contentBase64,
+            contentType,
+            originalName
+        };
+    });
+}
+
+async function commitChangesToGitHub(env, path, content, assets) {
+    const committedAssets = [];
+
+    for (const asset of assets) {
+        const result = await commitFileToGitHub(
+            env,
+            asset.path,
+            asset.contentBase64,
+            `cms: adauga imagine ${asset.path}`
+        );
+        committedAssets.push({
+            path: asset.path,
+            commit: result.commit
+        });
+    }
+
+    const contentResult = await commitFileToGitHub(
+        env,
+        path,
+        toBase64(`${JSON.stringify(content, null, 2)}\n`),
+        `cms: actualizeaza ${path}`
+    );
+
+    return {
+        commit: contentResult.commit,
+        assets: committedAssets
+    };
+}
+
+async function commitFileToGitHub(env, path, contentBase64, message) {
     const owner = requiredEnv(env, "GITHUB_OWNER");
     const repo = requiredEnv(env, "GITHUB_REPO");
     const token = requiredEnv(env, "GITHUB_TOKEN");
@@ -109,18 +182,25 @@ async function commitJsonToGitHub(env, path, content) {
     };
 
     const current = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers });
-    if (!current.ok) throw new Error("Nu pot citi fisierul curent din GitHub.");
-    const currentFile = await current.json();
+    let currentSha = null;
+    if (current.ok) {
+        const currentFile = await current.json();
+        currentSha = currentFile.sha || null;
+    } else if (current.status !== 404) {
+        throw new Error("Nu pot citi fisierul curent din GitHub.");
+    }
+
+    const payload = {
+        branch,
+        message,
+        content: contentBase64
+    };
+    if (currentSha) payload.sha = currentSha;
 
     const response = await fetch(apiUrl, {
         method: "PUT",
         headers,
-        body: JSON.stringify({
-            branch,
-            sha: currentFile.sha,
-            message: `cms: actualizeaza ${path}`,
-            content: toBase64(`${JSON.stringify(content, null, 2)}\n`)
-        })
+        body: JSON.stringify(payload)
     });
 
     const result = await response.json().catch(() => ({}));
