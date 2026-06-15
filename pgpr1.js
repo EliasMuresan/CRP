@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-=======
-// ===== Maintenance mode =====
-const MAINTENANCE_MODE = true;                 // <-- pune false când dai drumul la site
-const MAINTENANCE_PAGE = "/in-constructie.html";
-const DEV_BYPASS_PARAM = "preview";            // folosește ?preview=1 ca să vezi site-ul real
-
-if (MAINTENANCE_MODE) {
-  const url = new URL(window.location.href);
-  const bypass = url.searchParams.get(DEV_BYPASS_PARAM) === "1";
-  const onMaintenance = window.location.pathname.endsWith(MAINTENANCE_PAGE);
-  if (!bypass && !onMaintenance) {
-    window.location.replace(MAINTENANCE_PAGE);
-  }
-
->>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
 /* ============================================================
    NAVBAR MOBILE – FIX
 ============================================================ */
@@ -55,10 +39,7 @@ function revealOnScroll() {
 
 window.addEventListener("scroll", revealOnScroll);
 window.addEventListener("load", revealOnScroll);
-<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", revealOnScroll);
-=======
->>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
 
 /* ============================================================
    EMAIL JS CONTACT FORM
@@ -135,13 +116,10 @@ const yearSpan = document.getElementById("yearSpan");
 if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
 }
-<<<<<<< HEAD
 const footerYear = document.getElementById("footerYear");
 if (footerYear) {
     footerYear.textContent = new Date().getFullYear();
 }
-=======
->>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
 
 /* ============================================================
    LIGHTBOX – GALERIE + MEDIA ZOOM + ZOOM-ON-CLICK
@@ -286,7 +264,6 @@ function updateLightbox() {
 
 function initEventsCarousel() {
     const track = document.getElementById("eventsTrack");
-<<<<<<< HEAD
     let btnPrev = document.getElementById("eventsPrev");
     let btnNext = document.getElementById("eventsNext");
 
@@ -298,13 +275,6 @@ function initEventsCarousel() {
     btnNext.replaceWith(freshNext);
     btnPrev = freshPrev;
     btnNext = freshNext;
-=======
-    const slides = track ? Array.from(track.querySelectorAll(".event-slide")) : [];
-    const btnPrev = document.getElementById("eventsPrev");
-    const btnNext = document.getElementById("eventsNext");
-
-    if (!track || slides.length === 0 || !btnPrev || !btnNext) return;
->>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
 
     // marcăm săgețile cu o clasă comună pentru tratamentul pe mobil
     btnPrev.classList.add("events-arrow");
@@ -312,7 +282,6 @@ function initEventsCarousel() {
 
     let current = 0; // indexul cardului din mijloc
 
-<<<<<<< HEAD
     function getSlides() {
         return Array.from(track.querySelectorAll(".event-slide"));
     }
@@ -323,10 +292,6 @@ function initEventsCarousel() {
         if (!n) return;
         if (current >= n) current = 0;
 
-=======
-    function render() {
-        const n = slides.length;
->>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
         const center = current;
         const right = (current + 1) % n;
         const left = (current - 1 + n) % n;
@@ -341,21 +306,15 @@ function initEventsCarousel() {
     }
 
     btnNext.addEventListener("click", () => {
-<<<<<<< HEAD
         const slides = getSlides();
         if (!slides.length) return;
-=======
->>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
         current = (current + 1) % slides.length;
         render();
     });
 
     btnPrev.addEventListener("click", () => {
-<<<<<<< HEAD
         const slides = getSlides();
         if (!slides.length) return;
-=======
->>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
         current = (current - 1 + slides.length) % slides.length;
         render();
     });
@@ -488,12 +447,8 @@ function fuzzyMatch(input, target) {
 }
 
 // Filtrare carduri
-<<<<<<< HEAD
 const churchSearchInput = document.getElementById("churchSearch");
 if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
-=======
-document.getElementById("churchSearch").addEventListener("input", function () {
->>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
     const query = this.value.trim();
     const cards = document.querySelectorAll(".church-card");
 
@@ -504,7 +459,6 @@ document.getElementById("churchSearch").addEventListener("input", function () {
         card.style.display = match ? "block" : "none";
     });
 });
-<<<<<<< HEAD
 /* ============================================================
    PAGES CMS CONTENT LOADER
 ============================================================ */
@@ -662,7 +616,7 @@ document.getElementById("churchSearch").addEventListener("input", function () {
                 <a href="${escapeAttr(county.href || "#")}" class="judet-card judet-link">
                     <span class="judet-name">${escapeHtml(county.name)}</span>
                     <span class="judet-sub">${escapeHtml(county.subtitle)}</span>
-                    <span class="judet-arrow">→</span>
+                    <span class="judet-arrow">-></span>
                     <div class="judet-overlay">
                         <p>${escapeHtml(county.overlay)}</p>
                     </div>
@@ -834,8 +788,3 @@ document.getElementById("churchSearch").addEventListener("input", function () {
             .catch((error) => console.warn("Pages CMS gallery content is not available.", error));
     }
 })();
-=======
-/* aici ai tu codul tău existent în pgpr1.js */
->>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
-
-
