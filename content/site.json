@@ -155,16 +155,7 @@
     "title": "Cele mai recente evenimente",
     "intro": "O privire de ansamblu asupra intalnirilor si conferintelor importante din comunitatea noastra."
   },
-  "events": [
-    {
-      "date": "DATA EVENIMENTULUI",
-      "title": "alegeri",
-      "text": "Descriere scurta pentru eveniment.",
-      "image": "images/placeholder.png",
-      "imageAlt": "alegeri",
-      "href": "alegeri.html"
-    }
-  ],
+  "events": [],
   "seminarsSection": {
     "kicker": "SEMINARII",
     "title": "Seminarii si formare",
@@ -232,6 +223,15 @@
     "phone": "0257-281-398 - 0257-210-404"
   },
   "archivedEvents": [
+    {
+      "date": "DATA EVENIMENTULUI",
+      "title": "alegeri",
+      "text": "Descriere scurta pentru eveniment.",
+      "image": "images/placeholder.png",
+      "imageAlt": "alegeri",
+      "href": "alegeri.html",
+      "archivedAt": "2026-06-15T20:50:37.879Z"
+    },
     {
       "date": "3 DECEMBRIE 2025",
       "title": "Intalnire municipala de tineret",
