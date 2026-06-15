@@ -1116,26 +1116,6 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         refreshTeamEditorControls();
     }
 
-    function moveTeamCard(card, direction) {
-        const group = card.dataset.cmsTeamGroup;
-        const config = teamGroupConfig(group);
-        const grid = document.querySelector(config.selector);
-        if (!grid) return;
-
-        const cards = teamCards(grid, config.cardSelector);
-        const index = cards.indexOf(card);
-        const target = cards[index + direction];
-        if (!target) return;
-
-        if (direction < 0) {
-            grid.insertBefore(card, target);
-        } else {
-            grid.insertBefore(target, card);
-        }
-
-        commitTeamOrder(group);
-    }
-
     function prepareTeamReorderGroup(group) {
         const config = teamGroupConfig(group);
         const grid = document.querySelector(config.selector);
@@ -1166,18 +1146,10 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             card.dataset.cmsTeamGroup = config.key;
             card.dataset.cmsTeamIndex = String(index);
             card.draggable = true;
-
-            const controls = document.createElement("div");
-            controls.className = "cms-reorder-controls";
-            controls.innerHTML = `
-                <button class="cms-reorder-button cms-drag-handle" type="button" title="Trage cardul">Muta</button>
-                <button class="cms-reorder-button" type="button" data-cms-move="-1" title="Muta in stanga/sus">&uarr;</button>
-                <button class="cms-reorder-button" type="button" data-cms-move="1" title="Muta in dreapta/jos">&darr;</button>
-            `;
-            card.appendChild(controls);
+            card.title = "Trage cardul ca sa schimbi ordinea";
 
             const onDragStart = (event) => {
-                if (!event.target.closest(".cms-drag-handle")) {
+                if (event.target.closest("[contenteditable='true'], .cms-image-control, a, button, input, textarea, select")) {
                     event.preventDefault();
                     return;
                 }
@@ -1195,27 +1167,17 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
                 commitTeamOrder(config.key);
             };
 
-            const onControlClick = (event) => {
-                const moveButton = event.target.closest("[data-cms-move]");
-                if (!moveButton) return;
-                event.preventDefault();
-                event.stopPropagation();
-                moveTeamCard(card, Number(moveButton.dataset.cmsMove));
-            };
-
             card.addEventListener("dragstart", onDragStart);
             card.addEventListener("dragend", onDragEnd);
-            controls.addEventListener("click", onControlClick);
 
             state.reorders.push(() => {
                 card.removeEventListener("dragstart", onDragStart);
                 card.removeEventListener("dragend", onDragEnd);
-                controls.removeEventListener("click", onControlClick);
-                controls.remove();
                 card.classList.remove("cms-reorder-card", "is-dragging");
                 card.removeAttribute("draggable");
                 card.removeAttribute("data-cms-team-group");
                 card.removeAttribute("data-cms-team-index");
+                card.removeAttribute("title");
             });
         });
     }

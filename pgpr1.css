@@ -499,36 +499,28 @@ body.cms-editing [data-cms-image] {
 }
 .cms-reorder-card {
     position: relative;
+    cursor: grab;
+    transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease;
 }
+.cms-reorder-card:active {
+    cursor: grabbing;
+}
+body.cms-editing .cms-reorder-card {
+    outline: 2px dashed rgba(44,93,134,.28);
+    outline-offset: 6px;
+}
+body.cms-editing .cms-reorder-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+}
+.cms-reorder-card [contenteditable="true"] {
+    cursor: text;
+}
+.cms-reorder-card .cms-image-control { cursor: pointer; }
 .cms-reorder-card.is-dragging {
     opacity: .45;
+    transform: scale(.98);
 }
-.cms-reorder-controls {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 25;
-    display: flex;
-    gap: 6px;
-}
-.cms-reorder-button {
-    min-width: 34px;
-    min-height: 34px;
-    border: 1px solid rgba(255,255,255,.72);
-    border-radius: var(--radius-sm);
-    padding: 0 9px;
-    background: rgba(24,34,46,.9);
-    color: #fff;
-    font: inherit;
-    font-size: .78rem;
-    font-weight: 800;
-    line-height: 1;
-    box-shadow: 0 10px 26px rgba(20,32,46,.2);
-    cursor: pointer;
-}
-.cms-reorder-button:hover { background: var(--accent-dark); }
-.cms-drag-handle { cursor: grab; }
-.cms-drag-handle:active { cursor: grabbing; }
 body.cms-editing .cms-reorder-grid {
     outline: 2px dashed rgba(44,93,134,.24);
     outline-offset: 10px;
