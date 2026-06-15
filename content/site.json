@@ -49,14 +49,14 @@
     ],
     "members": [
       {
-        "name": "Hada Daniel",
-        "role": "PASTOR",
-        "image": "images/cms/20260615183255-team-members-1-image-1.png"
-      },
-      {
         "name": "Coroban Titus",
         "role": "PASTOR",
         "image": "images/cms/20260615185413-team-members-3-image-1.png"
+      },
+      {
+        "name": "Hada Daniel",
+        "role": "PASTOR",
+        "image": "images/cms/20260615183255-team-members-1-image-1.png"
       },
       {
         "name": "Anca Iosif",
