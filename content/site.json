@@ -49,24 +49,24 @@
     ],
     "members": [
       {
-        "name": "Filip Ioan",
-        "role": "PASTOR",
-        "image": "images/cms/20260615182326-team-members-0-image-2.png"
-      },
-      {
         "name": "Hada Daniel",
         "role": "PASTOR",
         "image": "images/cms/20260615183255-team-members-1-image-1.png"
       },
       {
-        "name": "Petroiesc Mihai",
-        "role": "PASTOR",
-        "image": "images/cms/20260615183258-team-members-2-image-2.png"
-      },
-      {
         "name": "Coroban Titus",
         "role": "PASTOR",
         "image": "images/cms/20260615185413-team-members-3-image-1.png"
+      },
+      {
+        "name": "Anca Iosif",
+        "role": "PASTOR",
+        "image": "images/cms/20260615190556-team-members-7-image-4.png"
+      },
+      {
+        "name": "Mureșan Mircea",
+        "role": "PASTOR",
+        "image": "images/cms/20260615190426-team-members-6-image-3.png"
       },
       {
         "name": "Ilioni Florin",
@@ -79,14 +79,14 @@
         "image": "images/cms/20260615190250-team-members-5-image-2.png"
       },
       {
-        "name": "Mureșan Mircea",
+        "name": "Filip Ioan",
         "role": "PASTOR",
-        "image": "images/cms/20260615190426-team-members-6-image-3.png"
+        "image": "images/cms/20260615182326-team-members-0-image-2.png"
       },
       {
-        "name": "Anca Iosif",
+        "name": "Petroiesc Mihai",
         "role": "PASTOR",
-        "image": "images/cms/20260615190556-team-members-7-image-4.png"
+        "image": "images/cms/20260615183258-team-members-2-image-2.png"
       }
     ]
   },
