@@ -3,18 +3,44 @@
 <head>
     <meta charset="UTF-8" />
 
+<<<<<<< HEAD
+=======
+    <!-- Redirect instant la pagina de mentenanță -->
+    <script>
+    (() => {
+      const MAINTENANCE_MODE = true;            // pune false când dai drumul la site
+      const MAINTENANCE_PAGE = "/in-constructie.html";
+
+      const qs = new URLSearchParams(location.search);
+      const bypass = qs.get("preview") === "1"; // intri cu ?preview=1 ca să vezi site-ul real
+      const onMaintenance = location.pathname.endsWith(MAINTENANCE_PAGE);
+
+      if (MAINTENANCE_MODE && !bypass && !onMaintenance) {
+        location.replace(MAINTENANCE_PAGE);
+      }
+    })();
+    </script>
+>>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
 
     <title>Comunitatea Regională Penticostală Arad</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Fonts -->
+<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+=======
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+>>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
 
     <!-- CSS -->
     <link rel="stylesheet" href="pgpr1.css" />
 
     <!-- JS (restul funcțiilor site-ului) -->
+<<<<<<< HEAD
     <script src="pgpr1.js?v=pages-cms-1" defer></script>
+=======
+    <script src="pgpr1.js" defer></script>
+>>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
 </head>
 <body class="page-transition-active">
 
@@ -478,9 +504,14 @@
             <h3>Seminarul Teologic Penticostal (Arad)</h3>
             <p>Pregătire biblică pentru slujire.</p>
         </div>
+<<<<<<< HEAD
     </a>
 
         </div>
+=======
+
+    </div>
+>>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
 </section>
 
 <!-- ============================================
@@ -642,6 +673,7 @@
 </section>
 
 <!-- ================= FOOTER ================= -->
+<<<<<<< HEAD
 <footer class="footer site-footer">
     <div class="footer-top">
         <div class="footer-brand">
@@ -670,6 +702,9 @@
         </div>
     </div>
     <div class="footer-bottom-wrap">
+=======
+<footer class="footer">
+>>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
     <div class="footer-inner">
         &copy; <span id="yearSpan"></span> Comunitatea Regională Penticostală Arad. Toate drepturile rezervate.
     </div>
@@ -677,5 +712,11 @@
 
 <!-- EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<<<<<<< HEAD
+=======
+
+<!-- JS site -->
+<script src="pgpr1.js"></script>
+>>>>>>> fb3944fc00f7a6c244a554f3da6a8b405d0df5a2
 </body>
 </html>
