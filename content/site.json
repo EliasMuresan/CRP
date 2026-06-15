@@ -1,0 +1,250 @@
+{
+  "hero": {
+    "kicker": "COMUNITATEA REGIONALA PENTICOSTALA ARAD",
+    "title": "Unitate. Slujire. Misiune.",
+    "subtitle": "Sustinem bisericile penticostale din judetele Arad, Timis, Hunedoara si Caras-Severin in lucrarea de slujire, inchinare si misiune.",
+    "backgroundImage": "images/pozemain.png",
+    "primaryButton": {
+      "label": "Afla mai mult",
+      "url": "#despre"
+    },
+    "secondaryButton": {
+      "label": "Vezi conducerea",
+      "url": "#comitet"
+    }
+  },
+  "about": {
+    "kicker": "Despre noi",
+    "title": "O comunitate pentru bisericile din Arad, Timis, Hunedoara, Caras-Severin",
+    "intro": "Comunitatea Regionala Penticostala Arad apartine Cultului Crestin Penticostal. Coordonam in mod transparent activitatea bisericilor penticostale din judetele Arad, Timis, Hunedoara si Caras-Severin, cultivand unitatea frateasca si responsabilitatea fata de Scriptura.",
+    "items": [
+      "Sprijin pentru bisericile locale.",
+      "Conferinte, seminarii si intalniri de formare.",
+      "Proiecte de misiune si evanghelizare.",
+      "Implicare sociala si ajutorarea celor in nevoie."
+    ],
+    "image": "images/pozacladire.png",
+    "imageAlt": "Cladirea Comunitatii Regionale Penticostale Arad"
+  },
+  "team": {
+    "kicker": "Comitet",
+    "title": "Conducerea Comunitatii",
+    "intro": "Pastori si slujitori care coordoneaza activitatea comunitatii regionale.",
+    "main": [
+      {
+        "name": "Tomuta Simion",
+        "role": "Presedinte",
+        "image": "images/TomutaSimion.png"
+      },
+      {
+        "name": "Stanciu Cornel",
+        "role": "Vicepresedinte",
+        "image": "images/StanciuCornel.png"
+      },
+      {
+        "name": "Avram Aurel",
+        "role": "Secretar",
+        "image": "images/AvramAurel.png"
+      }
+    ],
+    "members": [
+      {
+        "name": "Filip Ioan",
+        "role": "Pastor",
+        "image": "images/IoanFilip.png"
+      },
+      {
+        "name": "Hada Daniel",
+        "role": "Pastor",
+        "image": "images/HadaDaniel.png"
+      },
+      {
+        "name": "Petroiesc Mihai",
+        "role": "Pastor",
+        "image": "images/PetroiescMihai.png"
+      },
+      {
+        "name": "Coroban Titus",
+        "role": "Pastor",
+        "image": "images/CorobanTitus.png"
+      },
+      {
+        "name": "Ilioni Florin",
+        "role": "Pastor",
+        "image": "images/IlioniFlorin.png"
+      },
+      {
+        "name": "Crisan Danut",
+        "role": "Pastor",
+        "image": "images/CrisanDanut.png"
+      },
+      {
+        "name": "Muresan Mircea",
+        "role": "Pastor",
+        "image": "images/MuresanMircea.png"
+      },
+      {
+        "name": "Anca Iosif",
+        "role": "Pastor",
+        "image": "images/IosifAnca.png"
+      }
+    ]
+  },
+  "beliefs": {
+    "pill": "Documente oficiale",
+    "title": "Convingeri",
+    "subtitle": "Documentele fundamentale ale credintei si organizarii in cadrul Comunitatii Regionale.",
+    "cards": [
+      {
+        "title": "Regulament electoral",
+        "text": "",
+        "href": "electoral.html"
+      },
+      {
+        "title": "Statutul de organizare",
+        "text": "",
+        "href": "statut-organizare.html"
+      },
+      {
+        "title": "Statutul slujitorului",
+        "text": "",
+        "href": "statut-slujitorului.html"
+      },
+      {
+        "title": "Marturisirea de credinta",
+        "text": "",
+        "href": "marturisirea-de-credinta.html"
+      }
+    ],
+    "meta": "Toate documentele se deschid intr-o fila noua si pot fi descarcate in format electronic."
+  },
+  "counties": {
+    "kicker": "Regiunile noastre",
+    "title": "Judetele coordonate de Comunitatea Regionala",
+    "intro": "Oferim sprijin, coordonare si resurse bisericilor penticostale din cele patru judete ale regiunii noastre.",
+    "tagline": "JUDETE",
+    "cards": [
+      {
+        "name": "ARAD",
+        "subtitle": "Vezi lista bisericilor",
+        "href": "arad.html",
+        "overlay": "Vezi lista bisericilor din judetul Arad"
+      },
+      {
+        "name": "TIMIS",
+        "subtitle": "Vezi lista bisericilor",
+        "href": "timis.html",
+        "overlay": "Vezi lista bisericilor din judetul Timis"
+      },
+      {
+        "name": "HUNEDOARA",
+        "subtitle": "Vezi lista bisericilor",
+        "href": "hunedoara.html",
+        "overlay": "Vezi lista bisericilor din judetul Hunedoara"
+      },
+      {
+        "name": "CARAS-SEVERIN",
+        "subtitle": "Vezi lista bisericilor",
+        "href": "caras.html",
+        "overlay": "Vezi lista bisericilor din judetul Caras-Severin"
+      }
+    ]
+  },
+  "eventsSection": {
+    "kicker": "Evenimente",
+    "title": "Cele mai recente evenimente",
+    "intro": "O privire de ansamblu asupra intalnirilor si conferintelor importante din comunitatea noastra."
+  },
+  "events": [
+    {
+      "date": "6 decembrie 2025",
+      "title": "Conferinta pastorala",
+      "text": "Discernamant. Disciplina. Dedicare. - O conferinta care ne reasaza chemarea.",
+      "image": "conferinta1/img10.png",
+      "imageAlt": "Conferinta pastorala",
+      "href": "conferinta1.html"
+    },
+    {
+      "date": "3 decembrie 2025",
+      "title": "Intalnire municipala de tineret",
+      "text": "O seara de lauda, inchinare si mesaj biblic pentru tinerii din regiune.",
+      "image": "conferinta2/pozc17-min.JPG",
+      "imageAlt": "Intalnire municipala de tineret",
+      "href": "conftineret.html"
+    },
+    {
+      "date": "2 decembrie 2025",
+      "title": "Intalnire de suflet la Comunitatea Regionala Penticostala Arad",
+      "text": "Educatia teologica - investitie strategica pentru generatiile care vin.",
+      "image": "eveniment3/puza1.png",
+      "imageAlt": "Intalnire de suflet la Comunitatea Regionala Penticostala Arad",
+      "href": "confiliala.html"
+    }
+  ],
+  "seminarsSection": {
+    "kicker": "SEMINARII",
+    "title": "Seminarii si formare",
+    "intro": "Sesiuni de instruire, studiu biblic si formare spirituala dedicate slujitorilor si comunitatii."
+  },
+  "seminars": [
+    {
+      "title": "Seminarul Biblic Penticostal (Caras-Severin)",
+      "text": "Invataturi fundamentale pentru lideri si lucratori ai bisericii.",
+      "href": "seminar1.html"
+    },
+    {
+      "title": "Seminarul Teologic Filadelfia (Petrosani)",
+      "text": "Echipare teologica pentru slujire.",
+      "href": "seminar2.html"
+    },
+    {
+      "title": "Seminarul Teologic Penticostal (Hunedoara)",
+      "text": "Inscrieri deschise pentru formare teologica.",
+      "href": "seminar3.html"
+    },
+    {
+      "title": "Seminarul Teologic Penticostal (Timisoara)",
+      "text": "Pregatire biblica pentru slujire.",
+      "href": "seminar4.html"
+    },
+    {
+      "title": "Seminarul Teologic Penticostal (Arad)",
+      "text": "Pregatire biblica pentru slujire.",
+      "href": "seminar5.html"
+    }
+  ],
+  "school": {
+    "title": "Liceul Penticostal Arad",
+    "subtitle": "Informatii",
+    "hoverText": "Vezi informatii despre Liceul Penticostal Arad",
+    "href": "liceu.html",
+    "image": "images/liceu-penticostal-arad.jpg",
+    "imageAlt": "Liceul Penticostal Arad"
+  },
+  "location": {
+    "kicker": "LOCATIE",
+    "title": "Unde ne gasiti",
+    "intro": "Ne puteti gasi la sediul Comunitatii Regionale Penticostale Arad, pe Strada Miron Costin nr. 2A, cod postal 310146.",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2812.8062081369016!2d21.319915!3d46.178825!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474598a8c4e74143%3A0x0000000000000000!2sStrada%20Miron%20Costin%202A%2C%20Arad!5e0!3m2!1sro!2sro!4v1736539200000"
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Luati legatura cu noi",
+    "intro": "Pentru intrebari sau colaborari, ne puteti scrie folosind formularul de contact.",
+    "pill": "Biroul Comunitatii Regionale",
+    "heading": "Suntem la un mesaj distanta",
+    "text": "Ne puteti scrie pentru intrebari legate de evenimente, colaborari sau informatii administrative. Vom directiona mesajul catre persoanele potrivite.",
+    "address": "Str. Miron Costin, Nr. 2A, 310146.",
+    "email": "crparad@gmail.com",
+    "phone": "0257-281-398 , 0257-210-404",
+    "note": "Comunicarea oficiala se realizeaza in colaborare cu pastorii si liderii zonali din cadrul comunitatii."
+  },
+  "footer": {
+    "brand": "Comunitatea Regionala",
+    "subtitle": "Penticostala Arad",
+    "text": "Sprijinim bisericile penticostale din judetele Arad, Timis, Hunedoara si Caras-Severin in slujire, inchinare si misiune.",
+    "address": "Str. Miron Costin, Nr. 2A, 310146 Arad",
+    "email": "crparad@gmail.com",
+    "phone": "0257-281-398 - 0257-210-404"
+  }
+}

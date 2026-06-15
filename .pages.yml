@@ -1,0 +1,412 @@
+media:
+  - name: site_images
+    label: Imagini site
+    input: images
+    output: images
+    categories: [image]
+  - name: conferinta1
+    label: Galerie conferinta pastorala
+    input: conferinta1
+    output: conferinta1
+    categories: [image]
+  - name: conferinta2
+    label: Galerie tineret
+    input: conferinta2
+    output: conferinta2
+    categories: [image]
+  - name: eveniment3
+    label: Galerie eveniment
+    input: eveniment3
+    output: eveniment3
+    categories: [image]
+  - name: seminarii
+    label: Imagini seminarii
+    input: seminariipoze
+    output: seminariipoze
+    categories: [image]
+
+components:
+  button:
+    type: object
+    label: Buton
+    fields:
+      - name: label
+        label: Text buton
+        type: string
+      - name: url
+        label: Link
+        type: string
+  section_header:
+    type: object
+    label: Titlu sectiune
+    fields:
+      - name: kicker
+        label: Eticheta mica
+        type: string
+      - name: title
+        label: Titlu
+        type: string
+      - name: intro
+        label: Descriere
+        type: text
+  card_link:
+    type: object
+    label: Card cu link
+    fields:
+      - name: title
+        label: Titlu
+        type: string
+      - name: text
+        label: Text
+        type: text
+      - name: href
+        label: Link
+        type: string
+  image_card:
+    type: object
+    label: Card cu imagine
+    fields:
+      - name: image
+        label: Imagine
+        type: image
+      - name: imageAlt
+        label: Text alternativ imagine
+        type: string
+      - name: title
+        label: Titlu
+        type: string
+      - name: text
+        label: Text
+        type: text
+      - name: href
+        label: Link
+        type: string
+  person:
+    type: object
+    label: Persoana
+    fields:
+      - name: name
+        label: Nume
+        type: string
+      - name: role
+        label: Rol
+        type: string
+      - name: image
+        label: Fotografie
+        type: image
+  event_card:
+    type: object
+    label: Eveniment
+    fields:
+      - name: date
+        label: Data
+        type: string
+      - name: title
+        label: Titlu
+        type: string
+      - name: text
+        label: Descriere
+        type: text
+      - name: image
+        label: Imagine
+        type: image
+      - name: imageAlt
+        label: Text alternativ imagine
+        type: string
+      - name: href
+        label: Link pagina eveniment
+        type: string
+  county_card:
+    type: object
+    label: Judet
+    fields:
+      - name: name
+        label: Nume judet
+        type: string
+      - name: subtitle
+        label: Text scurt
+        type: string
+      - name: href
+        label: Link
+        type: string
+      - name: overlay
+        label: Text la hover
+        type: text
+
+content:
+  - name: homepage
+    label: Pagina principala
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - name: kicker
+            label: Eticheta
+            type: string
+          - name: title
+            label: Titlu principal
+            type: string
+          - name: subtitle
+            label: Subtitlu
+            type: text
+          - name: backgroundImage
+            label: Imagine fundal
+            type: image
+          - name: primaryButton
+            label: Buton principal
+            component: button
+          - name: secondaryButton
+            label: Buton secundar
+            component: button
+      - name: about
+        label: Despre noi
+        type: object
+        fields:
+          - name: kicker
+            label: Eticheta
+            type: string
+          - name: title
+            label: Titlu
+            type: string
+          - name: intro
+            label: Text introductiv
+            type: text
+          - name: items
+            label: Lista puncte
+            type: string
+            list: true
+          - name: image
+            label: Imagine
+            type: image
+          - name: imageAlt
+            label: Text alternativ imagine
+            type: string
+      - name: team
+        label: Comitet
+        type: object
+        fields:
+          - name: kicker
+            label: Eticheta
+            type: string
+          - name: title
+            label: Titlu
+            type: string
+          - name: intro
+            label: Descriere
+            type: text
+          - name: main
+            label: Lideri principali
+            component: person
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+          - name: members
+            label: Membri comitet
+            component: person
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+      - name: beliefs
+        label: Convingeri
+        type: object
+        fields:
+          - name: pill
+            label: Eticheta
+            type: string
+          - name: title
+            label: Titlu
+            type: string
+          - name: subtitle
+            label: Descriere
+            type: text
+          - name: cards
+            label: Carduri documente
+            component: card_link
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title}"
+          - name: meta
+            label: Text sub carduri
+            type: text
+      - name: counties
+        label: Judete
+        type: object
+        fields:
+          - name: kicker
+            label: Eticheta
+            type: string
+          - name: title
+            label: Titlu
+            type: string
+          - name: intro
+            label: Descriere
+            type: text
+          - name: tagline
+            label: Titlu panel
+            type: string
+          - name: cards
+            label: Carduri judete
+            component: county_card
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+      - name: eventsSection
+        label: Titlu sectiune evenimente
+        component: section_header
+      - name: events
+        label: Evenimente
+        component: event_card
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+      - name: seminarsSection
+        label: Titlu sectiune seminarii
+        component: section_header
+      - name: seminars
+        label: Seminarii
+        component: card_link
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+      - name: school
+        label: Liceu
+        type: object
+        fields:
+          - name: title
+            label: Titlu
+            type: string
+          - name: subtitle
+            label: Subtitlu
+            type: string
+          - name: hoverText
+            label: Text la hover
+            type: string
+          - name: href
+            label: Link
+            type: string
+          - name: image
+            label: Imagine
+            type: image
+          - name: imageAlt
+            label: Text alternativ imagine
+            type: string
+      - name: location
+        label: Locatie
+        type: object
+        fields:
+          - name: kicker
+            label: Eticheta
+            type: string
+          - name: title
+            label: Titlu
+            type: string
+          - name: intro
+            label: Descriere
+            type: text
+          - name: mapEmbedUrl
+            label: Link embed Google Maps
+            type: string
+      - name: contact
+        label: Contact
+        type: object
+        fields:
+          - name: kicker
+            label: Eticheta
+            type: string
+          - name: title
+            label: Titlu
+            type: string
+          - name: intro
+            label: Descriere
+            type: text
+          - name: pill
+            label: Eticheta card
+            type: string
+          - name: heading
+            label: Titlu card
+            type: string
+          - name: text
+            label: Text card
+            type: text
+          - name: address
+            label: Adresa
+            type: string
+          - name: email
+            label: Email
+            type: string
+          - name: phone
+            label: Telefon
+            type: string
+          - name: note
+            label: Nota
+            type: text
+      - name: footer
+        label: Footer
+        type: object
+        fields:
+          - name: brand
+            label: Brand
+            type: string
+          - name: subtitle
+            label: Subtitlu
+            type: string
+          - name: text
+            label: Text
+            type: text
+          - name: address
+            label: Adresa
+            type: string
+          - name: email
+            label: Email
+            type: string
+          - name: phone
+            label: Telefon
+            type: string
+
+  - name: event_galleries
+    label: Galerii evenimente
+    type: collection
+    path: content/galleries
+    filename: "{fields.slug}.json"
+    format: json
+    view:
+      primary: title
+      fields: [title, slug]
+      search: [title, slug]
+    fields:
+      - name: title
+        label: Titlu galerie
+        type: string
+      - name: slug
+        label: Slug
+        type: string
+        pattern: "^[a-z0-9-]+$"
+      - name: kicker
+        label: Eticheta
+        type: string
+      - name: intro
+        label: Descriere galerie
+        type: text
+      - name: images
+        label: Imagini
+        type: image
+        list: true
+
+settings:
+  content:
+    merge: true
+  commit:
+    templates:
+      create: "cms: adauga {name}"
+      update: "cms: actualizeaza {name}"
+      delete: "cms: sterge {name}"
