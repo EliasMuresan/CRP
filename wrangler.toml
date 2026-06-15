@@ -1,0 +1,12 @@
+name = "crp-cms"
+main = "cloudflare-worker/crp-cms-worker.js"
+compatibility_date = "2026-06-15"
+workers_dev = true
+
+[vars]
+GITHUB_OWNER = "EliasMuresan"
+GITHUB_REPO = "CRP"
+GITHUB_BRANCH = "main"
+ADMIN_EMAIL = "crparad@gmail.com"
+ALLOWED_ORIGIN = "https://www.crparad.ro"
+FIREBASE_API_KEY = "AIzaSyBg1mDwkKxepDb7FWB0_taSsFCtSR8ONVU"

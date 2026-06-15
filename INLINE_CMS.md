@@ -25,7 +25,13 @@ Fisierul Worker este pregatit aici:
 cloudflare-worker/crp-cms-worker.js
 ```
 
-In Cloudflare Worker trebuie setate variabilele:
+Configuratia Worker este in:
+
+```text
+wrangler.toml
+```
+
+Variabilele publice sunt deja setate acolo:
 
 ```text
 GITHUB_OWNER=EliasMuresan
@@ -36,13 +42,21 @@ ALLOWED_ORIGIN=https://www.crparad.ro
 FIREBASE_API_KEY=AIzaSyBg1mDwkKxepDb7FWB0_taSsFCtSR8ONVU
 ```
 
-Si secretul:
+Secretul se seteaza in Cloudflare, nu in cod:
 
 ```text
 GITHUB_TOKEN=token GitHub cu acces Contents: Read and write doar pentru repo-ul CRP
 ```
 
-Dupa ce Worker-ul are URL, se pune URL-ul in `pgpr1.js`, la `SAVE_ENDPOINT`, sau inainte de script ca:
+## Deploy rapid
+
+Ruleaza:
+
+```bat
+deploy-cloudflare-worker.bat
+```
+
+Dupa ce Worker-ul are URL, se pune URL-ul inainte de scriptul principal ca:
 
 ```html
 <script>
