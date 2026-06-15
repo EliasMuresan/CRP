@@ -28,17 +28,17 @@
   },
   "team": {
     "kicker": "COMITET",
-    "title": "Conducerea Comunitatii",
+    "title": "Conducerea Comunității",
     "intro": "Pastori si slujitori care coordoneaza activitatea comunitatii regionale.",
     "main": [
       {
         "name": "Tomuta Simion",
-        "role": "PRESEDINTE",
+        "role": "PREȘEDINTE",
         "image": "images/cms/20260615181318-team-main-0-image-1.png"
       },
       {
         "name": "Stanciu Cornel",
-        "role": "VICEPRESEDINTE",
+        "role": "VICEPREȘEDINTE",
         "image": "images/cms/20260615181329-team-main-1-image-2.png"
       },
       {
@@ -74,19 +74,19 @@
         "image": "images/cms/20260615190009-team-members-4-image-1.png"
       },
       {
-        "name": "Crisan Danut",
+        "name": "Crișan Danut",
         "role": "PASTOR",
-        "image": "images/CrisanDanut.png"
+        "image": "images/cms/20260615190250-team-members-5-image-2.png"
       },
       {
-        "name": "Muresan Mircea",
+        "name": "Mureșan Mircea",
         "role": "PASTOR",
-        "image": "images/MuresanMircea.png"
+        "image": "images/cms/20260615190426-team-members-6-image-3.png"
       },
       {
         "name": "Anca Iosif",
         "role": "PASTOR",
-        "image": "images/IosifAnca.png"
+        "image": "images/cms/20260615190556-team-members-7-image-4.png"
       }
     ]
   },
