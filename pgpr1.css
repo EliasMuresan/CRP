@@ -264,7 +264,7 @@ main > section:first-child:not(.band-hero) { padding-top: calc(var(--header-h) +
     border-color: var(--line-strong);
     color: var(--accent-dark);
 }
-.auth-nav-button.is-admin {
+.auth-nav-button.can-edit-site {
     background: var(--accent-dark);
     border-color: var(--accent-dark);
     color: #fff;
@@ -356,8 +356,6 @@ body.auth-modal-open { overflow: hidden; }
     font-size: .96rem;
 }
 
-.auth-google,
-.auth-guest,
 .auth-logout {
     width: 100%;
     min-height: 46px;
@@ -371,59 +369,21 @@ body.auth-modal-open { overflow: hidden; }
     font-weight: 600;
     cursor: pointer;
 }
-.auth-google {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-.auth-google:hover,
-.auth-guest:hover,
 .auth-logout:hover { background: var(--bg-muted); }
 
-.auth-google-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    color: #4285f4;
-    border: 1px solid var(--line);
-    font-weight: 700;
-}
-
-.auth-divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--text-soft);
-    font-size: .78rem;
-    font-weight: 700;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    margin: 22px 0 16px;
-}
-.auth-divider::before,
-.auth-divider::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-}
-
-.auth-admin-form {
+.auth-login-form {
     display: grid;
     gap: 12px;
+    margin-top: 18px;
 }
-.auth-admin-form label {
+.auth-login-form label {
     display: grid;
     gap: 6px;
     color: var(--text-muted);
     font-size: .9rem;
     font-weight: 600;
 }
-.auth-admin-form input {
+.auth-login-form input {
     width: 100%;
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-sm);
@@ -432,7 +392,7 @@ body.auth-modal-open { overflow: hidden; }
     color: var(--text-main);
     background: #fff;
 }
-.auth-admin-form input:focus {
+.auth-login-form input:focus {
     outline: 2px solid rgba(44,93,134,.18);
     border-color: var(--accent);
 }
@@ -446,17 +406,7 @@ body.auth-modal-open { overflow: hidden; }
 }
 .auth-status.is-error { color: #b42318; }
 
-.auth-admin-badge {
-    display: inline-flex;
-    margin-top: 16px;
-    padding: 8px 11px;
-    border-radius: var(--radius-sm);
-    background: var(--accent-soft);
-    color: var(--accent-dark);
-    font-size: .9rem;
-    font-weight: 700;
-}
-.auth-admin-panel { width: 100%; margin-top: 18px; }
+.auth-edit-button { width: 100%; margin-top: 18px; }
 
 
 /* =========================================================

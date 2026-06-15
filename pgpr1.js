@@ -461,13 +461,13 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
 });
 
 /* ============================================================
-   FIREBASE AUTH - LOGIN / GUEST / ADMIN
+   FIREBASE AUTH - LOGIN SIMPLU
 ============================================================ */
 (function () {
     if (window.__crpAuthBooted) return;
     window.__crpAuthBooted = true;
 
-    const ADMIN_EMAIL = "crparad@gmail.com";
+    const EDITOR_EMAIL = "crparad@gmail.com";
     const firebaseConfig = {
         apiKey: "AIzaSyBg1mDwkKxepDb7FWB0_taSsFCtSR8ONVU",
         authDomain: "crparad-ed5c4.firebaseapp.com",
@@ -480,7 +480,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
 
     window.CRP_AUTH = {
         user: null,
-        isAdmin: false,
+        canEdit: false,
         ready: false
     };
 
@@ -514,49 +514,41 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         modal.setAttribute("aria-hidden", "true");
         modal.innerHTML = `
             <div class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="crpAuthTitle">
-                <button class="auth-close" type="button" aria-label="Inchide login">&times;</button>
-                <div class="auth-guest-view">
+                <button class="auth-close" type="button" aria-label="Inchide">&times;</button>
+
+                <div class="auth-login-view">
                     <p class="auth-kicker">Cont CRP Arad</p>
-                    <h2 id="crpAuthTitle">Autentificare</h2>
-                    <p class="auth-muted">Poti ramane vizitator sau te poti autentifica. Loginul cu Google pastreaza sesiunea pe acest dispozitiv.</p>
+                    <h2 id="crpAuthTitle">Login</h2>
+                    <p class="auth-muted">Intra cu email si parola.</p>
 
-                    <button class="auth-google" type="button">
-                        <span class="auth-google-mark">G</span>
-                        Continua cu Google
-                    </button>
-
-                    <div class="auth-divider"><span>Admin</span></div>
-
-                    <form class="auth-admin-form">
+                    <form class="auth-login-form">
                         <label>
-                            Email admin
-                            <input type="email" name="email" value="${ADMIN_EMAIL}" autocomplete="username" required>
+                            Email
+                            <input type="email" name="email" autocomplete="username" required>
                         </label>
                         <label>
                             Parola
                             <input type="password" name="password" autocomplete="current-password" required>
                         </label>
-                        <button class="btn primary auth-submit" type="submit">Login admin</button>
+                        <button class="btn primary auth-submit" type="submit">Intra in cont</button>
                     </form>
 
-                    <button class="auth-guest" type="button">Continua ca guest</button>
                     <p class="auth-status" role="status"></p>
                 </div>
 
                 <div class="auth-user-view" hidden>
-                    <p class="auth-kicker">Esti autentificat</p>
+                    <p class="auth-kicker">Conectat</p>
                     <h2 class="auth-user-name">Cont conectat</h2>
                     <p class="auth-user-email"></p>
-                    <p class="auth-admin-badge" hidden>Admin activ pentru viitorul CMS</p>
-                    <button class="btn primary auth-admin-panel" type="button" hidden>Panou admin</button>
+                    <button class="btn primary auth-edit-button" type="button" hidden>Editeaza siteul</button>
                     <button class="auth-logout" type="button">Logout</button>
+                    <p class="auth-status auth-user-status" role="status"></p>
                 </div>
             </div>
         `;
         document.body.appendChild(modal);
 
         modal.querySelector(".auth-close").addEventListener("click", closeAuthModal);
-        modal.querySelector(".auth-guest").addEventListener("click", closeAuthModal);
         modal.addEventListener("click", (event) => {
             if (event.target === modal) closeAuthModal();
         });
@@ -569,7 +561,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         modal.setAttribute("aria-hidden", "false");
         document.body.classList.add("auth-modal-open");
         window.setTimeout(() => {
-            const firstInput = modal.querySelector(".auth-admin-form input");
+            const firstInput = modal.querySelector(".auth-login-form input");
             if (firstInput && !window.CRP_AUTH.user) firstInput.focus();
         }, 30);
     }
@@ -584,10 +576,10 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     }
 
     function setStatus(message, isError) {
-        const status = document.querySelector(".auth-status");
-        if (!status) return;
-        status.textContent = message || "";
-        status.classList.toggle("is-error", Boolean(isError));
+        document.querySelectorAll(".auth-status").forEach((status) => {
+            status.textContent = message || "";
+            status.classList.toggle("is-error", Boolean(isError));
+        });
     }
 
     function setAuthText(selector, value, root) {
@@ -595,50 +587,43 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         if (node && value !== undefined && value !== null) node.textContent = value;
     }
 
-    function friendlyName(user) {
-        if (!user) return "Login";
-        if ((user.email || "").toLowerCase() === ADMIN_EMAIL) return "Admin";
-        return user.displayName ? user.displayName.split(" ")[0] : "Cont";
-    }
-
     function updateAuthUi(user) {
         const email = (user && user.email ? user.email : "").toLowerCase();
-        const isAdmin = email === ADMIN_EMAIL;
+        const canEdit = email === EDITOR_EMAIL;
 
         window.CRP_AUTH.user = user || null;
-        window.CRP_AUTH.isAdmin = isAdmin;
+        window.CRP_AUTH.canEdit = canEdit;
         window.CRP_AUTH.ready = true;
+
         document.body.classList.add("auth-ready");
         document.body.classList.toggle("is-authenticated", Boolean(user));
-        document.body.classList.toggle("is-admin", isAdmin);
+        document.body.classList.toggle("can-edit-site", canEdit);
 
         const button = document.getElementById("crpAuthButton");
         if (button) {
-            button.textContent = friendlyName(user);
+            button.textContent = user ? "Cont" : "Login";
             button.classList.toggle("is-logged", Boolean(user));
-            button.classList.toggle("is-admin", isAdmin);
+            button.classList.toggle("can-edit-site", canEdit);
         }
 
         const modal = document.getElementById("crpAuthModal");
         if (modal) {
-            const guestView = modal.querySelector(".auth-guest-view");
+            const loginView = modal.querySelector(".auth-login-view");
             const userView = modal.querySelector(".auth-user-view");
-            if (guestView) guestView.hidden = Boolean(user);
+            if (loginView) loginView.hidden = Boolean(user);
             if (userView) userView.hidden = !user;
 
-            setAuthText(".auth-user-name", isAdmin ? "Administrator CRP Arad" : (user && user.displayName ? user.displayName : "Cont conectat"), modal);
-            setAuthText(".auth-user-email", user ? user.email || "Cont Google" : "", modal);
+            setAuthText(".auth-user-name", canEdit ? "Editare site" : "Cont conectat", modal);
+            setAuthText(".auth-user-email", user ? user.email || "" : "", modal);
 
-            const adminBadge = modal.querySelector(".auth-admin-badge");
-            const adminPanel = modal.querySelector(".auth-admin-panel");
-            if (adminBadge) adminBadge.hidden = !isAdmin;
-            if (adminPanel) adminPanel.hidden = !isAdmin;
+            const editButton = modal.querySelector(".auth-edit-button");
+            if (editButton) editButton.hidden = !canEdit;
         }
 
         window.dispatchEvent(new CustomEvent("crp-auth-change", {
             detail: {
                 user: user || null,
-                isAdmin
+                canEdit
             }
         }));
     }
@@ -656,41 +641,24 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
 
             await authModule.setPersistence(auth, authModule.browserLocalPersistence);
 
-            const provider = new authModule.GoogleAuthProvider();
-            provider.setCustomParameters({ prompt: "select_account" });
-
-            const googleButton = document.querySelector(".auth-google");
-            if (googleButton) {
-                googleButton.addEventListener("click", async () => {
-                    setStatus("Se deschide loginul Google...");
-                    try {
-                        await authModule.signInWithPopup(auth, provider);
-                        closeAuthModal();
-                    } catch (error) {
-                        setStatus(authErrorMessage(error), true);
-                    }
-                });
-            }
-
-            const adminForm = document.querySelector(".auth-admin-form");
-            if (adminForm) {
-                adminForm.addEventListener("submit", async (event) => {
+            const loginForm = document.querySelector(".auth-login-form");
+            if (loginForm) {
+                loginForm.addEventListener("submit", async (event) => {
                     event.preventDefault();
-                    const formData = new FormData(adminForm);
+                    const formData = new FormData(loginForm);
                     const email = String(formData.get("email") || "").trim();
                     const password = String(formData.get("password") || "");
 
-                    setStatus("Verific datele...");
+                    setStatus("Se verifica...");
                     try {
                         const credential = await authModule.signInWithEmailAndPassword(auth, email, password);
                         const loggedEmail = (credential.user.email || "").toLowerCase();
-                        if (loggedEmail !== ADMIN_EMAIL) {
+                        if (loggedEmail !== EDITOR_EMAIL) {
                             await authModule.signOut(auth);
-                            setStatus("Contul acesta nu are drepturi de admin.", true);
+                            setStatus("Contul acesta nu are acces.", true);
                             return;
                         }
-                        adminForm.reset();
-                        adminForm.email.value = ADMIN_EMAIL;
+                        loginForm.reset();
                         closeAuthModal();
                     } catch (error) {
                         setStatus(authErrorMessage(error), true);
@@ -706,10 +674,10 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
                 });
             }
 
-            const adminPanelButton = document.querySelector(".auth-admin-panel");
-            if (adminPanelButton) {
-                adminPanelButton.addEventListener("click", () => {
-                    setStatus("Panoul CMS urmeaza in etapa urmatoare.");
+            const editButton = document.querySelector(".auth-edit-button");
+            if (editButton) {
+                editButton.addEventListener("click", () => {
+                    setStatus("Editorul se deschide in pasul urmator.");
                 });
             }
 
@@ -725,9 +693,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     function authErrorMessage(error) {
         const code = error && error.code ? error.code : "";
         if (code.includes("wrong-password") || code.includes("invalid-credential")) return "Emailul sau parola nu sunt corecte.";
-        if (code.includes("user-not-found")) return "Nu exista utilizator cu acest email.";
-        if (code.includes("popup-closed-by-user")) return "Loginul Google a fost inchis inainte de finalizare.";
-        if (code.includes("unauthorized-domain")) return "Domeniul nu este autorizat in Firebase Authentication.";
+        if (code.includes("user-not-found")) return "Nu exista cont cu acest email.";
         if (code.includes("too-many-requests")) return "Prea multe incercari. Incearca mai tarziu.";
         return "Autentificarea nu a reusit. Incearca din nou.";
     }
