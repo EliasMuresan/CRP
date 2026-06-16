@@ -24,7 +24,11 @@
       "Implicare sociala si ajutorarea celor in nevoie."
     ],
     "image": "images/pozacladire.png",
-    "imageAlt": "Cladirea Comunitatii Regionale Penticostale Arad"
+    "imageAlt": "Cladirea Comunitatii Regionale Penticostale Arad",
+    "imageLayout": {
+      "align": "right",
+      "width": 310
+    }
   },
   "team": {
     "kicker": "COMITET",
