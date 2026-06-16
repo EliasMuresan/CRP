@@ -1,15 +1,15 @@
 {
   "hero": {
     "kicker": "COMUNITATEA REGIONALA PENTICOSTALA ARAD",
-    "title": "Unitate. Slujire. Misiune.",
+    "title": "UNITATE. SLUJIRE. MISIUNE.",
     "subtitle": "Sustinem bisericile penticostale din judetele Arad, Timis, Hunedoara si Caras-Severin in lucrarea de slujire, inchinare si misiune.",
     "backgroundImage": "images/cms/20260615191430-hero-backgroundimage-4.png",
     "primaryButton": {
-      "label": "Afla mai mult",
+      "label": "AFLA MAI MULT",
       "url": "#despre"
     },
     "secondaryButton": {
-      "label": "despre noi",
+      "label": "DESPRE NOI",
       "url": "#comitet"
     }
   },
@@ -27,7 +27,7 @@
     "imageAlt": "Cladirea Comunitatii Regionale Penticostale Arad",
     "imageLayout": {
       "align": "right",
-      "width": 310
+      "width": 760
     }
   },
   "team": {
