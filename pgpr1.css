@@ -889,6 +889,9 @@ body.cms-crop-open { overflow: hidden; }
     height: 100%;
     object-fit: cover;
     display: block;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
     transform: scale(1.01);
     transition: transform .5s ease, filter .5s ease;
 }

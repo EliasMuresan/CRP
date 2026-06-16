@@ -373,12 +373,23 @@ function initTeamMarquee() {
         const cards = Array.from(grid.children).filter((card) => !card.hasAttribute("data-marquee-clone"));
         if (!cards.length) return;
 
+        cards.forEach((card) => {
+            card.querySelectorAll("img").forEach((image) => {
+                image.draggable = false;
+                image.setAttribute("draggable", "false");
+            });
+        });
+
         for (let copy = 0; copy < 2; copy += 1) {
             cards.forEach((card) => {
                 const clone = card.cloneNode(true);
                 clone.setAttribute("aria-hidden", "true");
                 clone.setAttribute("data-marquee-clone", "true");
                 clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+                clone.querySelectorAll("img").forEach((image) => {
+                    image.draggable = false;
+                    image.setAttribute("draggable", "false");
+                });
                 grid.appendChild(clone);
             });
         }
@@ -426,6 +437,12 @@ function initTeamMarquee() {
             }
         }
 
+        function suppressNativeDrag(event) {
+            if (event.target.closest("img, .team-card-main, .team-card-secondary")) {
+                event.preventDefault();
+            }
+        }
+
         function onPointerMove(event) {
             if (!state.dragging) return;
             state.offset += event.clientX - state.lastPointerX;
@@ -450,13 +467,15 @@ function initTeamMarquee() {
         windowEl.addEventListener("pointerup", endDrag);
         windowEl.addEventListener("pointercancel", endDrag);
         windowEl.addEventListener("lostpointercapture", endDrag);
+        windowEl.addEventListener("dragstart", suppressNativeDrag);
 
         state.cleanupHandlers.push(
             () => windowEl.removeEventListener("pointerdown", onPointerDown),
             () => windowEl.removeEventListener("pointermove", onPointerMove),
             () => windowEl.removeEventListener("pointerup", endDrag),
             () => windowEl.removeEventListener("pointercancel", endDrag),
-            () => windowEl.removeEventListener("lostpointercapture", endDrag)
+            () => windowEl.removeEventListener("lostpointercapture", endDrag),
+            () => windowEl.removeEventListener("dragstart", suppressNativeDrag)
         );
         state.cleanup = () => {
             state.cleanupHandlers.forEach((cleanup) => cleanup());
@@ -890,7 +909,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     const PAGE_TEXT_DIR = "content/page-text";
     const DRAFT_KEY = "crp-inline-cms-draft";
     const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "https://crp-cms.crparad.workers.dev";
-    const CMS_ASSET_VERSION = "inline-cms-14";
+    const CMS_ASSET_VERSION = "inline-cms-15";
     const RESERVED_EVENT_PAGES = new Set([
         "index.html",
         "evenimente-arhivate.html",
