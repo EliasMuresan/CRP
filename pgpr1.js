@@ -322,29 +322,167 @@ function initEventsCarousel() {
     render();
 }
 
+let teamMarqueeFrame = null;
+let teamMarqueeStates = [];
+
+function stopTeamMarquee() {
+    if (teamMarqueeFrame) {
+        cancelAnimationFrame(teamMarqueeFrame);
+        teamMarqueeFrame = null;
+    }
+
+    teamMarqueeStates.forEach((state) => {
+        state.cleanup();
+    });
+    teamMarqueeStates = [];
+}
+
+function ensureTeamMarqueeWindow(grid) {
+    if (grid.parentElement && grid.parentElement.classList.contains("team-marquee-window")) {
+        return grid.parentElement;
+    }
+
+    const windowEl = document.createElement("div");
+    windowEl.className = "team-marquee-window";
+    grid.parentNode.insertBefore(windowEl, grid);
+    windowEl.appendChild(grid);
+    return windowEl;
+}
+
 function initTeamMarquee() {
     const section = document.getElementById("comitet");
     if (!section) return;
 
+    stopTeamMarquee();
+
     section.querySelectorAll(".team-main-grid, .team-secondary-grid").forEach((grid) => {
         grid.querySelectorAll("[data-marquee-clone='true']").forEach((clone) => clone.remove());
         grid.classList.remove("is-marquee-ready");
+        grid.style.removeProperty("--marquee-offset");
+
+        const windowEl = ensureTeamMarqueeWindow(grid);
+        windowEl.classList.remove("is-dragging");
 
         if (document.body.classList.contains("cms-editing")) return;
 
         const cards = Array.from(grid.children).filter((card) => !card.hasAttribute("data-marquee-clone"));
         if (!cards.length) return;
 
-        cards.forEach((card) => {
-            const clone = card.cloneNode(true);
-            clone.setAttribute("aria-hidden", "true");
-            clone.setAttribute("data-marquee-clone", "true");
-            clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
-            grid.appendChild(clone);
-        });
+        for (let copy = 0; copy < 2; copy += 1) {
+            cards.forEach((card) => {
+                const clone = card.cloneNode(true);
+                clone.setAttribute("aria-hidden", "true");
+                clone.setAttribute("data-marquee-clone", "true");
+                clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+                grid.appendChild(clone);
+            });
+        }
 
         grid.classList.add("is-marquee-ready");
+
+        const first = grid.children[0];
+        const firstClone = grid.children[cards.length];
+        if (!first || !firstClone) return;
+
+        const setWidth = firstClone.getBoundingClientRect().left - first.getBoundingClientRect().left;
+        if (!setWidth || setWidth < 1) return;
+
+        const state = {
+            grid,
+            windowEl,
+            setWidth,
+            offset: -setWidth / 2,
+            speed: grid.classList.contains("team-main-grid") ? 0.026 : 0.034,
+            dragging: false,
+            lastPointerX: 0,
+            lastTime: performance.now(),
+            cleanupHandlers: []
+        };
+
+        function normalize() {
+            while (state.offset >= 0) state.offset -= state.setWidth;
+            while (state.offset < -state.setWidth) state.offset += state.setWidth;
+        }
+
+        function applyOffset() {
+            normalize();
+            state.grid.style.setProperty("--marquee-offset", `${state.offset}px`);
+        }
+
+        function onPointerDown(event) {
+            if (event.button !== undefined && event.button !== 0) return;
+            state.dragging = true;
+            state.lastPointerX = event.clientX;
+            state.windowEl.classList.add("is-dragging");
+            try {
+                state.windowEl.setPointerCapture(event.pointerId);
+            } catch (error) {
+                console.info("Nu pot captura pointerul pentru carousel.", error);
+            }
+        }
+
+        function onPointerMove(event) {
+            if (!state.dragging) return;
+            state.offset += event.clientX - state.lastPointerX;
+            state.lastPointerX = event.clientX;
+            applyOffset();
+        }
+
+        function endDrag(event) {
+            state.dragging = false;
+            state.windowEl.classList.remove("is-dragging");
+            if (event && event.pointerId !== undefined) {
+                try {
+                    state.windowEl.releasePointerCapture(event.pointerId);
+                } catch (error) {
+                    console.info("Pointerul carouselului a fost eliberat deja.", error);
+                }
+            }
+        }
+
+        windowEl.addEventListener("pointerdown", onPointerDown);
+        windowEl.addEventListener("pointermove", onPointerMove);
+        windowEl.addEventListener("pointerup", endDrag);
+        windowEl.addEventListener("pointercancel", endDrag);
+        windowEl.addEventListener("lostpointercapture", endDrag);
+
+        state.cleanupHandlers.push(
+            () => windowEl.removeEventListener("pointerdown", onPointerDown),
+            () => windowEl.removeEventListener("pointermove", onPointerMove),
+            () => windowEl.removeEventListener("pointerup", endDrag),
+            () => windowEl.removeEventListener("pointercancel", endDrag),
+            () => windowEl.removeEventListener("lostpointercapture", endDrag)
+        );
+        state.cleanup = () => {
+            state.cleanupHandlers.forEach((cleanup) => cleanup());
+            state.windowEl.classList.remove("is-dragging");
+            state.grid.style.removeProperty("--marquee-offset");
+        };
+
+        applyOffset();
+        teamMarqueeStates.push(state);
     });
+
+    if (!teamMarqueeStates.length) return;
+
+    function tick(time) {
+        teamMarqueeStates.forEach((state) => {
+            const elapsed = Math.min(64, time - state.lastTime);
+            state.lastTime = time;
+            if (!state.dragging) {
+                state.offset += state.speed * elapsed;
+                const normalized = (() => {
+                    while (state.offset >= 0) state.offset -= state.setWidth;
+                    while (state.offset < -state.setWidth) state.offset += state.setWidth;
+                    return state.offset;
+                })();
+                state.grid.style.setProperty("--marquee-offset", `${normalized}px`);
+            }
+        });
+        teamMarqueeFrame = requestAnimationFrame(tick);
+    }
+
+    teamMarqueeFrame = requestAnimationFrame(tick);
 }
 
 /* ============================================================
@@ -747,7 +885,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     const PAGE_TEXT_DIR = "content/page-text";
     const DRAFT_KEY = "crp-inline-cms-draft";
     const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "https://crp-cms.crparad.workers.dev";
-    const CMS_ASSET_VERSION = "inline-cms-9";
+    const CMS_ASSET_VERSION = "inline-cms-10";
     const RESERVED_EVENT_PAGES = new Set([
         "index.html",
         "evenimente-arhivate.html",
@@ -2016,6 +2154,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         state.images.forEach(prepareImage);
         prepareTeamReorder();
         prepareEventManager();
+        if (isHomePage && typeof initTeamMarquee === "function") initTeamMarquee();
     }
 
     function deactivateFields() {
@@ -2170,6 +2309,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             state.editing = false;
             document.body.classList.remove("cms-editing");
             deactivateFields();
+            if (isHomePage && typeof initTeamMarquee === "function") initTeamMarquee();
         }
         updateToolbar();
     });
