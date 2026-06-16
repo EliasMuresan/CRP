@@ -322,6 +322,31 @@ function initEventsCarousel() {
     render();
 }
 
+function initTeamMarquee() {
+    const section = document.getElementById("comitet");
+    if (!section) return;
+
+    section.querySelectorAll(".team-main-grid, .team-secondary-grid").forEach((grid) => {
+        grid.querySelectorAll("[data-marquee-clone='true']").forEach((clone) => clone.remove());
+        grid.classList.remove("is-marquee-ready");
+
+        if (document.body.classList.contains("cms-editing")) return;
+
+        const cards = Array.from(grid.children).filter((card) => !card.hasAttribute("data-marquee-clone"));
+        if (!cards.length) return;
+
+        cards.forEach((card) => {
+            const clone = card.cloneNode(true);
+            clone.setAttribute("aria-hidden", "true");
+            clone.setAttribute("data-marquee-clone", "true");
+            clone.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+            grid.appendChild(clone);
+        });
+
+        grid.classList.add("is-marquee-ready");
+    });
+}
+
 /* ============================================================
    INIT DOMCONTENTLOADED
 ============================================================ */
@@ -331,6 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadZoomableImages();
     }
     initEventsCarousel();
+    initTeamMarquee();
     // Scroll lin pentru link-urile interne din pagină
 const internalLinks = document.querySelectorAll('a[href^="#"]');
 
@@ -721,7 +747,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     const PAGE_TEXT_DIR = "content/page-text";
     const DRAFT_KEY = "crp-inline-cms-draft";
     const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "https://crp-cms.crparad.workers.dev";
-    const CMS_ASSET_VERSION = "inline-cms-8";
+    const CMS_ASSET_VERSION = "inline-cms-9";
     const RESERVED_EVENT_PAGES = new Set([
         "index.html",
         "evenimente-arhivate.html",
@@ -982,11 +1008,11 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         addField(fields, "#comitet .section-kicker", ["team", "kicker"], "Comitet: eticheta");
         addField(fields, "#comitet h2", ["team", "title"], "Comitet: titlu");
         addField(fields, "#comitet .section-intro", ["team", "intro"], "Comitet: descriere", document, { multiline: true });
-        document.querySelectorAll("#comitet .team-main-grid > div").forEach((card, index) => {
+        document.querySelectorAll("#comitet .team-main-grid > div:not([data-marquee-clone])").forEach((card, index) => {
             addField(fields, "h3", ["team", "main", index, "name"], `Lider principal ${index + 1}: nume`, card);
             addField(fields, ".team-role", ["team", "main", index, "role"], `Lider principal ${index + 1}: rol`, card);
         });
-        document.querySelectorAll("#comitet .team-secondary-grid > div").forEach((card, index) => {
+        document.querySelectorAll("#comitet .team-secondary-grid > div:not([data-marquee-clone])").forEach((card, index) => {
             addField(fields, "h3", ["team", "members", index, "name"], `Membru comitet ${index + 1}: nume`, card);
             addField(fields, ".team-role", ["team", "members", index, "role"], `Membru comitet ${index + 1}: rol`, card);
         });
@@ -1069,10 +1095,10 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         );
         addImageBySelector(images, "#despre .about-photo img", ["about", "image"], "Despre: poza cladire");
 
-        document.querySelectorAll("#comitet .team-main-grid > div").forEach((card, index) => {
+        document.querySelectorAll("#comitet .team-main-grid > div:not([data-marquee-clone])").forEach((card, index) => {
             addImageBySelector(images, ".team-photo-main img", ["team", "main", index, "image"], `Lider principal ${index + 1}: poza`, card);
         });
-        document.querySelectorAll("#comitet .team-secondary-grid > div").forEach((card, index) => {
+        document.querySelectorAll("#comitet .team-secondary-grid > div:not([data-marquee-clone])").forEach((card, index) => {
             addImageBySelector(images, ".team-photo-secondary img", ["team", "members", index, "image"], `Membru comitet ${index + 1}: poza`, card);
         });
         document.querySelectorAll("#eventsTrack .event-card").forEach((card, index) => {
@@ -1102,7 +1128,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     }
 
     function teamCards(grid, cardSelector) {
-        return Array.from(grid.children).filter((node) => node.matches(cardSelector));
+        return Array.from(grid.children).filter((node) => node.matches(cardSelector) && !node.hasAttribute("data-marquee-clone"));
     }
 
     function getGridInsertTarget(grid, cardSelector, x, y) {
@@ -2320,6 +2346,8 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         if (membersGrid && Array.isArray(team.members)) {
             membersGrid.innerHTML = team.members.map((person) => personCard(person, false)).join("");
         }
+
+        if (typeof initTeamMarquee === "function") initTeamMarquee();
     }
 
     function renderBeliefs(beliefs) {
