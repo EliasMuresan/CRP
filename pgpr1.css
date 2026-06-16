@@ -1659,6 +1659,11 @@ body.cms-editing #comitet .team-card-secondary {
 @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
 }
+body:not(.cms-editing) #comitet .team-main-grid.is-marquee-ready,
+body:not(.cms-editing) #comitet .team-secondary-grid.is-marquee-ready {
+    transform: translate3d(var(--marquee-offset, 0px), 0, 0);
+    transition: none;
+}
 
 /* =========================================================
    PAGINI INTERIOARE — hero mic + detalii

@@ -323,12 +323,17 @@ function initEventsCarousel() {
 }
 
 let teamMarqueeFrame = null;
+let teamMarqueeTimer = null;
 let teamMarqueeStates = [];
 
 function stopTeamMarquee() {
     if (teamMarqueeFrame) {
         cancelAnimationFrame(teamMarqueeFrame);
         teamMarqueeFrame = null;
+    }
+    if (teamMarqueeTimer) {
+        clearInterval(teamMarqueeTimer);
+        teamMarqueeTimer = null;
     }
 
     teamMarqueeStates.forEach((state) => {
@@ -392,7 +397,7 @@ function initTeamMarquee() {
             windowEl,
             setWidth,
             offset: -setWidth / 2,
-            speed: grid.classList.contains("team-main-grid") ? 0.026 : 0.034,
+            speed: grid.classList.contains("team-main-grid") ? 0.045 : 0.055,
             dragging: false,
             lastPointerX: 0,
             lastTime: performance.now(),
@@ -467,7 +472,7 @@ function initTeamMarquee() {
 
     function tick(time) {
         teamMarqueeStates.forEach((state) => {
-            const elapsed = Math.min(64, time - state.lastTime);
+            const elapsed = Math.min(1200, Math.max(0, time - state.lastTime));
             state.lastTime = time;
             if (!state.dragging) {
                 state.offset += state.speed * elapsed;
@@ -479,10 +484,10 @@ function initTeamMarquee() {
                 state.grid.style.setProperty("--marquee-offset", `${normalized}px`);
             }
         });
-        teamMarqueeFrame = requestAnimationFrame(tick);
     }
 
-    teamMarqueeFrame = requestAnimationFrame(tick);
+    tick(performance.now());
+    teamMarqueeTimer = window.setInterval(() => tick(performance.now()), 16);
 }
 
 /* ============================================================
@@ -885,7 +890,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     const PAGE_TEXT_DIR = "content/page-text";
     const DRAFT_KEY = "crp-inline-cms-draft";
     const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "https://crp-cms.crparad.workers.dev";
-    const CMS_ASSET_VERSION = "inline-cms-10";
+    const CMS_ASSET_VERSION = "inline-cms-14";
     const RESERVED_EVENT_PAGES = new Set([
         "index.html",
         "evenimente-arhivate.html",
