@@ -655,7 +655,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     if (window.__crpAuthBooted) return;
     window.__crpAuthBooted = true;
 
-    const EDITOR_EMAIL = "crparad@gmail.com";
+    const EDITOR_EMAILS = ["crparad@gmail.com", "comunitate@gmail.com"];
     const firebaseConfig = {
         apiKey: "AIzaSyBg1mDwkKxepDb7FWB0_taSsFCtSR8ONVU",
         authDomain: "crparad-ed5c4.firebaseapp.com",
@@ -786,7 +786,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
 
     function updateAuthUi(user) {
         const email = (user && user.email ? user.email : "").toLowerCase();
-        const canEdit = email === EDITOR_EMAIL;
+        const canEdit = EDITOR_EMAILS.includes(email);
 
         window.CRP_AUTH.user = user || null;
         window.CRP_AUTH.canEdit = canEdit;
@@ -909,7 +909,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     const PAGE_TEXT_DIR = "content/page-text";
     const DRAFT_KEY = "crp-inline-cms-draft";
     const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "https://crp-cms.crparad.workers.dev";
-    const CMS_ASSET_VERSION = "inline-cms-16";
+    const CMS_ASSET_VERSION = "inline-cms-17";
     const RESERVED_EVENT_PAGES = new Set([
         "index.html",
         "evenimente-arhivate.html",
@@ -2758,5 +2758,132 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         loadJson("content/site.json")
             .then(renderArchivedEvents)
             .catch((error) => console.warn("Archived events content is not available.", error));
+    }
+})();
+
+/* ============================================================
+   CMS IMAGE DRAG-TO-MOVE & RESIZE HANDLES
+============================================================ */
+(function () {
+    function isExcluded(img) {
+        if (img.closest('.band-hero')) return true;
+        if (img.closest('.team-photo-main')) return true;
+        if (img.closest('.team-photo-secondary')) return true;
+        if (img.closest('.team-card-main')) return true;
+        if (img.closest('.team-card-secondary')) return true;
+        return false;
+    }
+
+    function syncHandle(img, handle) {
+        const host = img.parentElement;
+        if (!host || !handle) return;
+        const hostRect = host.getBoundingClientRect();
+        const imgRect = img.getBoundingClientRect();
+        const gap = 6;
+        const sz = 20;
+        handle.style.left = (imgRect.right - hostRect.left - sz - gap) + 'px';
+        handle.style.top  = (imgRect.bottom - hostRect.top  - sz - gap) + 'px';
+    }
+
+    function addControls(img) {
+        if (img._cmsDragInited || isExcluded(img)) return;
+        img._cmsDragInited = true;
+
+        const host = img.parentElement;
+        if (!host) return;
+        if (window.getComputedStyle(host).position === 'static') {
+            host.style.position = 'relative';
+        }
+
+        img.style.cursor = 'move';
+        img.draggable = false;
+
+        const handle = document.createElement('div');
+        handle.className = 'cms-resize-handle';
+        host.appendChild(handle);
+        syncHandle(img, handle);
+
+        /* ── drag-to-move ── */
+        const dragHandler = (e) => {
+            if (e.button !== 0) return;
+            e.preventDefault();
+            e.stopPropagation();
+
+            const imgRect = img.getBoundingClientRect();
+            const hostRect = host.getBoundingClientRect();
+
+            if (window.getComputedStyle(img).position !== 'absolute') {
+                img.style.position = 'absolute';
+                img.style.left = (imgRect.left - hostRect.left) + 'px';
+                img.style.top  = (imgRect.top  - hostRect.top)  + 'px';
+            }
+
+            const offsetX = e.clientX - img.getBoundingClientRect().left;
+            const offsetY = e.clientY - img.getBoundingClientRect().top;
+
+            const onMove = (e) => {
+                const fr = host.getBoundingClientRect();
+                img.style.left = (e.clientX - fr.left - offsetX) + 'px';
+                img.style.top  = (e.clientY - fr.top  - offsetY) + 'px';
+                syncHandle(img, handle);
+            };
+            const onUp = () => {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+            };
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+        };
+        img._cmsDragHandler = dragHandler;
+        img.addEventListener('mousedown', dragHandler);
+
+        /* ── resize ── */
+        handle.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const startX = e.clientX, startY = e.clientY;
+            const startW = img.offsetWidth,  startH = img.offsetHeight;
+
+            const onMove = (e) => {
+                const newW = Math.max(80, startW + (e.clientX - startX));
+                const newH = Math.max(60, startH + (e.clientY - startY));
+                img.style.width    = newW + 'px';
+                img.style.maxWidth = newW + 'px';
+                img.style.height    = newH + 'px';
+                img.style.maxHeight = newH + 'px';
+                syncHandle(img, handle);
+            };
+            const onUp = () => {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+            };
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+        });
+    }
+
+    function removeControls() {
+        document.querySelectorAll('.cms-resize-handle').forEach(h => h.remove());
+        document.querySelectorAll('img').forEach(img => {
+            if (img._cmsDragHandler) {
+                img.removeEventListener('mousedown', img._cmsDragHandler);
+                img._cmsDragHandler = null;
+            }
+            img.style.cursor = '';
+            img._cmsDragInited = false;
+        });
+    }
+
+    new MutationObserver(() => {
+        if (document.body.classList.contains('cms-editing')) {
+            document.querySelectorAll('img').forEach(addControls);
+        } else {
+            removeControls();
+        }
+    }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+    if (document.body.classList.contains('cms-editing')) {
+        document.querySelectorAll('img').forEach(addControls);
     }
 })();
