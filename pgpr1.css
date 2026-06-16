@@ -504,12 +504,37 @@ body.cms-editing a [data-cms-editable] {
     cursor: text;
 }
 .cms-image-host { position: relative; }
+.cms-image-layout-editable {
+    cursor: grab;
+    touch-action: none;
+}
+.cms-image-layout-editable:active { cursor: grabbing; }
+.cms-image-layout-editable img {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+.cms-image-flow {
+    display: block !important;
+}
+.cms-image-flow::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.cms-image-flow .cms-image-float-host {
+    max-width: min(52%, 560px);
+}
+.cms-image-flow .cms-image-float-host img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
 
 /* ── CMS Resize handle ── */
 .cms-resize-handle {
     position: absolute;
-    top: 0;
-    left: 0;
+    right: 8px;
+    bottom: 8px;
     width: 20px;
     height: 20px;
     background: var(--accent-dark);
@@ -2234,6 +2259,12 @@ body:not(.cms-editing) #comitet .team-secondary-grid.is-marquee-ready {
     .wiki-block.reverse .wiki-image { order: 0; }
     .about-photo { order: -1; }
     .about-photo img { max-height: 360px; }
+    .cms-image-flow .cms-image-float-host {
+        float: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 18px !important;
+    }
 
     .contact-grid { grid-template-columns: 1fr; }
     .event-L-aside { float: none; width: 100%; margin: 0 0 22px; }

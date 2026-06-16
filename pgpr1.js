@@ -909,7 +909,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     const PAGE_TEXT_DIR = "content/page-text";
     const DRAFT_KEY = "crp-inline-cms-draft";
     const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "https://crp-cms.crparad.workers.dev";
-    const CMS_ASSET_VERSION = "inline-cms-17";
+    const CMS_ASSET_VERSION = "inline-cms-18";
     const RESERVED_EVENT_PAGES = new Set([
         "index.html",
         "evenimente-arhivate.html",
@@ -1016,6 +1016,188 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         const node = (root || document).querySelector(selector);
         if (!node) return;
         addImage(images, node, node.parentElement || node, path, label, "image");
+    }
+
+    function imageLayoutPath(image) {
+        return image.path.slice(0, -1).concat(`${image.path[image.path.length - 1]}Layout`);
+    }
+
+    function canUseFlowImageLayout(image) {
+        return Boolean(image && image.node && image.node.matches("#despre .about-photo img"));
+    }
+
+    function getFlowImageContainer(image) {
+        return image && image.host ? image.host.closest(".about-card") : null;
+    }
+
+    function clampImageWidth(width, container) {
+        const containerWidth = container ? container.getBoundingClientRect().width : 0;
+        const maxWidth = Math.max(220, Math.min(760, containerWidth ? containerWidth * 0.72 : 620));
+        return Math.round(Math.max(160, Math.min(Number(width) || 360, maxWidth)));
+    }
+
+    function normalizeImageLayout(layout, container, fallbackWidth) {
+        const align = layout && layout.align === "left" ? "left" : "right";
+        const width = clampImageWidth(layout && layout.width ? layout.width : fallbackWidth, container);
+        return { align, width };
+    }
+
+    function currentImageLayout(image) {
+        const container = getFlowImageContainer(image);
+        const saved = getAtPath(state.content, imageLayoutPath(image));
+        const hostWidth = image.host ? image.host.getBoundingClientRect().width : 0;
+        const nodeWidth = image.node ? image.node.getBoundingClientRect().width : 0;
+        const fallbackWidth = hostWidth || nodeWidth || 360;
+        return normalizeImageLayout(saved, container, fallbackWidth);
+    }
+
+    function placeFlowImageBeforeText(image) {
+        const container = getFlowImageContainer(image);
+        if (!container || !image.host) return null;
+
+        const content = container.querySelector(".about-content");
+        if (content && image.host.nextElementSibling !== content) {
+            container.insertBefore(image.host, content);
+        }
+
+        return container;
+    }
+
+    function applyFlowImageLayout(image, layout) {
+        if (!canUseFlowImageLayout(image)) return;
+
+        const container = placeFlowImageBeforeText(image);
+        if (!container || !image.host) return;
+
+        const nextLayout = normalizeImageLayout(layout, container, image.host.getBoundingClientRect().width);
+        container.classList.add("cms-image-flow");
+        image.host.classList.add("cms-image-float-host");
+        image.host.style.float = nextLayout.align;
+        image.host.style.width = `${nextLayout.width}px`;
+        image.host.style.maxWidth = "min(52%, 560px)";
+        image.host.style.margin = nextLayout.align === "left" ? "0 30px 18px 0" : "0 0 18px 30px";
+        image.host.style.position = "relative";
+
+        image.node.style.display = "block";
+        image.node.style.width = "100%";
+        image.node.style.height = "auto";
+        image.node.style.maxHeight = "none";
+        image.node.style.maxWidth = "100%";
+        image.node.style.position = "";
+        image.node.style.left = "";
+        image.node.style.top = "";
+    }
+
+    function persistFlowImageLayout(image, layout) {
+        if (!canUseFlowImageLayout(image)) return;
+        const normalized = normalizeImageLayout(layout, getFlowImageContainer(image), image.host.getBoundingClientRect().width);
+        setAtPath(state.content, imageLayoutPath(image), normalized);
+        state.dirty = true;
+        setStatus("Pozitia pozei a fost schimbata. Apasa Salveaza.");
+    }
+
+    function prepareFlowImageLayout(image) {
+        if (!canUseFlowImageLayout(image)) return;
+
+        const savedLayout = getAtPath(state.content, imageLayoutPath(image));
+        if (savedLayout) applyFlowImageLayout(image, savedLayout);
+
+        image.node.draggable = false;
+        image.host.classList.add("cms-image-layout-editable");
+
+        const preventNativeDrag = (event) => event.preventDefault();
+        image.node.addEventListener("dragstart", preventNativeDrag);
+
+        const handle = document.createElement("div");
+        handle.className = "cms-resize-handle";
+        handle.setAttribute("aria-hidden", "true");
+        image.host.appendChild(handle);
+        image.layoutHandle = handle;
+
+        const onDragStart = (event) => {
+            if (!state.editing || event.target.closest(".cms-image-control, .cms-resize-handle")) return;
+            if (event.button !== undefined && event.button !== 0) return;
+
+            const container = getFlowImageContainer(image);
+            if (!container) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+            image.host.setPointerCapture?.(event.pointerId);
+
+            let moved = false;
+            let layout = currentImageLayout(image);
+            applyFlowImageLayout(image, layout);
+
+            const onMove = (moveEvent) => {
+                moveEvent.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const align = moveEvent.clientX < rect.left + rect.width / 2 ? "left" : "right";
+                const width = image.host.getBoundingClientRect().width;
+                layout = normalizeImageLayout({ align, width }, container, width);
+                applyFlowImageLayout(image, layout);
+                moved = true;
+            };
+
+            const onUp = () => {
+                document.removeEventListener("pointermove", onMove);
+                document.removeEventListener("pointerup", onUp);
+                document.removeEventListener("pointercancel", onUp);
+                if (moved) persistFlowImageLayout(image, layout);
+            };
+
+            document.addEventListener("pointermove", onMove);
+            document.addEventListener("pointerup", onUp);
+            document.addEventListener("pointercancel", onUp);
+        };
+
+        const onResizeStart = (event) => {
+            if (!state.editing) return;
+
+            const container = getFlowImageContainer(image);
+            if (!container) return;
+
+            event.preventDefault();
+            event.stopPropagation();
+            handle.setPointerCapture?.(event.pointerId);
+
+            let layout = currentImageLayout(image);
+            applyFlowImageLayout(image, layout);
+
+            const startX = event.clientX;
+            const startWidth = image.host.getBoundingClientRect().width;
+
+            const onMove = (moveEvent) => {
+                moveEvent.preventDefault();
+                const width = clampImageWidth(startWidth + (moveEvent.clientX - startX), container);
+                layout = normalizeImageLayout({ align: layout.align, width }, container, width);
+                applyFlowImageLayout(image, layout);
+            };
+
+            const onUp = () => {
+                document.removeEventListener("pointermove", onMove);
+                document.removeEventListener("pointerup", onUp);
+                document.removeEventListener("pointercancel", onUp);
+                persistFlowImageLayout(image, layout);
+            };
+
+            document.addEventListener("pointermove", onMove);
+            document.addEventListener("pointerup", onUp);
+            document.addEventListener("pointercancel", onUp);
+        };
+
+        image.host.addEventListener("pointerdown", onDragStart);
+        handle.addEventListener("pointerdown", onResizeStart);
+
+        image.layoutCleanup = () => {
+            image.node.removeEventListener("dragstart", preventNativeDrag);
+            image.host.removeEventListener("pointerdown", onDragStart);
+            handle.removeEventListener("pointerdown", onResizeStart);
+            handle.remove();
+            image.host.classList.remove("cms-image-layout-editable");
+            image.layoutHandle = null;
+            image.layoutCleanup = null;
+        };
     }
 
     function getPageTextRoot() {
@@ -2169,6 +2351,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
 
         image.control = button;
         image.host.appendChild(button);
+        prepareFlowImageLayout(image);
     }
 
     function activateFields() {
@@ -2200,6 +2383,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         });
         state.images.forEach((image) => {
             image.node.removeAttribute("data-cms-image");
+            if (image.layoutCleanup) image.layoutCleanup();
             if (image.control) image.control.remove();
             if (image.host) image.host.classList.remove("cms-image-host");
         });
@@ -2412,6 +2596,75 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         if (alt !== undefined && alt !== null) img.alt = alt;
     }
 
+    function clampRenderedImageWidth(width, container) {
+        const containerWidth = container ? container.getBoundingClientRect().width : 0;
+        const maxWidth = Math.max(220, Math.min(760, containerWidth ? containerWidth * 0.72 : 620));
+        return Math.round(Math.max(160, Math.min(Number(width) || 360, maxWidth)));
+    }
+
+    function normalizeRenderedImageLayout(layout, container, fallbackWidth) {
+        if (!layout || typeof layout !== "object") return null;
+        return {
+            align: layout.align === "left" ? "left" : "right",
+            width: clampRenderedImageWidth(layout.width || fallbackWidth, container)
+        };
+    }
+
+    function resetAboutImageLayout(section) {
+        const card = section && section.querySelector(".about-card");
+        const content = card && card.querySelector(".about-content");
+        const photo = card && card.querySelector(".about-photo");
+        const img = photo && photo.querySelector("img");
+        if (!card || !content || !photo) return;
+
+        if (content.nextElementSibling !== photo) content.after(photo);
+        card.classList.remove("cms-image-flow");
+        photo.classList.remove("cms-image-float-host");
+        photo.removeAttribute("style");
+        if (img) {
+            img.style.display = "";
+            img.style.width = "";
+            img.style.height = "";
+            img.style.maxHeight = "";
+            img.style.maxWidth = "";
+            img.style.position = "";
+            img.style.left = "";
+            img.style.top = "";
+        }
+    }
+
+    function applyAboutImageLayout(section, layout) {
+        const card = section && section.querySelector(".about-card");
+        const content = card && card.querySelector(".about-content");
+        const photo = card && card.querySelector(".about-photo");
+        const img = photo && photo.querySelector("img");
+        if (!card || !content || !photo || !img) return;
+
+        const normalized = normalizeRenderedImageLayout(layout, card, photo.getBoundingClientRect().width || 360);
+        if (!normalized) {
+            resetAboutImageLayout(section);
+            return;
+        }
+
+        if (photo.nextElementSibling !== content) card.insertBefore(photo, content);
+        card.classList.add("cms-image-flow");
+        photo.classList.add("cms-image-float-host");
+        photo.style.float = normalized.align;
+        photo.style.width = `${normalized.width}px`;
+        photo.style.maxWidth = "min(52%, 560px)";
+        photo.style.margin = normalized.align === "left" ? "0 30px 18px 0" : "0 0 18px 30px";
+        photo.style.position = "relative";
+
+        img.style.display = "block";
+        img.style.width = "100%";
+        img.style.height = "auto";
+        img.style.maxHeight = "none";
+        img.style.maxWidth = "100%";
+        img.style.position = "";
+        img.style.left = "";
+        img.style.top = "";
+    }
+
     function buttonHtml(button, className) {
         if (!button || !button.label || !button.url) return "";
         return `<a href="${escapeAttr(button.url)}" class="btn ${className}">${escapeHtml(button.label)}</a>`;
@@ -2478,6 +2731,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         }
 
         setImage(section.querySelector(".about-photo img"), about.image, about.imageAlt);
+        applyAboutImageLayout(section, about.imageLayout);
     }
 
     function personCard(person, main) {
@@ -2765,6 +3019,8 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
    CMS IMAGE DRAG-TO-MOVE & RESIZE HANDLES
 ============================================================ */
 (function () {
+    return;
+
     function isExcluded(img) {
         if (img.closest('.band-hero')) return true;
         if (img.closest('.team-photo-main')) return true;
