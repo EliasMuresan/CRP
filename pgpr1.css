@@ -43,7 +43,14 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidd
 
 body {
     font-family: 'Libre Franklin', system-ui, -apple-system, Segoe UI, sans-serif;
-    background: var(--bg-page);
+    background-color: #fff;
+    background-image:
+        linear-gradient(90deg, rgba(44,93,134,.055) 1px, transparent 1px),
+        linear-gradient(rgba(44,93,134,.055) 1px, transparent 1px),
+        linear-gradient(135deg, transparent calc(50% - .5px), rgba(29,60,89,.035) calc(50% - .5px), rgba(29,60,89,.035) calc(50% + .5px), transparent calc(50% + .5px));
+    background-size: 42px 42px, 42px 42px, 168px 168px;
+    background-position: center top;
+    background-attachment: fixed;
     color: var(--text-main);
     font-size: 17px;
     line-height: 1.65;
@@ -72,9 +79,9 @@ h1, h2, h3, h4 { line-height: 1.18; letter-spacing: -0.02em; color: var(--text-m
     padding: 0 24px;
 }
 
-.band { width: 100%; padding: clamp(56px, 8vw, 96px) 0; }
-.band-light { background: var(--bg-light); }
-.band-muted { background: var(--bg-muted); }
+.band { width: 100%; padding: clamp(56px, 8vw, 96px) 0; background: transparent; }
+.band-light { background: transparent; }
+.band-muted { background: transparent; }
 .band + .band { border-top: 1px solid transparent; }
 
 /* spațiu sub header fix, pe paginile interioare */
@@ -675,21 +682,18 @@ body.cms-crop-open { overflow: hidden; }
 
 .band-hero {
     position: relative;
-    min-height: min(86vh, 760px);
+    min-height: min(74vh, 680px);
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     overflow: hidden;
-    background: var(--bg-deep);
+    background: transparent;
+    padding: calc(var(--header-h) + clamp(52px, 8vw, 92px)) 0 clamp(64px, 8vw, 100px);
 }
 
 .hero-background {
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(to top, rgba(13,26,40,.86) 0%, rgba(13,26,40,.45) 42%, rgba(13,26,40,.30) 100%),
-        url("images/pozemain.png");
-    background-size: cover;
-    background-position: center 28%;
+    display: none;
     z-index: 1;
 }
 
@@ -699,7 +703,7 @@ body.cms-crop-open { overflow: hidden; }
     width: 100%;
     max-width: var(--maxw);
     margin: 0 auto;
-    padding: 0 24px clamp(48px, 7vw, 88px);
+    padding: 0 24px;
     display: flex;
     justify-content: flex-start;
 }
@@ -707,7 +711,7 @@ body.cms-crop-open { overflow: hidden; }
 .hero-card {
     max-width: 680px;
     text-align: left;
-    color: #fff;
+    color: var(--text-main);
 }
 
 .hero-kicker {
@@ -715,7 +719,7 @@ body.cms-crop-open { overflow: hidden; }
     font-weight: 600;
     letter-spacing: .18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,.82);
+    color: var(--accent);
     margin-bottom: 18px;
 }
 
@@ -724,13 +728,13 @@ body.cms-crop-open { overflow: hidden; }
     font-weight: 700;
     letter-spacing: -0.025em;
     line-height: 1.06;
-    color: #fff;
+    color: var(--text-main);
     margin-bottom: 18px;
 }
 
 .hero-subtitle {
     font-size: clamp(1.02rem, 1.6vw, 1.18rem);
-    color: rgba(255,255,255,.9);
+    color: var(--text-muted);
     max-width: 56ch;
     margin-bottom: 30px;
 }
@@ -738,18 +742,18 @@ body.cms-crop-open { overflow: hidden; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
 .hero-actions .btn.primary {
-    background: #fff;
-    color: var(--accent-dark);
-    border-color: #fff;
+    background: var(--accent-dark);
+    color: #fff;
+    border-color: var(--accent-dark);
 }
-.hero-actions .btn.primary:hover { background: #eef3f8; border-color: #eef3f8; }
+.hero-actions .btn.primary:hover { background: #16304a; border-color: #16304a; }
 
 .hero-actions .btn.ghost {
-    background: rgba(255,255,255,.08);
-    border-color: rgba(255,255,255,.55);
-    color: #fff;
+    background: rgba(255,255,255,.78);
+    border-color: var(--line-strong);
+    color: var(--accent-dark);
 }
-.hero-actions .btn.ghost:hover { background: rgba(255,255,255,.16); }
+.hero-actions .btn.ghost:hover { background: var(--accent-soft); }
 
 /* =========================================================
    DESPRE
@@ -816,8 +820,8 @@ body.cms-crop-open { overflow: hidden; }
     position: relative;
     overflow: hidden;
     padding: clamp(72px, 8vw, 112px) 0;
-    background: #111821;
-    color: #fff;
+    background: transparent;
+    color: var(--text-main);
 }
 
 #comitet .container {
@@ -833,15 +837,15 @@ body.cms-crop-open { overflow: hidden; }
 }
 
 #comitet .section-kicker {
-    color: #8fc7ff;
+    color: var(--accent);
 }
 
 #comitet .section-header h2 {
-    color: #fff;
+    color: var(--text-main);
 }
 
 #comitet .section-intro {
-    color: rgba(255,255,255,.72);
+    color: var(--text-muted);
 }
 
 .team-main-grid {
@@ -1025,11 +1029,11 @@ body.cms-crop-open { overflow: hidden; }
 }
 .team-marquee-window::before {
     left: 0;
-    background: linear-gradient(to right, #111821, rgba(17,24,33,0));
+    background: linear-gradient(to right, rgba(255,255,255,.98), rgba(255,255,255,0));
 }
 .team-marquee-window::after {
     right: 0;
-    background: linear-gradient(to left, #111821, rgba(17,24,33,0));
+    background: linear-gradient(to left, rgba(255,255,255,.98), rgba(255,255,255,0));
 }
 .team-marquee-window.is-dragging {
     cursor: grabbing;
@@ -1598,8 +1602,8 @@ body.cms-editing #comitet .team-card-secondary {
    ========================================================= */
 
 .footer {
-    background: var(--bg-deep);
-    color: rgba(255,255,255,.72);
+    background: transparent;
+    color: var(--text-muted);
     padding: 30px 0;
 }
 .footer-inner {
@@ -1609,7 +1613,7 @@ body.cms-editing #comitet .team-card-secondary {
     text-align: center;
     font-size: .92rem;
 }
-.footer-inner a { color: rgba(255,255,255,.9); }
+.footer-inner a { color: var(--accent-dark); }
 
 /* footer extins (home) */
 .site-footer { padding: clamp(44px, 5vw, 60px) 0 22px; }
@@ -1621,18 +1625,18 @@ body.cms-editing #comitet .team-card-secondary {
     grid-template-columns: 1.5fr 1fr 1.2fr;
     gap: clamp(28px, 4vw, 56px);
 }
-.footer-brand strong { display: block; color: #fff; font-size: 1.04rem; font-weight: 700; }
+.footer-brand strong { display: block; color: var(--text-main); font-size: 1.04rem; font-weight: 700; }
 .footer-brand .footer-sub {
     display: block;
     font-size: .74rem;
     letter-spacing: .16em;
     text-transform: uppercase;
-    color: rgba(255,255,255,.55);
+    color: var(--text-soft);
     margin: 3px 0 14px;
 }
-.footer-brand p { color: rgba(255,255,255,.6); font-size: .94rem; max-width: 36ch; }
+.footer-brand p { color: var(--text-muted); font-size: .94rem; max-width: 36ch; }
 .footer-col h4 {
-    color: #fff;
+    color: var(--text-main);
     font-size: .8rem;
     font-weight: 600;
     letter-spacing: .12em;
@@ -1640,12 +1644,12 @@ body.cms-editing #comitet .team-card-secondary {
     margin-bottom: 14px;
 }
 .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
-.footer-links a, .footer-col p { color: rgba(255,255,255,.66); text-decoration: none; font-size: .94rem; }
+.footer-links a, .footer-col p { color: var(--text-muted); text-decoration: none; font-size: .94rem; }
 .footer-col p { margin-bottom: 8px; }
-.footer-links a:hover, .footer-col a:hover { color: #fff; }
-.footer-col a { color: rgba(255,255,255,.82); text-decoration: none; }
+.footer-links a:hover, .footer-col a:hover { color: var(--accent-dark); }
+.footer-col a { color: var(--accent-dark); text-decoration: none; }
 .site-footer .footer-bottom-wrap {
-    border-top: 1px solid rgba(255,255,255,.12);
+    border-top: 1px solid var(--line);
     padding-top: 22px;
 }
 
@@ -1866,7 +1870,7 @@ body:not(.cms-editing) #comitet .team-secondary-grid.is-marquee-ready {
    DOCUMENTE (.doc-*) — mărturisire, statut
    ========================================================= */
 
-.doc-wrapper { background: var(--bg-muted); }
+.doc-wrapper { background: transparent; }
 .doc-header {
     max-width: 860px;
     margin: 0 auto;
@@ -1906,7 +1910,7 @@ body:not(.cms-editing) #comitet .team-secondary-grid.is-marquee-ready {
    REGULAMENT ELECTORAL (.reg-*)
    ========================================================= */
 
-.reg-page { background: var(--bg-muted); }
+.reg-page { background: transparent; }
 .reg-wrapper { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 .reg-header { text-align: center; margin-bottom: clamp(24px, 4vw, 40px); }
 .reg-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; margin-bottom: 10px; }
@@ -1942,12 +1946,12 @@ body:not(.cms-editing) #comitet .team-secondary-grid.is-marquee-ready {
    WIKI / LICEU (articole cu blocuri imagine-text)
    ========================================================= */
 
-.wiki-hero { background: var(--bg-muted); padding: calc(var(--header-h) + clamp(28px,5vw,56px)) 0 clamp(20px,3vw,32px); }
+.wiki-hero { background: transparent; padding: calc(var(--header-h) + clamp(28px,5vw,56px)) 0 clamp(20px,3vw,32px); }
 .wiki-hero-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; text-align: center; }
 .wiki-hero-inner h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 12px; }
 .wiki-hero-inner p { color: var(--text-muted); font-size: 1.05rem; max-width: 60ch; margin: 0 auto; }
 
-.wiki-article-band { background: var(--bg-muted); padding-bottom: clamp(48px, 7vw, 80px); }
+.wiki-article-band { background: transparent; padding-bottom: clamp(48px, 7vw, 80px); }
 .wiki-article {
     max-width: 1000px;
     margin: 0 auto;

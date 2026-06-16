@@ -909,7 +909,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     const PAGE_TEXT_DIR = "content/page-text";
     const DRAFT_KEY = "crp-inline-cms-draft";
     const SAVE_ENDPOINT = window.CRP_CMS_SAVE_ENDPOINT || "https://crp-cms.crparad.workers.dev";
-    const CMS_ASSET_VERSION = "inline-cms-15";
+    const CMS_ASSET_VERSION = "inline-cms-16";
     const RESERVED_EVENT_PAGES = new Set([
         "index.html",
         "evenimente-arhivate.html",
