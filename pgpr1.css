@@ -5017,11 +5017,14 @@ body.inner-page main { padding-top: 0; }
         max-width: 100% !important;
     }
 
-    /* Logo: compact, arată pe toate paginile */
-    .header-page .logo-area { display: flex !important; }
-    .site-title { display: none !important; }
-    .site-logo { width: 34px !important; height: 34px !important; object-fit: contain !important; }
-    .logo-area { gap: 0 !important; flex-shrink: 0; }
+    /* Logo: ascuns pe mobile */
+    .logo-area { display: none !important; }
+
+    /* Container: tot la dreapta fără logo */
+    .header-container,
+    .header-page .header-container {
+        justify-content: flex-end !important;
+    }
 
     /* Nav: rând de shortcut-uri permanent vizibil */
     .nav {
@@ -5109,7 +5112,7 @@ body.inner-page main { padding-top: 0; }
     }
     .nav-toggle span { width: 18px !important; height: 2px !important; }
 
-    /* === PANOU DESCHIS: toate linkurile === */
+    /* === PANOU DESCHIS === */
     .nav.open {
         position: fixed !important;
         top: 68px !important;
@@ -5120,40 +5123,69 @@ body.inner-page main { padding-top: 0; }
         backdrop-filter: blur(28px) !important;
         -webkit-backdrop-filter: blur(28px) !important;
         border: 1px solid rgba(255,255,255,.1) !important;
-        border-radius: 22px !important;
-        box-shadow: 0 24px 64px rgba(0,0,0,.5) !important;
-        padding: 10px !important;
+        border-radius: 20px !important;
+        box-shadow: 0 20px 60px rgba(0,0,0,.45) !important;
+        padding: 8px !important;
         gap: 0 !important;
         z-index: 9999 !important;
         overflow: hidden !important;
-        max-height: 90vh !important;
+        max-height: none !important;
+        height: auto !important;
+        animation: navDropIn .32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
     }
 
-    /* Când e deschis: arată toate linkurile */
-    .nav.open .nav-link {
+    .nav.closing {
+        position: fixed !important;
+        top: 68px !important;
+        left: 10px !important;
+        right: 10px !important;
+        flex-direction: column !important;
+        background: rgba(12,20,34,.97) !important;
+        border: 1px solid rgba(255,255,255,.1) !important;
+        border-radius: 20px !important;
+        padding: 8px !important;
+        z-index: 9999 !important;
+        overflow: hidden !important;
+        animation: navDropOut .2s ease forwards !important;
+    }
+
+    /* Linkuri în panou */
+    .nav.open .nav-link, .nav.closing .nav-link {
         display: flex !important;
-        color: rgba(255,255,255,.8) !important;
-        font-size: 1rem !important;
+        color: rgba(255,255,255,.78) !important;
+        font-size: .95rem !important;
         font-weight: 600 !important;
         letter-spacing: .01em !important;
         text-transform: none !important;
-        padding: 13px 18px !important;
+        padding: 11px 16px !important;
         border: none !important;
-        border-radius: 12px !important;
+        border-radius: 10px !important;
         background: transparent !important;
     }
+    .nav.open .nav-link:nth-child(7) { border: none !important; color: rgba(255,255,255,.78) !important; }
     .nav.open .nav-link:active { background: rgba(255,255,255,.1) !important; color: #fff !important; }
 
-    .nav.open .nav-btn {
+    .nav.open .nav-btn, .nav.closing .nav-btn {
         background: var(--accent) !important;
         color: #fff !important;
         border: none !important;
-        margin: 6px 6px 6px !important;
-        border-radius: 12px !important;
+        margin: 4px 6px 6px !important;
+        border-radius: 10px !important;
         text-align: center !important;
         justify-content: center !important;
         font-weight: 700 !important;
-        padding: 13px 18px !important;
+        padding: 11px 16px !important;
         letter-spacing: .04em !important;
     }
+}
+
+/* Animații navbar mobil */
+@keyframes navDropIn {
+    0%   { opacity: 0; transform: translateY(-14px) scale(0.95); }
+    65%  { opacity: 1; transform: translateY(3px) scale(1.01); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes navDropOut {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-10px) scale(0.96); }
 }

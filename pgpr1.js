@@ -5,19 +5,28 @@ const navToggle = document.getElementById("navToggle");
 const mainNav = document.getElementById("mainNav");
 
 if (navToggle && mainNav) {
-    // deschide/închide meniul
+    function closeNav() {
+        mainNav.classList.add("closing");
+        mainNav.addEventListener("animationend", () => {
+            mainNav.classList.remove("open", "closing");
+            navToggle.classList.remove("active");
+        }, { once: true });
+    }
+
     navToggle.addEventListener("click", () => {
-        mainNav.classList.toggle("open");
-        navToggle.classList.toggle("active"); // se potrivește cu CSS-ul tău
+        if (mainNav.classList.contains("open")) {
+            closeNav();
+        } else {
+            mainNav.classList.add("open");
+            navToggle.classList.add("active");
+        }
     });
 
-    // când apeși pe un link, închidem meniul pe mobil
     const navLinks = mainNav.querySelectorAll(".nav-link");
     navLinks.forEach(link => {
         link.addEventListener("click", () => {
-            if (window.innerWidth <= 768) {
-                mainNav.classList.remove("open");
-                navToggle.classList.remove("active");
+            if (window.innerWidth <= 1080 && mainNav.classList.contains("open")) {
+                closeNav();
             }
         });
     });
