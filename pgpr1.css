@@ -5264,3 +5264,21 @@ body.inner-page main { padding-top: 0; }
         opacity: 1;
     }
 }
+
+/* ── LOCATIE: fix overlap titlu + buton pe mobile îngust ─────────── */
+@media (max-width: 560px) {
+    #locatie .location-info {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "kicker"
+            "title"
+            "btn"
+            "desc"
+            "details";
+    }
+    #locatie .location-directions-btn {
+        justify-self: start;
+        margin-top: 12px;
+        margin-bottom: 0;
+    }
+}
