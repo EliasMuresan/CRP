@@ -15,7 +15,7 @@
   },
   "about": {
     "kicker": "DESPRE NOI",
-    "title": "Comunitatea regională",
+    "title": "COMUNITATEA REGIONALĂ",
     "intro": "Comunitatea Regionala Penticostala Arad apartine Cultului Crestin Penticostal. Coordonam in mod transparent activitatea bisericilor penticostale din judetele Arad, Timis, Hunedoara si Caras-Severin, cultivand unitatea frateasca si responsabilitatea fata de Scriptura.",
     "items": [
       "Sprijin pentru bisericile locale.",
@@ -27,68 +27,68 @@
     "imageAlt": "Cladirea Comunitatii Regionale Penticostale Arad",
     "imageLayout": {
       "align": "right",
-      "width": 760
+      "width": 327
     }
   },
   "team": {
     "kicker": "COMITET",
-    "title": "Conducerea Comunitățiii",
+    "title": "CONDUCEREA COMUNITĂȚIII",
     "intro": "Pastori si slujitori care coordoneaza activitatea comunitatii regionale.",
     "main": [
       {
-        "name": "Tomuta Simion",
+        "name": "TOMUTA SIMION",
         "role": "PREȘEDINTE",
         "image": "images/cms/20260615181318-team-main-0-image-1.png"
       },
       {
-        "name": "Stanciu Cornel",
+        "name": "STANCIU CORNEL",
         "role": "VICEPREȘEDINTE",
         "image": "images/cms/20260615181329-team-main-1-image-2.png"
       },
       {
-        "name": "Avram Aurel",
+        "name": "AVRAM AUREL",
         "role": "SECRETAR",
         "image": "images/cms/20260615182322-team-main-2-image-1.png"
       }
     ],
     "members": [
       {
-        "name": "Coroban Titus",
+        "name": "COROBAN TITUS",
         "role": "PASTOR",
         "image": "images/cms/20260615185413-team-members-3-image-1.png"
       },
       {
-        "name": "Hada Daniel",
+        "name": "HADA DANIEL",
         "role": "PASTOR",
         "image": "images/cms/20260615183255-team-members-1-image-1.png"
       },
       {
-        "name": "Anca Iosif",
+        "name": "ANCA IOSIF",
         "role": "PASTOR",
         "image": "images/cms/20260615190556-team-members-7-image-4.png"
       },
       {
-        "name": "Mureșan Mircea",
+        "name": "MUREȘAN MIRCEA",
         "role": "PASTOR",
         "image": "images/cms/20260615190426-team-members-6-image-3.png"
       },
       {
-        "name": "Ilioni Florin",
+        "name": "ILIONI FLORIN",
         "role": "PASTOR",
         "image": "images/cms/20260615190009-team-members-4-image-1.png"
       },
       {
-        "name": "Crișan Danut",
+        "name": "CRIȘAN DANUT",
         "role": "PASTOR",
         "image": "images/cms/20260615190250-team-members-5-image-2.png"
       },
       {
-        "name": "Filip Ioan",
+        "name": "FILIP IOAN",
         "role": "PASTOR",
         "image": "images/cms/20260615182326-team-members-0-image-2.png"
       },
       {
-        "name": "Petroiesc Mihai",
+        "name": "PETROIESC MIHAI",
         "role": "PASTOR",
         "image": "images/cms/20260615183258-team-members-2-image-2.png"
       }
@@ -96,26 +96,26 @@
   },
   "beliefs": {
     "pill": "DOCUMENTE OFICIALE",
-    "title": "Convingeri",
+    "title": "CONVINGERI",
     "subtitle": "Documentele fundamentale ale credintei si organizarii in cadrul Comunitatii Regionale.",
     "cards": [
       {
-        "title": "Regulament electoral",
+        "title": "REGULAMENT ELECTORAL",
         "text": "",
         "href": "electoral.html"
       },
       {
-        "title": "Statutul de organizare",
+        "title": "STATUTUL DE ORGANIZARE",
         "text": "",
         "href": "statut-organizare.html"
       },
       {
-        "title": "Statutul slujitorului",
+        "title": "STATUTUL SLUJITORULUI",
         "text": "",
         "href": "statut-slujitorului.html"
       },
       {
-        "title": "Marturisirea de credinta",
+        "title": "MARTURISIREA DE CREDINTA",
         "text": "",
         "href": "marturisirea-de-credinta.html"
       }
@@ -124,7 +124,7 @@
   },
   "counties": {
     "kicker": "REGIUNILE NOASTRE",
-    "title": "Judetele coordonate de Comunitatea Regionala",
+    "title": "JUDETELE COORDONATE DE COMUNITATEA REGIONALA",
     "intro": "Oferim sprijin, coordonare si resurse bisericilor penticostale din cele patru judete ale regiunii noastre.",
     "tagline": "JUDETE",
     "cards": [
@@ -162,7 +162,7 @@
   "events": [],
   "seminarsSection": {
     "kicker": "SEMINARII",
-    "title": "Seminarii si formare",
+    "title": "SEMINARII SI FORMARE",
     "intro": "Sesiuni de instruire, studiu biblic si formare spirituala dedicate slujitorilor si comunitatii."
   },
   "seminars": [
@@ -193,7 +193,7 @@
     }
   ],
   "school": {
-    "title": "Liceul Penticostal Arad",
+    "title": "LICEUL PENTICOSTAL ARAD",
     "subtitle": "INFORMATII",
     "hoverText": "Vezi informatii despre Liceul Penticostal Arad",
     "href": "liceu.html",
@@ -202,7 +202,7 @@
   },
   "location": {
     "kicker": "LOCATIE",
-    "title": "Unde ne gasiti",
+    "title": "UNDE NE GASITI",
     "intro": "Ne puteti gasi la sediul Comunitatii Regionale Penticostale Arad, pe Strada Miron Costin nr. 2A, cod postal 310146.",
     "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2812.8062081369016!2d21.319915!3d46.178825!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474598a8c4e74143%3A0x0000000000000000!2sStrada%20Miron%20Costin%202A%2C%20Arad!5e0!3m2!1sro!2sro!4v1736539200000"
   },
