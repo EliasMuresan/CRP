@@ -71,7 +71,7 @@ if (typeof emailjs !== "undefined") {
     var tabDefs = [
         { key: 'home',    label: 'Acasă',     href: 'index.html',           hash: null },
         { key: 'sem',     label: 'Seminarii',  href: 'index.html#seminarii', hash: 'seminarii' },
-        { key: 'liceu',   label: 'Liceu',      href: 'liceu.html',           hash: null },
+        { key: 'liceu',   label: 'Liceu',      href: 'index.html#liceu',     hash: 'liceu' },
         { key: 'contact', label: 'Contact',    href: 'index.html#contact',   hash: 'contact' }
     ];
 
@@ -82,6 +82,7 @@ if (typeof emailjs !== "undefined") {
         if (p.indexOf('seminar') !== -1 || /\/s[2-5]/.test(p)) return 'sem';
         if (h === '#contact') return 'contact';
         if (h === '#seminarii') return 'sem';
+        if (h === '#liceu') return 'liceu';
         return 'home';
     }
 
