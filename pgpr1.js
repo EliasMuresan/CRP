@@ -69,10 +69,10 @@ if (typeof emailjs !== "undefined") {
     };
 
     var tabDefs = [
-        { key: 'home',    label: 'Acasă',     href: 'index.html' },
-        { key: 'sem',     label: 'Seminarii',  href: 'index.html#seminarii' },
-        { key: 'liceu',   label: 'Liceu',      href: 'liceu.html' },
-        { key: 'contact', label: 'Contact',    href: 'index.html#contact' }
+        { key: 'home',    label: 'Acasă',     href: 'index.html',           hash: null },
+        { key: 'sem',     label: 'Seminarii',  href: 'index.html#seminarii', hash: 'seminarii' },
+        { key: 'liceu',   label: 'Liceu',      href: 'liceu.html',           hash: null },
+        { key: 'contact', label: 'Contact',    href: 'index.html#contact',   hash: 'contact' }
     ];
 
     function getActiveKey() {
@@ -95,13 +95,15 @@ if (typeof emailjs !== "undefined") {
         if (document.body.classList.contains('cms-editing')) return;
         if (document.querySelector('.btb-wrap')) return;
 
+        var p = window.location.pathname.toLowerCase();
+        var isIndex = p === '/' || p === '' || p.endsWith('index.html');
+
         var activeKey = getActiveKey();
         var wrap = document.createElement('div');
         wrap.className = 'btb-wrap';
         var bar  = document.createElement('div');
         bar.className = 'btb';
 
-        /* sliding pill — positioned by JS, no CSS transition yet */
         var pill = document.createElement('div');
         pill.className = 'btb-pill';
         bar.appendChild(pill);
@@ -111,18 +113,34 @@ if (typeof emailjs !== "undefined") {
             a.className = 'btb-tab' + (def.key === activeKey ? ' active' : '');
             a.href = def.href;
             a.innerHTML = icons[def.key] + '<span class="btb-label">' + def.label + '</span>';
-            a.addEventListener('click', function () {
+
+            a.addEventListener('click', function (e) {
                 document.querySelectorAll('.btb-tab').forEach(function (t) { t.classList.remove('active'); });
                 a.classList.add('active');
                 movePill(pill, a);
+
+                /* smooth scroll pentru navigare pe aceeași pagină */
+                if (isIndex) {
+                    if (def.hash) {
+                        e.preventDefault();
+                        var target = document.getElementById(def.hash);
+                        if (target) {
+                            var offset = target.getBoundingClientRect().top + window.pageYOffset - wrap.offsetHeight - 8;
+                            window.scrollTo({ top: Math.max(0, offset), behavior: 'smooth' });
+                        }
+                    } else if (def.key === 'home') {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }
             });
+
             bar.appendChild(a);
         });
 
         wrap.appendChild(bar);
         document.body.appendChild(wrap);
 
-        /* set initial pill position (no animation), then enable transition */
         requestAnimationFrame(function () {
             var active = bar.querySelector('.btb-tab.active');
             if (active) {
@@ -131,8 +149,10 @@ if (typeof emailjs !== "undefined") {
                     pill.style.transition = 'left .42s cubic-bezier(.4,0,.2,1), width .42s cubic-bezier(.4,0,.2,1)';
                 });
             }
-            /* fit body padding to actual bar height */
-            document.body.style.paddingTop = (wrap.offsetHeight + 2) + 'px';
+            /* padding-top doar pe inner pages; homepage are hero care acoperă */
+            if (!isIndex) {
+                document.body.style.paddingTop = (wrap.offsetHeight + 2) + 'px';
+            }
         });
     }
 

@@ -5196,16 +5196,14 @@ body.inner-page main { padding-top: 0; }
 @media (max-width: 1080px) {
     :root { --header-h: 0px; }
     .header { display: none !important; }
-    body:not(.cms-editing) {
-        padding-top: 90px !important;
-        padding-bottom: 0 !important;
-    }
+    /* padding-top set per-page by JS (homepage = 0, inner pages = bar height) */
+    body:not(.cms-editing) { padding-bottom: 0 !important; }
 
     .btb-wrap {
         position: fixed;
         top: 0; left: 0; right: 0;
         z-index: 10000;
-        padding: env(safe-area-inset-top, 10px) 12px 8px;
+        padding: max(18px, env(safe-area-inset-top)) 12px 10px;
         pointer-events: none;
     }
     .btb {
