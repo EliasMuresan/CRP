@@ -994,7 +994,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
                     try {
                         const credential = await authModule.signInWithEmailAndPassword(auth, email, password);
                         const loggedEmail = (credential.user.email || "").toLowerCase();
-                        if (loggedEmail !== EDITOR_EMAIL) {
+                        if (!EDITOR_EMAILS.includes(loggedEmail)) {
                             await authModule.signOut(auth);
                             setStatus("Contul acesta nu are acces.", true);
                             return;
