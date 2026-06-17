@@ -171,7 +171,7 @@ if (contactForm) {
         e.preventDefault();
 
         emailjs
-            .sendForm("service_ru3iykd", "template_m4msnqs", this)
+            .sendForm("service_16c6b95", "template_yxivzgn", this)
             .then(() => {
                 const overlay = document.getElementById("contactSuccessOverlay");
                 const sound = document.getElementById("contactSuccessSound");
