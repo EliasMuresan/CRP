@@ -3143,3 +3143,84 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         document.querySelectorAll('img').forEach(addControls);
     }
 })();
+
+// ── INNER PAGE: dark header + multi-column footer ────────────
+(function () {
+    if (document.querySelector('.band-hero')) return; // index – skip
+
+    var h = document.querySelector('.header');
+    if (h) h.classList.add('header-page');
+    document.body.classList.add('inner-page');
+
+    var footer = document.querySelector('footer');
+    if (footer && !footer.querySelector('.footer-mc-grid')) {
+        footer.className = 'footer-mc';
+        var phoneIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.36 12 19.79 19.79 0 0 1 1.18 3.38 2 2 0 0 1 3.16 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+        var pinIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+        var mailIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>';
+        footer.innerHTML = [
+            '<div class="footer-mc-inner"><div class="footer-mc-grid">',
+            '  <div class="footer-mc-col"><h4>Contact</h4>',
+            '    <ul class="footer-mc-contact-list">',
+            '      <li class="footer-mc-contact-item"><div class="footer-mc-icon">' + phoneIcon + '</div><div class="footer-mc-contact-text">0257-281-398<br>0257-210-404</div></li>',
+            '      <li class="footer-mc-contact-item"><div class="footer-mc-icon">' + pinIcon + '</div><div class="footer-mc-contact-text">Str. Miron Costin, Nr. 2A,<br>310146 Arad</div></li>',
+            '      <li class="footer-mc-contact-item"><div class="footer-mc-icon">' + mailIcon + '</div><div class="footer-mc-contact-text"><a href="mailto:crparad@gmail.com">crparad@gmail.com</a></div></li>',
+            '    </ul>',
+            '  </div>',
+            '  <div class="footer-mc-col"><h4>Navigare</h4>',
+            '    <ul class="footer-mc-links">',
+            '      <li><a href="index.html#despre">Despre noi</a></li>',
+            '      <li><a href="index.html#comitet">Comitet</a></li>',
+            '      <li><a href="index.html#convingeri">Convingeri</a></li>',
+            '      <li><a href="index.html#judete">Județe</a></li>',
+            '      <li><a href="index.html#locatie">Locație</a></li>',
+            '    </ul>',
+            '  </div>',
+            '  <div class="footer-mc-col"><h4>Activități</h4>',
+            '    <ul class="footer-mc-links">',
+            '      <li><a href="index.html#evenimente">Evenimente</a></li>',
+            '      <li><a href="index.html#seminarii">Seminarii</a></li>',
+            '      <li><a href="index.html#liceu">Liceu</a></li>',
+            '      <li><a href="index.html#contact">Contact</a></li>',
+            '    </ul>',
+            '  </div>',
+            '  <div class="footer-mc-col"><h4>Documente</h4>',
+            '    <ul class="footer-mc-links">',
+            '      <li><a href="electoral.html">Regulament Electoral</a></li>',
+            '      <li><a href="statut-organizare.html">Statut Organizare</a></li>',
+            '      <li><a href="statut-slujitorului.html">Statut Slujitorului</a></li>',
+            '      <li><a href="marturisirea-de-credinta.html">Mărturisire</a></li>',
+            '    </ul>',
+            '  </div>',
+            '</div></div>',
+            '<div class="footer-mc-bottom-wrap"><div class="footer-mc-bottom">',
+            '  &copy; <span id="footerYearInner"></span> Comunitatea Regională Penticostală Arad. Toate drepturile rezervate.',
+            '</div></div>'
+        ].join('');
+        var ys = document.getElementById('footerYearInner');
+        if (ys) ys.textContent = new Date().getFullYear();
+    }
+})();
+
+// ── SLIDE-TEXT ANIMATION ──────────────────────────────────────
+(function () {
+    var SEL = '.nav-link, .btn, .btn-primary, .reg-btn, .s4-pdf-btn, .about-tail-btn, .contact-submit-btn';
+
+    function wrap(el) {
+        if (el.querySelector('.n1')) return;
+        var hasElChild = false;
+        el.childNodes.forEach(function (n) { if (n.nodeType === 1) hasElChild = true; });
+        if (hasElChild) return;
+        var text = el.textContent.trim();
+        if (!text) return;
+        el.innerHTML = '<span class="n1">' + text + '</span><span class="n2" aria-hidden="true">' + text + '</span>';
+    }
+
+    function init() { document.querySelectorAll(SEL).forEach(wrap); }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
