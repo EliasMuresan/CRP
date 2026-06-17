@@ -5282,3 +5282,235 @@ body.inner-page main { padding-top: 0; }
         margin-bottom: 0;
     }
 }
+
+/* === CMS EDITOR BAR — modern dark redesign === */
+.cms-editor-bar {
+    background: rgba(10,17,30,.96) !important;
+    border: 1px solid rgba(255,255,255,.1) !important;
+    border-radius: 20px !important;
+    padding: 10px 10px 10px 20px !important;
+    box-shadow: 0 24px 64px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    gap: 12px !important;
+    bottom: 22px !important;
+    animation: cmsBarIn .42s cubic-bezier(.34,1.3,.64,1) both !important;
+}
+.cms-editor-main { gap: 3px !important; }
+.cms-editor-main strong {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    color: #fff !important;
+    font-size: .92rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -.01em !important;
+}
+.cms-editor-main strong::before {
+    content: '' !important;
+    display: inline-block !important;
+    width: 7px !important;
+    height: 7px !important;
+    border-radius: 50% !important;
+    background: #4ade80 !important;
+    box-shadow: 0 0 8px #4ade80, 0 0 18px rgba(74,222,128,.45) !important;
+    flex-shrink: 0 !important;
+}
+.cms-editor-status { color: rgba(255,255,255,.4) !important; font-size: .77rem !important; }
+.cms-editor-status.is-error { color: #f87171 !important; }
+
+.cms-editor-button {
+    min-height: 42px !important;
+    border-radius: 12px !important;
+    font-size: .84rem !important;
+    font-weight: 700 !important;
+    padding: 0 18px !important;
+    border: 1.5px solid rgba(255,255,255,.13) !important;
+    background: rgba(255,255,255,.07) !important;
+    color: rgba(255,255,255,.7) !important;
+    transition: background .18s ease, box-shadow .18s ease, color .18s ease !important;
+    cursor: pointer !important;
+}
+.cms-editor-button:hover {
+    background: rgba(255,255,255,.14) !important;
+    color: #fff !important;
+}
+.cms-editor-button.cms-start,
+.cms-editor-button.cms-save {
+    background: var(--accent) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+    padding: 0 24px !important;
+    box-shadow: 0 4px 18px rgba(44,93,134,.55) !important;
+    font-size: .88rem !important;
+}
+.cms-editor-button.cms-start:hover,
+.cms-editor-button.cms-save:hover {
+    background: #2472a4 !important;
+    box-shadow: 0 6px 24px rgba(44,93,134,.7) !important;
+    color: #fff !important;
+}
+.cms-editor-button.cms-save {
+    background: #16a34a !important;
+    box-shadow: 0 4px 16px rgba(22,163,74,.45) !important;
+}
+.cms-editor-button.cms-save:hover {
+    background: #15803d !important;
+    box-shadow: 0 6px 22px rgba(22,163,74,.6) !important;
+}
+@keyframes cmsBarIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(16px) scale(.97); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0)     scale(1);  }
+}
+
+/* === PAGINA ARHIVĂ — redesign modern, fundal alb cu pattern === */
+.archive-hero {
+    position: relative;
+    background: transparent;
+    padding: clamp(80px, 12vw, 130px) 24px clamp(60px, 9vw, 100px);
+    overflow: hidden;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+}
+.archive-hero::before {
+    content: 'ARHIVĂ';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(100px, 24vw, 280px);
+    font-weight: 900;
+    letter-spacing: -.05em;
+    color: rgba(44,93,134,.045);
+    white-space: nowrap;
+    pointer-events: none;
+    line-height: 1;
+}
+.archive-hero-inner {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+}
+.archive-hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+    color: var(--accent);
+    background: rgba(44,93,134,.07);
+    border: 1px solid rgba(44,93,134,.18);
+    border-radius: 20px;
+    padding: 5px 16px;
+    margin-bottom: 28px;
+}
+.archive-hero-label::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: .7;
+}
+.archive-hero-title {
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 800;
+    line-height: .92;
+    letter-spacing: -.035em;
+    color: var(--text-main);
+    margin: 0 0 28px;
+}
+.archive-hero-title span {
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(44,93,134,.3);
+}
+.archive-hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+}
+.archive-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .83rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: .01em;
+    opacity: .7;
+    transition: opacity .2s;
+}
+.archive-hero-cta:hover { opacity: 1; }
+
+.archive-body {
+    background: transparent;
+    padding: clamp(52px, 8vw, 90px) 0 clamp(60px, 9vw, 110px);
+}
+
+/* Carduri arhivă — versiune de impact */
+.archive-body .archived-events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 28px;
+    margin-top: clamp(32px, 5vw, 52px);
+}
+.archive-body .archived-event-card {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,.06), 0 10px 30px rgba(0,0,0,.07);
+    transition: transform .22s ease, box-shadow .22s ease;
+}
+.archive-body .archived-event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 20px rgba(0,0,0,.1), 0 28px 56px rgba(0,0,0,.11);
+}
+.archive-body .archived-event-card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    transition: transform .45s ease;
+    display: block;
+}
+.archive-body .archived-event-card:hover img {
+    transform: scale(1.05);
+}
+.archive-body .archived-event-card span.event-date {
+    display: inline-block;
+    font-size: .67rem;
+    font-weight: 700;
+    letter-spacing: .13em;
+    color: var(--accent);
+    background: rgba(44,93,134,.08);
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin: 18px 18px 0;
+}
+.archive-body .archived-event-card strong {
+    margin: 10px 18px 0;
+    font-size: 1.08rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-main);
+}
+.archive-body .archived-event-card p {
+    margin: 8px 18px 22px;
+    font-size: .87rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+    .archive-body .archived-events-grid {
+        grid-template-columns: 1fr;
+    }
+}

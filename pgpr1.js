@@ -3341,6 +3341,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
             '      <li><a href="statut-organizare.html">Statut Organizare</a></li>',
             '      <li><a href="statut-slujitorului.html">Statut Slujitorului</a></li>',
             '      <li><a href="marturisirea-de-credinta.html">Mărturisire</a></li>',
+            '      <li><a href="evenimente-arhivate.html">Arhivă</a></li>',
             '    </ul>',
             '  </div>',
             '</div></div>',
