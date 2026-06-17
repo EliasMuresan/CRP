@@ -5555,16 +5555,43 @@ body.inner-page main { padding-top: 0; }
     justify-content: center !important;
     margin: 44px auto 28px !important;
     box-shadow: 0 0 0 8px rgba(12,25,41,.08) !important;
+    position: relative !important;
+    overflow: visible !important;
 }
-.contact-checkmark { width: 30px !important; height: 30px !important; }
-.contact-checkmark-circle { display: none !important; }
-.contact-checkmark-tick {
-    stroke: #fff !important;
-    stroke-width: 3 !important;
-    stroke-dasharray: 36 !important;
-    stroke-dashoffset: 36 !important;
-    animation: checkTickNew .35s ease .25s forwards !important;
+.contact-checkmark { display: none !important; }
+
+/* bifa CSS pură */
+.contact-checkmark-wrapper::before,
+.contact-checkmark-wrapper::after {
+    content: '' !important;
+    position: absolute !important;
+    background: #fff !important;
+    border-radius: 3px !important;
+    transform-origin: bottom left !important;
 }
+.contact-checkmark-wrapper::before {
+    width: 3px !important;
+    height: 0;
+    bottom: 22px !important;
+    left: 22px !important;
+    transform: rotate(45deg) !important;
+}
+.contact-checkmark-wrapper::after {
+    width: 3px !important;
+    height: 0;
+    bottom: 31px !important;
+    left: 28px !important;
+    transform: rotate(-50deg) !important;
+    transform-origin: bottom left !important;
+}
+.contact-overlay.show .contact-checkmark-wrapper::before {
+    animation: legShort .18s ease .2s forwards !important;
+}
+.contact-overlay.show .contact-checkmark-wrapper::after {
+    animation: legLong .28s ease .35s forwards !important;
+}
+@keyframes legShort { to { height: 12px; } }
+@keyframes legLong  { to { height: 22px; } }
 .contact-overlay-box h2 {
     display: flex !important;
     flex-direction: column !important;
