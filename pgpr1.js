@@ -881,15 +881,15 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
         });
 
         document.addEventListener("keydown", (event) => {
-            const key = event.key.toLowerCase();
-            const isEditShortcut =
-                (event.ctrlKey && event.altKey && key === "e") ||
-                (event.ctrlKey && event.shiftKey && key === "e");
-            if (!isEditShortcut || event.repeat) return;
-
+            if (!event.ctrlKey || !event.shiftKey || event.key !== "9" || event.repeat) return;
             event.preventDefault();
             closeMobileNav();
-            openAuthModal();
+            const modal = document.getElementById("crpAuthModal");
+            if (modal && modal.classList.contains("open")) {
+                closeAuthModal();
+            } else {
+                openAuthModal();
+            }
         });
 
         document.addEventListener("keydown", (event) => {
