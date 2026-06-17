@@ -58,31 +58,36 @@ if (typeof emailjs !== "undefined") {
 }
 
 /* ============================================================
-   MOBILE BOTTOM TAB BAR
+   MOBILE TOP TAB BAR — neumorphic sliding pill
 ============================================================ */
 (function () {
     var icons = {
-        home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
-        sem:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
-        liceu:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',
-        contact:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>'
+        home:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+        sem:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+        liceu:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',
+        contact: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>'
     };
 
-    var tabs = [
-        { key: 'home',    label: 'Acasă',    href: 'index.html' },
-        { key: 'sem',     label: 'Seminarii', href: 'index.html#seminarii' },
-        { key: 'liceu',   label: 'Liceu',     href: 'liceu.html' },
-        { key: 'contact', label: 'Contact',   href: 'index.html#contact' }
+    var tabDefs = [
+        { key: 'home',    label: 'Acasă',     href: 'index.html' },
+        { key: 'sem',     label: 'Seminarii',  href: 'index.html#seminarii' },
+        { key: 'liceu',   label: 'Liceu',      href: 'liceu.html' },
+        { key: 'contact', label: 'Contact',    href: 'index.html#contact' }
     ];
 
     function getActiveKey() {
         var p = window.location.pathname.toLowerCase();
         var h = window.location.hash.toLowerCase();
         if (p.indexOf('liceu') !== -1) return 'liceu';
-        if (p.indexOf('seminar') !== -1 || /\/s[2-5]/.test(p) || p.indexOf('/s2') !== -1 || p.indexOf('/s3') !== -1 || p.indexOf('/s4') !== -1 || p.indexOf('/s5') !== -1) return 'sem';
+        if (p.indexOf('seminar') !== -1 || /\/s[2-5]/.test(p)) return 'sem';
         if (h === '#contact') return 'contact';
         if (h === '#seminarii') return 'sem';
         return 'home';
+    }
+
+    function movePill(pill, tab) {
+        pill.style.left  = tab.offsetLeft + 'px';
+        pill.style.width = tab.offsetWidth + 'px';
     }
 
     function buildBTB() {
@@ -93,23 +98,42 @@ if (typeof emailjs !== "undefined") {
         var activeKey = getActiveKey();
         var wrap = document.createElement('div');
         wrap.className = 'btb-wrap';
-        var bar = document.createElement('div');
+        var bar  = document.createElement('div');
         bar.className = 'btb';
 
-        tabs.forEach(function (tab) {
+        /* sliding pill — positioned by JS, no CSS transition yet */
+        var pill = document.createElement('div');
+        pill.className = 'btb-pill';
+        bar.appendChild(pill);
+
+        tabDefs.forEach(function (def) {
             var a = document.createElement('a');
-            a.className = 'btb-tab' + (tab.key === activeKey ? ' active' : '');
-            a.href = tab.href;
-            a.innerHTML = icons[tab.key] + '<span class="btb-label">' + tab.label + '</span>';
+            a.className = 'btb-tab' + (def.key === activeKey ? ' active' : '');
+            a.href = def.href;
+            a.innerHTML = icons[def.key] + '<span class="btb-label">' + def.label + '</span>';
             a.addEventListener('click', function () {
                 document.querySelectorAll('.btb-tab').forEach(function (t) { t.classList.remove('active'); });
                 a.classList.add('active');
+                movePill(pill, a);
             });
             bar.appendChild(a);
         });
 
         wrap.appendChild(bar);
         document.body.appendChild(wrap);
+
+        /* set initial pill position (no animation), then enable transition */
+        requestAnimationFrame(function () {
+            var active = bar.querySelector('.btb-tab.active');
+            if (active) {
+                movePill(pill, active);
+                requestAnimationFrame(function () {
+                    pill.style.transition = 'left .42s cubic-bezier(.4,0,.2,1), width .42s cubic-bezier(.4,0,.2,1)';
+                });
+            }
+            /* fit body padding to actual bar height */
+            document.body.style.paddingTop = (wrap.offsetHeight + 2) + 'px';
+        });
     }
 
     if (document.readyState === 'loading') {

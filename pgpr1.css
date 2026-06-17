@@ -5191,72 +5191,78 @@ body.inner-page main { padding-top: 0; }
 }
 
 /* ============================================================
-   MOBILE BOTTOM TAB BAR — replaces top header on mobile
+   MOBILE TOP TAB BAR — neumorphic sliding pill
 ============================================================ */
 @media (max-width: 1080px) {
     :root { --header-h: 0px; }
     .header { display: none !important; }
-    body:not(.cms-editing) { padding-bottom: 104px !important; }
+    body:not(.cms-editing) {
+        padding-top: 90px !important;
+        padding-bottom: 0 !important;
+    }
 
     .btb-wrap {
         position: fixed;
-        bottom: 0; left: 0; right: 0;
+        top: 0; left: 0; right: 0;
         z-index: 10000;
-        padding: 8px 12px;
-        padding-bottom: max(14px, env(safe-area-inset-bottom, 14px));
+        padding: env(safe-area-inset-top, 10px) 12px 8px;
         pointer-events: none;
     }
     .btb {
         pointer-events: auto;
+        position: relative;
         background: #eef2f7;
-        border-radius: 28px;
+        border-radius: 26px;
         padding: 7px;
         display: flex;
         align-items: center;
-        gap: 3px;
+        gap: 0;
+        overflow: hidden;
         box-shadow:
-            6px 6px 14px rgba(0,0,0,.11),
-            -4px -4px 10px rgba(255,255,255,.92);
+            0 4px 16px rgba(0,0,0,.09),
+            6px 6px 14px rgba(0,0,0,.07),
+            -3px -3px 8px rgba(255,255,255,.9);
+    }
+    .btb-pill {
+        position: absolute;
+        top: 7px; bottom: 7px;
+        background: #fff;
+        border-radius: 20px;
+        z-index: 0;
+        pointer-events: none;
+        will-change: left, width;
     }
     .btb-tab {
         flex: 1;
+        position: relative;
+        z-index: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 52px;
-        padding: 10px 8px;
-        border-radius: 22px;
-        text-decoration: none !important;
+        min-height: 50px;
+        padding: 0 6px;
+        gap: 5px;
         color: #9aa5b4 !important;
-        gap: 8px;
+        text-decoration: none !important;
         overflow: hidden;
-        transition: flex-grow .35s cubic-bezier(.34,1.2,.64,1),
-                    background .25s ease,
-                    color .25s ease,
-                    box-shadow .25s ease;
-        background: transparent;
         -webkit-tap-highlight-color: transparent;
+        transition: color .3s ease;
     }
-    .btb-tab svg {
-        width: 22px; height: 22px;
-        flex-shrink: 0;
-        stroke-width: 1.75;
-    }
+    .btb-tab.active { color: var(--accent) !important; }
+    .btb-tab svg { width: 19px; height: 19px; flex-shrink: 0; stroke-width: 1.8; }
     .btb-label {
-        display: none;
-        font-size: .78rem;
+        font-size: .68rem;
         font-weight: 700;
         letter-spacing: .01em;
         white-space: nowrap;
-        font-family: 'Libre Franklin', sans-serif;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-width .4s cubic-bezier(.34,1.15,.64,1),
+                    opacity .22s ease;
     }
-    .btb-tab.active {
-        flex-grow: 1.9;
-        background: #fff !important;
-        color: var(--accent) !important;
-        box-shadow:
-            4px 4px 10px rgba(0,0,0,.10),
-            -2px -2px 7px rgba(255,255,255,.9);
+    .btb-tab.active .btb-label {
+        max-width: 72px;
+        opacity: 1;
     }
-    .btb-tab.active .btb-label { display: block; }
 }
