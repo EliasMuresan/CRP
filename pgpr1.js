@@ -336,6 +336,9 @@ function stopTeamMarquee() {
         teamMarqueeTimer = null;
     }
 
+    if (teamMarqueeStates._visibilityCleanup) {
+        teamMarqueeStates._visibilityCleanup();
+    }
     teamMarqueeStates.forEach((state) => {
         state.cleanup();
     });
@@ -408,10 +411,11 @@ function initTeamMarquee() {
             windowEl,
             setWidth,
             offset: -setWidth / 2,
-            speed: grid.classList.contains("team-main-grid") ? 0.045 : 0.055,
+            speed: grid.classList.contains("team-main-grid") ? -0.045 : 0.055,
             dragging: false,
             lastPointerX: 0,
             lastTime: performance.now(),
+            momentumVelocity: 0,
             cleanupHandlers: []
         };
 
@@ -422,7 +426,7 @@ function initTeamMarquee() {
 
         function applyOffset() {
             normalize();
-            state.grid.style.setProperty("--marquee-offset", `${state.offset}px`);
+            state.grid.style.transform = `translate3d(${state.offset}px, 0, 0)`;
         }
 
         function onPointerDown(event) {
@@ -462,12 +466,24 @@ function initTeamMarquee() {
             }
         }
 
+        function onWheel(event) {
+            let delta = Math.abs(event.deltaY) >= Math.abs(event.deltaX) ? event.deltaY : event.deltaX;
+            if (event.deltaMode === 1) delta *= 18;
+            if (event.deltaMode === 2) delta *= 300;
+            const dir = state.speed < 0 ? -1 : 1;
+            state.momentumVelocity += dir * Math.abs(delta) * 0.0015;
+            const cap = Math.abs(state.speed) * 14;
+            if (state.momentumVelocity > cap) state.momentumVelocity = cap;
+            if (state.momentumVelocity < -cap) state.momentumVelocity = -cap;
+        }
+
         windowEl.addEventListener("pointerdown", onPointerDown);
         windowEl.addEventListener("pointermove", onPointerMove);
         windowEl.addEventListener("pointerup", endDrag);
         windowEl.addEventListener("pointercancel", endDrag);
         windowEl.addEventListener("lostpointercapture", endDrag);
         windowEl.addEventListener("dragstart", suppressNativeDrag);
+        windowEl.addEventListener("wheel", onWheel, { passive: true });
 
         state.cleanupHandlers.push(
             () => windowEl.removeEventListener("pointerdown", onPointerDown),
@@ -475,12 +491,13 @@ function initTeamMarquee() {
             () => windowEl.removeEventListener("pointerup", endDrag),
             () => windowEl.removeEventListener("pointercancel", endDrag),
             () => windowEl.removeEventListener("lostpointercapture", endDrag),
-            () => windowEl.removeEventListener("dragstart", suppressNativeDrag)
+            () => windowEl.removeEventListener("dragstart", suppressNativeDrag),
+            () => windowEl.removeEventListener("wheel", onWheel)
         );
         state.cleanup = () => {
             state.cleanupHandlers.forEach((cleanup) => cleanup());
             state.windowEl.classList.remove("is-dragging");
-            state.grid.style.removeProperty("--marquee-offset");
+            state.grid.style.transform = "";
         };
 
         applyOffset();
@@ -494,19 +511,37 @@ function initTeamMarquee() {
             const elapsed = Math.min(1200, Math.max(0, time - state.lastTime));
             state.lastTime = time;
             if (!state.dragging) {
-                state.offset += state.speed * elapsed;
+                if (state.momentumVelocity !== 0) {
+                    state.momentumVelocity *= Math.pow(0.997, elapsed);
+                    if (Math.abs(state.momentumVelocity) < 0.0004) state.momentumVelocity = 0;
+                }
+                state.offset += (state.speed + state.momentumVelocity) * elapsed;
                 const normalized = (() => {
                     while (state.offset >= 0) state.offset -= state.setWidth;
                     while (state.offset < -state.setWidth) state.offset += state.setWidth;
                     return state.offset;
                 })();
-                state.grid.style.setProperty("--marquee-offset", `${normalized}px`);
+                state.grid.style.transform = `translate3d(${normalized}px, 0, 0)`;
             }
         });
     }
 
+    function rafLoop(time) {
+        tick(time);
+        teamMarqueeFrame = requestAnimationFrame(rafLoop);
+    }
     tick(performance.now());
-    teamMarqueeTimer = window.setInterval(() => tick(performance.now()), 16);
+    teamMarqueeFrame = requestAnimationFrame(rafLoop);
+
+    function onVisibilityChange() {
+        if (!document.hidden) {
+            const now = performance.now();
+            teamMarqueeStates.forEach((s) => { s.lastTime = now; });
+        }
+    }
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    teamMarqueeStates._visibilityCleanup = () =>
+        document.removeEventListener("visibilitychange", onVisibilityChange);
 }
 
 /* ============================================================

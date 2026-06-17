@@ -1080,7 +1080,6 @@ body.cms-crop-open { overflow: hidden; }
 .team-main-grid.is-marquee-ready {
     width: max-content;
     padding: 0;
-    transform: translate3d(var(--marquee-offset, 0px), 0, 0);
     will-change: transform;
 }
 .team-card-main {
@@ -1176,7 +1175,6 @@ body.cms-crop-open { overflow: hidden; }
 .team-secondary-grid.is-marquee-ready {
     width: max-content;
     padding: 0;
-    transform: translate3d(var(--marquee-offset, 0px), 0, 0);
     will-change: transform;
 }
 .team-card-secondary {
@@ -1194,7 +1192,6 @@ body.cms-crop-open { overflow: hidden; }
     isolation: isolate;
 }
 .team-card-secondary:hover {
-    transform: translateY(-4px);
     box-shadow: 0 28px 62px rgba(0,0,0,.26);
     border-color: rgba(255,255,255,.34);
 }
@@ -2022,7 +2019,6 @@ body.cms-editing #comitet .team-card-secondary {
 }
 body:not(.cms-editing) #comitet .team-main-grid.is-marquee-ready,
 body:not(.cms-editing) #comitet .team-secondary-grid.is-marquee-ready {
-    transform: translate3d(var(--marquee-offset, 0px), 0, 0);
     transition: none;
 }
 
@@ -3351,45 +3347,57 @@ body.inner-page main { padding-top: 0; }
 }
 
 #locatie .location-info {
-    flex-direction: column;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "kicker  kicker"
+        "title   btn"
+        "desc    desc"
+        "details details";
+    align-items: end;
     padding-top: 0;
 }
 
 /* Kicker */
 #locatie .section-kicker {
+    grid-area: kicker;
     font-size: .72rem;
     letter-spacing: .22em;
     color: var(--text-soft);
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 }
 
-/* Massive uppercase title */
+/* Massive uppercase title — shares row with button */
 #locatie .location-headline {
+    grid-area: title;
     font-size: clamp(3rem, 7vw, 5.5rem);
     font-weight: 800;
     letter-spacing: -0.04em;
     text-transform: uppercase;
     line-height: .92;
     color: var(--text-main);
-    margin-bottom: 18px;
+    margin-bottom: 0;
 }
 
 #locatie .location-desc {
+    grid-area: desc;
     font-size: .98rem;
     color: var(--text-muted);
     line-height: 1.75;
     max-width: 52ch;
-    margin-bottom: 36px;
+    margin-top: 20px;
+    margin-bottom: 0;
 }
 
 /* 3-col horizontal detail strip */
 #locatie .location-details {
+    grid-area: details;
     flex-direction: row;
     gap: 0;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-    margin-bottom: 28px;
+    margin-bottom: 0;
+    margin-top: 20px;
 }
 
 #locatie .location-detail-item {
@@ -3417,8 +3425,12 @@ body.inner-page main { padding-top: 0; }
     letter-spacing: .15em;
 }
 
-/* Button */
+/* Button — inline with headline */
 #locatie .location-directions-btn {
+    grid-area: btn;
+    align-self: end;
+    justify-self: end;
+    margin-bottom: 0;
     background: var(--text-main);
     border-radius: 8px;
     font-size: .88rem;
@@ -3520,10 +3532,15 @@ body.inner-page main { padding-top: 0; }
 /* ── COMITET — remove focus outline on carousel click ───────────── */
 
 .team-marquee-window:focus,
+.team-marquee-window:focus-visible,
 .team-card-main:focus,
+.team-card-main:focus-visible,
 .team-card-secondary:focus,
-#comitet *:focus {
-    outline: none;
+.team-card-secondary:focus-visible,
+#comitet *:focus,
+#comitet *:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 /* ── COMITET SECTION — names uppercase + header tune ───────────── */
@@ -3552,9 +3569,9 @@ body.inner-page main { padding-top: 0; }
 }
 
 #despre .about-card {
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(40px, 5vw, 72px);
-    align-items: stretch;
+    grid-template-columns: 1.1fr .9fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
 }
 
 #despre .section-kicker {
@@ -3566,11 +3583,11 @@ body.inner-page main { padding-top: 0; }
 }
 
 #despre .about-content h2 {
-    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
     font-weight: 800;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
-    line-height: .9;
+    line-height: .95;
     color: var(--text-main);
     margin-bottom: 0;
 }
@@ -3906,4 +3923,1058 @@ body.inner-page main { padding-top: 0; }
     .seminar-card-link:nth-child(5) { border-bottom: none; }
     .seminar-card-link:nth-child(3),
     .seminar-card-link:nth-child(4) { border-bottom: 1px solid var(--line); }
+}
+
+/* ── EVENIMENTE — editorial numbered grid ──────────────────────── */
+
+#evenimente.band { padding: clamp(44px,5.5vw,68px) 0; }
+
+#evenimente .section-header h2 {
+    font-size: clamp(2rem,4.5vw,3.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+/* Hide carousel arrows — all events shown in grid */
+#evenimente .events-arrow { display: none !important; }
+
+/* Carousel wrapper — remove carousel constraints */
+#evenimente .events-carousel {
+    display: block;
+    max-width: none;
+    margin: clamp(28px,4vw,44px) 0 0;
+    padding: 0;
+    position: static;
+}
+
+/* Track → editorial CSS grid */
+#evenimente .events-track {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 0;
+    height: auto !important;
+    position: static !important;
+    border-top: 1px solid var(--line);
+    overflow: hidden;
+    counter-reset: event-counter;
+}
+
+/* Slide — grid item, fully visible */
+#evenimente .event-slide {
+    counter-increment: event-counter;
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    width: auto !important;
+    left: auto !important;
+    top: auto !important;
+    z-index: auto !important;
+    transition: background .2s;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(28px,3.5vw,44px) clamp(22px,3vw,40px);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+#evenimente .event-slide.is-center,
+#evenimente .event-slide.is-left,
+#evenimente .event-slide.is-right {
+    position: static !important;
+    transform: none !important;
+    opacity: 1 !important;
+    left: auto !important;
+}
+
+#evenimente .event-slide:hover { background: rgba(44,93,134,.03); }
+
+/* CSS counter ordinal */
+#evenimente .event-slide::before {
+    content: "0" counter(event-counter);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    color: var(--text-soft);
+    display: block;
+    margin-bottom: clamp(18px,2vw,28px);
+}
+
+/* Card link */
+#evenimente .event-card-link {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Card reset */
+#evenimente .event-card {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Image */
+#evenimente .event-image {
+    aspect-ratio: 3/2;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: clamp(16px,2vw,24px);
+    flex-shrink: 0;
+}
+
+#evenimente .event-image img {
+    width: 100%;
+    height: 100% !important;
+    object-fit: cover;
+    border-radius: 0;
+    transition: transform .4s ease;
+}
+
+#evenimente .event-slide:hover .event-image img { transform: scale(1.04); }
+
+/* Body padding reset */
+#evenimente .event-body {
+    padding: 0 !important;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Date */
+#evenimente .event-date {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+/* Title */
+#evenimente .event-title {
+    font-size: clamp(1rem,1.8vw,1.3rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -.01em;
+    color: var(--text-main);
+    line-height: 1.15;
+    margin-bottom: 0;
+}
+
+/* Divider hidden */
+#evenimente .event-divider { display: none; }
+
+/* Text */
+#evenimente .event-text {
+    font-size: .875rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-top: 12px;
+}
+
+/* Hover on card link — remove old translateY */
+#evenimente .event-card-link:hover .event-card {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+@media (max-width:700px) {
+    #evenimente .events-track {
+        grid-template-columns: 1fr;
+        height: auto !important;
+    }
+    #evenimente .event-slide {
+        border-right: none;
+        width: auto !important;
+        opacity: 1 !important;
+    }
+}
+
+/* ── HERO — left editorial redesign ───────────────────────────── */
+
+/* Overlay: diagonal — dark stânga, transparent dreapta + alb jos */
+.band-hero .hero-background::after {
+    background:
+        linear-gradient(to top, #fff 0%, rgba(255,255,255,.05) 16%, transparent 32%),
+        linear-gradient(108deg, rgba(4,10,22,.88) 0%, rgba(4,10,22,.6) 42%, rgba(4,10,22,.15) 100%);
+}
+
+/* Content jos-stânga */
+.band-hero {
+    padding: 0 0 clamp(56px,7vw,88px);
+    align-items: flex-end;
+}
+
+.band-hero .hero {
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 0 clamp(28px,5vw,80px) clamp(28px,4vw,56px);
+}
+
+/* Card stânga */
+.band-hero .hero-card {
+    text-align: left;
+    max-width: min(740px, 70vw);
+    padding: 0;
+    border: none;
+}
+
+/* Kicker — linie + text mic deasupra titlului */
+.band-hero .hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .28em;
+    color: rgba(255,255,255,.55);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    justify-content: flex-start;
+}
+.band-hero .hero-kicker::before {
+    width: 36px;
+    background: rgba(255,255,255,.45);
+}
+.band-hero .hero-kicker::after { display: none; }
+
+/* Titlu masiv */
+.band-hero .hero-card h1 {
+    font-size: clamp(3rem, 7.5vw, 7.5rem);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: .87;
+    color: #fff;
+    margin-bottom: 32px;
+    text-shadow: 0 2px 60px rgba(0,0,0,.12);
+    text-transform: uppercase;
+}
+
+/* Subtitlu vizibil */
+.band-hero .hero-subtitle {
+    display: block;
+    font-size: clamp(.85rem,1.3vw,1rem);
+    color: rgba(255,255,255,.7);
+    line-height: 1.7;
+    max-width: 50ch;
+    margin-bottom: 36px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,.22);
+}
+
+/* Butoane stânga */
+.band-hero .hero-actions { justify-content: flex-start; }
+
+/* Buton primar — alb */
+.band-hero .btn.primary {
+    background: #fff !important;
+    color: var(--text-main) !important;
+    border-color: #fff !important;
+    font-weight: 700;
+}
+.band-hero .btn.primary:hover {
+    background: rgba(255,255,255,.88) !important;
+}
+
+/* Buton secundar — outline alb */
+.band-hero .btn.ghost {
+    background: transparent;
+    border-color: rgba(255,255,255,.45);
+    color: #fff;
+}
+.band-hero .btn.ghost:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.8);
+}
+
+@media (max-width: 700px) {
+    .band-hero .hero-card { max-width: 100%; }
+    .band-hero .hero-card h1 { font-size: clamp(2.4rem, 9vw, 3.6rem); line-height: .9; }
+    .band-hero .hero-subtitle { font-size: .85rem; }
+}
+
+/* ── HERO BUTTONS — modern minimal ────────────────────────────── */
+
+.band-hero .hero-actions { gap: 20px; align-items: center; }
+
+/* Primar: alb solid, text întunecat, fără border-radius */
+.band-hero .btn.primary {
+    background: #fff !important;
+    color: var(--text-main) !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 13px 28px !important;
+    font-size: .75rem !important;
+    font-weight: 800 !important;
+    letter-spacing: .14em !important;
+    text-transform: uppercase !important;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: background .2s !important;
+}
+.band-hero .btn.primary:hover {
+    background: rgba(255,255,255,.88) !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Secundar: text gol + săgeată + underline */
+.band-hero .btn.ghost {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255,255,255,.35) !important;
+    border-radius: 0 !important;
+    color: rgba(255,255,255,.8) !important;
+    padding: 13px 2px !important;
+    font-size: .75rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .14em !important;
+    text-transform: uppercase !important;
+    transform: none !important;
+    transition: color .2s, border-color .2s !important;
+}
+.band-hero .btn.ghost::after {
+    content: " →";
+    font-weight: 400;
+    letter-spacing: 0;
+    font-size: .9em;
+}
+.band-hero .btn.ghost:hover {
+    color: #fff !important;
+    border-bottom-color: rgba(255,255,255,.75) !important;
+    background: transparent !important;
+    transform: none !important;
+}
+
+/* ── ARAD / JUDEȚ — editorial directory redesign ─────────────── */
+
+.arad-wrapper {
+    padding: calc(var(--header-h) + clamp(48px,6vw,80px)) clamp(20px,5vw,60px) clamp(80px,9vw,120px);
+}
+
+.arad-header { margin-bottom: clamp(32px,4.5vw,52px); }
+.arad-header h2 {
+    font-size: clamp(2.6rem,6.5vw,5.2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: .9;
+    margin-bottom: 0;
+    color: var(--text-main);
+}
+.arad-header p {
+    font-size: .88rem;
+    color: var(--text-muted);
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    max-width: 56ch;
+    line-height: 1.6;
+}
+
+.arad-search-wrapper {
+    position: relative;
+    max-width: 100%;
+    margin-bottom: clamp(32px,4vw,52px);
+}
+.arad-search-wrapper::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 14px;
+    transform: none;
+    width: 20px;
+    height: 20px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237b8593' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") center/contain no-repeat;
+    pointer-events: none;
+}
+#churchSearch {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--text-main);
+    border-radius: 0;
+    padding: 14px 0 14px 36px;
+    font-family: inherit;
+    font-size: clamp(1rem,1.5vw,1.2rem);
+    font-weight: 500;
+    color: var(--text-main);
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+    transition: border-color .2s;
+}
+#churchSearch::placeholder { color: var(--text-soft); font-weight: 400; }
+#churchSearch:focus { border-bottom-color: var(--accent); box-shadow: none; }
+.search-results-count {
+    margin-top: 10px;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+}
+
+.churches-grid, .arad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 2px solid var(--text-main);
+}
+
+.church-card {
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    box-shadow: none;
+    padding: clamp(22px,2.5vw,32px) clamp(18px,2vw,28px);
+    transition: background .15s;
+    transform: none !important;
+}
+.church-card:nth-child(3n) { border-right: none; }
+.church-card:hover {
+    background: var(--accent-soft);
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: var(--line) !important;
+}
+.church-card h3 {
+    font-size: .88rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    line-height: 1.25;
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+.church-card p {
+    font-size: .78rem;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+    line-height: 1.55;
+}
+.church-card p strong { color: var(--text-main); font-weight: 600; }
+.church-card a { color: var(--accent); text-decoration: none; }
+.church-card a:hover { text-decoration: underline; }
+
+@media (max-width: 860px) {
+    .churches-grid, .arad-grid { grid-template-columns: repeat(2, 1fr); }
+    .church-card:nth-child(3n) { border-right: 1px solid var(--line); }
+    .church-card:nth-child(2n) { border-right: none; }
+}
+@media (max-width: 560px) {
+    .churches-grid, .arad-grid { grid-template-columns: 1fr; }
+    .church-card:nth-child(3n),
+    .church-card:nth-child(2n) { border-right: none; }
+    .arad-header h2 { font-size: clamp(2rem,9vw,3rem); }
+}
+
+/* ── SEMINAR PAGES — editorial redesign ──────────────────────── */
+
+/* Hero: alb cu pattern, padding de la navbar */
+.seminar-page-hero,
+.seminar2-hero,
+.seminar3-hero,
+.seminar4-hero,
+.seminar5-hero {
+    background: transparent !important;
+    padding-top: calc(var(--header-h) + clamp(56px,8vw,96px)) !important;
+    padding-bottom: clamp(24px,3vw,36px) !important;
+    border-bottom: none !important;
+}
+
+/* Titluri hero: mari, caps, dark */
+.seminar3-title, .seminar4-title, .seminar5-title,
+.seminar-page-hero h1 {
+    font-size: clamp(2.2rem,5vw,4rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.04em !important;
+    line-height: .9 !important;
+    text-transform: uppercase !important;
+    color: var(--text-main) !important;
+    margin-bottom: 0 !important;
+}
+.seminar3-title-accent, .seminar4-subtitle, .seminar5-subtitle {
+    color: var(--accent-dark) !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    letter-spacing: inherit !important;
+    display: block;
+}
+.seminar3-subline { color: var(--text-soft) !important; margin-bottom: 12px; }
+.seminar3-lead, .seminar4-lead, .seminar5-lead {
+    color: var(--text-muted) !important;
+    font-size: .92rem !important;
+    margin-top: 16px !important;
+    margin-bottom: 28px !important;
+}
+
+/* Butoane hero pe alb */
+.seminar3-hero .seminar3-btn-primary {
+    background: var(--accent-dark) !important; color: #fff !important;
+    border: none !important; border-radius: 4px !important;
+    font-weight: 800 !important; font-size: .75rem !important;
+    letter-spacing: .12em !important; text-transform: uppercase !important;
+    padding: 12px 24px !important;
+}
+.seminar3-hero .seminar3-btn-secondary {
+    background: transparent !important;
+    border: 1.5px solid var(--line-strong, #c8ced7) !important;
+    border-radius: 4px !important; color: var(--text-main) !important;
+    padding: 11px 18px !important; font-size: .75rem !important;
+    font-weight: 700 !important; letter-spacing: .1em !important;
+    text-transform: uppercase !important;
+}
+
+/* Article container: stack fără fundal */
+.s3-article, .s4-article, .s5-article, .s2-article {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+}
+
+/* Fiecare secțiune = card modern */
+.s3-section, .s4-section, .s5-section, .s2-section {
+    background: #fff !important;
+    border: 1px solid var(--line) !important;
+    border-top: 3px solid var(--accent) !important;
+    border-radius: 14px !important;
+    padding: clamp(24px,3vw,36px) !important;
+    box-shadow: 0 2px 16px rgba(20,40,80,.05) !important;
+    margin: 0 !important;
+}
+
+/* s3-grid (secțiunea cu 2 coloane interne) — rămâne card, dar internul e grid */
+.s3-section.s3-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: clamp(20px,3vw,36px) !important;
+}
+
+/* Coloanele din interior — transparente, fără border propriu */
+.s3-col, .s4-col {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Heading: label mic caps în culoare accent */
+.s3-section h2, .s4-section h2, .s5-section h2, .s2-section h2,
+.s3-col h2, .s4-col h2 {
+    font-size: .65rem !important;
+    font-weight: 800 !important;
+    letter-spacing: .18em !important;
+    text-transform: uppercase !important;
+    color: var(--accent) !important;
+    margin-bottom: 14px !important;
+    padding-top: 0 !important;
+}
+
+/* Liste */
+.s3-list, .s4-list, .s5-list { gap: 7px !important; display: grid !important; }
+.s3-list li, .s4-list li, .s5-list li { font-size: .9rem; line-height: 1.65; }
+
+/* Contact inline */
+.s3-contact, .s4-contact, .s5-contact {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px 36px !important;
+}
+.s3-contact p, .s4-contact p, .s5-contact p { margin: 0 !important; font-size: .9rem; }
+
+/* Poster */
+.seminar3-poster-wrap {
+    max-width: 480px;
+    margin: clamp(24px,3vw,36px) auto 0;
+    padding-top: clamp(24px,3vw,36px);
+    border-top: 1px solid var(--line);
+}
+.seminar3-poster { border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,.14); }
+
+@media (max-width: 640px) {
+    .s3-section.s3-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Prima secțiune de conținut după hero — fără padding mare deasupra */
+.seminar-page-hero + .band,
+.seminar2-hero + .band,
+.seminar3-hero + .band,
+.seminar4-hero + .band,
+.seminar5-hero + .band {
+    padding-top: clamp(16px,2vw,24px) !important;
+}
+
+/* ── SEMINAR1 (Caraș-Severin) — aceeași stilizare ca s2-s5 ───── */
+.seminar-cards-grid {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    gap: 12px !important;
+}
+.seminar-cards-grid .seminar-card,
+.seminar2-page .seminar-card {
+    border-top: 3px solid var(--accent) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 2px 16px rgba(20,40,80,.05) !important;
+}
+.seminar-cards-grid .seminar-card h2 {
+    font-size: .65rem !important;
+    font-weight: 800 !important;
+    letter-spacing: .18em !important;
+    text-transform: uppercase !important;
+    color: var(--accent) !important;
+    margin-bottom: 14px !important;
+}
+
+/* ── EVENT DETAIL PAGES — editorial redesign ──────────────────── */
+
+/* Hero: more space from navbar + editorial title */
+.inner-hero {
+    padding-top: calc(var(--header-h) + clamp(56px,8vw,96px)) !important;
+    padding-bottom: clamp(48px,6vw,80px);
+    border-bottom: 1px solid var(--line);
+}
+
+.inner-hero-layout {
+    grid-template-columns: 1.1fr .9fr;
+    gap: clamp(48px,7vw,96px);
+    align-items: start;
+}
+
+.inner-hero .section-kicker {
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .22em;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.inner-hero-title {
+    font-size: clamp(2.2rem,5vw,4rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: .9;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+/* Subtitle span inside h1 — override inline styles */
+.inner-hero-title span {
+    display: block !important;
+    font-size: .36em !important;
+    font-weight: 700 !important;
+    letter-spacing: .14em !important;
+    color: var(--text-muted);
+    margin-top: 20px;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+/* Meta: 2-col grid with separator */
+.inner-hero-meta {
+    margin-top: clamp(22px,3vw,32px);
+    padding-top: clamp(18px,2.5vw,24px);
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 20px;
+    font-size: .8rem;
+    color: var(--text-muted);
+}
+.inner-hero-meta p { margin-bottom: 0; }
+.inner-hero-meta strong { color: var(--text-main); font-weight: 700; }
+
+/* Photo: sharp, subtle shadow */
+.inner-hero-photo img {
+    border-radius: 6px;
+    border: none;
+    box-shadow: 0 24px 64px rgba(0,0,0,.12);
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Event body: editorial headings + text */
+.event-L-text h2 {
+    font-size: clamp(1.4rem,2.6vw,2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin: clamp(32px,4vw,52px) 0 14px;
+    color: var(--text-main);
+}
+.event-L-text h2:first-child { margin-top: 0; }
+.event-L-text p {
+    font-size: .9rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+/* Info sidebar: flat, accent-soft bg */
+.event-info-card-single {
+    background: var(--accent-soft);
+    border: none;
+    border-radius: 6px;
+    box-shadow: none;
+    padding: clamp(20px,2.5vw,30px);
+}
+.event-info-card-single h3 {
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 14px;
+}
+.event-L-photo-top { border-radius: 4px; margin-bottom: 20px; }
+
+/* Gallery section title (sibling of inner-hero) */
+.inner-hero ~ .band .section-header h2 {
+    font-size: clamp(1.8rem,4vw,3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+}
+
+/* Gallery: tighter gap, no radius */
+.gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+    gap: 4px;
+    margin-top: clamp(28px,4vw,44px);
+}
+.gallery-item { border-radius: 0; }
+.gallery-item img { height: 210px; }
+
+@media (max-width: 720px) {
+    .inner-hero-layout { grid-template-columns: 1fr; }
+    .inner-hero-photo { margin-top: 24px; }
+    .inner-hero-meta { grid-template-columns: 1fr; }
+    .inner-hero-title { font-size: clamp(2rem,9vw,3rem); }
+}
+
+/* ── NAVBAR — colțuri rotunjite (inner pages only) ─────────────── */
+
+/* Pagini interioare: pill alb exact pe nav */
+.header-page {
+    padding: 14px 28px;
+}
+.header-page .header-container {
+    height: 52px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+}
+.header-page .nav {
+    background: rgba(255,255,255,.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.06);
+    padding: 4px 10px;
+}
+
+/* ── EVENT BODY — metadata strip deasupra textului ─────────────── */
+
+/* Kill float → coloană flex (aside e deja primul în DOM) */
+.event-L-wrapper { display: flex; flex-direction: column; }
+.event-L-wrapper::after { display: none; }
+
+.event-L-aside {
+    float: none !important;
+    width: 100% !important;
+    margin: 0 0 clamp(32px,4vw,52px) !important;
+}
+
+/* Ascunde poza din aside (hero are deja poza principală) */
+.event-L-photo-top { display: none !important; }
+
+/* Info card → bandă orizontală fără box */
+.event-info-card-single {
+    background: transparent !important;
+    border: none !important;
+    border-top: 2px solid var(--text-main) !important;
+    border-bottom: 1px solid var(--line) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: clamp(20px,2.5vw,28px) 0 !important;
+}
+
+.event-info-card-single h3 {
+    font-size: .6rem !important;
+    letter-spacing: .22em !important;
+    color: var(--text-soft) !important;
+    margin-bottom: 16px !important;
+}
+
+/* Lista din aside → rând orizontal de fapte */
+.event-L-aside .event-detail-list {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 12px 0;
+    margin: 0; padding: 0;
+    list-style: none;
+}
+.event-L-aside .event-detail-list li {
+    padding: 0 clamp(16px,2.5vw,32px) 0 0 !important;
+    margin: 0 clamp(16px,2.5vw,32px) 0 0 !important;
+    border-right: 1px solid var(--line);
+    position: static !important;
+    color: var(--text-main);
+    font-size: .88rem;
+}
+.event-L-aside .event-detail-list li::before { display: none !important; }
+.event-L-aside .event-detail-list li:last-child {
+    border-right: none !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+}
+.event-L-aside .event-detail-list li strong {
+    display: block;
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 3px;
+}
+
+/* Descriere sub fapte */
+.event-info-card-single .event-source {
+    margin-top: 16px !important;
+    padding-top: 14px !important;
+    border-top: 1px solid var(--line) !important;
+    font-size: .8rem !important;
+    color: var(--text-soft) !important;
+    font-style: italic;
+}
+
+/* =========================================================
+   LICEU PAGE — modern redesign
+   ========================================================= */
+
+/* Hero */
+.liceu-hero {
+    padding-top: calc(var(--header-h) + clamp(56px,8vw,96px));
+    padding-bottom: clamp(48px,6vw,72px);
+}
+
+.liceu-hero-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 clamp(20px,5vw,48px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px,6vw,80px);
+    align-items: center;
+}
+
+.liceu-kicker {
+    font-size: .65rem;
+    font-weight: 800;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 22px;
+}
+
+.liceu-title {
+    font-size: clamp(2.8rem,7vw,5.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: .9;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin-bottom: 28px;
+}
+
+.liceu-title-accent { color: var(--accent); }
+
+.liceu-hero-desc {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    max-width: 46ch;
+}
+
+.liceu-hero-photo img {
+    width: 100%;
+    border-radius: 16px;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+    box-shadow: 0 24px 64px rgba(20,40,80,.13);
+    display: block;
+}
+
+/* Stats strip */
+.liceu-stats {
+    background: var(--text-main);
+    padding: clamp(28px,3.5vw,44px) clamp(20px,5vw,48px);
+}
+
+.liceu-stats-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 24px;
+    text-align: center;
+}
+
+.liceu-stat strong {
+    display: block;
+    font-size: clamp(2rem,4vw,3rem);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.liceu-stat span {
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.5);
+}
+
+/* Content wrapper */
+.liceu-content {
+    padding: clamp(48px,6vw,80px) 0 clamp(80px,9vw,120px);
+}
+
+.liceu-container {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 clamp(20px,5vw,48px);
+}
+
+/* Block: section de conținut */
+.liceu-block {
+    padding: clamp(36px,4.5vw,56px) 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.liceu-block:last-child { border-bottom: none; }
+
+.liceu-block-label {
+    font-size: .6rem;
+    font-weight: 800;
+    letter-spacing: .24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.liceu-block-title {
+    font-size: clamp(1.4rem,2.8vw,2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin-bottom: 18px;
+    line-height: 1.1;
+}
+
+.liceu-lead {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-main);
+    margin-bottom: 14px;
+}
+
+.liceu-block p { color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+.liceu-block p:last-child { margin-bottom: 0; }
+.liceu-block-body p { color: var(--text-muted); line-height: 1.75; margin-bottom: 12px; }
+
+.liceu-sub {
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin: 24px 0 10px;
+    display: block;
+}
+
+/* Liste */
+.liceu-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.liceu-list li {
+    padding-left: 22px;
+    position: relative;
+    color: var(--text-muted);
+    font-size: .95rem;
+    line-height: 1.65;
+}
+
+.liceu-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* Split block: text | imagine */
+.liceu-block-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(36px,5vw,72px);
+    align-items: start;
+}
+
+.liceu-block-split.liceu-reverse .liceu-block-right { order: -1; }
+
+.liceu-img {
+    width: 100%;
+    border-radius: 14px;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+    box-shadow: 0 12px 40px rgba(20,40,80,.1);
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .liceu-hero-inner { grid-template-columns: 1fr; }
+    .liceu-hero-photo { order: -1; }
+    .liceu-stats-inner { grid-template-columns: repeat(2,1fr); gap: 16px; }
+    .liceu-block-split { grid-template-columns: 1fr; }
+    .liceu-block-split.liceu-reverse .liceu-block-right { order: 0; }
 }
