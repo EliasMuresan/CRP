@@ -5189,3 +5189,74 @@ body.inner-page main { padding-top: 0; }
     0%   { opacity: 1; transform: translateY(0) scale(1); }
     100% { opacity: 0; transform: translateY(-10px) scale(0.96); }
 }
+
+/* ============================================================
+   MOBILE BOTTOM TAB BAR — replaces top header on mobile
+============================================================ */
+@media (max-width: 1080px) {
+    :root { --header-h: 0px; }
+    .header { display: none !important; }
+    body:not(.cms-editing) { padding-bottom: 104px !important; }
+
+    .btb-wrap {
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        z-index: 10000;
+        padding: 8px 12px;
+        padding-bottom: max(14px, env(safe-area-inset-bottom, 14px));
+        pointer-events: none;
+    }
+    .btb {
+        pointer-events: auto;
+        background: #eef2f7;
+        border-radius: 28px;
+        padding: 7px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        box-shadow:
+            6px 6px 14px rgba(0,0,0,.11),
+            -4px -4px 10px rgba(255,255,255,.92);
+    }
+    .btb-tab {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 10px 8px;
+        border-radius: 22px;
+        text-decoration: none !important;
+        color: #9aa5b4 !important;
+        gap: 8px;
+        overflow: hidden;
+        transition: flex-grow .35s cubic-bezier(.34,1.2,.64,1),
+                    background .25s ease,
+                    color .25s ease,
+                    box-shadow .25s ease;
+        background: transparent;
+        -webkit-tap-highlight-color: transparent;
+    }
+    .btb-tab svg {
+        width: 22px; height: 22px;
+        flex-shrink: 0;
+        stroke-width: 1.75;
+    }
+    .btb-label {
+        display: none;
+        font-size: .78rem;
+        font-weight: 700;
+        letter-spacing: .01em;
+        white-space: nowrap;
+        font-family: 'Libre Franklin', sans-serif;
+    }
+    .btb-tab.active {
+        flex-grow: 1.9;
+        background: #fff !important;
+        color: var(--accent) !important;
+        box-shadow:
+            4px 4px 10px rgba(0,0,0,.10),
+            -2px -2px 7px rgba(255,255,255,.9);
+    }
+    .btb-tab.active .btb-label { display: block; }
+}
