@@ -903,6 +903,7 @@ if (churchSearchInput) churchSearchInput.addEventListener("input", function () {
     }
 
     function openAuthModal() {
+        if (window.innerWidth <= 1080) return;
         const modal = document.getElementById("crpAuthModal");
         if (!modal) return;
         modal.classList.add("open");
